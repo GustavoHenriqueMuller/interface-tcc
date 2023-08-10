@@ -1,5 +1,5 @@
 Analysis & Synthesis report for InterfaceTCC
-Thu Aug 10 07:47:52 2023
+Thu Aug 10 10:28:54 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -14,9 +14,14 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Post-Synthesis Netlist Statistics for Top Partition
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  9. Parameter Settings for User Entity Instance: Top-level Entity: |interface_tcc_top
+ 10. Parameter Settings for User Entity Instance: interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND
+ 11. Parameter Settings for User Entity Instance: interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND|interface_tcc_frontend_master:\u_INTERFACE_TCC_MASTER:u_INTERFACE_TCC_FRONTEND_MASTER
+ 12. Parameter Settings for User Entity Instance: interface_tcc_backend:u_INTERFACE_TCC_BACKEND
+ 13. Port Connectivity Checks: "interface_tcc_backend:u_INTERFACE_TCC_BACKEND"
+ 14. Post-Synthesis Netlist Statistics for Top Partition
+ 15. Elapsed Time Per Partition
+ 16. Analysis & Synthesis Messages
 
 
 
@@ -43,14 +48,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Aug 10 07:47:52 2023          ;
+; Analysis & Synthesis Status     ; Successful - Thu Aug 10 10:28:54 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
 ; Top-level Entity Name           ; interface_tcc_top                              ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
 ; Total registers                 ; 0                                              ;
-; Total pins                      ; 3                                              ;
+; Total pins                      ; 206                                            ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
 ; Total DSP Blocks                ; 0                                              ;
@@ -68,7 +73,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
+; Device                                                                          ; 5CGXFC9E7F35C8     ;                    ;
 ; Top-level entity name                                                           ; interface_tcc_top  ; InterfaceTCC       ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
@@ -166,40 +171,45 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                    ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                             ; Library ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
-; hdl/interface_tcc_top.vhd        ; yes             ; User VHDL File  ; E:/repos/TCC/TCC3/InterfaceTCC/hdl/interface_tcc_top.vhd ;         ;
-+----------------------------------+-----------------+-----------------+----------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                              ;
++------------------------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
+; File Name with User-Entered Path               ; Used in Netlist ; File Type       ; File Name with Absolute Path                                         ; Library ;
++------------------------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
+; hdl/dependencies/xina/xina_package.vhd         ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/xina_package.vhd         ;         ;
+; hdl/interface_tcc_package.vhd                  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_package.vhd                  ;         ;
+; hdl/frontend/interface_tcc_frontend_master.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd ;         ;
+; hdl/interface_tcc_frontend.vhd                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_frontend.vhd                 ;         ;
+; hdl/interface_tcc_backend.vhd                  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd                  ;         ;
+; hdl/interface_tcc_top.vhd                      ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd                      ;         ;
++------------------------------------------------+-----------------+-----------------+----------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary         ;
-+---------------------------------------------+-------+
-; Resource                                    ; Usage ;
-+---------------------------------------------+-------+
-; Estimate of Logic utilization (ALMs needed) ; 1     ;
-;                                             ;       ;
-; Combinational ALUT usage for logic          ; 1     ;
-;     -- 7 input functions                    ; 0     ;
-;     -- 6 input functions                    ; 0     ;
-;     -- 5 input functions                    ; 0     ;
-;     -- 4 input functions                    ; 0     ;
-;     -- <=3 input functions                  ; 1     ;
-;                                             ;       ;
-; Dedicated logic registers                   ; 0     ;
-;                                             ;       ;
-; I/O pins                                    ; 3     ;
-;                                             ;       ;
-; Total DSP Blocks                            ; 0     ;
-;                                             ;       ;
-; Maximum fan-out node                        ; Y~0   ;
-; Maximum fan-out                             ; 1     ;
-; Total fan-out                               ; 6     ;
-; Average fan-out                             ; 0.86  ;
-+---------------------------------------------+-------+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimate of Logic utilization (ALMs needed) ; 0              ;
+;                                             ;                ;
+; Combinational ALUT usage for logic          ; 0              ;
+;     -- 7 input functions                    ; 0              ;
+;     -- 6 input functions                    ; 0              ;
+;     -- 5 input functions                    ; 0              ;
+;     -- 4 input functions                    ; 0              ;
+;     -- <=3 input functions                  ; 0              ;
+;                                             ;                ;
+; Dedicated logic registers                   ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 206            ;
+;                                             ;                ;
+; Total DSP Blocks                            ; 0              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; AWVALID~output ;
+; Maximum fan-out                             ; 1              ;
+; Total fan-out                               ; 340            ;
+; Average fan-out                             ; 0.62           ;
++---------------------------------------------+----------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -207,7 +217,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name       ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------------+--------------+
-; |interface_tcc_top         ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 3    ; 0            ; |interface_tcc_top  ; interface_tcc_top ; work         ;
+; |interface_tcc_top         ; 0 (0)               ; 0 (0)                     ; 0                 ; 0          ; 206  ; 0            ; |interface_tcc_top  ; interface_tcc_top ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -227,18 +237,93 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |interface_tcc_top ;
++----------------+--------+---------------------------------------------------------+
+; Parameter Name ; Value  ; Type                                                    ;
++----------------+--------+---------------------------------------------------------+
+; g_TYPE         ; MASTER ; String                                                  ;
+; g_ID_W_WIDTH   ; 5      ; Signed Integer                                          ;
+; g_ID_R_WIDTH   ; 5      ; Signed Integer                                          ;
+; g_ADDR_WIDTH   ; 8      ; Signed Integer                                          ;
+; g_DATA_WIDTH   ; 32     ; Signed Integer                                          ;
+; g_BRESP_WIDTH  ; 3      ; Signed Integer                                          ;
+; g_RRESP_WIDTH  ; 3      ; Signed Integer                                          ;
++----------------+--------+---------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND ;
++----------------+--------+--------------------------------------------------------------------+
+; Parameter Name ; Value  ; Type                                                               ;
++----------------+--------+--------------------------------------------------------------------+
+; g_type         ; MASTER ; String                                                             ;
+; g_id_w_width   ; 5      ; Signed Integer                                                     ;
+; g_id_r_width   ; 5      ; Signed Integer                                                     ;
+; g_addr_width   ; 8      ; Signed Integer                                                     ;
+; g_data_width   ; 32     ; Signed Integer                                                     ;
+; g_bresp_width  ; 3      ; Signed Integer                                                     ;
+; g_rresp_width  ; 3      ; Signed Integer                                                     ;
++----------------+--------+--------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND|interface_tcc_frontend_master:\u_INTERFACE_TCC_MASTER:u_INTERFACE_TCC_FRONTEND_MASTER ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                                                      ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; g_id_w_width   ; 5     ; Signed Integer                                                                                                                                            ;
+; g_id_r_width   ; 5     ; Signed Integer                                                                                                                                            ;
+; g_addr_width   ; 8     ; Signed Integer                                                                                                                                            ;
+; g_data_width   ; 32    ; Signed Integer                                                                                                                                            ;
+; g_bresp_width  ; 3     ; Signed Integer                                                                                                                                            ;
+; g_rresp_width  ; 3     ; Signed Integer                                                                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: interface_tcc_backend:u_INTERFACE_TCC_BACKEND ;
++----------------+--------+------------------------------------------------------------------+
+; Parameter Name ; Value  ; Type                                                             ;
++----------------+--------+------------------------------------------------------------------+
+; g_type         ; MASTER ; String                                                           ;
+; g_id_w_width   ; 5      ; Signed Integer                                                   ;
+; g_id_r_width   ; 5      ; Signed Integer                                                   ;
+; g_addr_width   ; 8      ; Signed Integer                                                   ;
+; g_data_width   ; 32     ; Signed Integer                                                   ;
+; g_bresp_width  ; 3      ; Signed Integer                                                   ;
+; g_rresp_width  ; 3      ; Signed Integer                                                   ;
++----------------+--------+------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "interface_tcc_backend:u_INTERFACE_TCC_BACKEND"                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; l_in_data_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; l_in_val_o  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; l_out_ack_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
+; arriav_io_obuf        ; 134                         ;
 ; arriav_lcell_comb     ; 1                           ;
 ;     normal            ; 1                           ;
-;         2 data inputs ; 1                           ;
-; boundary_port         ; 3                           ;
+;         0 data inputs ; 1                           ;
+; boundary_port         ; 206                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 1.00                        ;
+; Max LUT depth         ; 0.00                        ;
+; Average LUT depth     ; 0.00                        ;
 +-----------------------+-----------------------------+
 
 
@@ -247,7 +332,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -257,25 +342,289 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Thu Aug 10 07:47:42 2023
+    Info: Processing started: Thu Aug 10 10:28:47 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 1 design units, including 0 entities, in source file hdl/dependencies/xina/xina_package.vhd
+    Info (12022): Found design unit 1: xina_package File: E:/repos/InterfaceTCC/hdl/dependencies/xina/xina_package.vhd Line: 4
+Info (12021): Found 1 design units, including 0 entities, in source file hdl/interface_tcc_package.vhd
+    Info (12022): Found design unit 1: interface_tcc_package File: E:/repos/InterfaceTCC/hdl/interface_tcc_package.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/interface_tcc_frontend_slave.vhd
+    Info (12022): Found design unit 1: interface_tcc_frontend_slave-arch_interface_tcc_frontend_slave File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_slave.vhd Line: 70
+    Info (12023): Found entity 1: interface_tcc_frontend_slave File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_slave.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/interface_tcc_frontend_master.vhd
+    Info (12022): Found design unit 1: interface_tcc_frontend_master-arch_interface_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 70
+    Info (12023): Found entity 1: interface_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/interface_tcc_frontend.vhd
+    Info (12022): Found design unit 1: interface_tcc_frontend-arch_interface_tcc_frontend File: E:/repos/InterfaceTCC/hdl/interface_tcc_frontend.vhd Line: 76
+    Info (12023): Found entity 1: interface_tcc_frontend File: E:/repos/InterfaceTCC/hdl/interface_tcc_frontend.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/interface_tcc_backend.vhd
+    Info (12022): Found design unit 1: interface_tcc_backend-arch_interface_tcc_backend File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 49
+    Info (12023): Found entity 1: interface_tcc_backend File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file hdl/interface_tcc_top.vhd
-    Info (12022): Found design unit 1: interface_tcc_top-arch_interface_tcc_top File: E:/repos/TCC/TCC3/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 10
-    Info (12023): Found entity 1: interface_tcc_top File: E:/repos/TCC/TCC3/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 4
+    Info (12022): Found design unit 1: interface_tcc_top-arch_interface_tcc_top File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 73
+    Info (12023): Found entity 1: interface_tcc_top File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 8
 Info (12127): Elaborating entity "interface_tcc_top" for the top level hierarchy
-Info (286030): Timing-Driven Synthesis is running
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(64): used implicit default value for signal "l_in_data_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(65): used implicit default value for signal "l_in_val_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 65
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(69): used implicit default value for signal "l_out_ack_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 69
+Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top.vhd(86): object "w_l_in_data_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 86
+Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top.vhd(87): object "w_l_in_val_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 87
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(88): used implicit default value for signal "w_l_in_ack_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 88
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(89): used implicit default value for signal "w_l_out_data_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 89
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_top.vhd(90): used implicit default value for signal "w_l_out_val_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 90
+Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top.vhd(91): object "w_l_out_ack_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 91
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "w_l_in_data_o" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
+Info (12128): Elaborating entity "interface_tcc_frontend" for hierarchy "interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 94
+Info (12128): Elaborating entity "interface_tcc_frontend_master" for hierarchy "interface_tcc_frontend:u_INTERFACE_TCC_FRONTEND|interface_tcc_frontend_master:\u_INTERFACE_TCC_MASTER:u_INTERFACE_TCC_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/interface_tcc_frontend.vhd Line: 80
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(25): used implicit default value for signal "AWREADY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 25
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(34): used implicit default value for signal "WREADY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 34
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(40): used implicit default value for signal "BREADY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 40
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(45): used implicit default value for signal "ARREADY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 45
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(54): used implicit default value for signal "RREADY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 54
+Warning (10540): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(57): used explicit default value for signal "RRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 57
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(63): used implicit default value for signal "o_SPC_START" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 63
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(64): used implicit default value for signal "o_SPC_OPC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 64
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(65): used implicit default value for signal "o_SPC_ADDR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 65
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(66): used implicit default value for signal "o_SPC_DATA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 66
+Info (12128): Elaborating entity "interface_tcc_backend" for hierarchy "interface_tcc_backend:u_INTERFACE_TCC_BACKEND" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 158
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(33): used implicit default value for signal "o_SPC_READY" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 33
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(34): used implicit default value for signal "o_SPC_OPC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 34
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(35): used implicit default value for signal "o_SPC_ADDR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 35
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(36): used implicit default value for signal "o_SPC_DATA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 36
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(37): used implicit default value for signal "o_SPC_WAIT" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 37
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(40): used implicit default value for signal "l_in_data_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 40
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(41): used implicit default value for signal "l_in_val_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 41
+Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend.vhd(45): used implicit default value for signal "l_out_ack_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_backend.vhd Line: 45
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
+Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "AWVALID" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 28
+    Warning (13040): bidirectional pin "AW_ID[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 30
+    Warning (13040): bidirectional pin "AW_ID[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 30
+    Warning (13040): bidirectional pin "AW_ID[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 30
+    Warning (13040): bidirectional pin "AW_ID[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 30
+    Warning (13040): bidirectional pin "AW_ID[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 30
+    Warning (13040): bidirectional pin "AWADDR[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWADDR[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 31
+    Warning (13040): bidirectional pin "AWLEN[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWLEN[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 32
+    Warning (13040): bidirectional pin "AWSIZE[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 33
+    Warning (13040): bidirectional pin "AWSIZE[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 33
+    Warning (13040): bidirectional pin "AWSIZE[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 33
+    Warning (13040): bidirectional pin "AWBURST[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 34
+    Warning (13040): bidirectional pin "AWBURST[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 34
+    Warning (13040): bidirectional pin "WVALID" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 37
+    Warning (13040): bidirectional pin "WDATA[31]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[30]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[29]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[28]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[27]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[26]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[25]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[24]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[23]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[22]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[21]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[20]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[19]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[18]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[17]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[16]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[15]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[14]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[13]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[12]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[11]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[10]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[9]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[8]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WDATA[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 39
+    Warning (13040): bidirectional pin "WLAST" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 40
+    Warning (13040): bidirectional pin "BVALID" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 43
+    Warning (13040): bidirectional pin "BRESP[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 45
+    Warning (13040): bidirectional pin "BRESP[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 45
+    Warning (13040): bidirectional pin "BRESP[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 45
+    Warning (13040): bidirectional pin "ARVALID" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 48
+    Warning (13040): bidirectional pin "AR_ID[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 50
+    Warning (13040): bidirectional pin "AR_ID[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 50
+    Warning (13040): bidirectional pin "AR_ID[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 50
+    Warning (13040): bidirectional pin "AR_ID[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 50
+    Warning (13040): bidirectional pin "AR_ID[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 50
+    Warning (13040): bidirectional pin "ARADDR[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARADDR[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 51
+    Warning (13040): bidirectional pin "ARLEN[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARLEN[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 52
+    Warning (13040): bidirectional pin "ARSIZE[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 53
+    Warning (13040): bidirectional pin "ARSIZE[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 53
+    Warning (13040): bidirectional pin "ARSIZE[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 53
+    Warning (13040): bidirectional pin "ARBURST[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 54
+    Warning (13040): bidirectional pin "ARBURST[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 54
+    Warning (13040): bidirectional pin "RVALID" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 57
+    Warning (13040): bidirectional pin "RDATA[31]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[30]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[29]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[28]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[27]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[26]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[25]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[24]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[23]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[22]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[21]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[20]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[19]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[18]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[17]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[16]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[15]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[14]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[13]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[12]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[11]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[10]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[9]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[8]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[7]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[6]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[5]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[4]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[3]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[2]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[1]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RDATA[0]" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 59
+    Warning (13040): bidirectional pin "RLAST" has no driver File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 60
+Warning (13032): The following tri-state nodes are fed by constants
+    Warning (13033): The pin "AWREADY" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 29
+    Warning (13033): The pin "WREADY" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 38
+    Warning (13033): The pin "BREADY" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 44
+    Warning (13033): The pin "ARREADY" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 49
+    Warning (13033): The pin "RREADY" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 58
+    Warning (13033): The pin "RRESP[2]" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 61
+    Warning (13033): The pin "RRESP[1]" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 61
+    Warning (13033): The pin "RRESP[0]" is fed by GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 61
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "l_in_data_o[0][0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][3]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][4]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][5]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][6]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][7]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][8]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][9]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][10]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][11]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][12]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][13]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][14]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][15]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][16]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][17]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][18]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][19]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][20]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][21]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][22]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][23]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][24]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][25]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][26]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][27]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][28]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][29]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][30]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][31]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_data_o[0][0][32]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 64
+    Warning (13410): Pin "l_in_val_o[0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 65
+    Warning (13410): Pin "l_out_ack_o[0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 69
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 4 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 1 output pins
-    Info (21061): Implemented 1 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4880 megabytes
-    Info: Processing ended: Thu Aug 10 07:47:52 2023
-    Info: Elapsed time: 00:00:10
+Warning (21074): Design contains 37 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "ACLK" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 24
+    Warning (15610): No output dependent on input pin "ARESETn" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 25
+    Warning (15610): No output dependent on input pin "l_in_ack_i[0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 66
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][8]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][9]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][10]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][11]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][12]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][13]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][14]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][15]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][16]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][17]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][18]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][19]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][20]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][21]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][22]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][23]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][24]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][25]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][26]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][27]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][28]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][29]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][30]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][31]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][32]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 67
+    Warning (15610): No output dependent on input pin "l_out_val_i[0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top.vhd Line: 68
+Info (21057): Implemented 206 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 37 input pins
+    Info (21059): Implemented 35 output pins
+    Info (21060): Implemented 134 bidirectional pins
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 238 warnings
+    Info: Peak virtual memory: 4868 megabytes
+    Info: Processing ended: Thu Aug 10 10:28:54 2023
+    Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:16
 
 
