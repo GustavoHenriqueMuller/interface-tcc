@@ -1,7 +1,7 @@
-Fitter Status : Successful - Thu Aug 10 10:29:37 2023
+Fitter Status : Successful - Wed Aug 16 23:42:50 2023
 Quartus Prime Version : 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 Revision Name : InterfaceTCC
-Top-level Entity Name : interface_tcc_top
+Top-level Entity Name : interface_tcc_top_master
 Family : Cyclone V
 Device : 5CGXFC9E7F35C8
 Timing Models : Final

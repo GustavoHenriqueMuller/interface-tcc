@@ -1,5 +1,5 @@
 Flow report for InterfaceTCC
-Thu Aug 10 10:29:56 2023
+Wed Aug 16 23:43:14 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -41,10 +41,10 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Thu Aug 10 10:29:56 2023          ;
+; Flow Status                     ; Successful - Wed Aug 16 23:43:14 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
-; Top-level Entity Name           ; interface_tcc_top                              ;
+; Top-level Entity Name           ; interface_tcc_top_master                       ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CGXFC9E7F35C8                                 ;
 ; Timing Models                   ; Final                                          ;
@@ -68,35 +68,35 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/10/2023 10:28:47 ;
+; Start date & time ; 08/16/2023 23:41:49 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; InterfaceTCC        ;
 +-------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                     ;
-+-------------------------------------+----------------------------------------+---------------+-------------------+-----------------------------------+
-; Assignment Name                     ; Value                                  ; Default Value ; Entity Name       ; Section Id                        ;
-+-------------------------------------+----------------------------------------+---------------+-------------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 1096885372208.169167412721928          ; --            ; --                ; --                                ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                ; eda_board_design_timing           ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                ; eda_board_design_boundary_scan    ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                ; eda_board_design_signal_integrity ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                ; eda_board_design_symbol           ;
-; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                            ; --            ; --                ; eda_simulation                    ;
-; EDA_SIMULATION_TOOL                 ; Questa Intel FPGA (Verilog)            ; <None>        ; --                ; --                                ;
-; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --                ; eda_simulation                    ;
-; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --                ; --                                ;
-; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --                ; --                                ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; interface_tcc_top ; Top                               ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; interface_tcc_top ; Top                               ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; interface_tcc_top ; Top                               ;
-; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --                ; --                                ;
-; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --                ; --                                ;
-; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --                ; --                                ;
-; TOP_LEVEL_ENTITY                    ; interface_tcc_top                      ; InterfaceTCC  ; --                ; --                                ;
-+-------------------------------------+----------------------------------------+---------------+-------------------+-----------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                            ;
++-------------------------------------+----------------------------------------+---------------+--------------------------+-----------------------------------+
+; Assignment Name                     ; Value                                  ; Default Value ; Entity Name              ; Section Id                        ;
++-------------------------------------+----------------------------------------+---------------+--------------------------+-----------------------------------+
+; COMPILER_SIGNATURE_ID               ; 1096885372208.169224010816632          ; --            ; --                       ; --                                ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                       ; eda_board_design_timing           ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                       ; eda_board_design_boundary_scan    ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                       ; eda_board_design_signal_integrity ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --                       ; eda_board_design_symbol           ;
+; EDA_OUTPUT_DATA_FORMAT              ; Verilog Hdl                            ; --            ; --                       ; eda_simulation                    ;
+; EDA_SIMULATION_TOOL                 ; Questa Intel FPGA (Verilog)            ; <None>        ; --                       ; --                                ;
+; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --                       ; eda_simulation                    ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --                       ; --                                ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --                       ; --                                ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; interface_tcc_top_master ; Top                               ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; interface_tcc_top_master ; Top                               ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; interface_tcc_top_master ; Top                               ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --                       ; --                                ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --                       ; --                                ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --                       ; --                                ;
+; TOP_LEVEL_ENTITY                    ; interface_tcc_top_master               ; InterfaceTCC  ; --                       ; --                                ;
++-------------------------------------+----------------------------------------+---------------+--------------------------+-----------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -104,12 +104,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 4868 MB             ; 00:00:16                           ;
-; Fitter               ; 00:00:43     ; 1.0                     ; 7233 MB             ; 00:01:45                           ;
-; Assembler            ; 00:00:10     ; 1.0                     ; 4876 MB             ; 00:00:10                           ;
-; Timing Analyzer      ; 00:00:07     ; 1.0                     ; 5286 MB             ; 00:00:06                           ;
-; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4748 MB             ; 00:00:01                           ;
-; Total                ; 00:01:06     ; --                      ; --                  ; 00:02:18                           ;
+; Analysis & Synthesis ; 00:00:09     ; 1.0                     ; 4862 MB             ; 00:00:16                           ;
+; Fitter               ; 00:00:49     ; 1.0                     ; 7229 MB             ; 00:01:48                           ;
+; Assembler            ; 00:00:11     ; 1.0                     ; 4877 MB             ; 00:00:10                           ;
+; Timing Analyzer      ; 00:00:05     ; 1.0                     ; 5283 MB             ; 00:00:05                           ;
+; EDA Netlist Writer   ; 00:00:00     ; 1.0                     ; 4741 MB             ; 00:00:01                           ;
+; Total                ; 00:01:14     ; --                      ; --                  ; 00:02:20                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
