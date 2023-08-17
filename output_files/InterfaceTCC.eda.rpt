@@ -1,5 +1,5 @@
 EDA Netlist Writer report for InterfaceTCC
-Thu Aug 17 10:13:19 2023
+Thu Aug 17 10:57:10 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -37,7 +37,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Aug 17 10:13:19 2023 ;
+; EDA Netlist Writer Status ; Successful - Thu Aug 17 10:57:10 2023 ;
 ; Revision Name             ; InterfaceTCC                          ;
 ; Top-level Entity Name     ; interface_tcc_top_master              ;
 ; Family                    ; Cyclone V                             ;
@@ -81,7 +81,7 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Thu Aug 17 10:13:18 2023
+    Info: Processing started: Thu Aug 17 10:57:10 2023
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204001): Port "l_in_val_o[0][0]" is changed into "l_in_val_o_0_0" because it's a member of 2-D array port "l_in_val_o" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 52
@@ -90,8 +90,8 @@ Info (204001): Port "l_out_val_i[0][0]" is changed into "l_out_val_i_0_0" becaus
 Info (204001): Port "l_out_ack_o[0][0]" is changed into "l_out_ack_o_0_0" because it's a member of 2-D array port "l_out_ack_o" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 56
 Info (204019): Generated file InterfaceTCC.vo in folder "E:/repos/InterfaceTCC/simulation/questa/" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4748 megabytes
-    Info: Processing ended: Thu Aug 17 10:13:19 2023
+    Info: Peak virtual memory: 4741 megabytes
+    Info: Processing ended: Thu Aug 17 10:57:11 2023
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

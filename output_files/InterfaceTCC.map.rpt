@@ -1,5 +1,5 @@
 Analysis & Synthesis report for InterfaceTCC
-Thu Aug 17 10:12:05 2023
+Thu Aug 17 10:56:10 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -47,7 +47,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu Aug 17 10:12:05 2023          ;
+; Analysis & Synthesis Status     ; Successful - Thu Aug 17 10:56:10 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
 ; Top-level Entity Name           ; interface_tcc_top_master                       ;
@@ -307,7 +307,7 @@ Encoding Type:  One-Hot
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -317,7 +317,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Thu Aug 17 10:11:56 2023
+    Info: Processing started: Thu Aug 17 10:56:03 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
@@ -591,9 +591,9 @@ Info (21057): Implemented 206 device resources after synthesis - the final resou
     Info (21058): Implemented 127 input pins
     Info (21059): Implemented 79 output pins
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 235 warnings
-    Info: Peak virtual memory: 4862 megabytes
-    Info: Processing ended: Thu Aug 17 10:12:05 2023
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:15
+    Info: Peak virtual memory: 4871 megabytes
+    Info: Processing ended: Thu Aug 17 10:56:10 2023
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:16
 
 

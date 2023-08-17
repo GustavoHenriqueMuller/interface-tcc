@@ -82,11 +82,11 @@ begin
     
     ---------------------------------------------------------------------------------------------
     -- Output values.
-    o_BACKEND_OPC   <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WRITE_TRANSACTION) else '1';
+    o_BACKEND_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WRITE_TRANSACTION) else '1';
     
-    o_BACKEND_ADDR  <= AWADDR when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-                       else ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
-                       else (c_ADDR_WIDTH - 1 downto 0 => '0');
+    o_BACKEND_ADDR <= AWADDR when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
+                      else ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
+                      else (c_ADDR_WIDTH - 1 downto 0 => '0');
                       
     o_BACKEND_BURST <= AWBURST when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
                        else ARBURST when (r_CURRENT_STATE = S_READ_TRANSACTION)
@@ -103,7 +103,7 @@ begin
                         
     -- Read packages only have the read address as the payload.
     o_BACKEND_DATA <= WDATA when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-							 else (WDATA'length - 1 downto ARADDR'length => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
+					  else (WDATA'length - 1 downto ARADDR'length => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
                       else (c_DATA_WIDTH - 1 downto 0 => '0');
                       
 end arch_interface_tcc_frontend_master_send_control;
