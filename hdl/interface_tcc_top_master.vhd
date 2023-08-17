@@ -60,12 +60,11 @@ end interface_tcc_top_master;
 architecture arch_interface_tcc_top_master of interface_tcc_top_master is
     -- Signals between frontend and backend.
     signal w_BACKEND_READY    : std_logic := '0';
-    signal w_BACKEND_OPC_IN   : std_logic_vector(c_OPC_WIDTH - 1 downto 0) := (others => '0');
-    signal w_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
+    signal w_BACKEND_OPC_IN   : std_logic;
     signal w_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
     signal w_BACKEND_START    : std_logic := '0';
     signal w_BACKEND_WAIT     : std_logic := '0';
-    signal w_BACKEND_OPC_OUT  : std_logic_vector(c_OPC_WIDTH - 1 downto 0) := (others => '0');
+    signal w_BACKEND_OPC_OUT  : std_logic;
     signal w_BACKEND_ADDR_OUT : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
     signal w_BACKEND_DATA_OUT : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
     
@@ -123,7 +122,6 @@ begin
             -- Backend signals.
             i_BACKEND_READY => w_BACKEND_READY,
             i_BACKEND_OPC   => w_BACKEND_OPC_IN,
-            i_BACKEND_ADDR  => w_BACKEND_ADDR_IN,
             i_BACKEND_DATA  => w_BACKEND_DATA_IN,
             i_BACKEND_WAIT  => w_BACKEND_WAIT,
             
@@ -147,7 +145,6 @@ begin
             
             o_BACKEND_READY => w_BACKEND_READY,
             o_BACKEND_OPC   => w_BACKEND_OPC_IN,
-            o_BACKEND_ADDR  => w_BACKEND_ADDR_IN,
             o_BACKEND_DATA  => w_BACKEND_DATA_IN,
             o_BACKEND_WAIT  => w_BACKEND_WAIT,
             

@@ -13,12 +13,12 @@ entity interface_tcc_backend_master is
         
         -- Backend signals.
         i_BACKEND_START: in std_logic;
-        i_BACKEND_OPC  : in std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+        i_BACKEND_OPC  : in std_logic;
         i_BACKEND_ADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         i_BACKEND_DATA : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         
         o_BACKEND_READY: out std_logic;
-        o_BACKEND_OPC  : out std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+        o_BACKEND_OPC  : out std_logic;
         o_BACKEND_ADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_DATA : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_BACKEND_WAIT : out std_logic;

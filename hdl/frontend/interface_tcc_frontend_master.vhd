@@ -48,11 +48,11 @@ entity interface_tcc_frontend_master is
         
         -- Backend signals.
         i_BACKEND_READY: in std_logic;
-        i_BACKEND_OPC  : in std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+        i_BACKEND_OPC  : in std_logic;
         i_BACKEND_DATA : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_BACKEND_WAIT : in std_logic;
         
-        o_BACKEND_OPC   : out std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+        o_BACKEND_OPC   : out std_logic;
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_BURST : out std_logic_vector(1 downto 0);
         o_BACKEND_TYPE  : out std_logic;
@@ -75,12 +75,12 @@ begin
             AWLEN   => AWLEN,
             AWBURST => AWBURST,
             WLAST   => WLAST,
+            WDATA   => WDATA,
             
             ARVALID => ARVALID,
             ARADDR  => ARADDR,
             ARLEN   => ARLEN,
             ARBURST => ARBURST,
-            RLAST   => RLAST,
             
             -- Signals to back-end.
             o_BACKEND_OPC    => o_BACKEND_OPC,

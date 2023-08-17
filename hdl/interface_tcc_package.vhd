@@ -5,13 +5,12 @@ use IEEE.std_logic_1164.all;
 use work.xina_package.all;
 
 package interface_tcc_package is
-  	constant c_OPC_WIDTH: natural := 1; -- '0' = WRITE, '1' = READ.
 	constant c_ID_W_WIDTH : natural := 5;
 	constant c_ID_R_WIDTH : natural := 5;
 	constant c_ADDR_WIDTH : natural := 8;
 	constant c_DATA_WIDTH : natural := 32;
 	constant c_BRESP_WIDTH: natural := 3;
-	constant c_RRESP_WIDTH: natural := 3
+	constant c_RRESP_WIDTH: natural := 3;
 	
 	-- Components.
 	component interface_tcc_frontend_master is
@@ -58,15 +57,17 @@ package interface_tcc_package is
 			
 			-- Backend signals.
 			i_BACKEND_READY: in std_logic;
-			i_BACKEND_OPC  : in std_logic_vector(c_OPC_WIDTH - 1 downto 0);
-			i_BACKEND_ADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+			i_BACKEND_OPC  : in std_logic;
 			i_BACKEND_DATA : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 			i_BACKEND_WAIT : in std_logic;
 			
-			o_BACKEND_START: out std_logic;
-			o_BACKEND_OPC  : out std_logic_vector(c_OPC_WIDTH - 1 downto 0);
-			o_BACKEND_ADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-			o_BACKEND_DATA : out std_logic_vector(c_DATA_WIDTH - 1 downto 0)
+			o_BACKEND_OPC   : out std_logic;
+			o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+			o_BACKEND_BURST : out std_logic_vector(1 downto 0);
+			o_BACKEND_TYPE  : out std_logic;
+			o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
+			o_BACKEND_START : out std_logic;
+			o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0)
 		);
 	end component;
 	
@@ -81,21 +82,23 @@ package interface_tcc_package is
 			AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 			AWLEN  : in std_logic_vector(7 downto 0);
 			AWBURST: in std_logic_vector(1 downto 0);
+			WDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 			WLAST  : in std_logic;
 			
 			ARVALID: in std_logic;
 			ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 			ARLEN  : in std_logic_vector(7 downto 0);
 			ARBURST: in std_logic_vector(1 downto 0);
-			RLAST  : in std_logic;
 			
 			-- Signals to back-end.
-			o_BACKEND_OPC   : out std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+			o_BACKEND_OPC   : out std_logic;
 			o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 			o_BACKEND_BURST : out std_logic_vector(1 downto 0);
 			o_BACKEND_TYPE  : out std_logic;
 			o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
 			o_BACKEND_START : out std_logic;
+			o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0)
+			-- @TODO: o_BACKEND_ID
 		);
 	end component;
 		
@@ -108,12 +111,12 @@ package interface_tcc_package is
 			
 			-- Backend signals.
 			i_BACKEND_START: in std_logic;
-			i_BACKEND_OPC  : in std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+			i_BACKEND_OPC  : in std_logic;
 			i_BACKEND_ADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 			i_BACKEND_DATA : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 			
 			o_BACKEND_READY: out std_logic;
-			o_BACKEND_OPC  : out std_logic_vector(c_OPC_WIDTH - 1 downto 0);
+			o_BACKEND_OPC  : out std_logic;
 			o_BACKEND_ADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 			o_BACKEND_DATA : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 			o_BACKEND_WAIT : out std_logic;
