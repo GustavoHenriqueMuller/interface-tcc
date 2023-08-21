@@ -2,7 +2,40 @@
 	"partitions" : [
 		{
 			"name" : "Top",
-			"pins" : []
+			"pins" : [
+				{
+					"name" : "AWREADY",
+					"strict" : false
+				},
+				{
+					"name" : "WREADY",
+					"strict" : false
+				},
+				{
+					"name" : "ARREADY",
+					"strict" : false
+				},
+				{
+					"name" : "WLAST",
+					"strict" : false
+				},
+				{
+					"name" : "AWVALID",
+					"strict" : false
+				},
+				{
+					"name" : "ARVALID",
+					"strict" : false
+				},
+				{
+					"name" : "ACLK",
+					"strict" : false
+				},
+				{
+					"name" : "ARESETn",
+					"strict" : false
+				}
+			]
 		}
 	]
 }

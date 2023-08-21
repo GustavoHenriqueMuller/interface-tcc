@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Thu Aug 17 10:56:10 2023
+Analysis & Synthesis Status : Successful - Mon Aug 21 16:08:38 2023
 Quartus Prime Version : 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 Revision Name : InterfaceTCC
 Top-level Entity Name : interface_tcc_top_master
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 0
+Total registers : 2
 Total pins : 206
 Total virtual pins : 0
 Total block memory bits : 0
