@@ -1,5 +1,5 @@
 Analysis & Synthesis report for InterfaceTCC
-Mon Aug 21 16:08:38 2023
+Thu Aug 24 09:30:58 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -13,15 +13,16 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |interface_tcc_top_master|interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
-  9. Registers Removed During Synthesis
- 10. General Register Statistics
- 11. Port Connectivity Checks: "interface_tcc_backend_master:u_INTERFACE_TCC_BACKEND_MASTER"
- 12. Port Connectivity Checks: "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL"
- 13. Port Connectivity Checks: "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER"
- 14. Post-Synthesis Netlist Statistics for Top Partition
- 15. Elapsed Time Per Partition
- 16. Analysis & Synthesis Messages
+  8. State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+  9. State Machine - |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Port Connectivity Checks: "tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL"
+ 14. Port Connectivity Checks: "tcc_frontend_master:u_TCC_FRONTEND_MASTER"
+ 15. Post-Synthesis Netlist Statistics for Top Partition
+ 16. Elapsed Time Per Partition
+ 17. Analysis & Synthesis Messages
 
 
 
@@ -48,13 +49,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Mon Aug 21 16:08:38 2023          ;
+; Analysis & Synthesis Status     ; Successful - Thu Aug 24 09:30:58 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
-; Top-level Entity Name           ; interface_tcc_top_master                       ;
+; Top-level Entity Name           ; tcc_top_master                                 ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 2                                              ;
+; Total registers                 ; 5                                              ;
 ; Total pins                      ; 206                                            ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
@@ -68,91 +69,92 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------+------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                                   ;
-+---------------------------------------------------------------------------------+--------------------------+--------------------+
-; Option                                                                          ; Setting                  ; Default Value      ;
-+---------------------------------------------------------------------------------+--------------------------+--------------------+
-; Device                                                                          ; 5CGXFC9E7F35C8           ;                    ;
-; Top-level entity name                                                           ; interface_tcc_top_master ; InterfaceTCC       ;
-; Family name                                                                     ; Cyclone V                ; Cyclone V          ;
-; Use smart compilation                                                           ; Off                      ; Off                ;
-; Enable parallel Assembler and Timing Analyzer during compilation                ; On                       ; On                 ;
-; Enable compact report table                                                     ; Off                      ; Off                ;
-; Restructure Multiplexers                                                        ; Auto                     ; Auto               ;
-; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                      ; Off                ;
-; Create Debugging Nodes for IP Cores                                             ; Off                      ; Off                ;
-; Preserve fewer node names                                                       ; On                       ; On                 ;
-; Intel FPGA IP Evaluation Mode                                                   ; Enable                   ; Enable             ;
-; Verilog Version                                                                 ; Verilog_2001             ; Verilog_2001       ;
-; VHDL Version                                                                    ; VHDL_1993                ; VHDL_1993          ;
-; State Machine Processing                                                        ; Auto                     ; Auto               ;
-; Safe State Machine                                                              ; Off                      ; Off                ;
-; Extract Verilog State Machines                                                  ; On                       ; On                 ;
-; Extract VHDL State Machines                                                     ; On                       ; On                 ;
-; Ignore Verilog initial constructs                                               ; Off                      ; Off                ;
-; Iteration limit for constant Verilog loops                                      ; 5000                     ; 5000               ;
-; Iteration limit for non-constant Verilog loops                                  ; 250                      ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                                         ; On                       ; On                 ;
-; Infer RAMs from Raw Logic                                                       ; On                       ; On                 ;
-; Parallel Synthesis                                                              ; On                       ; On                 ;
-; DSP Block Balancing                                                             ; Auto                     ; Auto               ;
-; NOT Gate Push-Back                                                              ; On                       ; On                 ;
-; Power-Up Don't Care                                                             ; On                       ; On                 ;
-; Remove Redundant Logic Cells                                                    ; Off                      ; Off                ;
-; Remove Duplicate Registers                                                      ; On                       ; On                 ;
-; Ignore CARRY Buffers                                                            ; Off                      ; Off                ;
-; Ignore CASCADE Buffers                                                          ; Off                      ; Off                ;
-; Ignore GLOBAL Buffers                                                           ; Off                      ; Off                ;
-; Ignore ROW GLOBAL Buffers                                                       ; Off                      ; Off                ;
-; Ignore LCELL Buffers                                                            ; Off                      ; Off                ;
-; Ignore SOFT Buffers                                                             ; On                       ; On                 ;
-; Limit AHDL Integers to 32 Bits                                                  ; Off                      ; Off                ;
-; Optimization Technique                                                          ; Balanced                 ; Balanced           ;
-; Carry Chain Length                                                              ; 70                       ; 70                 ;
-; Auto Carry Chains                                                               ; On                       ; On                 ;
-; Auto Open-Drain Pins                                                            ; On                       ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                                           ; Off                      ; Off                ;
-; Auto ROM Replacement                                                            ; On                       ; On                 ;
-; Auto RAM Replacement                                                            ; On                       ; On                 ;
-; Auto DSP Block Replacement                                                      ; On                       ; On                 ;
-; Auto Shift Register Replacement                                                 ; Auto                     ; Auto               ;
-; Allow Shift Register Merging across Hierarchies                                 ; Auto                     ; Auto               ;
-; Auto Clock Enable Replacement                                                   ; On                       ; On                 ;
-; Strict RAM Replacement                                                          ; Off                      ; Off                ;
-; Allow Synchronous Control Signals                                               ; On                       ; On                 ;
-; Force Use of Synchronous Clear Signals                                          ; Off                      ; Off                ;
-; Auto Resource Sharing                                                           ; Off                      ; Off                ;
-; Allow Any RAM Size For Recognition                                              ; Off                      ; Off                ;
-; Allow Any ROM Size For Recognition                                              ; Off                      ; Off                ;
-; Allow Any Shift Register Size For Recognition                                   ; Off                      ; Off                ;
-; Use LogicLock Constraints during Resource Balancing                             ; On                       ; On                 ;
-; Ignore translate_off and synthesis_off directives                               ; Off                      ; Off                ;
-; Timing-Driven Synthesis                                                         ; On                       ; On                 ;
-; Report Parameter Settings                                                       ; On                       ; On                 ;
-; Report Source Assignments                                                       ; On                       ; On                 ;
-; Report Connectivity Checks                                                      ; On                       ; On                 ;
-; Ignore Maximum Fan-Out Assignments                                              ; Off                      ; Off                ;
-; Synchronization Register Chain Length                                           ; 3                        ; 3                  ;
-; Power Optimization During Synthesis                                             ; Normal compilation       ; Normal compilation ;
-; HDL message level                                                               ; Level2                   ; Level2             ;
-; Suppress Register Optimization Related Messages                                 ; Off                      ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report                        ; 5000                     ; 5000               ;
-; Number of Swept Nodes Reported in Synthesis Report                              ; 5000                     ; 5000               ;
-; Number of Inverted Registers Reported in Synthesis Report                       ; 100                      ; 100                ;
-; Clock MUX Protection                                                            ; On                       ; On                 ;
-; Auto Gated Clock Conversion                                                     ; Off                      ; Off                ;
-; Block Design Naming                                                             ; Auto                     ; Auto               ;
-; SDC constraint protection                                                       ; Off                      ; Off                ;
-; Synthesis Effort                                                                ; Auto                     ; Auto               ;
-; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                       ; On                 ;
-; Pre-Mapping Resynthesis Optimization                                            ; Off                      ; Off                ;
-; Analysis & Synthesis Message Level                                              ; Medium                   ; Medium             ;
-; Disable Register Merging Across Hierarchies                                     ; Auto                     ; Auto               ;
-; Resource Aware Inference For Block RAM                                          ; On                       ; On                 ;
-; Automatic Parallel Synthesis                                                    ; On                       ; On                 ;
-; Partial Reconfiguration Bitstream ID                                            ; Off                      ; Off                ;
-+---------------------------------------------------------------------------------+--------------------------+--------------------+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CGXFC9E7F35C8     ;                    ;
+; Top-level entity name                                                           ; tcc_top_master     ; InterfaceTCC       ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Preserve fewer node names                                                       ; Off                ; On                 ;
+; VHDL Show LMF Mapping Messages                                                  ; Off                ;                    ;
+; VHDL Version                                                                    ; VHDL_2008          ; VHDL_1993          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
 +------------------------------------------+
@@ -172,79 +174,94 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                        ;
-+-------------------------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path                            ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                      ; Library ;
-+-------------------------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------+---------+
-; hdl/backend/interface_tcc_backend_master.vhd                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd                ;         ;
-; hdl/dependencies/xina/xina_package.vhd                      ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/xina_package.vhd                      ;         ;
-; hdl/frontend/interface_tcc_frontend_master_send_control.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master_send_control.vhd ;         ;
-; hdl/frontend/interface_tcc_frontend_master.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd              ;         ;
-; hdl/interface_tcc_top_master.vhd                            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd                            ;         ;
-; hdl/interface_tcc_package.vhd                               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/interface_tcc_package.vhd                               ;         ;
-+-------------------------------------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                    ;
++---------------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                  ; Used in Netlist ; File Type       ; File Name with Absolute Path                                            ; Library ;
++---------------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
+; hdl/dependencies/xina_pkg.vhd                     ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina_pkg.vhd                     ;         ;
+; hdl/backend/tcc_backend_master_send_control.vhd   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd   ;         ;
+; hdl/tcc_package.vhd                               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_package.vhd                               ;         ;
+; hdl/backend/tcc_backend_master.vhd                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd                ;         ;
+; hdl/frontend/tcc_frontend_master_send_control.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd ;         ;
+; hdl/frontend/tcc_frontend_master.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd              ;         ;
+; hdl/tcc_top_master.vhd                            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd                            ;         ;
++---------------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                                                                                                                ;
-+---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                                                                                                                        ;
-+---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Estimate of Logic utilization (ALMs needed) ; 1                                                                                                                                                                            ;
-;                                             ;                                                                                                                                                                              ;
-; Combinational ALUT usage for logic          ; 2                                                                                                                                                                            ;
-;     -- 7 input functions                    ; 0                                                                                                                                                                            ;
-;     -- 6 input functions                    ; 0                                                                                                                                                                            ;
-;     -- 5 input functions                    ; 1                                                                                                                                                                            ;
-;     -- 4 input functions                    ; 1                                                                                                                                                                            ;
-;     -- <=3 input functions                  ; 0                                                                                                                                                                            ;
-;                                             ;                                                                                                                                                                              ;
-; Dedicated logic registers                   ; 2                                                                                                                                                                            ;
-;                                             ;                                                                                                                                                                              ;
-; I/O pins                                    ; 206                                                                                                                                                                          ;
-;                                             ;                                                                                                                                                                              ;
-; Total DSP Blocks                            ; 0                                                                                                                                                                            ;
-;                                             ;                                                                                                                                                                              ;
-; Maximum fan-out node                        ; interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE.S_IDLE ;
-; Maximum fan-out                             ; 4                                                                                                                                                                            ;
-; Total fan-out                               ; 224                                                                                                                                                                          ;
-; Average fan-out                             ; 0.54                                                                                                                                                                         ;
-+---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                                                                     ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                                                                             ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Estimate of Logic utilization (ALMs needed) ; 20                                                                                                                                                ;
+;                                             ;                                                                                                                                                   ;
+; Combinational ALUT usage for logic          ; 39                                                                                                                                                ;
+;     -- 7 input functions                    ; 0                                                                                                                                                 ;
+;     -- 6 input functions                    ; 1                                                                                                                                                 ;
+;     -- 5 input functions                    ; 10                                                                                                                                                ;
+;     -- 4 input functions                    ; 1                                                                                                                                                 ;
+;     -- <=3 input functions                  ; 27                                                                                                                                                ;
+;                                             ;                                                                                                                                                   ;
+; Dedicated logic registers                   ; 5                                                                                                                                                 ;
+;                                             ;                                                                                                                                                   ;
+; I/O pins                                    ; 206                                                                                                                                               ;
+;                                             ;                                                                                                                                                   ;
+; Total DSP Blocks                            ; 0                                                                                                                                                 ;
+;                                             ;                                                                                                                                                   ;
+; Maximum fan-out node                        ; tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE.S_WRITE_TRANSACTION ;
+; Maximum fan-out                             ; 37                                                                                                                                                ;
+; Total fan-out                               ; 397                                                                                                                                               ;
+; Average fan-out                             ; 0.87                                                                                                                                              ;
++---------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                                                                                    ;
-+-------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------+--------------+
-; Compilation Hierarchy Node                                                                      ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Entity Name                                ; Library Name ;
-+-------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------+--------------+
-; |interface_tcc_top_master                                                                       ; 2 (0)               ; 2 (0)                     ; 0                 ; 0          ; 206  ; 0            ; |interface_tcc_top_master                                                                                                                                                       ; interface_tcc_top_master                   ; work         ;
-;    |interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|                              ; 2 (0)               ; 2 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |interface_tcc_top_master|interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER                                                                                         ; interface_tcc_frontend_master              ; work         ;
-;       |interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL| ; 2 (2)               ; 2 (2)                     ; 0                 ; 0          ; 0    ; 0            ; |interface_tcc_top_master|interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL ; interface_tcc_frontend_master_send_control ; work         ;
-+-------------------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                    ;
++-----------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+----------------------------------+--------------+
+; Compilation Hierarchy Node                                                  ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                           ; Entity Name                      ; Library Name ;
++-----------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+----------------------------------+--------------+
+; |tcc_top_master                                                             ; 39 (0)              ; 5 (0)                     ; 0                 ; 0          ; 206  ; 0            ; |tcc_top_master                                                                                                               ; tcc_top_master                   ; work         ;
+;    |tcc_backend_master:u_TCC_BACKEND_MASTER|                                ; 34 (0)              ; 2 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER                                                                       ; tcc_backend_master               ; work         ;
+;       |tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|   ; 34 (34)             ; 2 (2)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL     ; tcc_backend_master_send_control  ; work         ;
+;    |tcc_frontend_master:u_TCC_FRONTEND_MASTER|                              ; 5 (0)               ; 3 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER                                                                     ; tcc_frontend_master              ; work         ;
+;       |tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL| ; 5 (5)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL ; tcc_frontend_master_send_control ; work         ;
++-----------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------+----------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |interface_tcc_top_master|interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE ;
-+-------------------------------------+------------------------------------+-------------------------------------+------------------------------------------------------------------------------------------------+
-; Name                                ; r_CURRENT_STATE.S_READ_TRANSACTION ; r_CURRENT_STATE.S_WRITE_TRANSACTION ; r_CURRENT_STATE.S_IDLE                                                                         ;
-+-------------------------------------+------------------------------------+-------------------------------------+------------------------------------------------------------------------------------------------+
-; r_CURRENT_STATE.S_IDLE              ; 0                                  ; 0                                   ; 0                                                                                              ;
-; r_CURRENT_STATE.S_WRITE_TRANSACTION ; 0                                  ; 1                                   ; 1                                                                                              ;
-; r_CURRENT_STATE.S_READ_TRANSACTION  ; 1                                  ; 0                                   ; 1                                                                                              ;
-+-------------------------------------+------------------------------------+-------------------------------------+------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE ;
++-----------------------------------+----------------------------+-----------------------------------+------------------------------------------------------+
+; Name                              ; r_CURRENT_STATE.S_ACK_BACK ; r_CURRENT_STATE.S_WAITING_FOR_ACK ; r_CURRENT_STATE.S_IDLE                               ;
++-----------------------------------+----------------------------+-----------------------------------+------------------------------------------------------+
+; r_CURRENT_STATE.S_IDLE            ; 0                          ; 0                                 ; 0                                                    ;
+; r_CURRENT_STATE.S_WAITING_FOR_ACK ; 0                          ; 1                                 ; 1                                                    ;
+; r_CURRENT_STATE.S_ACK_BACK        ; 1                          ; 0                                 ; 1                                                    ;
++-----------------------------------+----------------------------+-----------------------------------+------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                                                                                            ;
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+
-; Register name                                                                                                                                                                            ; Reason for Removal ;
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+
-; interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE.S_READ_TRANSACTION ; Lost fanout        ;
-; Total Number of Removed Registers = 1                                                                                                                                                    ;                    ;
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE ;
++-------------------------------------+------------------------------------+-------------------------------------+----------------------------------------------+
+; Name                                ; r_CURRENT_STATE.S_READ_TRANSACTION ; r_CURRENT_STATE.S_WRITE_TRANSACTION ; r_CURRENT_STATE.S_IDLE                       ;
++-------------------------------------+------------------------------------+-------------------------------------+----------------------------------------------+
+; r_CURRENT_STATE.S_IDLE              ; 0                                  ; 0                                   ; 0                                            ;
+; r_CURRENT_STATE.S_WRITE_TRANSACTION ; 0                                  ; 1                                   ; 1                                            ;
+; r_CURRENT_STATE.S_READ_TRANSACTION  ; 1                                  ; 0                                   ; 1                                            ;
++-------------------------------------+------------------------------------+-------------------------------------+----------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                            ;
++--------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
+; Register name                                                                                                                        ; Reason for Removal                     ;
++--------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
+; tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE.S_ACK_BACK ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 1                                                                                                ;                                        ;
++--------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -252,57 +269,43 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2     ;
+; Total registers                              ; 5     ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 2     ;
+; Number of registers using Asynchronous Clear ; 5     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "interface_tcc_backend_master:u_INTERFACE_TCC_BACKEND_MASTER"                               ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                             ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
-; i_valid     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; i_opc       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; i_addr      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; i_burst     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; i_length    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; i_data      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; l_in_data_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; l_in_val_o  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; l_out_ack_o ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+; 3:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|l_in_data_o[17] ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|l_in_data_o[7]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL" ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                                                                                        ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; aw_id        ; Input  ; Info     ; Stuck at GND                                                                                                                                   ;
-; ar_id        ; Input  ; Info     ; Stuck at GND                                                                                                                                   ;
-; o_backend_id ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                            ;
-+--------------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL" ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------+
+; Port  ; Type  ; Severity ; Details                                                                                                        ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------+
+; aw_id ; Input ; Info     ; Stuck at GND                                                                                                   ;
+; ar_id ; Input ; Info     ; Stuck at GND                                                                                                   ;
++-------+-------+----------+----------------------------------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER"                                  ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port             ; Type   ; Severity ; Details                                                                             ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
-; o_backend_valid  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_opc    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_addr   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_burst  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_length ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_data   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; o_backend_id     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------------------+--------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "tcc_frontend_master:u_TCC_FRONTEND_MASTER"                                                  ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port         ; Type   ; Severity ; Details                                                                             ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
+; o_backend_id ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -310,18 +313,21 @@ Encoding Type:  One-Hot
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 2                           ;
-;     CLR               ; 2                           ;
-; arriav_lcell_comb     ; 4                           ;
-;     normal            ; 4                           ;
+; arriav_ff             ; 5                           ;
+;     CLR               ; 5                           ;
+; arriav_lcell_comb     ; 41                          ;
+;     normal            ; 41                          ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 1                           ;
+;         2 data inputs ; 2                           ;
+;         3 data inputs ; 25                          ;
 ;         4 data inputs ; 1                           ;
-;         5 data inputs ; 1                           ;
+;         5 data inputs ; 10                          ;
+;         6 data inputs ; 1                           ;
 ; boundary_port         ; 206                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 0.73                        ;
+; Max LUT depth         ; 2.00                        ;
+; Average LUT depth     ; 1.01                        ;
 +-----------------------+-----------------------------+
 
 
@@ -340,282 +346,180 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Mon Aug 21 16:08:31 2023
+    Info: Processing started: Thu Aug 24 09:30:51 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
-Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/interface_tcc_backend_master.vhd
-    Info (12022): Found design unit 1: interface_tcc_backend_master-arch_interface_tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 34
-    Info (12023): Found entity 1: interface_tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 8
-Info (12021): Found 1 design units, including 0 entities, in source file hdl/dependencies/xina/xina_package.vhd
-    Info (12022): Found design unit 1: xina_package File: E:/repos/InterfaceTCC/hdl/dependencies/xina/xina_package.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/interface_tcc_frontend_master_send_control.vhd
-    Info (12022): Found design unit 1: interface_tcc_frontend_master_send_control-arch_interface_tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master_send_control.vhd Line: 46
-    Info (12023): Found entity 1: interface_tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master_send_control.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/interface_tcc_frontend_master.vhd
-    Info (12022): Found design unit 1: interface_tcc_frontend_master-arch_interface_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 62
-    Info (12023): Found entity 1: interface_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file hdl/interface_tcc_top_master.vhd
-    Info (12022): Found design unit 1: interface_tcc_top_master-arch_interface_tcc_top_master File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 60
-    Info (12023): Found entity 1: interface_tcc_top_master File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 8
-Info (12021): Found 1 design units, including 0 entities, in source file hdl/interface_tcc_package.vhd
-    Info (12022): Found design unit 1: interface_tcc_package File: E:/repos/InterfaceTCC/hdl/interface_tcc_package.vhd Line: 7
-Info (12127): Elaborating entity "interface_tcc_top_master" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(54): used implicit default value for signal "l_in_data_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(55): used implicit default value for signal "l_in_val_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 55
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(56): used implicit default value for signal "l_out_ack_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 56
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(62): object "w_BACKEND_VALID_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 62
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(63): object "w_BACKEND_OPC_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 63
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(64): object "w_BACKEND_ADDR_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 64
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(65): object "w_BACKEND_BURST_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 65
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(66): object "w_BACKEND_LENGTH_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 66
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(67): object "w_BACKEND_DATA_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 67
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(68): object "w_BACKEND_ID_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 68
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(73): object "w_l_in_data_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 73
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(74): object "w_l_in_val_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 74
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(75): used implicit default value for signal "w_l_in_ack_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 75
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(76): used implicit default value for signal "w_l_out_data_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 76
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_top_master.vhd(77): used implicit default value for signal "w_l_out_val_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 77
-Warning (10036): Verilog HDL or VHDL warning at interface_tcc_top_master.vhd(78): object "w_l_out_ack_o" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 78
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "w_l_in_data_o" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
-Info (12128): Elaborating entity "interface_tcc_frontend_master" for hierarchy "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 81
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(29): used implicit default value for signal "BVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 29
-Warning (10540): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(31): used explicit default value for signal "BRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 31
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(43): used implicit default value for signal "RVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 43
-Warning (10540): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(45): used explicit default value for signal "RDATA" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 45
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(46): used implicit default value for signal "RLAST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 46
-Warning (10540): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(47): used explicit default value for signal "RRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 47
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_frontend_master.vhd(58): used implicit default value for signal "o_BACKEND_ID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 58
-Info (12128): Elaborating entity "interface_tcc_frontend_master_send_control" for hierarchy "interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/interface_tcc_frontend_master.vhd Line: 64
-Info (12128): Elaborating entity "interface_tcc_backend_master" for hierarchy "interface_tcc_backend_master:u_INTERFACE_TCC_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 135
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(15): used implicit default value for signal "i_VALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 15
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(16): used implicit default value for signal "i_OPC" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 16
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(17): used implicit default value for signal "i_ADDR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 17
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(18): used implicit default value for signal "i_BURST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 18
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(19): used implicit default value for signal "i_LENGTH" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 19
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(20): used implicit default value for signal "i_DATA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 20
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(28): used implicit default value for signal "l_in_data_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 28
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(29): used implicit default value for signal "l_in_val_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 29
-Warning (10541): VHDL Signal Declaration warning at interface_tcc_backend_master.vhd(30): used implicit default value for signal "l_out_ack_o" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/interface_tcc_backend_master.vhd Line: 30
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_out_data_i" into its bus
-Info (10008): Verilog HDL or VHDL information: EDA Netlist Writer cannot regroup multidimensional array "l_in_data_o" into its bus
+Info (12021): Found 1 design units, including 0 entities, in source file hdl/dependencies/xina_pkg.vhd
+    Info (12022): Found design unit 1: xina_pkg File: E:/repos/InterfaceTCC/hdl/dependencies/xina_pkg.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/tcc_backend_master_send_control.vhd
+    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 34
+    Info (12023): Found entity 1: tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 8
+Info (12021): Found 1 design units, including 0 entities, in source file hdl/tcc_package.vhd
+    Info (12022): Found design unit 1: tcc_package File: E:/repos/InterfaceTCC/hdl/tcc_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/test/tcc_frontend_master_tb.vhd
+    Info (12022): Found design unit 1: tcc_frontend_master_tb-arch_tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 10
+    Info (12023): Found entity 1: tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/tcc_backend_master.vhd
+    Info (12022): Found design unit 1: tcc_backend_master-arch_tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 34
+    Info (12023): Found entity 1: tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/tcc_frontend_master_send_control.vhd
+    Info (12022): Found design unit 1: tcc_frontend_master_send_control-arch_tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 48
+    Info (12023): Found entity 1: tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/frontend/tcc_frontend_master.vhd
+    Info (12022): Found design unit 1: tcc_frontend_master-arch_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 62
+    Info (12023): Found entity 1: tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/tcc_top_master.vhd
+    Info (12022): Found design unit 1: tcc_top_master-arch_tcc_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 60
+    Info (12023): Found entity 1: tcc_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 8
+Info (12127): Elaborating entity "tcc_top_master" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at tcc_top_master.vhd(68): object "w_BACKEND_ID_IN" assigned a value but never read File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 68
+Info (12128): Elaborating entity "tcc_frontend_master" for hierarchy "tcc_frontend_master:u_TCC_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 73
+Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(29): used implicit default value for signal "BVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 29
+Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(31): used explicit default value for signal "BRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 31
+Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(43): used implicit default value for signal "RVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 43
+Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(45): used explicit default value for signal "RDATA" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 45
+Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(46): used implicit default value for signal "RLAST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 46
+Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(47): used explicit default value for signal "RRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 47
+Info (12128): Elaborating entity "tcc_frontend_master_send_control" for hierarchy "tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 64
+Info (12128): Elaborating entity "tcc_backend_master" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 127
+Info (12128): Elaborating entity "tcc_backend_master_send_control" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 36
+Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(56): signal "i_VALID" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 56
+Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(62): signal "l_in_ack_i" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 62
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "BVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 30
-    Warning (13410): Pin "BRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "BRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "BRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "RVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 44
-    Warning (13410): Pin "RDATA[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[3]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[4]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[5]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[6]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[7]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[8]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[9]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[10]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[11]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[12]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[13]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[14]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[15]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[16]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[17]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[18]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[19]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[20]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[21]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[22]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[23]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[24]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[25]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[26]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[27]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[28]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[29]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[30]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[31]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RLAST" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 47
-    Warning (13410): Pin "RRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "RRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "RRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "l_in_data_o[0][0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][3]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][4]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][5]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][6]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][7]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][8]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][9]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][10]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][11]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][12]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][13]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][14]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][15]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][16]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][17]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][18]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][19]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][20]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][21]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][22]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][23]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][24]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][25]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][26]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][27]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][28]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][29]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][30]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][31]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_data_o[0][0][32]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 54
-    Warning (13410): Pin "l_in_val_o[0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 55
-    Warning (13410): Pin "l_out_ack_o[0][0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 56
+    Warning (13410): Pin "BVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 30
+    Warning (13410): Pin "BRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
+    Warning (13410): Pin "BRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
+    Warning (13410): Pin "BRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
+    Warning (13410): Pin "RVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 44
+    Warning (13410): Pin "RDATA[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[3]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[4]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[5]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[6]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[7]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[8]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[9]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[10]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[11]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[12]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[13]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[14]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[15]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[16]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[17]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[18]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[19]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[20]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[21]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[22]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[23]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[24]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[25]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[26]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[27]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[28]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[29]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[30]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RDATA[31]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
+    Warning (13410): Pin "RLAST" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 47
+    Warning (13410): Pin "RRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
+    Warning (13410): Pin "RRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
+    Warning (13410): Pin "RRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
+    Warning (13410): Pin "l_out_ack_o" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 56
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 122 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "AW_ID[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 17
-    Warning (15610): No output dependent on input pin "AW_ID[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 17
-    Warning (15610): No output dependent on input pin "AW_ID[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 17
-    Warning (15610): No output dependent on input pin "AW_ID[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 17
-    Warning (15610): No output dependent on input pin "AW_ID[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 17
-    Warning (15610): No output dependent on input pin "AWADDR[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWLEN[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWLEN[7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 19
-    Warning (15610): No output dependent on input pin "AWSIZE[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "AWSIZE[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "AWSIZE[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "AWBURST[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 21
-    Warning (15610): No output dependent on input pin "AWBURST[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 21
-    Warning (15610): No output dependent on input pin "WVALID" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 24
-    Warning (15610): No output dependent on input pin "WDATA[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[8]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[9]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[10]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[11]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[12]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[13]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[14]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[15]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[16]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[17]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[18]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[19]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[20]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[21]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[22]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[23]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[24]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[25]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[26]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[27]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[28]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[29]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[30]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "WDATA[31]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 26
-    Warning (15610): No output dependent on input pin "BREADY" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 31
-    Warning (15610): No output dependent on input pin "AR_ID[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 37
-    Warning (15610): No output dependent on input pin "AR_ID[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 37
-    Warning (15610): No output dependent on input pin "AR_ID[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 37
-    Warning (15610): No output dependent on input pin "AR_ID[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 37
-    Warning (15610): No output dependent on input pin "AR_ID[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 37
-    Warning (15610): No output dependent on input pin "ARADDR[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARADDR[7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 38
-    Warning (15610): No output dependent on input pin "ARLEN[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARLEN[7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 39
-    Warning (15610): No output dependent on input pin "ARSIZE[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "ARSIZE[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "ARSIZE[2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "ARBURST[0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 41
-    Warning (15610): No output dependent on input pin "ARBURST[1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 41
-    Warning (15610): No output dependent on input pin "RREADY" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 45
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][1]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][2]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][3]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][4]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][5]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][6]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][7]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][8]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][9]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][10]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][11]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][12]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][13]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][14]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][15]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][16]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][17]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][18]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][19]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][20]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][21]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][22]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][23]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][24]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][25]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][26]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][27]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][28]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][29]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][30]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][31]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_data_i[0][0][32]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 51
-    Warning (15610): No output dependent on input pin "l_out_val_i[0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 52
-    Warning (15610): No output dependent on input pin "l_in_ack_i[0][0]" File: E:/repos/InterfaceTCC/hdl/interface_tcc_top_master.vhd Line: 53
-Info (21057): Implemented 208 device resources after synthesis - the final resource count might be different
+Warning (21074): Design contains 80 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "AW_ID[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 17
+    Warning (15610): No output dependent on input pin "AW_ID[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 17
+    Warning (15610): No output dependent on input pin "AW_ID[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 17
+    Warning (15610): No output dependent on input pin "AW_ID[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 17
+    Warning (15610): No output dependent on input pin "AW_ID[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 17
+    Warning (15610): No output dependent on input pin "AWADDR[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWADDR[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
+    Warning (15610): No output dependent on input pin "AWLEN[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWLEN[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 19
+    Warning (15610): No output dependent on input pin "AWSIZE[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
+    Warning (15610): No output dependent on input pin "AWSIZE[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
+    Warning (15610): No output dependent on input pin "AWSIZE[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
+    Warning (15610): No output dependent on input pin "AWBURST[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 21
+    Warning (15610): No output dependent on input pin "AWBURST[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 21
+    Warning (15610): No output dependent on input pin "BREADY" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 31
+    Warning (15610): No output dependent on input pin "AR_ID[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 37
+    Warning (15610): No output dependent on input pin "AR_ID[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 37
+    Warning (15610): No output dependent on input pin "AR_ID[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 37
+    Warning (15610): No output dependent on input pin "AR_ID[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 37
+    Warning (15610): No output dependent on input pin "AR_ID[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 37
+    Warning (15610): No output dependent on input pin "ARLEN[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARLEN[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 39
+    Warning (15610): No output dependent on input pin "ARSIZE[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
+    Warning (15610): No output dependent on input pin "ARSIZE[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
+    Warning (15610): No output dependent on input pin "ARSIZE[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
+    Warning (15610): No output dependent on input pin "ARBURST[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 41
+    Warning (15610): No output dependent on input pin "ARBURST[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 41
+    Warning (15610): No output dependent on input pin "RREADY" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 45
+    Warning (15610): No output dependent on input pin "l_out_data_i[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[8]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[9]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[10]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[11]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[12]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[13]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[14]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[15]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[16]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[17]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[18]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[19]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[20]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[21]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[22]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[23]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[24]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[25]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[26]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[27]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[28]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[29]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[30]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[31]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_data_i[32]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 51
+    Warning (15610): No output dependent on input pin "l_out_val_i" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 52
+Info (21057): Implemented 245 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 127 input pins
     Info (21059): Implemented 79 output pins
-    Info (21061): Implemented 2 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 233 warnings
-    Info: Peak virtual memory: 4887 megabytes
-    Info: Processing ended: Mon Aug 21 16:08:38 2023
+    Info (21061): Implemented 39 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 134 warnings
+    Info: Peak virtual memory: 4895 megabytes
+    Info: Processing ended: Thu Aug 24 09:30:58 2023
     Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:16
 

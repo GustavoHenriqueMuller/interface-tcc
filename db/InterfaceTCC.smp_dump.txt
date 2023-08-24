@@ -1,5 +1,11 @@
 
-State Machine - |interface_tcc_top_master|interface_tcc_frontend_master:u_INTERFACE_TCC_FRONTEND_MASTER|interface_tcc_frontend_master_send_control:u_INTERFACE_TCC_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+Name r_CURRENT_STATE.S_ACK_BACK r_CURRENT_STATE.S_WAITING_FOR_ACK r_CURRENT_STATE.S_IDLE 
+r_CURRENT_STATE.S_IDLE 0 0 0 
+r_CURRENT_STATE.S_WAITING_FOR_ACK 0 1 1 
+r_CURRENT_STATE.S_ACK_BACK 1 0 1 
+
+State Machine - |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
 Name r_CURRENT_STATE.S_READ_TRANSACTION r_CURRENT_STATE.S_WRITE_TRANSACTION r_CURRENT_STATE.S_IDLE 
 r_CURRENT_STATE.S_IDLE 0 0 0 
 r_CURRENT_STATE.S_WRITE_TRANSACTION 0 1 1 

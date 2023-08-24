@@ -16,6 +16,318 @@
 					"strict" : false
 				},
 				{
+					"name" : "l_in_data_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[7]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[8]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[9]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[10]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[11]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[12]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[13]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[14]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[15]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[16]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[17]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[18]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[19]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[20]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[21]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[22]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[23]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[24]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[25]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[26]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[27]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[28]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[29]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[30]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[31]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_data_o[32]",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_val_o",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[0]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[0]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[1]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[1]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[2]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[2]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[3]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[3]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[4]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[4]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[5]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[5]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[6]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[6]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ARADDR[7]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[8]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[9]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[10]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[11]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[12]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[13]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[14]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[15]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[16]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[17]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[18]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[19]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[20]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[21]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[22]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[23]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[24]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[25]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[26]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[27]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[28]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[29]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[30]",
+					"strict" : false
+				},
+				{
+					"name" : "WDATA[31]",
+					"strict" : false
+				},
+				{
+					"name" : "WVALID",
+					"strict" : false
+				},
+				{
+					"name" : "l_in_ack_i",
+					"strict" : false
+				},
+				{
+					"name" : "ACLK",
+					"strict" : false
+				},
+				{
+					"name" : "ARESETn",
+					"strict" : false
+				},
+				{
 					"name" : "WLAST",
 					"strict" : false
 				},
@@ -25,14 +337,6 @@
 				},
 				{
 					"name" : "ARVALID",
-					"strict" : false
-				},
-				{
-					"name" : "ACLK",
-					"strict" : false
-				},
-				{
-					"name" : "ARESETn",
 					"strict" : false
 				}
 			]
