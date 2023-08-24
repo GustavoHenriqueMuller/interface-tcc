@@ -1,0 +1,346 @@
+
+*** Running vivado
+    with args -log tcc_tb.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source tcc_tb.tcl
+
+
+****** Vivado v2020.1 (64-bit)
+  **** SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+  **** IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source tcc_tb.tcl -notrace
+Command: synth_design -top tcc_tb -part xc7k70tfbv676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 19218
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 2099.785 ; gain = 0.000 ; free physical = 978 ; free virtual = 10320
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'tcc_tb' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd:11]
+INFO: [Synth 8-638] synthesizing module 'tcc_top_master' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/tcc_top_master.vhd:60]
+INFO: [Synth 8-638] synthesizing module 'tcc_frontend_master' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd:62]
+INFO: [Synth 8-638] synthesizing module 'tcc_frontend_master_send_control' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd:48]
+INFO: [Synth 8-256] done synthesizing module 'tcc_frontend_master_send_control' (1#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd:48]
+INFO: [Synth 8-256] done synthesizing module 'tcc_frontend_master' (2#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd:62]
+INFO: [Synth 8-638] synthesizing module 'tcc_backend_master' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/backend/tcc_backend_master.vhd:34]
+INFO: [Synth 8-638] synthesizing module 'tcc_backend_master_send_control' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'tcc_backend_master_send_control' (3#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'tcc_backend_master' (4#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/backend/tcc_backend_master.vhd:34]
+INFO: [Synth 8-256] done synthesizing module 'tcc_top_master' (5#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/tcc_top_master.vhd:60]
+INFO: [Synth 8-638] synthesizing module 'router' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd:68]
+	Parameter x_id_p bound to: 1 - type: integer 
+	Parameter y_id_p bound to: 1 - type: integer 
+	Parameter l_ena_p bound to: 1 - type: integer 
+	Parameter n_ena_p bound to: 1 - type: integer 
+	Parameter e_ena_p bound to: 1 - type: integer 
+	Parameter s_ena_p bound to: 1 - type: integer 
+	Parameter w_ena_p bound to: 1 - type: integer 
+	Parameter flow_mode_p bound to: 0 - type: integer 
+	Parameter routing_mode_p bound to: 0 - type: integer 
+	Parameter arbitration_mode_p bound to: 0 - type: integer 
+	Parameter buffer_mode_p bound to: 0 - type: integer 
+	Parameter buffer_depth_p bound to: 4 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'channel_in' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd:43]
+	Parameter c_ena_p bound to: 1 - type: integer 
+	Parameter x_id_p bound to: 1 - type: integer 
+	Parameter y_id_p bound to: 1 - type: integer 
+	Parameter flow_mode_p bound to: 0 - type: integer 
+	Parameter routing_mode_p bound to: 0 - type: integer 
+	Parameter buffer_mode_p bound to: 0 - type: integer 
+	Parameter buffer_depth_p bound to: 4 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'flow_in' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd:24]
+	Parameter mode_p bound to: 0 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'flow_in_hs_moore' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd:23]
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'flow_in_hs_moore' (6#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd:23]
+INFO: [Synth 8-256] done synthesizing module 'flow_in' (7#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd:24]
+INFO: [Synth 8-638] synthesizing module 'buffering' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd:25]
+	Parameter mode_p bound to: 0 - type: integer 
+	Parameter data_width_p bound to: 33 - type: integer 
+	Parameter buffer_depth_p bound to: 4 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'buffering_fifo_ring' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd:26]
+	Parameter data_width_p bound to: 33 - type: integer 
+	Parameter buffer_depth_p bound to: 4 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'buffering_fifo_ring' (8#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd:26]
+INFO: [Synth 8-256] done synthesizing module 'buffering' (9#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd:25]
+INFO: [Synth 8-638] synthesizing module 'routing' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd:31]
+	Parameter mode_p bound to: 0 - type: integer 
+	Parameter x_id_p bound to: 1 - type: integer 
+	Parameter y_id_p bound to: 1 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'routing_xy_moore' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd:31]
+	Parameter x_id_p bound to: 1 - type: integer 
+	Parameter y_id_p bound to: 1 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'routing_xy_moore' (10#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd:31]
+INFO: [Synth 8-256] done synthesizing module 'routing' (11#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd:31]
+INFO: [Synth 8-638] synthesizing module 'switch' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd:21]
+	Parameter data_width_p bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'switch' (12#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'channel_in' (13#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd:43]
+INFO: [Synth 8-638] synthesizing module 'channel_out' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd:35]
+	Parameter c_ena_p bound to: 1 - type: integer 
+	Parameter flow_mode_p bound to: 0 - type: integer 
+	Parameter arbitration_mode_p bound to: 0 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'flow_out' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd:24]
+	Parameter mode_p bound to: 0 - type: integer 
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'flow_out_hs_moore' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd:23]
+	Parameter data_width_p bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'flow_out_hs_moore' (14#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd:23]
+INFO: [Synth 8-256] done synthesizing module 'flow_out' (15#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd:24]
+INFO: [Synth 8-638] synthesizing module 'arbitration' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd:17]
+	Parameter mode_p bound to: 0 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'arbitration_rr_moore' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd:14]
+INFO: [Synth 8-226] default block is never used [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd:33]
+INFO: [Synth 8-256] done synthesizing module 'arbitration_rr_moore' (16#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd:14]
+INFO: [Synth 8-256] done synthesizing module 'arbitration' (17#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd:17]
+INFO: [Synth 8-638] synthesizing module 'switch__parameterized0' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd:21]
+	Parameter data_width_p bound to: 33 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'switch__parameterized0' (17#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'channel_out' (18#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd:35]
+INFO: [Synth 8-638] synthesizing module 'crossbar' [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd:99]
+INFO: [Synth 8-256] done synthesizing module 'crossbar' (19#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd:99]
+INFO: [Synth 8-256] done synthesizing module 'router' (20#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd:68]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: wait statement with no conditon [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd:188]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: wait statement with no conditon [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd:200]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: wait statement with no conditon [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd:207]
+INFO: [Synth 8-256] done synthesizing module 'tcc_tb' (21#1) [/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd:11]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 2099.785 ; gain = 0.000 ; free physical = 979 ; free virtual = 10330
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:09 . Memory (MB): peak = 2099.785 ; gain = 0.000 ; free physical = 995 ; free virtual = 10346
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7k70tfbv676-1
+INFO: [Device 21-403] Loading part xc7k70tfbv676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 994 ; free virtual = 10346
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'r_CURRENT_STATE_reg' in module 'tcc_frontend_master_send_control'
+INFO: [Synth 8-802] inferred FSM for state register 'r_CURRENT_STATE_reg' in module 'tcc_backend_master_send_control'
+INFO: [Synth 8-802] inferred FSM for state register 'current_r_reg' in module 'flow_in_hs_moore'
+INFO: [Synth 8-802] inferred FSM for state register 'current_r_reg' in module 'routing_xy_moore'
+INFO: [Synth 8-802] inferred FSM for state register 'current_r_reg' in module 'flow_out_hs_moore'
+INFO: [Synth 8-802] inferred FSM for state register 'current_r_reg' in module 'arbitration_rr_moore'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  s_idle |                              001 |                               00
+     s_write_transaction |                              100 |                               01
+      s_read_transaction |                              010 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_CURRENT_STATE_reg' using encoding 'one-hot' in module 'tcc_frontend_master_send_control'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                  s_idle |                                0 |                               00
+       s_waiting_for_ack |                                1 |                               01
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'r_CURRENT_STATE_reg' using encoding 'sequential' in module 'tcc_backend_master_send_control'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE1 |                              001 |                               00
+                  iSTATE |                              010 |                               01
+                 iSTATE0 |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'current_r_reg' using encoding 'one-hot' in module 'flow_in_hs_moore'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE7 |                             0101 |                             0000
+                 iSTATE6 |                             1000 |                             0001
+                 iSTATE8 |                             1001 |                             1001
+                 iSTATE2 |                             0110 |                             0010
+                 iSTATE5 |                             0111 |                             1010
+                  iSTATE |                             0000 |                             0011
+                 iSTATE4 |                             0001 |                             1011
+                 iSTATE0 |                             0010 |                             0100
+                 iSTATE3 |                             0011 |                             1100
+                 iSTATE9 |                             1010 |                             0101
+                 iSTATE1 |                             0100 |                             1101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'current_r_reg' using encoding 'sequential' in module 'routing_xy_moore'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE0 |                              001 |                               00
+                 iSTATE1 |                              010 |                               01
+                  iSTATE |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'current_r_reg' using encoding 'one-hot' in module 'flow_out_hs_moore'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                 iSTATE5 |                              000 |                              000
+                 iSTATE2 |                              001 |                              111
+                 iSTATE6 |                              010 |                              101
+                 iSTATE1 |                              011 |                              110
+                 iSTATE4 |                              100 |                              011
+                 iSTATE0 |                              101 |                              100
+                 iSTATE3 |                              110 |                              001
+                  iSTATE |                              111 |                              010
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'current_r_reg' using encoding 'sequential' in module 'arbitration_rr_moore'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 947 ; free virtual = 10310
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    3 Bit       Adders := 5     
+	   2 Input    2 Bit       Adders := 10    
++---Registers : 
+	                3 Bit    Registers := 5     
++---RAMs : 
+	              132 Bit	(4 X 33 bit)          RAMs := 5     
++---Muxes : 
+	   2 Input   33 Bit        Muxes := 1     
+	   3 Input   32 Bit        Muxes := 1     
+	   3 Input    8 Bit        Muxes := 2     
+	   3 Input    5 Bit        Muxes := 1     
+	  27 Input    4 Bit        Muxes := 5     
+	   2 Input    4 Bit        Muxes := 5     
+	   3 Input    3 Bit        Muxes := 11    
+	   2 Input    3 Bit        Muxes := 38    
+	  40 Input    3 Bit        Muxes := 5     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 10    
+	   2 Input    1 Bit        Muxes := 14    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 738 ; free virtual = 10124
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 733 ; free virtual = 10119
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 718 ; free virtual = 10105
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++-+-----+------+
+| |Cell |Count |
++-+-----+------+
++-+-----+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |     0|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10103
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.812 ; gain = 6.027 ; free physical = 717 ; free virtual = 10104
+Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 2105.820 ; gain = 6.027 ; free physical = 717 ; free virtual = 10104
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.820 ; gain = 0.000 ; free physical = 774 ; free virtual = 10165
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2105.820 ; gain = 0.000 ; free physical = 685 ; free virtual = 10088
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+67 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2105.820 ; gain = 6.035 ; free physical = 803 ; free virtual = 10206
+INFO: [Common 17-1381] The checkpoint '/home/haas/Documents/Gihtub/InterfaceTCC/vivado/tcc.runs/synth_1/tcc_tb.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file tcc_tb_utilization_synth.rpt -pb tcc_tb_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Aug 24 13:39:16 2023...

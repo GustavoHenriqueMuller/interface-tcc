@@ -1,0 +1,41 @@
+Vivado Simulator 2020.1
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: /tools/Xilinx/Vivado/2020.1/bin/unwrapped/lnx64.o/xelab -wto b29828e3f33d4d20b2f3431d57d4161f --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot tcc_tb_behav xil_defaultlib.tcc_tb -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package xil_defaultlib.tcc_package
+Compiling package xil_defaultlib.xina_pkg
+Compiling package synopsys.attributes
+Compiling package ieee.std_logic_misc
+Compiling package ieee.numeric_std
+Compiling package ieee.math_real
+Compiling architecture arch_tcc_frontend_master_send_control of entity xil_defaultlib.tcc_frontend_master_send_control [tcc_frontend_master_send_control...]
+Compiling architecture arch_tcc_frontend_master of entity xil_defaultlib.tcc_frontend_master [tcc_frontend_master_default]
+Compiling architecture arch_tcc_backend_master_send_control of entity xil_defaultlib.tcc_backend_master_send_control [tcc_backend_master_send_control_...]
+Compiling architecture arch_tcc_backend_master of entity xil_defaultlib.tcc_backend_master [tcc_backend_master_default]
+Compiling architecture arch_tcc_top_master of entity xil_defaultlib.tcc_top_master [tcc_top_master_default]
+Compiling architecture moore of entity xil_defaultlib.flow_in_hs [flow_in_hs_default]
+Compiling architecture rtl of entity xil_defaultlib.flow_in [flow_in_default]
+Compiling architecture ring of entity xil_defaultlib.buffering_fifo [\buffering_fifo(data_width_p=33)...]
+Compiling architecture rtl of entity xil_defaultlib.buffering [\buffering(data_width_p=33)\]
+Compiling architecture moore of entity xil_defaultlib.routing_xy [routing_xy_default]
+Compiling architecture rtl of entity xil_defaultlib.routing [routing_default]
+Compiling architecture rtl of entity xil_defaultlib.switch [\switch(data_width_p=1)\]
+Compiling architecture rtl of entity xil_defaultlib.channel_in [channel_in_default]
+Compiling architecture moore of entity xil_defaultlib.flow_out_hs [flow_out_hs_default]
+Compiling architecture rtl of entity xil_defaultlib.flow_out [flow_out_default]
+Compiling architecture moore of entity xil_defaultlib.arbitration_rr [arbitration_rr_default]
+Compiling architecture rtl of entity xil_defaultlib.arbitration [arbitration_default]
+Compiling architecture rtl of entity xil_defaultlib.switch [\switch(data_width_p=33)\]
+Compiling architecture rtl of entity xil_defaultlib.channel_out [channel_out_default]
+Compiling architecture rtl of entity xil_defaultlib.crossbar [crossbar_default]
+Compiling architecture rtl of entity xil_defaultlib.router [router_default]
+Compiling architecture arch_tcc_tb of entity xil_defaultlib.tcc_tb
+Built simulation snapshot tcc_tb_behav

@@ -1,0 +1,38 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../hdl/tcc_package.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../../hdl/frontend/tcc_frontend_master_send_control.vhd" \
+"../../../../../hdl/frontend/tcc_frontend_master.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/flow_in_hs.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/flow_in.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/buffering_fifo.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/buffering.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/routing_xy.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/routing.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/switch.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/channel_in.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/flow_out_hs.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/flow_out.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/arbitration_rr.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/arbitration.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/channel_out.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/crossbar.vhd" \
+"../../../../../hdl/dependencies/xina/rtl/router.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../../hdl/dependencies/xina/rtl/xina.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../../hdl/backend/tcc_backend_master_send_control.vhd" \
+"../../../../../hdl/backend/tcc_backend_master.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../../hdl/tcc_top_master.vhd" \
+
+vhdl2008 xil_defaultlib  \
+"../../../../../hdl/test/tcc_tb.vhd" \
+
+# Do not sort compile order
+nosort

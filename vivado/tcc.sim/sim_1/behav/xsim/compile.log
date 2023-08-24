@@ -1,0 +1,34 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'flow_in_hs'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'flow_in'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'buffering_fifo'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'buffering'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'routing_xy'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'routing'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'switch'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'channel_in'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'flow_out_hs'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'flow_out'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'arbitration_rr'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'arbitration'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'channel_out'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'crossbar'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'router'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'xina'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/haas/Documents/Gihtub/InterfaceTCC/hdl/test/tcc_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'tcc_tb'
