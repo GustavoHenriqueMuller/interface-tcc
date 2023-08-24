@@ -84,6 +84,8 @@ architecture arch_tcc_tb of tcc_tb is
     signal t_w_in_data_o  : std_logic_vector(data_width_c downto 0);
     signal t_w_in_val_o   : std_logic;
     signal t_w_out_ack_o  : std_logic;
+    
+    signal w_t_RESETn : std_logic;
 
 begin
     u_TCC_TOP_MASTER: entity work.tcc_top_master
@@ -140,7 +142,7 @@ begin
     u_XINA_ROUTER: entity work.router
         port map(
             clk_i => t_ACLK,
-            rst_i => not t_RESETn,
+            rst_i => w_t_RESETn,
 
             -- local channel interface
             l_in_data_i  => t_l_in_data_o,
@@ -186,7 +188,11 @@ begin
         wait for 50 ns;
         t_ACLK <= not t_ACLK;
     end process;
-
+    
+    process(t_RESETn)
+    begin
+        w_t_RESETn <= not t_RESETn;
+    end process;
     ---------------------------------------------------------------------------------------------
     -- Tests.
     process
@@ -201,6 +207,7 @@ begin
         wait for 50 ns;
 
         t_AWVALID <= '0';
+        
         t_WVALID <= '1';
         t_WDATA <= "10101010101010101010101010101010";
         t_WLAST <= '1';

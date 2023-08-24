@@ -50,7 +50,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (r_CURRENT_STATE, l_out_val_i)
+    process (r_CURRENT_STATE, i_VALID, l_in_ack_i)
     begin
         case r_CURRENT_STATE is
             when S_IDLE =>  if (i_VALID = '1') then
