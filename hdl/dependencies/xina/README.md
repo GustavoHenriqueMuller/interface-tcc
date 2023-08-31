@@ -1,1 +1,0 @@
-# XINA - eXtensible Interconnect Network Architecture
