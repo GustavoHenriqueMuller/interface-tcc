@@ -48,12 +48,12 @@ entity tcc_top_master is
             RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
-        l_out_data_i : in std_logic_vector(data_width_c downto 0);
-        l_out_val_i  : in std_logic;
-        l_in_ack_i   : in std_logic;
-        l_in_data_o  : out std_logic_vector(data_width_c downto 0);
-        l_in_val_o   : out std_logic;
-        l_out_ack_o  : out std_logic
+        l_data_in : in std_logic_vector(data_width_c downto 0);
+        l_val_in  : in std_logic;
+        l_ack_in  : in std_logic;
+        l_data_out: out std_logic_vector(data_width_c downto 0);
+        l_val_out : out std_logic;
+        l_ack_out : out std_logic
     );
 end tcc_top_master;
 
@@ -141,12 +141,12 @@ begin
 			o_READY  => w_BACKEND_READY_OUT,
 
             -- XINA signals.
-            l_out_data_i => l_out_data_i,
-            l_out_val_i  => l_out_val_i,
-            l_in_ack_i   => l_in_ack_i,
-            l_in_data_o  => l_in_data_o,
-            l_in_val_o   => l_in_val_o,
-            l_out_ack_o  => l_out_ack_o
+            l_data_in  => l_data_in,
+            l_val_in   => l_val_in,
+            l_ack_in   => l_ack_in,
+            l_data_out => l_data_out,
+            l_val_out  => l_val_out,
+            l_ack_out  => l_ack_out
         );
 
 end arch_tcc_top_master;

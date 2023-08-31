@@ -1,5 +1,5 @@
 Analysis & Synthesis report for InterfaceTCC
-Wed Aug 30 23:00:52 2023
+Wed Aug 30 23:16:28 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -49,7 +49,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Aug 30 23:00:52 2023          ;
+; Analysis & Synthesis Status     ; Successful - Wed Aug 30 23:16:28 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
 ; Top-level Entity Name           ; tcc_top_master                                 ;
@@ -179,9 +179,19 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path                  ; Used in Netlist ; File Type       ; File Name with Absolute Path                                            ; Library ;
 +---------------------------------------------------+-----------------+-----------------+-------------------------------------------------------------------------+---------+
-; hdl/dependencies/xina_pkg.vhd                     ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina_pkg.vhd                     ;         ;
-; hdl/backend/tcc_backend_master_send_control.vhd   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd   ;         ;
+; hdl/dependencies/xina/rtl/xina.vhd                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd                ;         ;
+; hdl/dependencies/xina/rtl/switch.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd              ;         ;
+; hdl/dependencies/xina/rtl/routing.vhd             ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd             ;         ;
+; hdl/dependencies/xina/rtl/router.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd              ;         ;
+; hdl/dependencies/xina/rtl/flow_out.vhd            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd            ;         ;
+; hdl/dependencies/xina/rtl/flow_in.vhd             ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd             ;         ;
+; hdl/dependencies/xina/rtl/crossbar.vhd            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd            ;         ;
+; hdl/dependencies/xina/rtl/channel_out.vhd         ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd         ;         ;
+; hdl/dependencies/xina/rtl/channel_in.vhd          ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd          ;         ;
+; hdl/dependencies/xina/rtl/buffering.vhd           ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd           ;         ;
+; hdl/dependencies/xina/rtl/arbitration.vhd         ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd         ;         ;
 ; hdl/tcc_package.vhd                               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_package.vhd                               ;         ;
+; hdl/backend/tcc_backend_master_send_control.vhd   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd   ;         ;
 ; hdl/backend/tcc_backend_master.vhd                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd                ;         ;
 ; hdl/frontend/tcc_frontend_master_send_control.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd ;         ;
 ; hdl/frontend/tcc_frontend_master.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd              ;         ;
@@ -336,7 +346,7 @@ Encoding Type:  One-Hot
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -346,20 +356,75 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Wed Aug 30 23:00:39 2023
+    Info: Processing started: Wed Aug 30 23:16:21 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
-Info (12021): Found 1 design units, including 0 entities, in source file hdl/dependencies/xina_pkg.vhd
-    Info (12022): Found design unit 1: xina_pkg File: E:/repos/InterfaceTCC/hdl/dependencies/xina_pkg.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/tcc_backend_master_send_control.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 34
-    Info (12023): Found entity 1: tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 8
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/xina.vhd
+    Info (12022): Found design unit 1: xina_pkg File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd Line: 4
+    Info (12022): Found design unit 2: xina-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd Line: 60
+    Info (12023): Found entity 1: xina File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd Line: 29
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/switch.vhd
+    Info (12022): Found design unit 1: switch-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd Line: 21
+    Info (12023): Found entity 1: switch File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd Line: 4
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/routing_xy.vhd
+    Info (12022): Found design unit 1: routing_xy-moore File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd Line: 31
+    Info (12022): Found design unit 2: routing_xy-mealy File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd Line: 138
+    Info (12023): Found entity 1: routing_xy File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing_xy.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/routing.vhd
+    Info (12022): Found design unit 1: routing-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd Line: 31
+    Info (12023): Found entity 1: routing File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/router.vhd
+    Info (12022): Found design unit 1: router-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd Line: 68
+    Info (12023): Found entity 1: router File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd Line: 4
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/flow_out_hs.vhd
+    Info (12022): Found design unit 1: flow_out_hs-moore File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd Line: 23
+    Info (12022): Found design unit 2: flow_out_hs-mealy File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd Line: 67
+    Info (12023): Found entity 1: flow_out_hs File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out_hs.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/flow_out.vhd
+    Info (12022): Found design unit 1: flow_out-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd Line: 24
+    Info (12023): Found entity 1: flow_out File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd Line: 4
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/flow_in_hs.vhd
+    Info (12022): Found design unit 1: flow_in_hs-moore File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd Line: 23
+    Info (12022): Found design unit 2: flow_in_hs-mealy File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd Line: 67
+    Info (12023): Found entity 1: flow_in_hs File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in_hs.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/flow_in.vhd
+    Info (12022): Found design unit 1: flow_in-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd Line: 24
+    Info (12023): Found entity 1: flow_in File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/crossbar.vhd
+    Info (12022): Found design unit 1: crossbar-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd Line: 99
+    Info (12023): Found entity 1: crossbar File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/channel_out.vhd
+    Info (12022): Found design unit 1: channel_out-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd Line: 35
+    Info (12023): Found entity 1: channel_out File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/channel_in.vhd
+    Info (12022): Found design unit 1: channel_in-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd Line: 43
+    Info (12023): Found entity 1: channel_in File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd Line: 5
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/buffering_fifo.vhd
+    Info (12022): Found design unit 1: buffering_fifo-ring File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd Line: 26
+    Info (12022): Found design unit 2: buffering_fifo-shift File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd Line: 62
+    Info (12023): Found entity 1: buffering_fifo File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/buffering.vhd
+    Info (12022): Found design unit 1: buffering-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 25
+    Info (12023): Found entity 1: buffering File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 4
+Info (12021): Found 3 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/arbitration_rr.vhd
+    Info (12022): Found design unit 1: arbitration_rr-moore File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd Line: 14
+    Info (12022): Found design unit 2: arbitration_rr-mealy File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd Line: 133
+    Info (12023): Found entity 1: arbitration_rr File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration_rr.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/dependencies/xina/rtl/arbitration.vhd
+    Info (12022): Found design unit 1: arbitration-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 17
+    Info (12023): Found entity 1: arbitration File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 4
 Info (12021): Found 1 design units, including 0 entities, in source file hdl/tcc_package.vhd
     Info (12022): Found design unit 1: tcc_package File: E:/repos/InterfaceTCC/hdl/tcc_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/test/tcc_tb.vhd
+    Info (12022): Found design unit 1: tcc_tb-arch_tcc_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 11
+    Info (12023): Found entity 1: tcc_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file hdl/test/tcc_frontend_master_tb.vhd
     Info (12022): Found design unit 1: tcc_frontend_master_tb-arch_tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 10
     Info (12023): Found entity 1: tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/tcc_backend_master_send_control.vhd
+    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 34
+    Info (12023): Found entity 1: tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file hdl/backend/tcc_backend_master.vhd
     Info (12022): Found design unit 1: tcc_backend_master-arch_tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 34
     Info (12023): Found entity 1: tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 8
@@ -384,8 +449,6 @@ Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(47):
 Info (12128): Elaborating entity "tcc_frontend_master_send_control" for hierarchy "tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 64
 Info (12128): Elaborating entity "tcc_backend_master" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 127
 Info (12128): Elaborating entity "tcc_backend_master_send_control" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 36
-Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(56): signal "i_VALID" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 56
-Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(62): signal "l_in_ack_i" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 62
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "BVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 30
     Warning (13410): Pin "BRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
@@ -517,10 +580,10 @@ Info (21057): Implemented 245 device resources after synthesis - the final resou
     Info (21058): Implemented 127 input pins
     Info (21059): Implemented 79 output pins
     Info (21061): Implemented 39 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 134 warnings
-    Info: Peak virtual memory: 4887 megabytes
-    Info: Processing ended: Wed Aug 30 23:00:52 2023
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:17
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 132 warnings
+    Info: Peak virtual memory: 4884 megabytes
+    Info: Processing ended: Wed Aug 30 23:16:28 2023
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:15
 
 

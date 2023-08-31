@@ -12,7 +12,7 @@ architecture arch_tcc_tb of tcc_tb is
     -- AMBA-AXI 5 signals.
     signal t_ACLK: std_logic := '0';
     signal t_RESETn: std_logic := '1';
-    signal t_RESET: std_logic := '1';
+    signal t_RESET: std_logic := '0';
 
         -- Write request signals.
         signal t_AWVALID: std_logic := '0';
@@ -51,40 +51,40 @@ architecture arch_tcc_tb of tcc_tb is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between backend and XINA router.
-    signal t_l_out_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_l_out_val_i  : std_logic;
-    signal t_l_in_ack_i   : std_logic;
-    signal t_l_in_data_o  : std_logic_vector(data_width_c downto 0);
-    signal t_l_in_val_o   : std_logic;
-    signal t_l_out_ack_o  : std_logic;
+    signal t_l_data_in : std_logic_vector(data_width_c downto 0);
+    signal t_l_val_in  : std_logic;
+    signal t_l_ack_in  : std_logic;
+    signal t_l_data_out: std_logic_vector(data_width_c downto 0);
+    signal t_l_val_out : std_logic;
+    signal t_l_ack_out : std_logic;
 
-    signal t_n_out_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_n_out_val_i  : std_logic;
-    signal t_n_in_ack_i   : std_logic;
-    signal t_n_in_data_o  : std_logic_vector(data_width_c downto 0);
-    signal t_n_in_val_o   : std_logic;
-    signal t_n_out_ack_o  : std_logic;
+    signal t_n_data_in : std_logic_vector(data_width_c downto 0);
+    signal t_n_val_in  : std_logic;
+    signal t_n_ack_in  : std_logic;
+    signal t_n_data_out: std_logic_vector(data_width_c downto 0);
+    signal t_n_val_out : std_logic;
+    signal t_n_ack_out : std_logic;
 
-    signal t_e_out_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_e_out_val_i  : std_logic;
-    signal t_e_in_ack_i   : std_logic;
-    signal t_e_in_data_o  : std_logic_vector(data_width_c downto 0);
-    signal t_e_in_val_o   : std_logic;
-    signal t_e_out_ack_o  : std_logic;
+    signal t_e_data_in : std_logic_vector(data_width_c downto 0);
+    signal t_e_val_in  : std_logic;
+    signal t_e_ack_in  : std_logic;
+    signal t_e_data_out: std_logic_vector(data_width_c downto 0);
+    signal t_e_val_out : std_logic;
+    signal t_e_ack_out : std_logic;
 
-    signal t_s_out_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_s_out_val_i  : std_logic;
-    signal t_s_in_ack_i   : std_logic;
-    signal t_s_in_data_o  : std_logic_vector(data_width_c downto 0);
-    signal t_s_in_val_o   : std_logic;
-    signal t_s_out_ack_o  : std_logic;
+    signal t_s_data_in : std_logic_vector(data_width_c downto 0);
+    signal t_s_val_in  : std_logic;
+    signal t_s_ack_in  : std_logic;
+    signal t_s_data_out: std_logic_vector(data_width_c downto 0);
+    signal t_s_val_out : std_logic;
+    signal t_s_ack_out : std_logic;
 
-    signal t_w_out_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_w_out_val_i  : std_logic;
-    signal t_w_in_ack_i   : std_logic;
-    signal t_w_in_data_o  : std_logic_vector(data_width_c downto 0);
-    signal t_w_in_val_o   : std_logic;
-    signal t_w_out_ack_o  : std_logic;
+    signal t_w_data_in : std_logic_vector(data_width_c downto 0);
+    signal t_w_val_in  : std_logic;
+    signal t_w_ack_in  : std_logic;
+    signal t_w_data_out: std_logic_vector(data_width_c downto 0);
+    signal t_w_val_out : std_logic;
+    signal t_w_ack_out : std_logic;
 
 begin
     u_TCC_TOP_MASTER: entity work.tcc_top_master
@@ -130,12 +130,12 @@ begin
                 RRESP   => t_RRESP,
 
             -- XINA signals.
-            l_out_data_i => t_l_out_data_i,
-            l_out_val_i  => t_l_out_val_i,
-            l_in_ack_i   => t_l_in_ack_i,
-            l_in_data_o  => t_l_in_data_o,
-            l_in_val_o   => t_l_in_val_o,
-            l_out_ack_o  => t_l_out_ack_o
+            l_data_in  => t_l_data_in,
+            l_val_in   => t_l_val_in,
+            l_ack_in   => t_l_ack_in,
+            l_data_out => t_l_data_out,
+            l_val_out  => t_l_val_out,
+            l_ack_out  => t_l_ack_out
         );
 
     u_XINA_ROUTER: entity work.router
@@ -144,40 +144,40 @@ begin
             rst_i => t_RESET,
 
             -- local channel interface
-            l_in_data_i  => t_l_in_data_o,
-            l_in_val_i   => t_l_in_val_o,
-            l_in_ack_o   => t_l_in_ack_i,
-            l_out_data_o => t_l_out_data_i,
-            l_out_val_o  => t_l_out_val_i,
-            l_out_ack_i  => t_l_out_ack_o,
+            l_in_data_i  => t_l_data_out,
+            l_in_val_i   => t_l_val_out,
+            l_in_ack_o   => t_l_ack_in,
+            l_out_data_o => t_l_data_in,
+            l_out_val_o  => t_l_val_in,
+            l_out_ack_i  => t_l_ack_out,
             -- north channel interface
-            n_in_data_i  => t_l_in_data_o,
-            n_in_val_i   => t_l_in_val_o,
-            n_in_ack_o   => t_l_in_ack_i,
-            n_out_data_o => t_l_out_data_i,
-            n_out_val_o  => t_l_out_val_i,
-            n_out_ack_i  => t_l_out_ack_o,
+            n_in_data_i  => t_n_data_out,
+            n_in_val_i   => t_n_val_out,
+            n_in_ack_o   => t_n_ack_in,
+            n_out_data_o => t_n_data_in,
+            n_out_val_o  => t_n_val_in,
+            n_out_ack_i  => t_n_ack_out,
             -- east channel interface
-            e_in_data_i  => t_l_in_data_o,
-            e_in_val_i   => t_l_in_val_o,
-            e_in_ack_o   => t_l_in_ack_i,
-            e_out_data_o => t_l_out_data_i,
-            e_out_val_o  => t_l_out_val_i,
-            e_out_ack_i  => t_l_out_ack_o,
+            e_in_data_i  => t_e_data_out,
+            e_in_val_i   => t_e_val_out,
+            e_in_ack_o   => t_e_ack_in,
+            e_out_data_o => t_e_data_in,
+            e_out_val_o  => t_e_val_in,
+            e_out_ack_i  => t_e_ack_out,
             -- south channel interface
-            s_in_data_i  => t_l_in_data_o,
-            s_in_val_i   => t_l_in_val_o,
-            s_in_ack_o   => t_l_in_ack_i,
-            s_out_data_o => t_l_out_data_i,
-            s_out_val_o  => t_l_out_val_i,
-            s_out_ack_i  => t_l_out_ack_o,
+            s_in_data_i  => t_s_data_out,
+            s_in_val_i   => t_s_val_out,
+            s_in_ack_o   => t_s_ack_in,
+            s_out_data_o => t_s_data_in,
+            s_out_val_o  => t_s_val_in,
+            s_out_ack_i  => t_s_ack_out,
             -- west port interface
-            w_in_data_i  => t_l_in_data_o,
-            w_in_val_i   => t_l_in_val_o,
-            w_in_ack_o   => t_l_in_ack_i,
-            w_out_data_o => t_l_out_data_i,
-            w_out_val_o  => t_l_out_val_i,
-            w_out_ack_i  => t_l_out_ack_o
+            w_in_data_i  => t_w_data_out,
+            w_in_val_i   => t_w_val_out,
+            w_in_ack_o   => t_w_ack_in,
+            w_out_data_o => t_w_data_in,
+            w_out_val_o  => t_w_val_in,
+            w_out_ack_i  => t_w_ack_out
         );
 
     ---------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ begin
         t_AWADDR <= "10101010";
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
-        wait for 50 ns;
+        wait for 65 ns;
 
         t_AWVALID <= '0';
         t_WVALID <= '1';
