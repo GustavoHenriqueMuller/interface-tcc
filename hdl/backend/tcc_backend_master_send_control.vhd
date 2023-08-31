@@ -50,11 +50,11 @@ begin
     process (all)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE =>  if (i_VALID = '1') then
-                                r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ONE;
-                            else
-                                r_NEXT_STATE <= S_IDLE;
-                            end if;
+            when S_IDLE => if (i_VALID = '1') then
+                               r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ONE;
+                           else
+                               r_NEXT_STATE <= S_IDLE;
+                           end if;
 
             when S_WAITING_FOR_ACK_TO_ONE => if (l_in_ack_o = '1') then
                                                 r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ZERO;
@@ -78,8 +78,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
-    l_in_data_i <= '1' & i_DATA when (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE or r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ZERO)
-                  else (data_width_c downto 0 => '0'); -- @TODO: FRAME BIT.
+    l_in_data_i <= '1' & i_DATA; -- @TODO: FRAME BIT.
     l_in_val_i  <= '1' when (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE) else '0';
 
 end arch_tcc_backend_master_send_control;
