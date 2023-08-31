@@ -1,0 +1,3 @@
+[submodule "hdl/dependencies/xina"]
+	path = hdl/dependencies/xina
+	url = https://github.com/xarc/xina
