@@ -53,7 +53,7 @@ architecture arch_tcc_frontend_master_send_control of tcc_frontend_master_send_c
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (ACLK, ARESETn)
+    process (all)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -64,18 +64,18 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (r_CURRENT_STATE, AWVALID, WLAST, ARVALID)
+    process (all)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE =>  if (AWVALID = '1') then
+            when S_IDLE =>  if (AWVALID = '1' and i_BACKEND_READY = '1') then
                                 r_NEXT_STATE <= S_WRITE_TRANSACTION;
-                            elsif (ARVALID = '1') then
+                            elsif (ARVALID = '1' and i_BACKEND_READY = '1') then
                                 r_NEXT_STATE <= S_READ_TRANSACTION;
                             else
                                 r_NEXT_STATE <= S_IDLE;
                             end if;
 
-            when S_WRITE_TRANSACTION => if (WLAST = '1') then
+            when S_WRITE_TRANSACTION => if (WLAST = '1' and i_BACKEND_READY = '1') then
                                             r_NEXT_STATE <= S_IDLE;
                                         else
                                             r_NEXT_STATE <= S_WRITE_TRANSACTION;
@@ -115,7 +115,7 @@ begin
 
     -- Read packages only have the read address as the payload.
     o_BACKEND_DATA <= WDATA when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-					  else (WDATA'length - 1 downto ARADDR'length => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
+					  else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
                       else (c_DATA_WIDTH - 1 downto 0 => '0'); -- @TODO: Esse código vai ter que mudar.
 
     o_BACKEND_ID <= AW_ID when (r_CURRENT_STATE = S_WRITE_TRANSACTION)

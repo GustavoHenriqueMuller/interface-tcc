@@ -22,12 +22,12 @@ entity tcc_backend_master is
 		o_READY : out std_logic;
 
         -- XINA signals.
-        l_data_in : in std_logic_vector(data_width_c downto 0);
-        l_val_in  : in std_logic;
-        l_ack_in  : in std_logic;
-        l_data_out: out std_logic_vector(data_width_c downto 0);
-        l_val_out : out std_logic;
-        l_ack_out : out std_logic
+        l_in_data_i  : out std_logic_vector(data_width_c downto 0);
+        l_in_val_i   : out std_logic;
+        l_in_ack_o   : in std_logic;
+        l_out_data_o : in std_logic_vector(data_width_c downto 0);
+        l_out_val_o  : in std_logic;
+        l_out_ack_i  : out std_logic
     );
 end tcc_backend_master;
 
@@ -46,9 +46,8 @@ begin
             i_DATA   => i_DATA,
             o_READY  => o_READY,
 
-            l_ack_in   => l_ack_in,
-            l_data_out => l_data_out,
-            l_val_out  => l_val_out,
-            l_ack_out  => l_ack_out
+            l_in_data_i => l_in_data_i,
+            l_in_val_i  => l_in_val_i,
+            l_in_ack_o  => l_in_ack_o
         );
 end arch_tcc_backend_master;
