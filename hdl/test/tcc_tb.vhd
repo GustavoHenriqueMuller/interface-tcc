@@ -12,6 +12,7 @@ architecture arch_tcc_tb of tcc_tb is
     -- AMBA-AXI 5 signals.
     signal t_ACLK: std_logic := '0';
     signal t_RESETn: std_logic := '1';
+    signal t_RESET: std_logic := '1';
 
         -- Write request signals.
         signal t_AWVALID: std_logic := '0';
@@ -140,7 +141,7 @@ begin
     u_XINA_ROUTER: entity work.router
         port map(
             clk_i => t_ACLK,
-            rst_i => not t_RESETn,
+            rst_i => t_RESET,
 
             -- local channel interface
             l_in_data_i  => t_l_in_data_o,
@@ -185,6 +186,13 @@ begin
     begin
         wait for 50 ns;
         t_ACLK <= not t_ACLK;
+    end process;
+
+    ---------------------------------------------------------------------------------------------
+    -- Reset.
+    process (t_RESETn)
+    begin
+        t_RESET <= not t_RESETn;
     end process;
 
     ---------------------------------------------------------------------------------------------
