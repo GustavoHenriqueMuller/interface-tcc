@@ -16,6 +16,18 @@ vcom -2008 ../hdl/test/tcc_tb.vhd
 
 
 
+vcom -2008 ../hdl/test_tg/tg_mo.vhd
+vcom -2008 ../hdl/test_tg/tg_tb.vhd
+
+
+
+
+
+
+
+
+
+
 
 vsim work.tcc_tb
 
@@ -54,6 +66,9 @@ sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_DATA_IN \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_LAST_IN \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_READY_OUT \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_VALID_IN
+
+add wave -position insertpoint  \
+sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_BUFFER_FIFO/data_i
 
 add wave -position insertpoint  \
 sim:/tcc_tb/t_l_in_data_i \

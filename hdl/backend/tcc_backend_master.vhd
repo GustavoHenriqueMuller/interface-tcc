@@ -12,30 +12,38 @@ entity tcc_backend_master is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_VALID : in std_logic;
-        i_LAST  : in std_logic;
-    	i_OPC   : in std_logic;
-		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-		i_BURST : in std_logic_vector(1 downto 0);
-		i_LENGTH: in std_logic_vector(7 downto 0);
-		i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_START_PACKET: in std_logic;
+        i_VALID       : in std_logic;
+        i_LAST        : in std_logic;
+    	i_OPC         : in std_logic;
+		i_ADDR        : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+		i_BURST       : in std_logic_vector(1 downto 0);
+		i_LENGTH      : in std_logic_vector(7 downto 0);
+		i_DATA        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 		o_READY : out std_logic;
 
         -- XINA signals.
-        l_in_data_i  : out std_logic_vector(data_width_c downto 0);
+        l_in_data_i  : out std_logic_vector(c_DATA_WIDTH downto 0);
         l_in_val_i   : out std_logic;
         l_in_ack_o   : in std_logic;
-        l_out_data_o : in std_logic_vector(data_width_c downto 0);
+        l_out_data_o : in std_logic_vector(c_DATA_WIDTH downto 0);
         l_out_val_o  : in std_logic;
         l_out_ack_i  : out std_logic
     );
 end tcc_backend_master;
 
 architecture arch_tcc_backend_master of tcc_backend_master is
-    signal w_FLIT: std_logic_vector(data_width_c downto 0);
-    signal w_READY_SEND_CONTROL: std_logic;
-    signal w_VALID_PACKETIZER: std_logic;
+    signal w_ARESET: std_logic;
+
+    -- Packetizer.
+    signal w_FLIT_PACKETIZER: std_logic_vector(c_DATA_WIDTH downto 0);
+
+    -- FIFO.
+    signal w_WRITE_BUFFER: std_logic;
+    signal w_WRITE_OK_BUFFER: std_logic;
+    signal w_READ_BUFFER: std_logic;
+    signal w_READ_OK_BUFFER: std_logic;
 
 begin
     u_TCC_BACKEND_MASTER_PACKETIZER: entity work.tcc_backend_master_packetizer
@@ -49,13 +57,32 @@ begin
             i_LENGTH => i_LENGTH,
             i_DATA   => i_DATA,
 
+            i_START_PACKET => i_START_PACKET,
             i_VALID  => i_VALID,
             i_LAST   => i_LAST,
-            i_READY_SEND_CONTROL => w_READY_SEND_CONTROL,
+            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
 
-            o_FLIT => w_FLIT,
-            o_VALID => w_VALID_PACKETIZER,
+            o_FLIT  => w_FLIT_PACKETIZER,
+            o_WRITE_BUFFER => w_WRITE_BUFFER,
             o_READY => o_READY
+        );
+
+    u_BUFFER_FIFO: entity work.buffering
+        generic map(
+            data_width_p => c_DATA_WIDTH + 1,
+            buffer_depth_p => 4
+        )
+        port map(
+            clk_i => ACLK,
+            rst_i => w_ARESET,
+
+            rok_o  => w_READ_OK_BUFFER,
+            rd_i   => w_READ_BUFFER,
+            data_o => l_in_data_i,
+
+            wok_o  => w_WRITE_OK_BUFFER,
+            wr_i   => w_WRITE_BUFFER,
+            data_i => w_FLIT_PACKETIZER
         );
 
     u_TCC_BACKEND_MASTER_SEND_CONTROL: entity work.tcc_backend_master_send_control
@@ -63,12 +90,12 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_VALID  => w_VALID_PACKETIZER,
-            i_FLIT   => w_FLIT,
-            o_READY  => w_READY_SEND_CONTROL,
+            i_VALID  => w_READ_OK_BUFFER,
+            o_READ_BUFFER  => w_READ_BUFFER,
 
-            l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
             l_in_ack_o  => l_in_ack_o
         );
+
+    w_ARESET <= not ARESETn;
 end arch_tcc_backend_master;

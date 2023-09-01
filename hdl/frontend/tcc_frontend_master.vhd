@@ -49,6 +49,7 @@ entity tcc_frontend_master is
         -- Backend signals.
         i_BACKEND_READY: in std_logic;
 
+        o_BACKEND_START_PACKET : out std_logic;
         o_BACKEND_VALID : out std_logic;
         o_BACKEND_LAST  : out std_logic;
         o_BACKEND_OPC   : out std_logic;
@@ -89,6 +90,7 @@ begin
             i_BACKEND_READY => i_BACKEND_READY,
 
             -- Signals to back-end.
+            o_BACKEND_START_PACKET => o_BACKEND_START_PACKET,
             o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_LAST   => o_BACKEND_LAST,
             o_BACKEND_OPC    => o_BACKEND_OPC,

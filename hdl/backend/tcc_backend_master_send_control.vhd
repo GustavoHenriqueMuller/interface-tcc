@@ -12,12 +12,10 @@ entity tcc_backend_master_send_control is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_VALID: in std_logic;
-        i_FLIT : in std_logic_vector(data_width_c downto 0);
-		o_READY: out std_logic;
+        i_VALID      : in std_logic;
+		o_READ_BUFFER: out std_logic;
 
         -- XINA signals.
-        l_in_data_i: out std_logic_vector(data_width_c downto 0);
         l_in_val_i : out std_logic;
         l_in_ack_o : in std_logic
     );
@@ -69,11 +67,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (front-end).
-    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE) else '0';
+    o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_IDLE) else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
-    l_in_data_i <= i_FLIT;
     l_in_val_i  <= '1' when (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE) else '0';
 
 end arch_tcc_backend_master_send_control;

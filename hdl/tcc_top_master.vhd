@@ -48,10 +48,10 @@ entity tcc_top_master is
             RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
-        l_in_data_i  : out std_logic_vector(data_width_c downto 0);
+        l_in_data_i  : out std_logic_vector(c_DATA_WIDTH downto 0);
         l_in_val_i   : out std_logic;
         l_in_ack_o   : in std_logic;
-        l_out_data_o : in std_logic_vector(data_width_c downto 0);
+        l_out_data_o : in std_logic_vector(c_DATA_WIDTH downto 0);
         l_out_val_o  : in std_logic;
         l_out_ack_i  : out std_logic
     );
@@ -59,6 +59,7 @@ end tcc_top_master;
 
 architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
+    signal w_BACKEND_START_PACKET_IN: std_logic;
     signal w_BACKEND_VALID_IN : std_logic;
     signal w_BACKEND_LAST_IN  : std_logic;
     signal w_BACKEND_OPC_IN   : std_logic;
@@ -116,6 +117,7 @@ begin
             -- Backend signals.
             i_BACKEND_READY => w_BACKEND_READY_OUT,
 
+            o_BACKEND_START_PACKET => w_BACKEND_START_PACKET_IN,
             o_BACKEND_VALID => w_BACKEND_VALID_IN,
             o_BACKEND_LAST => w_BACKEND_LAST_IN,
             o_BACKEND_OPC => w_BACKEND_OPC_IN,
@@ -133,6 +135,7 @@ begin
             ARESETn => ARESETn,
 
             -- Backend signals.
+            i_START_PACKET  => w_BACKEND_START_PACKET_IN,
             i_VALID  => w_BACKEND_VALID_IN,
             i_LAST   => w_BACKEND_LAST_IN,
 			i_OPC    => w_BACKEND_OPC_IN,

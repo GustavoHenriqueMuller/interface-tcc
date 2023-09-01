@@ -51,38 +51,38 @@ architecture arch_tcc_tb of tcc_tb is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between backend and XINA router.
-    signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_l_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_l_in_val_i  : std_logic;
     signal t_l_in_ack_o  : std_logic;
-    signal t_l_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_l_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_l_out_val_o : std_logic;
     signal t_l_out_ack_i : std_logic;
 
-    signal t_n_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_n_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_n_in_val_i  : std_logic;
     signal t_n_in_ack_o  : std_logic;
-    signal t_n_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_n_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_n_out_val_o : std_logic;
     signal t_n_out_ack_i : std_logic;
 
-    signal t_e_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_e_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_e_in_val_i  : std_logic;
     signal t_e_in_ack_o  : std_logic;
-    signal t_e_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_e_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_e_out_val_o : std_logic;
     signal t_e_out_ack_i : std_logic;
 
-    signal t_s_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_s_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_s_in_val_i  : std_logic;
     signal t_s_in_ack_o  : std_logic;
-    signal t_s_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_s_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_s_out_val_o : std_logic;
     signal t_s_out_ack_i : std_logic;
 
-    signal t_w_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_w_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_w_in_val_i  : std_logic;
     signal t_w_in_ack_o  : std_logic;
-    signal t_w_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_w_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
     signal t_w_out_val_o : std_logic;
     signal t_w_out_ack_i : std_logic;
 
@@ -206,24 +206,33 @@ begin
         t_AWADDR <= "10101010";
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
-        wait until t_AWREADY = '0';
+
+        if t_AWREADY /= '1' then
+            wait until t_AWREADY = '1';
+        end if;
+
+        -- First transfer.
+        wait until t_ACLK = '1';
         t_AWVALID <= '0';
 
         t_WVALID <= '1';
-        t_WDATA <= "10101010101010101010101010101010";
-        wait for 100 ns;
-        -- wait until t_WREADY = '1'; -- Header.
-
-        t_WVALID <= '1';
-        t_WDATA <= "00110011001100110011001100110011";
-        wait for 100 ns;
-        -- wait until t_WREADY = '1'; -- Payload.
-
-        t_WVALID <= '1';
         t_WDATA <= "00001111000011110000111100001111";
+
+        if t_WREADY /= '1' then
+            wait until t_WREADY = '1';
+        end if;
+
+        -- Second (last) transfer.
+        wait until t_ACLK = '1';
+        t_WVALID <= '1';
+        t_WDATA <= "01010101010101010101010101010101";
         t_WLAST <= '1';
-        wait for 100 ns;
-        -- wait until t_WREADY = '1'; -- Trailer.
+
+        if t_WREADY /= '1' then
+            wait until t_WREADY = '1';
+        end if;
+
+        wait until t_ACLK = '1';
         t_WVALID <= '0';
         t_WLAST <= '0';
     end process;

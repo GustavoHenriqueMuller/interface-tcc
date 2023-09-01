@@ -133,12 +133,23 @@ begin
         t_AWADDR <= "10101010";
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
-        wait for 50 ns;
+
+        if t_AWREADY /= '1' then
+            wait until t_AWREADY = '1';
+        end if;
+
+        wait for 100 ns;
 
         t_AWVALID <= '0';
         t_WVALID <= '1';
         t_WDATA <= "10101010101010101010101010101010";
         t_WLAST <= '1';
-        wait for 50 ns;
+
+        if t_WREADY /= '1' then
+            wait until t_WREADY = '1';
+        end if;
+
+        wait for 100 ns;
+        t_WVALID <= '0';
     end process;
 end arch_tcc_frontend_master_tb;

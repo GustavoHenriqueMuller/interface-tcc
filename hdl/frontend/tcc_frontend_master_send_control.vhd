@@ -35,6 +35,7 @@ entity tcc_frontend_master_send_control is
         i_BACKEND_READY : in std_logic;
 
         -- Signals to back-end.
+        o_BACKEND_START_PACKET: out std_logic;
         o_BACKEND_VALID : out std_logic;
         o_BACKEND_LAST  : out std_logic;
         o_BACKEND_OPC   : out std_logic;
@@ -47,7 +48,7 @@ entity tcc_frontend_master_send_control is
 end tcc_frontend_master_send_control;
 
 architecture arch_tcc_frontend_master_send_control of tcc_frontend_master_send_control is
-    type t_STATE is (S_IDLE, S_WRITE_TRANSACTION, S_READ_TRANSACTION);
+    type t_STATE is (S_IDLE, S_WAIT_PACKET_HEADERS_WRITE, S_WAIT_PACKET_HEADERS_READ, S_WRITE_TRANSACTION, S_READ_TRANSACTION);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE   : t_STATE;
 
@@ -76,6 +77,14 @@ begin
                                 r_NEXT_STATE <= S_IDLE;
                             end if;
 
+            when S_WAIT_PACKET_HEADERS_WRITE => if (i_BACKEND_READY = '1') then
+                                                    r_NEXT_STATE <= S_WRITE_TRANSACTION;
+                                                end if;
+
+            when S_WAIT_PACKET_HEADERS_READ => if (i_BACKEND_READY = '1') then
+                                                   r_NEXT_STATE <= S_READ_TRANSACTION;
+                                               end if;
+
             when S_WRITE_TRANSACTION => if (WLAST = '1' and i_BACKEND_READY = '1') then
                                             r_NEXT_STATE <= S_IDLE;
                                         else
@@ -96,6 +105,9 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (back-end).
+    o_BACKEND_START_PACKET <= '1' when (r_NEXT_STATE = S_WRITE_TRANSACTION) or (r_NEXT_STATE = S_READ_TRANSACTION)
+                              else '0';
+
     o_BACKEND_VALID <= '1' when ((r_CURRENT_STATE = S_WRITE_TRANSACTION and WVALID = '1')
                            or r_CURRENT_STATE = S_READ_TRANSACTION)
                            else '0';
@@ -104,18 +116,18 @@ begin
                            or r_CURRENT_STATE = S_READ_TRANSACTION)
                            else '0';
 
-    o_BACKEND_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WRITE_TRANSACTION) else '1';
+    o_BACKEND_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_WRITE) else '1';
 
-    o_BACKEND_ADDR <= AWADDR when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-                      else ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
+    o_BACKEND_ADDR <= AWADDR when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_WRITE)
+                      else ARADDR when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_READ)
                       else (c_ADDR_WIDTH - 1 downto 0 => '0');
 
-    o_BACKEND_BURST <= AWBURST when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-                       else ARBURST when (r_CURRENT_STATE = S_READ_TRANSACTION)
+    o_BACKEND_BURST <= AWBURST when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_WRITE)
+                       else ARBURST when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_READ)
                        else (1 downto 0 => '0');
 
-    o_BACKEND_LENGTH <= AWLEN when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-                        else ARLEN when (r_CURRENT_STATE = S_READ_TRANSACTION)
+    o_BACKEND_LENGTH <= AWLEN when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_WRITE)
+                        else ARLEN when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_READ)
                         else (7 downto 0 => '0');
 
     -- Read packages only have the read address as the payload.
@@ -123,8 +135,8 @@ begin
 					  else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
                       else (c_DATA_WIDTH - 1 downto 0 => '0');
 
-    o_BACKEND_ID <= AW_ID when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
-                    else AR_ID when (r_CURRENT_STATE = S_READ_TRANSACTION)
+    o_BACKEND_ID <= AW_ID when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_WRITE)
+                    else AR_ID when (r_CURRENT_STATE = S_WAIT_PACKET_HEADERS_READ)
                     else (c_ID_WIDTH - 1 downto 0 => '0');
 
 end arch_tcc_frontend_master_send_control;
