@@ -14,9 +14,13 @@ vcom -2008 ../hdl/tcc_top_master.vhd
 vcom -2008 ../hdl/test/tcc_frontend_master_tb.vhd
 vcom -2008 ../hdl/test/tcc_tb.vhd
 
-
-
+vcom -2008 ../hdl/test_tg/xina_tg_tm.vhd
 vcom -2008 ../hdl/test_tg/tg_mo.vhd
+vcom -2008 ../hdl/test_tg/tg_me.vhd
+vcom -2008 ../hdl/test_tg/tm_me.vhd
+vcom -2008 ../hdl/test_tg/tm_mo.vhd
+vcom -2008 ../hdl/test_tg/tm_group.vhd
+vcom -2008 ../hdl/test_tg/tg_group.vhd
 vcom -2008 ../hdl/test_tg/tg_tb.vhd
 
 
