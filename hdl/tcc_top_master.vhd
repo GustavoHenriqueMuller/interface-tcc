@@ -59,15 +59,16 @@ end tcc_top_master;
 
 architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
-    signal w_BACKEND_VALID_IN  : std_logic;
-    signal w_BACKEND_OPC_IN    : std_logic;
-    signal w_BACKEND_ADDR_IN   : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal w_BACKEND_BURST_IN  : std_logic_vector(1 downto 0);
-    signal w_BACKEND_LENGTH_IN : std_logic_vector(7 downto 0);
-    signal w_BACKEND_DATA_IN   : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_BACKEND_ID_IN     : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal w_BACKEND_VALID_IN : std_logic;
+    signal w_BACKEND_LAST_IN  : std_logic;
+    signal w_BACKEND_OPC_IN   : std_logic;
+    signal w_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+    signal w_BACKEND_BURST_IN : std_logic_vector(1 downto 0);
+    signal w_BACKEND_LENGTH_IN: std_logic_vector(7 downto 0);
+    signal w_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
-    signal w_BACKEND_READY_OUT : std_logic;
+    signal w_BACKEND_READY_OUT: std_logic;
 
 begin
     u_TCC_FRONTEND_MASTER: entity work.tcc_frontend_master
@@ -115,11 +116,12 @@ begin
             -- Backend signals.
             i_BACKEND_READY => w_BACKEND_READY_OUT,
 
+            o_BACKEND_VALID => w_BACKEND_VALID_IN,
+            o_BACKEND_LAST => w_BACKEND_LAST_IN,
             o_BACKEND_OPC => w_BACKEND_OPC_IN,
             o_BACKEND_ADDR => w_BACKEND_ADDR_IN,
             o_BACKEND_BURST => w_BACKEND_BURST_IN,
             o_BACKEND_LENGTH => w_BACKEND_LENGTH_IN,
-            o_BACKEND_VALID => w_BACKEND_VALID_IN,
             o_BACKEND_DATA => w_BACKEND_DATA_IN,
             o_BACKEND_ID => w_BACKEND_ID_IN
         );
@@ -132,6 +134,7 @@ begin
 
             -- Backend signals.
             i_VALID  => w_BACKEND_VALID_IN,
+            i_LAST   => w_BACKEND_LAST_IN,
 			i_OPC    => w_BACKEND_OPC_IN,
 			i_ADDR   => w_BACKEND_ADDR_IN,
 			i_BURST  => w_BACKEND_BURST_IN,

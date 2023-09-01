@@ -13,6 +13,7 @@ entity tcc_backend_master is
 
         -- Backend signals.
         i_VALID : in std_logic;
+        i_LAST  : in std_logic;
     	i_OPC   : in std_logic;
 		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 		i_BURST : in std_logic_vector(1 downto 0);
@@ -32,19 +33,39 @@ entity tcc_backend_master is
 end tcc_backend_master;
 
 architecture arch_tcc_backend_master of tcc_backend_master is
+    signal w_FLIT: std_logic_vector(data_width_c downto 0);
+    signal w_READY_SEND_CONTROL: std_logic;
+    signal w_VALID_PACKETIZER: std_logic;
+
 begin
-    u_TCC_BACKEND_MASTER_SEND_CONTROL: entity work.tcc_backend_master_send_control
+    u_TCC_BACKEND_MASTER_PACKETIZER: entity work.tcc_backend_master_packetizer
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_VALID  => i_VALID,
             i_OPC    => i_OPC,
             i_ADDR   => i_ADDR,
             i_BURST  => i_BURST,
             i_LENGTH => i_LENGTH,
             i_DATA   => i_DATA,
-            o_READY  => o_READY,
+
+            i_VALID  => i_VALID,
+            i_LAST   => i_LAST,
+            i_READY_SEND_CONTROL => w_READY_SEND_CONTROL,
+
+            o_FLIT => w_FLIT,
+            o_VALID => w_VALID_PACKETIZER,
+            o_READY => o_READY
+        );
+
+    u_TCC_BACKEND_MASTER_SEND_CONTROL: entity work.tcc_backend_master_send_control
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            i_VALID  => w_VALID_PACKETIZER,
+            i_FLIT   => w_FLIT,
+            o_READY  => w_READY_SEND_CONTROL,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,

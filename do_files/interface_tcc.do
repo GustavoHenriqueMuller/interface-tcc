@@ -5,6 +5,7 @@ vcom -2008 ../hdl/tcc_package.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master_send_control.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master.vhd
 
+vcom -2008 ../hdl/backend/tcc_backend_master_packetizer.vhd
 vcom -2008 ../hdl/backend/tcc_backend_master_send_control.vhd
 vcom -2008 ../hdl/backend/tcc_backend_master.vhd
 
@@ -12,6 +13,9 @@ vcom -2008 ../hdl/tcc_top_master.vhd
 
 vcom -2008 ../hdl/test/tcc_frontend_master_tb.vhd
 vcom -2008 ../hdl/test/tcc_tb.vhd
+
+
+
 
 vsim work.tcc_tb
 
@@ -43,7 +47,11 @@ add wave -position insertpoint  \
 sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
+sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_PACKETIZER/r_CURRENT_STATE
+
+add wave -position insertpoint  \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_DATA_IN \
+sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_LAST_IN \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_READY_OUT \
 sim:/tcc_tb/u_TCC_TOP_MASTER/w_BACKEND_VALID_IN
 

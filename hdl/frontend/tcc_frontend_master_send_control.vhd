@@ -7,7 +7,7 @@ use work.tcc_package.all;
 entity tcc_frontend_master_send_control is
     port (
         -- AMBA AXI 5 signals.
-        ACLK: in std_logic;
+        ACLK   : in std_logic;
         ARESETn: in std_logic;
 
         -- Signals from front-end.
@@ -35,11 +35,12 @@ entity tcc_frontend_master_send_control is
         i_BACKEND_READY : in std_logic;
 
         -- Signals to back-end.
+        o_BACKEND_VALID : out std_logic;
+        o_BACKEND_LAST  : out std_logic;
         o_BACKEND_OPC   : out std_logic;
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_BURST : out std_logic_vector(1 downto 0);
         o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
-        o_BACKEND_VALID : out std_logic;
         o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
     );
@@ -95,6 +96,14 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (back-end).
+    o_BACKEND_VALID <= '1' when ((r_CURRENT_STATE = S_WRITE_TRANSACTION and WVALID = '1')
+                           or r_CURRENT_STATE = S_READ_TRANSACTION)
+                           else '0';
+
+    o_BACKEND_LAST <= '1' when ((r_CURRENT_STATE = S_WRITE_TRANSACTION and WLAST = '1')
+                           or r_CURRENT_STATE = S_READ_TRANSACTION)
+                           else '0';
+
     o_BACKEND_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WRITE_TRANSACTION) else '1';
 
     o_BACKEND_ADDR <= AWADDR when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
@@ -109,14 +118,10 @@ begin
                         else ARLEN when (r_CURRENT_STATE = S_READ_TRANSACTION)
                         else (7 downto 0 => '0');
 
-    o_BACKEND_VALID <= '1' when ((r_CURRENT_STATE = S_WRITE_TRANSACTION and WVALID = '1')
-                           or r_CURRENT_STATE = S_READ_TRANSACTION)
-                           else '0';
-
     -- Read packages only have the read address as the payload.
     o_BACKEND_DATA <= WDATA when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
 					  else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSACTION)
-                      else (c_DATA_WIDTH - 1 downto 0 => '0'); -- @TODO: Esse código vai ter que mudar.
+                      else (c_DATA_WIDTH - 1 downto 0 => '0');
 
     o_BACKEND_ID <= AW_ID when (r_CURRENT_STATE = S_WRITE_TRANSACTION)
                     else AR_ID when (r_CURRENT_STATE = S_READ_TRANSACTION)

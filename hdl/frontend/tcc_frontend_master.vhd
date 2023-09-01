@@ -50,6 +50,7 @@ entity tcc_frontend_master is
         i_BACKEND_READY: in std_logic;
 
         o_BACKEND_VALID : out std_logic;
+        o_BACKEND_LAST  : out std_logic;
         o_BACKEND_OPC   : out std_logic;
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_BURST : out std_logic_vector(1 downto 0);
@@ -88,11 +89,12 @@ begin
             i_BACKEND_READY => i_BACKEND_READY,
 
             -- Signals to back-end.
+            o_BACKEND_VALID  => o_BACKEND_VALID,
+            o_BACKEND_LAST   => o_BACKEND_LAST,
             o_BACKEND_OPC    => o_BACKEND_OPC,
             o_BACKEND_ADDR   => o_BACKEND_ADDR,
             o_BACKEND_BURST  => o_BACKEND_BURST,
             o_BACKEND_LENGTH => o_BACKEND_LENGTH,
-            o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_DATA   => o_BACKEND_DATA,
             o_BACKEND_ID     => o_BACKEND_ID
         );
