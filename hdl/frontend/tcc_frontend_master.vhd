@@ -69,6 +69,7 @@ begin
 
             -- Signals from front-end.
             AWVALID => AWVALID,
+            AW_ID   => AW_ID,
             AWADDR  => AWADDR,
             AWLEN   => AWLEN,
             AWBURST => AWBURST,
@@ -76,6 +77,7 @@ begin
             WLAST   => WLAST,
             WVALID  => WVALID,
             ARVALID => ARVALID,
+            AR_ID   => AR_ID,
             ARADDR  => ARADDR,
             ARLEN   => ARLEN,
             ARBURST => ARBURST,

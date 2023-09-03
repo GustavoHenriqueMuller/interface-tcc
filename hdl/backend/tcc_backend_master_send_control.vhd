@@ -22,7 +22,7 @@ entity tcc_backend_master_send_control is
 end tcc_backend_master_send_control;
 
 architecture arch_tcc_backend_master_send_control of tcc_backend_master_send_control is
-    type t_STATE is (S_IDLE, S_WAITING_FOR_ACK_TO_ONE, S_WAITING_FOR_ACK_TO_ZERO);
+    type t_STATE is (S_IDLE, S_WAITING_ACK_ONE, S_WAITING_ACK_ZERO);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -44,22 +44,22 @@ begin
     begin
         case r_CURRENT_STATE is
             when S_IDLE => if (i_READ_OK_BUFFER = '1') then
-                               r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ONE;
+                               r_NEXT_STATE <= S_WAITING_ACK_ONE;
                            else
                                r_NEXT_STATE <= S_IDLE;
                            end if;
 
-            when S_WAITING_FOR_ACK_TO_ONE => if (l_in_ack_o = '1') then
-                                                r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ZERO;
-                                             else
-                                                r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ONE;
-                                             end if;
+            when S_WAITING_ACK_ONE => if (l_in_ack_o = '1') then
+                                          r_NEXT_STATE <= S_WAITING_ACK_ZERO;
+                                      else
+                                          r_NEXT_STATE <= S_WAITING_ACK_ONE;
+                                      end if;
 
-            when S_WAITING_FOR_ACK_TO_ZERO => if (l_in_ack_o = '0') then
-                                                 r_NEXT_STATE <= S_IDLE;
-                                              else
-                                                 r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ZERO;
-                                              end if;
+            when S_WAITING_ACK_ZERO => if (l_in_ack_o = '0') then
+                                          r_NEXT_STATE <= S_IDLE;
+                                       else
+                                          r_NEXT_STATE <= S_WAITING_ACK_ZERO;
+                                       end if;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;
@@ -72,6 +72,6 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
     l_in_val_i <= '1' when (r_CURRENT_STATE = S_IDLE and i_READ_OK_BUFFER = '1') or
-                           (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE) else '0';
+                           (r_CURRENT_STATE = S_WAITING_ACK_ONE) else '0';
 
 end arch_tcc_backend_master_send_control;

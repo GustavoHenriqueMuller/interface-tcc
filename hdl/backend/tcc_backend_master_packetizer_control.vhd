@@ -99,14 +99,14 @@ begin
                        "01" when (r_CURRENT_STATE = S_HEADER_2) else
                        "10" when (r_CURRENT_STATE = S_PAYLOAD) else
                        "11" when (r_CURRENT_STATE = S_TRAILER) else
-                       "00";
+                       "XX";
 
     o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
                                (r_CURRENT_STATE = S_PAYLOAD and i_VALID = '1') or
                                (r_CURRENT_STATE  = S_TRAILER) else '0';
 
-    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE) or
+    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE or r_NEXT_STATE = S_IDLE) or
                         (r_NEXT_STATE = S_PAYLOAD)
                         else '0';
 

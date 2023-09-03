@@ -27,8 +27,8 @@ end tcc_backend_master_packetizer_datapath;
 architecture arch_tcc_backend_master_packetizer_datapath of tcc_backend_master_packetizer_datapath is
     signal w_FLIT_HEADER_1: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_HEADER_2: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_PAYLOAD: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_TRAILER: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_PAYLOAD : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_TRAILER : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
 begin
     u_MUX4: entity work.mux4
