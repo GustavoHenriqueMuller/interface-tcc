@@ -55,7 +55,7 @@ architecture arch_tcc_frontend_master_send_control of tcc_frontend_master_send_c
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (all)
+    process (ACLK, ARESETn)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -66,13 +66,13 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (all)
+    process (ACLK, AWVALID, ARVALID, i_BACKEND_READY, WLAST)
     begin
         case r_CURRENT_STATE is
             when S_IDLE =>  if (AWVALID = '1' and i_BACKEND_READY = '1') then
-                                r_NEXT_STATE <= S_WRITE_TRANSACTION;
+                                r_NEXT_STATE <= S_WAIT_PACKET_HEADERS_WRITE;
                             elsif (ARVALID = '1' and i_BACKEND_READY = '1') then
-                                r_NEXT_STATE <= S_READ_TRANSACTION;
+                                r_NEXT_STATE <= S_WAIT_PACKET_HEADERS_READ;
                             else
                                 r_NEXT_STATE <= S_IDLE;
                             end if;
@@ -101,7 +101,7 @@ begin
     -- Output values (front-end).
     AWREADY <= '1' when (r_CURRENT_STATE = S_IDLE and i_BACKEND_READY = '1') else '0';
     WREADY <= '1' when (r_CURRENT_STATE = S_WRITE_TRANSACTION and i_BACKEND_READY = '1') else '0';
-    ARREADY <= '1' when (r_CURRENT_STATE = S_IDLE and i_BACKEND_READY = '1') else '0';
+    ARREADY <= '1' when (r_NEXT_STATE = S_READ_TRANSACTION) else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values (back-end).

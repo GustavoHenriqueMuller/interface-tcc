@@ -16,8 +16,8 @@ entity tcc_backend_master_send_control is
 		o_READ_BUFFER: out std_logic;
 
         -- XINA signals.
-        l_in_val_i : out std_logic;
-        l_in_ack_o : in std_logic
+        l_in_val_i: out std_logic;
+        l_in_ack_o: in std_logic
     );
 end tcc_backend_master_send_control;
 
@@ -29,7 +29,7 @@ architecture arch_tcc_backend_master_send_control of tcc_backend_master_send_con
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (all)
+    process (ACLK, ARESETn)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -40,7 +40,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (all)
+    process (ACLK, i_VALID, l_in_ack_o)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => if (i_VALID = '1') then

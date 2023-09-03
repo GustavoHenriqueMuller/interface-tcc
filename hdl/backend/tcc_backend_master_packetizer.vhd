@@ -40,7 +40,7 @@ architecture arch_tcc_backend_master_packetizer of tcc_backend_master_packetizer
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (all)
+    process (ACLK, ARESETn)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -51,7 +51,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (all)
+    process (ACLK, i_START_PACKET, i_WRITE_OK_BUFFER, i_VALID, i_LAST)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => if (i_START_PACKET = '1') then
@@ -99,17 +99,17 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Output values.
     o_FLIT <= '1' & "1111111111111111" & "1111111111111111" when (r_CURRENT_STATE = S_HEADER_1_WAIT_OK) else
-              '0' & "1011010111010110" & "1011010111010110" when (r_CURRENT_STATE = S_HEADER_2_WAIT_OK) else
+              '0' & "1100110011001100" & "1100110011001100" when (r_CURRENT_STATE = S_HEADER_2_WAIT_OK) else
               '0' & i_DATA when (r_CURRENT_STATE = S_PAYLOAD_WAIT_OK) else
               '1' & "10101010101010101010101010101010" when (r_CURRENT_STATE = S_TRAILER_WAIT_OK) else
               (data_width_c downto 0 => '0');
 
               -- @TODO: Mudar código acima.
 
-    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1_WAIT_OK) or
-                               (r_CURRENT_STATE = S_HEADER_2_WAIT_OK) or
-                               (r_CURRENT_STATE = S_PAYLOAD_WAIT_OK) or
-                               (r_CURRENT_STATE = S_TRAILER_WAIT_OK);
+    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
+                               (r_CURRENT_STATE = S_HEADER_2) or
+                               (r_CURRENT_STATE = S_PAYLOAD and i_VALID = '1') or
+                               (r_CURRENT_STATE = S_TRAILER) else '0';
 
     o_READY <= '1' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_PAYLOAD) else '0';
 
