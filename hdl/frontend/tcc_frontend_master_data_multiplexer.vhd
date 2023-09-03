@@ -39,15 +39,15 @@ architecture arch_tcc_frontend_master_data_multiplexer of tcc_frontend_master_da
 begin
     o_BACKEND_OPC    <= i_OPC;
 
-    o_BACKEND_ADDR   <= AWADDR when (i_OPC = '0') else ARADDR when (i_OPC = '1');
+    o_BACKEND_ADDR   <= AWADDR  when (i_OPC = '0') else ARADDR when (i_OPC = '1');
 
     o_BACKEND_BURST  <= AWBURST when (i_OPC = '0') else ARBURST when (i_OPC = '1');
 
-    o_BACKEND_LENGTH <= AWLEN when (i_OPC = '0') else ARLEN when (i_OPC = '1');
+    o_BACKEND_LENGTH <= AWLEN   when (i_OPC = '0') else ARLEN when (i_OPC = '1');
 
-    o_BACKEND_DATA   <= WDATA when (i_OPC = '0')
-					          else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when ((i_OPC = '1'));
+    o_BACKEND_DATA   <= WDATA   when (i_OPC = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    -- @TODO: else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when ((i_OPC = '1'));
 
-    o_BACKEND_ID     <= AW_ID when (i_OPC = '0') else AR_ID when (i_OPC = '1');
+    o_BACKEND_ID     <= AW_ID   when (i_OPC = '0') else AR_ID when (i_OPC = '1');
 
 end arch_tcc_frontend_master_data_multiplexer;

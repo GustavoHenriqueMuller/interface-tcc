@@ -37,9 +37,9 @@ architecture arch_tcc_backend_master of tcc_backend_master is
     signal w_ARESET: std_logic;
 
     -- Routing table.
-    signal w_OPERATION_ADDR: std_logic_vector(c_ADDR_WIDTH / 2);
-    signal w_DEST_X: std_logic_vector(c_ADDR_WIDTH / 2);
-    signal w_DEST_Y: std_logic_vector(c_ADDR_WIDTH / 2);
+    signal w_OPERATION_ADDR: std_logic_vector((c_ADDR_WIDTH / 2) - 1 downto 0);
+    signal w_DEST_X: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+    signal w_DEST_Y: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
 
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);

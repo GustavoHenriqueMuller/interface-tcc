@@ -8,6 +8,7 @@ vcom -2008 ../hdl/frontend/tcc_frontend_master_data_multiplexer.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master_send_control.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master.vhd
 
+vcom -2008 ../hdl/backend/tcc_backend_master_routing_table.vhd
 vcom -2008 ../hdl/backend/tcc_backend_master_packetizer_control.vhd
 vcom -2008 ../hdl/backend/tcc_backend_master_packetizer_datapath.vhd
 vcom -2008 ../hdl/backend/tcc_backend_master_send_control.vhd

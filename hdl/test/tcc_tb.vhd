@@ -201,7 +201,7 @@ begin
     begin
         -- Simple write transaction.
         t_AWVALID <= '1';
-        t_AWADDR <= "10101010";
+        t_AWADDR <= "10101010101010101010101010101010" & "10101010101010101010101010101010";
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
 

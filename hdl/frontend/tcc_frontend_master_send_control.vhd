@@ -107,6 +107,6 @@ begin
                                or r_CURRENT_STATE = S_READ_TRANSFER)
                                else '0';
 
-    o_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WAIT_HEADERS_WRITE) else '1';
+    o_OPC <= '0' when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE) else '1';
 
 end arch_tcc_frontend_master_send_control;

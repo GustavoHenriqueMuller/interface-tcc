@@ -18,8 +18,8 @@ entity tcc_backend_master_packetizer_datapath is
         i_ID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 		i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_OPERATION_ADDR: in std_logic_vector((c_ADDR_WIDTH / 2) - 1 downto 0);
-        i_DEST_X: in std_logic_vector(c_ADDR_WIDTH / 2);
-        i_DEST_Y: in std_logic_vector(c_ADDR_WIDTH / 2);
+        i_DEST_X: in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        i_DEST_Y: in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
 
         i_FLIT_SELECTOR: in std_logic_vector(1 downto 0);
 		o_FLIT         : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)

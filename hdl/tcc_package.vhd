@@ -13,6 +13,6 @@ package tcc_package is
 	constant c_RRESP_WIDTH: natural := 3;
 
 	-- Interface attributes.
-	constant c_SRC_X: std_logic_vector(c_ADDR_WIDTH / 4) := "00";
-	constant c_SRC_Y: std_logic_vector(c_ADDR_WIDTH / 4) := "00";
+	constant c_SRC_X: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := "0000000000000000";
+	constant c_SRC_Y: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := "0000000000000000";
 end tcc_package;
