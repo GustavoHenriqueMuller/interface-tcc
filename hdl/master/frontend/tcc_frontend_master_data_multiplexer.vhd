@@ -23,31 +23,30 @@ entity tcc_frontend_master_data_multiplexer is
         ARBURST: in std_logic_vector(1 downto 0);
 
         -- Signals from control.
-        i_OPC  : in std_logic;
+        i_OPC: in std_logic;
 
         -- Signals to back-end.
-        o_BACKEND_OPC   : out std_logic;
-        o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-        o_BACKEND_BURST : out std_logic_vector(1 downto 0);
-        o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
-        o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
+        o_BACKEND_OPC: out std_logic;
+        o_BACKEND_ADDR     : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+        o_BACKEND_BURST    : out std_logic_vector(1 downto 0);
+        o_BACKEND_LENGTH   : out std_logic_vector(7 downto 0);
+        o_BACKEND_DATA     : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_BACKEND_ID       : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
     );
 end tcc_frontend_master_data_multiplexer;
 
 architecture arch_tcc_frontend_master_data_multiplexer of tcc_frontend_master_data_multiplexer is
 begin
-    o_BACKEND_OPC    <= i_OPC;
+    o_BACKEND_OPC <= i_OPC;
 
-    o_BACKEND_ADDR   <= AWADDR  when (i_OPC = '0') else ARADDR when (i_OPC = '1');
+    o_BACKEND_ADDR      <= AWADDR  when (i_OPC = '0') else ARADDR when (i_OPC = '1');
 
-    o_BACKEND_BURST  <= AWBURST when (i_OPC = '0') else ARBURST when (i_OPC = '1');
+    o_BACKEND_BURST     <= AWBURST when (i_OPC = '0') else ARBURST when (i_OPC = '1');
 
-    o_BACKEND_LENGTH <= AWLEN   when (i_OPC = '0') else ARLEN when (i_OPC = '1');
+    o_BACKEND_LENGTH    <= AWLEN   when (i_OPC = '0') else ARLEN when (i_OPC = '1');
 
-    o_BACKEND_DATA   <= WDATA   when (i_OPC = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    -- @TODO: else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when ((i_OPC = '1'));
+    o_BACKEND_DATA      <= WDATA   when (i_OPC = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
 
-    o_BACKEND_ID     <= AW_ID   when (i_OPC = '0') else AR_ID when (i_OPC = '1');
+    o_BACKEND_ID        <= AW_ID   when (i_OPC = '0') else AR_ID when (i_OPC = '1');
 
 end arch_tcc_frontend_master_data_multiplexer;

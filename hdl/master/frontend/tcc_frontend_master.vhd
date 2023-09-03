@@ -51,17 +51,17 @@ entity tcc_frontend_master is
 
         o_BACKEND_VALID : out std_logic;
         o_BACKEND_LAST  : out std_logic;
-        o_BACKEND_OPC   : out std_logic;
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_BURST : out std_logic_vector(1 downto 0);
         o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
+        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
         o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
+        o_BACKEND_OPC: out std_logic
     );
 end tcc_frontend_master;
 
 architecture arch_tcc_frontend_master of tcc_frontend_master is
-    signal w_OPC: std_logic;
+    signal w_OPERATION: std_logic;
 
 begin
     u_TCC_FRONTEND_MASTER_SEND_CONTROL: entity work.tcc_frontend_master_send_control
@@ -86,7 +86,7 @@ begin
             -- Signals to back-end.
             o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_LAST   => o_BACKEND_LAST,
-            o_OPC            => w_OPC
+            o_OPERATION      => w_OPERATION
         );
 
     u_TCC_FRONTEND_MASTER_DATA_MULTIPLEXER: entity work.tcc_frontend_master_data_multiplexer
@@ -106,15 +106,15 @@ begin
             ARLEN   => ARLEN,
             ARBURST => ARBURST,
 
-            i_OPC   => w_OPC,
+            i_OPC => w_OPERATION,
 
             -- Signals to back-end.
-            o_BACKEND_OPC    => o_BACKEND_OPC,
-            o_BACKEND_ADDR   => o_BACKEND_ADDR,
-            o_BACKEND_BURST  => o_BACKEND_BURST,
-            o_BACKEND_LENGTH => o_BACKEND_LENGTH,
-            o_BACKEND_DATA   => o_BACKEND_DATA,
-            o_BACKEND_ID     => o_BACKEND_ID
+            o_BACKEND_OPC => o_BACKEND_OPC,
+            o_BACKEND_ADDR      => o_BACKEND_ADDR,
+            o_BACKEND_BURST     => o_BACKEND_BURST,
+            o_BACKEND_LENGTH    => o_BACKEND_LENGTH,
+            o_BACKEND_DATA      => o_BACKEND_DATA,
+            o_BACKEND_ID        => o_BACKEND_ID
         );
 
     -- @TODO: Os sinais abaixo vão sair de um controlador de receber pacotes do backend.

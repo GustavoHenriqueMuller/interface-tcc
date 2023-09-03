@@ -27,7 +27,7 @@ add wave -position insertpoint  \
 sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_FLOW_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_DATA_IN \

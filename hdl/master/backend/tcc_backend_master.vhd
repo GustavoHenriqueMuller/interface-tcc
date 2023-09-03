@@ -14,12 +14,12 @@ entity tcc_backend_master is
         -- Backend signals.
         i_VALID       : in std_logic;
         i_LAST        : in std_logic;
-    	i_OPC         : in std_logic;
 		i_ADDR        : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 		i_BURST       : in std_logic_vector(1 downto 0);
 		i_LENGTH      : in std_logic_vector(7 downto 0);
         i_ID          : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 		i_DATA        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_OPC   : in std_logic;
 
 		o_READY : out std_logic;
 
@@ -82,17 +82,17 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_OPC    => i_OPC,
-            i_BURST  => i_BURST,
-            i_LENGTH => i_LENGTH,
-            i_ID     => i_ID,
-            i_DATA   => i_DATA,
-            i_OPERATION_ADDR => w_OPERATION_ADDR,
+            i_BURST     => i_BURST,
+            i_LENGTH    => i_LENGTH,
+            i_ID        => i_ID,
+            i_DATA      => i_DATA,
+            i_OPC => i_OPC,
+            i_OPC_ADDR => w_OPERATION_ADDR,
             i_DEST_X => w_DEST_X,
             i_DEST_Y => w_DEST_Y,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
 
-            o_FLIT  => w_FLIT
+            o_FLIT => w_FLIT
         );
 
     u_BUFFER_FIFO: entity work.buffering

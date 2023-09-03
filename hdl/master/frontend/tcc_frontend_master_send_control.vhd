@@ -27,7 +27,7 @@ entity tcc_frontend_master_send_control is
         -- Signals to back-end.
         o_BACKEND_VALID: out std_logic;
         o_BACKEND_LAST : out std_logic;
-        o_OPC          : out std_logic
+        o_OPERATION    : out std_logic
     );
 end tcc_frontend_master_send_control;
 
@@ -108,6 +108,6 @@ begin
                                or r_CURRENT_STATE = S_READ_TRANSFER)
                                else '0';
 
-    o_OPC           <= '0' when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE or r_CURRENT_STATE = S_WRITE_TRANSFER) else '1';
+    o_OPERATION     <= '0' when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE or r_CURRENT_STATE = S_WRITE_TRANSFER) else '1';
 
 end arch_tcc_frontend_master_send_control;
