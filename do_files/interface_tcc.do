@@ -4,6 +4,7 @@ vcom -2008 ../hdl/basic/mux4.vhd
 
 vcom -2008 ../hdl/tcc_package.vhd
 
+vcom -2008 ../hdl/frontend/tcc_frontend_master_data_multiplexer.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master_send_control.vhd
 vcom -2008 ../hdl/frontend/tcc_frontend_master.vhd
 

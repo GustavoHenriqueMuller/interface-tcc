@@ -12,19 +12,9 @@ entity tcc_frontend_master_send_control is
 
         -- Signals from front-end.
         AWVALID: in std_logic;
-        AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-        AWLEN  : in std_logic_vector(7 downto 0);
-        AWBURST: in std_logic_vector(1 downto 0);
-        WDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         WLAST  : in std_logic;
         WVALID : in std_logic;
-
         ARVALID: in std_logic;
-        AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-        ARLEN  : in std_logic_vector(7 downto 0);
-        ARBURST: in std_logic_vector(1 downto 0);
 
         -- Signals to front-end.
         AWREADY: out std_logic;
@@ -37,12 +27,7 @@ entity tcc_frontend_master_send_control is
         -- Signals to back-end.
         o_BACKEND_VALID : out std_logic;
         o_BACKEND_LAST  : out std_logic;
-        o_BACKEND_OPC   : out std_logic;
-        o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-        o_BACKEND_BURST : out std_logic_vector(1 downto 0);
-        o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
-        o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
+        o_OPC           : out std_logic
     );
 end tcc_frontend_master_send_control;
 
@@ -107,13 +92,13 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Output values (front-end).
     AWREADY <= '1' when (r_CURRENT_STATE = S_IDLE and i_BACKEND_READY = '1') else '0';
-    WREADY <= '1' when (r_CURRENT_STATE = S_WRITE_TRANSFER and i_BACKEND_READY = '1') else '0';
+    WREADY  <= '1' when (r_CURRENT_STATE = S_WRITE_TRANSFER and i_BACKEND_READY = '1') else '0';
     ARREADY <= '1' when (r_CURRENT_STATE = S_IDLE and i_BACKEND_READY = '1') else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values (back-end).
-    o_BACKEND_VALID <= '1' when ((r_NEXT_STATE = S_WAIT_HEADERS_WRITE) or
-                                 (r_NEXT_STATE = S_WAIT_HEADERS_READ) or
+    o_BACKEND_VALID <= '1' when ((r_CURRENT_STATE = S_IDLE and r_NEXT_STATE = S_WAIT_HEADERS_WRITE) or
+                                 (r_CURRENT_STATE = S_IDLE and r_NEXT_STATE = S_WAIT_HEADERS_READ) or
                                  (r_CURRENT_STATE = S_WRITE_TRANSFER and WVALID = '1') or
                                  r_CURRENT_STATE = S_READ_TRANSFER)
                                 else '0';
@@ -122,37 +107,6 @@ begin
                                or r_CURRENT_STATE = S_READ_TRANSFER)
                                else '0';
 
-
-
-
-
-
-
-
-
-    -- @TODO: SEPARAR ESSA MULTIPLEXAÇÃO EM OUTRO BLOCO.
-
-    o_BACKEND_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WAIT_HEADERS_WRITE) else '1';
-
-    o_BACKEND_ADDR <= AWADDR when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE)
-                             else ARADDR when (r_CURRENT_STATE = S_WAIT_HEADERS_READ)
-                             else (c_ADDR_WIDTH - 1 downto 0 => '0');
-
-    o_BACKEND_BURST <= AWBURST when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE)
-                               else ARBURST when (r_CURRENT_STATE = S_WAIT_HEADERS_READ)
-                               else (1 downto 0 => '0');
-
-    o_BACKEND_LENGTH <= AWLEN when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE)
-                              else ARLEN when (r_CURRENT_STATE = S_WAIT_HEADERS_READ)
-                              else (7 downto 0 => '0');
-
-    -- Read packages only have the read address as the payload.
-    o_BACKEND_DATA <= WDATA when (r_CURRENT_STATE = S_WRITE_TRANSFER)
-					        else (c_DATA_WIDTH - 1 downto c_ADDR_WIDTH => '0') & ARADDR when (r_CURRENT_STATE = S_READ_TRANSFER)
-                            else (c_DATA_WIDTH - 1 downto 0 => '0');
-
-    o_BACKEND_ID <= AW_ID when (r_CURRENT_STATE = S_WAIT_HEADERS_WRITE)
-                          else AR_ID when (r_CURRENT_STATE = S_WAIT_HEADERS_READ)
-                          else (c_ID_WIDTH - 1 downto 0 => '0');
+    o_OPC <= '0' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_WAIT_HEADERS_WRITE) else '1';
 
 end arch_tcc_frontend_master_send_control;

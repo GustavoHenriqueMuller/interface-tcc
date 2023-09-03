@@ -61,26 +61,19 @@ entity tcc_frontend_master is
 end tcc_frontend_master;
 
 architecture arch_tcc_frontend_master of tcc_frontend_master is
+    signal w_OPC: std_logic;
+
 begin
-    u_tcc_FRONTEND_MASTER_SEND_CONTROL: entity work.tcc_frontend_master_send_control
+    u_TCC_FRONTEND_MASTER_SEND_CONTROL: entity work.tcc_frontend_master_send_control
         port map (
             ACLK => ACLK,
             ARESETn => ARESETn,
 
             -- Signals from front-end.
             AWVALID => AWVALID,
-            AW_ID   => AW_ID,
-            AWADDR  => AWADDR,
-            AWLEN   => AWLEN,
-            AWBURST => AWBURST,
-            WDATA   => WDATA,
             WLAST   => WLAST,
             WVALID  => WVALID,
             ARVALID => ARVALID,
-            AR_ID   => AR_ID,
-            ARADDR  => ARADDR,
-            ARLEN   => ARLEN,
-            ARBURST => ARBURST,
 
             -- Signals to front-end.
             AWREADY => AWREADY,
@@ -93,6 +86,29 @@ begin
             -- Signals to back-end.
             o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_LAST   => o_BACKEND_LAST,
+            o_OPC            => w_OPC
+        );
+
+    u_TCC_FRONTEND_MASTER_DATA_MULTIPLEXER: entity work.tcc_frontend_master_data_multiplexer
+        port map(
+            ACLK => ACLK,
+            ARESETn => ARESETn,
+
+            -- Signals from front-end.
+            AW_ID   => AW_ID,
+            AWADDR  => AWADDR,
+            AWLEN   => AWLEN,
+            AWBURST => AWBURST,
+            WDATA   => WDATA,
+
+            AR_ID   => AR_ID,
+            ARADDR  => ARADDR,
+            ARLEN   => ARLEN,
+            ARBURST => ARBURST,
+
+            i_OPC   => w_OPC,
+
+            -- Signals to back-end.
             o_BACKEND_OPC    => o_BACKEND_OPC,
             o_BACKEND_ADDR   => o_BACKEND_ADDR,
             o_BACKEND_BURST  => o_BACKEND_BURST,
