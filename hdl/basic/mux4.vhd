@@ -1,0 +1,37 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux4 is
+    generic (
+        data_width_p : natural := 32
+    );
+
+    port (
+        i_DATA_A  : in  std_logic_vector(data_width_p - 1 downto 0);
+        i_DATA_B  : in  std_logic_vector(data_width_p - 1 downto 0);
+        i_DATA_C  : in  std_logic_vector(data_width_p - 1 downto 0);
+        i_DATA_D  : in  std_logic_vector(data_width_p - 1 downto 0);
+        i_SELECTOR: in  std_logic_vector(1 downto 0);
+
+        o_DATA    : out std_logic_vector(data_width_p - 1 downto 0)
+    );
+end mux4;
+
+architecture arch_mux4 of mux4 is
+begin
+  process (i_SELECTOR, i_DATA_A, i_DATA_B, i_DATA_C, i_DATA_D)
+  begin
+    case i_SELECTOR is
+      when "00" =>
+        o_DATA <= i_DATA_A;
+      when "01" =>
+        o_DATA <= i_DATA_B;
+      when "10" =>
+        o_DATA <= i_DATA_C;
+      when "11" =>
+        o_DATA <= i_DATA_D;
+      when others =>
+        o_DATA <= (others => '0');
+    end case;
+  end process;
+end arch_mux4;

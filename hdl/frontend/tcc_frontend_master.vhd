@@ -103,7 +103,7 @@ begin
     -- BVALID : out std_logic;
     -- BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
     -- RVALID : out std_logic;
-    -- RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+    -- RDATA  : out std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
     -- RLAST  : out std_logic;
     -- RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 end arch_tcc_frontend_master;

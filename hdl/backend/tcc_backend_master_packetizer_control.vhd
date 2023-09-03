@@ -5,30 +5,24 @@ use IEEE.std_logic_1164.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tcc_backend_master_packetizer is
+entity tcc_backend_master_packetizer_control is
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
         ARESETn: in std_logic;
 
         -- Backend signals.
-    	i_OPC   : in std_logic;
-		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-		i_BURST : in std_logic_vector(1 downto 0);
-		i_LENGTH: in std_logic_vector(7 downto 0);
-		i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-
         i_VALID          : in std_logic;
         i_LAST           : in std_logic;
         i_WRITE_OK_BUFFER: in std_logic;
 
-		o_FLIT        : out std_logic_vector(c_DATA_WIDTH downto 0);
-        o_WRITE_BUFFER: out std_logic;
-        o_READY       : out std_logic
+        o_FLIT_SELECTOR: out std_logic_vector(1 downto 0);
+        o_WRITE_BUFFER : out std_logic;
+        o_READY        : out std_logic
     );
-end tcc_backend_master_packetizer;
+end tcc_backend_master_packetizer_control;
 
-architecture arch_tcc_backend_master_packetizer of tcc_backend_master_packetizer is
+architecture arch_tcc_backend_master_packetizer_control of tcc_backend_master_packetizer_control is
     type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_1_WAIT_OK,
                              S_HEADER_2, S_HEADER_2_WAIT_OK,
                              S_PAYLOAD, S_PAYLOAD_WAIT_OK,
@@ -101,11 +95,11 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-    o_FLIT <= '1' & "1111111111111111" & "1111111111111111" when (r_CURRENT_STATE = S_HEADER_1) else
-              '0' & "1100110011001100" & "1100110011001100" when (r_CURRENT_STATE = S_HEADER_2) else
-              '0' & i_DATA when (r_CURRENT_STATE = S_PAYLOAD) else
-              '1' & "10101010101010101010101010101010" when (r_CURRENT_STATE = S_TRAILER) else
-              (data_width_c downto 0 => '0');
+    o_FLIT_SELECTOR <= "00" when (r_CURRENT_STATE = S_HEADER_1) else
+                       "01" when (r_CURRENT_STATE = S_HEADER_2) else
+                       "10" when (r_CURRENT_STATE = S_PAYLOAD) else
+                       "11" when (r_CURRENT_STATE = S_TRAILER) else
+                       "00";
 
     o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
@@ -116,4 +110,4 @@ begin
                         (r_NEXT_STATE = S_PAYLOAD)
                         else '0';
 
-end arch_tcc_backend_master_packetizer;
+end arch_tcc_backend_master_packetizer_control;

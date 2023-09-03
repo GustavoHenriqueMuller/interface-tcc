@@ -13,8 +13,7 @@ entity tcc_backend_master_send_control is
 
         -- Buffer signals.
         i_READ_OK_BUFFER: in std_logic;
-		o_READ_BUFFER: out std_logic;
-        o_ENABLE_REG_BUFFER_DATA_OUT: out std_logic;
+		o_READ_BUFFER   : out std_logic;
 
         -- XINA signals.
         l_in_val_i: out std_logic;

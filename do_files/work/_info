@@ -11,20 +11,21 @@ z2
 cModel Technology
 Z0 dE:/repos/InterfaceTCC/do_files
 T_opt
-!s110 1693759799
-VYUI@c5Fz;;9`N03bUazLj3
+!s110 1693762157
+VL3Q3;iHD7]zESVOcUB@``0
 04 6 11 work tcc_tb arch_tcc_tb 1
-=1-04d9f579f44a-64f4b937-95-3bcc
-!s124 OEM10U86 
+=1-04d9f579f44a-64f4c26d-1c7-38f0
+!s124 OEM10U88 
 o-quiet -auto_acc_if_foreign -work work +acc
 tCvgOpt 0
 n@_opt
 OL;O;2021.2;73
+R0
 Earbitration
 Z1 w1693447583
 Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
-!i122 7
+!i122 111
 R0
 Z4 8../hdl/dependencies/xina/rtl/arbitration.vhd
 Z5 F../hdl/dependencies/xina/rtl/arbitration.vhd
@@ -34,9 +35,9 @@ VCcaUnUC0`L2BX=T78`>ZN0
 !s100 SUKzHZde[2@ab3:m<jL[;1
 Z6 OL;C;2021.2;73
 33
-Z7 !s110 1693759791
+Z7 !s110 1693762152
 !i10b 1
-Z8 !s108 1693759791.000000
+Z8 !s108 1693762152.000000
 Z9 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/arbitration.vhd|
 Z10 !s107 ../hdl/dependencies/xina/rtl/arbitration.vhd|
 !i113 0
@@ -47,7 +48,7 @@ Z13 DEx4 work 14 arbitration_rr 0 22 0ZaP^j7XJAW>nelc?Xl6i1
 R2
 R3
 Z14 DEx4 work 11 arbitration 0 22 CcaUnUC0`L2BX=T78`>ZN0
-!i122 7
+!i122 111
 l19
 L17 24
 VSbo5FP>AN6igciOWQ]PGc0
@@ -66,7 +67,7 @@ Earbitration_rr
 R1
 R2
 R3
-!i122 6
+!i122 110
 R0
 Z15 8../hdl/dependencies/xina/rtl/arbitration_rr.vhd
 Z16 F../hdl/dependencies/xina/rtl/arbitration_rr.vhd
@@ -88,7 +89,7 @@ Amealy
 R2
 R3
 R13
-!i122 6
+!i122 110
 l138
 L133 91
 VcmN@<:A^a7fJVR58L;jW51
@@ -107,7 +108,7 @@ Amoore
 R2
 R3
 R13
-!i122 6
+!i122 110
 l20
 L14 118
 VC=]Kk:e4OC=a:3feGPz;j1
@@ -126,7 +127,7 @@ Ebuffering
 R1
 R2
 R3
-!i122 9
+!i122 113
 R0
 Z19 8../hdl/dependencies/xina/rtl/buffering.vhd
 Z20 F../hdl/dependencies/xina/rtl/buffering.vhd
@@ -151,7 +152,7 @@ Z25 DEx4 work 14 buffering_fifo 0 22 >WXBA<GdIl2lg=M5`h?:g2
 R2
 R3
 Z26 DEx4 work 9 buffering 0 22 gZjfRSJZiGR;mBEQWizjG3
-!i122 9
+!i122 113
 l27
 L25 40
 Ve@D5_];WK3EcGB4b88gXd1
@@ -172,7 +173,7 @@ R23
 R24
 R2
 R3
-!i122 8
+!i122 112
 R0
 Z27 8../hdl/dependencies/xina/rtl/buffering_fifo.vhd
 Z28 F../hdl/dependencies/xina/rtl/buffering_fifo.vhd
@@ -196,7 +197,7 @@ R24
 R2
 R3
 R25
-!i122 8
+!i122 112
 l68
 L62 31
 VP_fjSCC[KQ[Te@SUK:XDM0
@@ -217,7 +218,7 @@ R24
 R2
 R3
 R25
-!i122 8
+!i122 112
 l34
 L26 35
 V^Yc8hFmnBJonPd8;4Ez:C1
@@ -238,7 +239,7 @@ Z31 DPx8 synopsys 10 attributes 0 22 iThS5<O8gHDP?YiMiccE>3
 Z32 DPx4 ieee 14 std_logic_misc 0 22 j4Ca:YPSgnCRYmKlN0[Uj0
 R2
 R3
-!i122 11
+!i122 115
 R0
 Z33 8../hdl/dependencies/xina/rtl/channel_in.vhd
 Z34 F../hdl/dependencies/xina/rtl/channel_in.vhd
@@ -248,36 +249,36 @@ V122:?m^eKT5ab:Z`@OPbQ0
 !s100 3i5UzlJOTR6^DQF6I8XCg3
 R6
 33
-R7
+Z35 !s110 1693762153
 !i10b 1
-R8
-Z35 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/channel_in.vhd|
-Z36 !s107 ../hdl/dependencies/xina/rtl/channel_in.vhd|
+Z36 !s108 1693762153.000000
+Z37 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/channel_in.vhd|
+Z38 !s107 ../hdl/dependencies/xina/rtl/channel_in.vhd|
 !i113 0
 R11
 R12
 Artl
-Z37 DEx4 work 6 switch 0 22 8Ng4egTU4i<SRAfP]Hnjc0
-Z38 DEx4 work 7 routing 0 22 _f85K>i3[Y@[UVBF`KlGz0
+Z39 DEx4 work 6 switch 0 22 8Ng4egTU4i<SRAfP]Hnjc0
+Z40 DEx4 work 7 routing 0 22 _f85K>i3[Y@[UVBF`KlGz0
 R26
-Z39 DEx4 work 7 flow_in 0 22 8]c4=8d@Y0B>D<eEP;N2S0
+Z41 DEx4 work 7 flow_in 0 22 8]c4=8d@Y0B>D<eEP;N2S0
 R31
 R32
 R2
 R3
-Z40 DEx4 work 10 channel_in 0 22 122:?m^eKT5ab:Z`@OPbQ0
-!i122 11
+Z42 DEx4 work 10 channel_in 0 22 122:?m^eKT5ab:Z`@OPbQ0
+!i122 115
 l52
 L43 90
 V<<_X3Q:LhnJO3Ij[eIeTf2
 !s100 K61DK8>OV3iiC37PH03aF2
 R6
 33
-R7
-!i10b 1
-R8
 R35
+!i10b 1
 R36
+R37
+R38
 !i113 0
 R11
 R12
@@ -285,43 +286,43 @@ Echannel_out
 R1
 R2
 R3
-!i122 12
+!i122 116
 R0
-Z41 8../hdl/dependencies/xina/rtl/channel_out.vhd
-Z42 F../hdl/dependencies/xina/rtl/channel_out.vhd
+Z43 8../hdl/dependencies/xina/rtl/channel_out.vhd
+Z44 F../hdl/dependencies/xina/rtl/channel_out.vhd
 l0
 L4 1
 VTgE9I50i=12WXD]m2T[cB1
 !s100 AjF3_mKg:9nFMZiWb45f<1
 R6
 33
-R7
+R35
 !i10b 1
-R8
-Z43 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/channel_out.vhd|
-Z44 !s107 ../hdl/dependencies/xina/rtl/channel_out.vhd|
+R36
+Z45 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/channel_out.vhd|
+Z46 !s107 ../hdl/dependencies/xina/rtl/channel_out.vhd|
 !i113 0
 R11
 R12
 Artl
-R37
+R39
 R14
-Z45 DEx4 work 8 flow_out 0 22 @^^Y8KLUZN@6eSEPF[59W1
+Z47 DEx4 work 8 flow_out 0 22 @^^Y8KLUZN@6eSEPF[59W1
 R2
 R3
-Z46 DEx4 work 11 channel_out 0 22 TgE9I50i=12WXD]m2T[cB1
-!i122 12
+Z48 DEx4 work 11 channel_out 0 22 TgE9I50i=12WXD]m2T[cB1
+!i122 116
 l41
 L35 68
 VV3e2OF=DQmQilf4fal7[;2
 !s100 3nbo;d=M6[5;RRzIQ8nJ40
 R6
 33
-R7
+R35
 !i10b 1
-R8
-R43
-R44
+R36
+R45
+R46
 !i113 0
 R11
 R12
@@ -329,40 +330,40 @@ Ecrossbar
 R1
 R2
 R3
-!i122 13
+!i122 117
 R0
-Z47 8../hdl/dependencies/xina/rtl/crossbar.vhd
-Z48 F../hdl/dependencies/xina/rtl/crossbar.vhd
+Z49 8../hdl/dependencies/xina/rtl/crossbar.vhd
+Z50 F../hdl/dependencies/xina/rtl/crossbar.vhd
 l0
 L4 1
 V]QeB43`Hae`oMGDn=Q2NQ1
 !s100 gn36G:9E`e`4j;7Z2PL4F3
 R6
 33
-R7
+R35
 !i10b 1
-R8
-Z49 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/crossbar.vhd|
-Z50 !s107 ../hdl/dependencies/xina/rtl/crossbar.vhd|
+R36
+Z51 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/crossbar.vhd|
+Z52 !s107 ../hdl/dependencies/xina/rtl/crossbar.vhd|
 !i113 0
 R11
 R12
 Artl
 R2
 R3
-Z51 DEx4 work 8 crossbar 0 22 ]QeB43`Hae`oMGDn=Q2NQ1
-!i122 13
+Z53 DEx4 work 8 crossbar 0 22 ]QeB43`Hae`oMGDn=Q2NQ1
+!i122 117
 l101
 L99 48
 VHFo5S;X1M@j_oJ]LG^J8[1
 !s100 oCjYMa99Z91a<Q8fHWm261
 R6
 33
-R7
+R35
 !i10b 1
-R8
-R49
-R50
+R36
+R51
+R52
 !i113 0
 R11
 R12
@@ -370,10 +371,10 @@ Eflow_in
 R1
 R2
 R3
-!i122 1
+!i122 105
 R0
-Z52 8../hdl/dependencies/xina/rtl/flow_in.vhd
-Z53 F../hdl/dependencies/xina/rtl/flow_in.vhd
+Z54 8../hdl/dependencies/xina/rtl/flow_in.vhd
+Z55 F../hdl/dependencies/xina/rtl/flow_in.vhd
 l0
 L4 1
 V8]c4=8d@Y0B>D<eEP;N2S0
@@ -383,19 +384,19 @@ R6
 R7
 !i10b 1
 R8
-Z54 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_in.vhd|
-Z55 !s107 ../hdl/dependencies/xina/rtl/flow_in.vhd|
+Z56 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_in.vhd|
+Z57 !s107 ../hdl/dependencies/xina/rtl/flow_in.vhd|
 !i113 0
 R11
 R12
 Artl
-Z56 DEx4 work 10 flow_in_hs 0 22 5Y9nTgY`OlEQ;nVc8@fz02
+Z58 DEx4 work 10 flow_in_hs 0 22 5Y9nTgY`OlEQ;nVc8@fz02
 R2
 R3
-R39
-!i122 1
+R41
+!i122 105
 l26
-Z57 L24 38
+Z59 L24 38
 V_JTdGli?]D;I_0e42<SmE0
 !s100 _h1_H`Y]a3Zj8S0IjGZ<l3
 R6
@@ -403,8 +404,8 @@ R6
 R7
 !i10b 1
 R8
-R54
-R55
+R56
+R57
 !i113 0
 R11
 R12
@@ -412,10 +413,10 @@ Eflow_in_hs
 R1
 R2
 R3
-!i122 0
+!i122 104
 R0
-Z58 8../hdl/dependencies/xina/rtl/flow_in_hs.vhd
-Z59 F../hdl/dependencies/xina/rtl/flow_in_hs.vhd
+Z60 8../hdl/dependencies/xina/rtl/flow_in_hs.vhd
+Z61 F../hdl/dependencies/xina/rtl/flow_in_hs.vhd
 l0
 L4 1
 V5Y9nTgY`OlEQ;nVc8@fz02
@@ -425,18 +426,18 @@ R6
 R7
 !i10b 1
 R8
-Z60 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_in_hs.vhd|
-Z61 !s107 ../hdl/dependencies/xina/rtl/flow_in_hs.vhd|
+Z62 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_in_hs.vhd|
+Z63 !s107 ../hdl/dependencies/xina/rtl/flow_in_hs.vhd|
 !i113 0
 R11
 R12
 Amealy
 R2
 R3
-R56
-!i122 0
+R58
+!i122 104
 l72
-Z62 L67 47
+Z64 L67 47
 VHn:LkI1TAS70?CJ8Dez>E0
 !s100 ai`NeSABe?X9X28bEd[J10
 R6
@@ -444,18 +445,18 @@ R6
 R7
 !i10b 1
 R8
-R60
-R61
+R62
+R63
 !i113 0
 R11
 R12
 Amoore
 R2
 R3
-R56
-!i122 0
+R58
+!i122 104
 l28
-Z63 L23 43
+Z65 L23 43
 V<:c6AZ8_O:;FCDD9^31Kd0
 !s100 NEPXe`1Db33751f4LgVVF2
 R6
@@ -463,8 +464,8 @@ R6
 R7
 !i10b 1
 R8
-R60
-R61
+R62
+R63
 !i113 0
 R11
 R12
@@ -472,10 +473,10 @@ Eflow_out
 R1
 R2
 R3
-!i122 3
+!i122 107
 R0
-Z64 8../hdl/dependencies/xina/rtl/flow_out.vhd
-Z65 F../hdl/dependencies/xina/rtl/flow_out.vhd
+Z66 8../hdl/dependencies/xina/rtl/flow_out.vhd
+Z67 F../hdl/dependencies/xina/rtl/flow_out.vhd
 l0
 L4 1
 V@^^Y8KLUZN@6eSEPF[59W1
@@ -485,19 +486,19 @@ R6
 R7
 !i10b 1
 R8
-Z66 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_out.vhd|
-Z67 !s107 ../hdl/dependencies/xina/rtl/flow_out.vhd|
+Z68 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_out.vhd|
+Z69 !s107 ../hdl/dependencies/xina/rtl/flow_out.vhd|
 !i113 0
 R11
 R12
 Artl
-Z68 DEx4 work 11 flow_out_hs 0 22 U0a6`i0gWAP;fSI8KB1ih1
+Z70 DEx4 work 11 flow_out_hs 0 22 U0a6`i0gWAP;fSI8KB1ih1
 R2
 R3
-R45
-!i122 3
+R47
+!i122 107
 l26
-R57
+R59
 V5Zk7<^5gea`dkTGM_OzZ40
 !s100 c`0lNLMAgP2JWTfRboOM81
 R6
@@ -505,8 +506,8 @@ R6
 R7
 !i10b 1
 R8
-R66
-R67
+R68
+R69
 !i113 0
 R11
 R12
@@ -514,10 +515,10 @@ Eflow_out_hs
 R1
 R2
 R3
-!i122 2
+!i122 106
 R0
-Z69 8../hdl/dependencies/xina/rtl/flow_out_hs.vhd
-Z70 F../hdl/dependencies/xina/rtl/flow_out_hs.vhd
+Z71 8../hdl/dependencies/xina/rtl/flow_out_hs.vhd
+Z72 F../hdl/dependencies/xina/rtl/flow_out_hs.vhd
 l0
 L4 1
 VU0a6`i0gWAP;fSI8KB1ih1
@@ -527,18 +528,18 @@ R6
 R7
 !i10b 1
 R8
-Z71 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_out_hs.vhd|
-Z72 !s107 ../hdl/dependencies/xina/rtl/flow_out_hs.vhd|
+Z73 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/flow_out_hs.vhd|
+Z74 !s107 ../hdl/dependencies/xina/rtl/flow_out_hs.vhd|
 !i113 0
 R11
 R12
 Amealy
 R2
 R3
-R68
-!i122 2
+R70
+!i122 106
 l72
-R62
+R64
 VO1cZlN7F0@acFUCKA13]_2
 !s100 2;GmmFof?7d;6`09bfBGg0
 R6
@@ -546,18 +547,18 @@ R6
 R7
 !i10b 1
 R8
-R71
-R72
+R73
+R74
 !i113 0
 R11
 R12
 Amoore
 R2
 R3
-R68
-!i122 2
+R70
+!i122 106
 l28
-R63
+R65
 Vj_5ji9TQ@Fk0e=Af8^OUn3
 !s100 HU5:TE_KZVPV=Z;<hbaf:2
 R6
@@ -565,54 +566,95 @@ R6
 R7
 !i10b 1
 R8
-R71
-R72
+R73
+R74
+!i113 0
+R11
+R12
+Emux4
+Z75 w1693760374
+R2
+R3
+!i122 140
+R0
+Z76 8../hdl/basic/mux4.vhd
+Z77 F../hdl/basic/mux4.vhd
+l0
+L4 1
+V@AWQ^M1I[71HGzAJzLzg62
+!s100 ^k30F@8mEE]ah[HGz_T;]3
+R6
+33
+Z78 !s110 1693762203
+!i10b 1
+Z79 !s108 1693762203.000000
+Z80 !s90 -reportprogress|300|-2008|../hdl/basic/mux4.vhd|
+Z81 !s107 ../hdl/basic/mux4.vhd|
+!i113 0
+R11
+R12
+Aarch_mux4
+R2
+R3
+Z82 DEx4 work 4 mux4 0 22 @AWQ^M1I[71HGzAJzLzg62
+!i122 140
+l21
+L20 18
+V?UFcah]g9>IZQC3b15_>T2
+!s100 ckL@e^oJb^QkGFaIn_;K^3
+R6
+33
+R78
+!i10b 1
+R79
+R80
+R81
 !i113 0
 R11
 R12
 Erouter
-Z73 w1693604003
+Z83 w1693604003
 R2
 R3
-!i122 14
+!i122 118
 R0
-Z74 8../hdl/dependencies/xina/rtl/router.vhd
-Z75 F../hdl/dependencies/xina/rtl/router.vhd
+Z84 8../hdl/dependencies/xina/rtl/router.vhd
+Z85 F../hdl/dependencies/xina/rtl/router.vhd
 l0
 L4 1
 Vao5hdz?hK_<jd;T^BPh?e2
 !s100 mkoThOi3_AGXIT`chAbb81
 R6
 33
-Z76 !s110 1693759792
+R35
 !i10b 1
-Z77 !s108 1693759792.000000
-Z78 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/router.vhd|
-Z79 !s107 ../hdl/dependencies/xina/rtl/router.vhd|
+R36
+Z86 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/router.vhd|
+Z87 !s107 ../hdl/dependencies/xina/rtl/router.vhd|
 !i113 0
 R11
 R12
 Artl
-R51
-R46
+R53
+R48
 R31
 R32
-R40
+R42
 R2
 R3
-Z80 DEx4 work 6 router 0 22 ao5hdz?hK_<jd;T^BPh?e2
-!i122 14
+Z88 DEx4 work 6 router 0 22 ao5hdz?hK_<jd;T^BPh?e2
+!i122 118
 l171
 L68 520
 VGMegITQK_dAgZVe38UY:02
 !s100 =Rbk7MV;[8JiON<l^kJTg2
 R6
 33
-R76
+R35
 !i10b 1
-R77
-R78
-R79
+R36
+R86
+R87
 !i113 0
 R11
 R12
@@ -620,10 +662,10 @@ Erouting
 R1
 R2
 R3
-!i122 5
+!i122 109
 R0
-Z81 8../hdl/dependencies/xina/rtl/routing.vhd
-Z82 F../hdl/dependencies/xina/rtl/routing.vhd
+Z89 8../hdl/dependencies/xina/rtl/routing.vhd
+Z90 F../hdl/dependencies/xina/rtl/routing.vhd
 l0
 L4 1
 V_f85K>i3[Y@[UVBF`KlGz0
@@ -633,18 +675,18 @@ R6
 R7
 !i10b 1
 R8
-Z83 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/routing.vhd|
-Z84 !s107 ../hdl/dependencies/xina/rtl/routing.vhd|
+Z91 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/routing.vhd|
+Z92 !s107 ../hdl/dependencies/xina/rtl/routing.vhd|
 !i113 0
 R11
 R12
 Artl
 R24
-Z85 DEx4 work 10 routing_xy 0 22 5;LYH]4mIi2lS_B854cEL2
+Z93 DEx4 work 10 routing_xy 0 22 5;LYH]4mIi2lS_B854cEL2
 R2
 R3
-R38
-!i122 5
+R40
+!i122 109
 l33
 L31 48
 VKd[7f4P^oCzQhjGd@]?6N0
@@ -654,8 +696,8 @@ R6
 R7
 !i10b 1
 R8
-R83
-R84
+R91
+R92
 !i113 0
 R11
 R12
@@ -664,10 +706,10 @@ R1
 R24
 R2
 R3
-!i122 4
+!i122 108
 R0
-Z86 8../hdl/dependencies/xina/rtl/routing_xy.vhd
-Z87 F../hdl/dependencies/xina/rtl/routing_xy.vhd
+Z94 8../hdl/dependencies/xina/rtl/routing_xy.vhd
+Z95 F../hdl/dependencies/xina/rtl/routing_xy.vhd
 l0
 L5 1
 V5;LYH]4mIi2lS_B854cEL2
@@ -677,8 +719,8 @@ R6
 R7
 !i10b 1
 R8
-Z88 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/routing_xy.vhd|
-Z89 !s107 ../hdl/dependencies/xina/rtl/routing_xy.vhd|
+Z96 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/routing_xy.vhd|
+Z97 !s107 ../hdl/dependencies/xina/rtl/routing_xy.vhd|
 !i113 0
 R11
 R12
@@ -686,8 +728,8 @@ Amealy
 R24
 R2
 R3
-R85
-!i122 4
+R93
+!i122 108
 l143
 L138 157
 Vg7FbiQFSWI;dZMlfP28g^0
@@ -697,8 +739,8 @@ R6
 R7
 !i10b 1
 R8
-R88
-R89
+R96
+R97
 !i113 0
 R11
 R12
@@ -706,8 +748,8 @@ Amoore
 R24
 R2
 R3
-R85
-!i122 4
+R93
+!i122 108
 l36
 L31 106
 VhlC?zl4MI>PAPa@AX1;[;0
@@ -717,8 +759,8 @@ R6
 R7
 !i10b 1
 R8
-R88
-R89
+R96
+R97
 !i113 0
 R11
 R12
@@ -726,927 +768,974 @@ Eswitch
 R1
 R2
 R3
-!i122 10
+!i122 114
 R0
-Z90 8../hdl/dependencies/xina/rtl/switch.vhd
-Z91 F../hdl/dependencies/xina/rtl/switch.vhd
+Z98 8../hdl/dependencies/xina/rtl/switch.vhd
+Z99 F../hdl/dependencies/xina/rtl/switch.vhd
 l0
 L4 1
 V8Ng4egTU4i<SRAfP]Hnjc0
 !s100 0572MCO9d;S3dT]R;Cz031
 R6
 33
-R7
+R35
 !i10b 1
 R8
-Z92 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/switch.vhd|
-Z93 !s107 ../hdl/dependencies/xina/rtl/switch.vhd|
+Z100 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/switch.vhd|
+Z101 !s107 ../hdl/dependencies/xina/rtl/switch.vhd|
 !i113 0
 R11
 R12
 Artl
 R2
 R3
-R37
-!i122 10
+R39
+!i122 114
 l23
 L21 10
 VR=B3`^3@XkzXL7A?N6EZV3
 !s100 f4Y7DhccYm3Je78a8Zomb1
 R6
 33
-R7
+R35
 !i10b 1
 R8
-R92
-R93
+R100
+R101
 !i113 0
 R11
 R12
 Etcc_backend_master
-Z94 w1693759712
-Z95 DPx4 work 8 xina_pkg 0 22 T_fRIdFRnglJeUcVQWj1W0
-Z96 DPx4 work 11 tcc_package 0 22 6eNoI?O;j:67mjV7KAPLF1
+Z102 w1693762112
+Z103 DPx4 work 8 xina_pkg 0 22 T_fRIdFRnglJeUcVQWj1W0
+Z104 DPx4 work 11 tcc_package 0 22 hYGVb_A_N0[h@4kX`<<cT0
 R2
 R3
-!i122 22
+!i122 147
 R0
-Z97 8../hdl/backend/tcc_backend_master.vhd
-Z98 F../hdl/backend/tcc_backend_master.vhd
+Z105 8../hdl/backend/tcc_backend_master.vhd
+Z106 F../hdl/backend/tcc_backend_master.vhd
 l0
 L8 1
-VHH@Kf>FGTXMNWoElj]7]C3
-!s100 ATYDnLXbbH_K_9DNE;CnL1
+VN7DUc0Q`U><ZB5l3jlP;`1
+!s100 EEBg8;[I1SFImeN_N@^^^1
 R6
 33
-Z99 !s110 1693759795
+Z107 !s110 1693762204
 !i10b 1
-Z100 !s108 1693759795.000000
-Z101 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master.vhd|
-Z102 !s107 ../hdl/backend/tcc_backend_master.vhd|
+R79
+Z108 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master.vhd|
+Z109 !s107 ../hdl/backend/tcc_backend_master.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_backend_master
-Z103 DEx4 work 31 tcc_backend_master_send_control 0 22 SZ>DNc6_nVaJgS;M5I3QD0
+Z110 DEx4 work 31 tcc_backend_master_send_control 0 22 7J`WfcmL`Z4m58J0L@H<i0
 R26
-Z104 DEx4 work 29 tcc_backend_master_packetizer 0 22 NTT^[[;KAo8GJIUEzg:Qg2
-R95
-R96
+Z111 DEx4 work 38 tcc_backend_master_packetizer_datapath 0 22 jYo4?RP[THGd?cVF@=e]53
+Z112 DEx4 work 37 tcc_backend_master_packetizer_control 0 22 44o`izOhP2XohkF09lS3W3
+R103
+R104
 R2
 R3
-Z105 DEx4 work 18 tcc_backend_master 0 22 HH@Kf>FGTXMNWoElj]7]C3
-!i122 22
+Z113 DEx4 work 18 tcc_backend_master 0 22 N7DUc0Q`U><ZB5l3jlP;`1
+!i122 147
 l49
-L37 66
-VM<CzdK0e5Db8?dR@zQd:;0
-!s100 RT2KVm_^:OUS=URlmZWh^0
+L36 77
+Vo]QM[@3hL1eO]<gQ<eOfP1
+!s100 KKP7iCHRmb]4SOWPfHa:B0
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R101
-R102
+R79
+R108
+R109
 !i113 0
 R11
 R12
-Etcc_backend_master_packetizer
-Z106 w1693757261
-R95
-R96
+Etcc_backend_master_packetizer_control
+Z114 w1693761773
+R103
+R104
 R2
 R3
-!i122 20
+!i122 144
 R0
-Z107 8../hdl/backend/tcc_backend_master_packetizer.vhd
-Z108 F../hdl/backend/tcc_backend_master_packetizer.vhd
+Z115 8../hdl/backend/tcc_backend_master_packetizer_control.vhd
+Z116 F../hdl/backend/tcc_backend_master_packetizer_control.vhd
 l0
 L8 1
-VNTT^[[;KAo8GJIUEzg:Qg2
-!s100 0<P=b`Ya<lOO0miIB>^<]3
+V44o`izOhP2XohkF09lS3W3
+!s100 gXHZg<`9c9QWmBJ@R_Qj81
 R6
 33
-R99
+R78
 !i10b 1
-R100
-Z109 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master_packetizer.vhd|
-Z110 !s107 ../hdl/backend/tcc_backend_master_packetizer.vhd|
+R79
+Z117 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master_packetizer_control.vhd|
+Z118 !s107 ../hdl/backend/tcc_backend_master_packetizer_control.vhd|
 !i113 0
 R11
 R12
-Aarch_tcc_backend_master_packetizer
-R95
-R96
+Aarch_tcc_backend_master_packetizer_control
+R103
+R104
 R2
 R3
-R104
-!i122 20
-l39
-L31 89
-VAF@[@bz]jk5V1Ga`<e][B2
-!s100 hlOeiI`0_^U6WA<]=lLDI3
+R112
+!i122 144
+l33
+L25 89
+VFCZGFNE13:9B;@NG05KAN1
+!s100 z?V9j46d`[L^C5NfkDRSD2
 R6
 33
-R99
+R78
 !i10b 1
-R100
-R109
-R110
+R79
+R117
+R118
+!i113 0
+R11
+R12
+Etcc_backend_master_packetizer_datapath
+Z119 w1693762001
+R103
+R104
+R2
+R3
+!i122 145
+R0
+Z120 8../hdl/backend/tcc_backend_master_packetizer_datapath.vhd
+Z121 F../hdl/backend/tcc_backend_master_packetizer_datapath.vhd
+l0
+L8 1
+VjYo4?RP[THGd?cVF@=e]53
+!s100 ;=QSRIWlB5m1^9]29l>3<2
+R6
+33
+R78
+!i10b 1
+R79
+Z122 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master_packetizer_datapath.vhd|
+Z123 !s107 ../hdl/backend/tcc_backend_master_packetizer_datapath.vhd|
+!i113 0
+R11
+R12
+Aarch_tcc_backend_master_packetizer_datapath
+R82
+R103
+R104
+R2
+R3
+R111
+!i122 145
+l33
+L27 27
+VKGgZGWE7i`=V22aHEWEA]2
+!s100 =F3b6=:IeRZ=gfK]_FO431
+R6
+33
+R78
+!i10b 1
+R79
+R122
+R123
 !i113 0
 R11
 R12
 Etcc_backend_master_send_control
-Z111 w1693759265
-R95
-R96
+Z124 w1693761761
+R103
+R104
 R2
 R3
-!i122 21
+!i122 146
 R0
-Z112 8../hdl/backend/tcc_backend_master_send_control.vhd
-Z113 F../hdl/backend/tcc_backend_master_send_control.vhd
+Z125 8../hdl/backend/tcc_backend_master_send_control.vhd
+Z126 F../hdl/backend/tcc_backend_master_send_control.vhd
 l0
 L8 1
-VSZ>DNc6_nVaJgS;M5I3QD0
-!s100 =W@^D3kDI86o5@C3OSg;o3
+V7J`WfcmL`Z4m58J0L@H<i0
+!s100 O=H6Akd_`j?29bPA]35OM1
 R6
 33
-R99
+R78
 !i10b 1
-R100
-Z114 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master_send_control.vhd|
-Z115 !s107 ../hdl/backend/tcc_backend_master_send_control.vhd|
+R79
+Z127 !s90 -reportprogress|300|-2008|../hdl/backend/tcc_backend_master_send_control.vhd|
+Z128 !s107 ../hdl/backend/tcc_backend_master_send_control.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_backend_master_send_control
-R95
-R96
+R103
+R104
 R2
 R3
-R103
-!i122 21
-l30
-L25 54
-VLPKB6PSBGY6DNnaJbCU6=2
-!s100 bQ4Y7B<zX>@=T?fhgG@Qm2
+R110
+!i122 146
+l29
+L24 54
+VWAR]0>`2cP^:j@j]f]:`^1
+!s100 Uj_ndAnh^JbmzZ:GXbeHL3
 R6
 33
-R99
+R78
 !i10b 1
-R100
-R114
-R115
+R79
+R127
+R128
 !i113 0
 R11
 R12
 Etcc_frontend_master
-Z116 w1693751853
-R96
+Z129 w1693761718
+R104
 R2
 R3
-!i122 19
+!i122 143
 R0
-Z117 8../hdl/frontend/tcc_frontend_master.vhd
-Z118 F../hdl/frontend/tcc_frontend_master.vhd
+Z130 8../hdl/frontend/tcc_frontend_master.vhd
+Z131 F../hdl/frontend/tcc_frontend_master.vhd
 l0
 L7 1
 V^T8<h@]k=kO@g_fL<oZ:h0
 !s100 NVCm6>J@YBh:l=jMaTzdn2
 R6
 33
-R99
+R78
 !i10b 1
-R100
-Z119 !s90 -reportprogress|300|-2008|../hdl/frontend/tcc_frontend_master.vhd|
-Z120 !s107 ../hdl/frontend/tcc_frontend_master.vhd|
+R79
+Z132 !s90 -reportprogress|300|-2008|../hdl/frontend/tcc_frontend_master.vhd|
+Z133 !s107 ../hdl/frontend/tcc_frontend_master.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_frontend_master
-Z121 DEx4 work 32 tcc_frontend_master_send_control 0 22 cWM>HUFCZ;OggoNEAJTZV0
-R96
+Z134 DEx4 work 32 tcc_frontend_master_send_control 0 22 cWM>HUFCZ;OggoNEAJTZV0
+R104
 R2
 R3
-Z122 DEx4 work 19 tcc_frontend_master 0 22 ^T8<h@]k=kO@g_fL<oZ:h0
-!i122 19
+Z135 DEx4 work 19 tcc_frontend_master 0 22 ^T8<h@]k=kO@g_fL<oZ:h0
+!i122 143
 l64
 L63 47
 VOB?be;G4VhCoJRmfk0LzX3
 !s100 PG@d==R`j^QJik:;:3bP_0
 R6
 33
-R99
+R78
 !i10b 1
-R100
-R119
-R120
+R79
+R132
+R133
 !i113 0
 R11
 R12
 Etcc_frontend_master_send_control
-Z123 w1693751523
-R96
+Z136 w1693762046
+R104
 R2
 R3
-!i122 18
+!i122 142
 R0
-Z124 8../hdl/frontend/tcc_frontend_master_send_control.vhd
-Z125 F../hdl/frontend/tcc_frontend_master_send_control.vhd
+Z137 8../hdl/frontend/tcc_frontend_master_send_control.vhd
+Z138 F../hdl/frontend/tcc_frontend_master_send_control.vhd
 l0
 L7 1
 VcWM>HUFCZ;OggoNEAJTZV0
 !s100 4Qaac4b;53O93@`A6AAD;0
 R6
 33
-R99
+R78
 !i10b 1
-R100
-Z126 !s90 -reportprogress|300|-2008|../hdl/frontend/tcc_frontend_master_send_control.vhd|
-Z127 !s107 ../hdl/frontend/tcc_frontend_master_send_control.vhd|
+R79
+Z139 !s90 -reportprogress|300|-2008|../hdl/frontend/tcc_frontend_master_send_control.vhd|
+Z140 !s107 ../hdl/frontend/tcc_frontend_master_send_control.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_frontend_master_send_control
-R96
+R104
 R2
 R3
-R121
-!i122 18
+R134
+!i122 142
 l54
 L49 96
 V9PU>E3`:W?fM59@WSbH<P2
 !s100 TaZm28PO^eliFfEFH?gZ70
 R6
 33
-R99
+R78
 !i10b 1
-R100
-R126
-R127
+R79
+R139
+R140
 !i113 0
 R11
 R12
 Etcc_frontend_master_tb
-Z128 w1693749475
-R96
+Z141 w1693762145
+R104
 R2
 R3
-!i122 24
+!i122 149
 R0
-Z129 8../hdl/test/tcc_frontend_master_tb.vhd
-Z130 F../hdl/test/tcc_frontend_master_tb.vhd
+Z142 8../hdl/test/tcc_frontend_master_tb.vhd
+Z143 F../hdl/test/tcc_frontend_master_tb.vhd
 l0
 L7 1
 VAR:PA7Q?Em8jLJ1J>=Sjl2
 !s100 aJFa<zHBVFG[4]k>^NT@m0
 R6
 33
-R99
+R107
 !i10b 1
-R100
-Z131 !s90 -reportprogress|300|-2008|../hdl/test/tcc_frontend_master_tb.vhd|
-Z132 !s107 ../hdl/test/tcc_frontend_master_tb.vhd|
+Z144 !s108 1693762204.000000
+Z145 !s90 -reportprogress|300|-2008|../hdl/test/tcc_frontend_master_tb.vhd|
+Z146 !s107 ../hdl/test/tcc_frontend_master_tb.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_frontend_master_tb
-R122
-R96
+R135
+R104
 R2
 R3
 DEx4 work 22 tcc_frontend_master_tb 0 22 AR:PA7Q?Em8jLJ1J>=Sjl2
-!i122 24
+!i122 149
 l62
 L10 138
 VKeYOXAaf7KdBSM3lobS]Q1
 !s100 ?GkZG8SK3CoOz;CWM1Wjn0
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R131
-R132
+R144
+R145
+R146
 !i113 0
 R11
 R12
 Ptcc_package
 R2
 R3
-!i122 17
-w1692879934
+!i122 141
+w1693761673
 R0
 8../hdl/tcc_package.vhd
 F../hdl/tcc_package.vhd
 l0
 L6 1
-V6eNoI?O;j:67mjV7KAPLF1
-!s100 Kn6DoXlnQm4b9<DcO:f?L1
+VhYGVb_A_N0[h@4kX`<<cT0
+!s100 C]ITdkG3<bL?c`2WYGA4_3
 R6
 33
-R99
+R78
 !i10b 1
-R100
+R79
 !s90 -reportprogress|300|-2008|../hdl/tcc_package.vhd|
 !s107 ../hdl/tcc_package.vhd|
 !i113 0
 R11
 R12
 Etcc_tb
-Z133 w1693749511
-R95
-R96
+Z147 w1693761666
+R103
+R104
 R2
 R3
-!i122 25
+!i122 150
 R0
-Z134 8../hdl/test/tcc_tb.vhd
-Z135 F../hdl/test/tcc_tb.vhd
+Z148 8../hdl/test/tcc_tb.vhd
+Z149 F../hdl/test/tcc_tb.vhd
 l0
 L8 1
 Vh9;0[WXO>W1D4`;PzUe_M3
 !s100 5RJ679Aa5hCM1A9QTDB5D2
 R6
 33
-R99
+R107
 !i10b 1
-R100
-Z136 !s90 -reportprogress|300|-2008|../hdl/test/tcc_tb.vhd|
-Z137 !s107 ../hdl/test/tcc_tb.vhd|
+R144
+Z150 !s90 -reportprogress|300|-2008|../hdl/test/tcc_tb.vhd|
+Z151 !s107 ../hdl/test/tcc_tb.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_tb
-R80
-Z138 DEx4 work 14 tcc_top_master 0 22 @8J6giJTf`J6_;HMC4;L43
-R95
-R96
+R88
+Z152 DEx4 work 14 tcc_top_master 0 22 Qa_[N2c95RE`g:DJocjAP1
+R103
+R104
 R2
 R3
 DEx4 work 6 tcc_tb 0 22 h9;0[WXO>W1D4`;PzUe_M3
-!i122 25
+!i122 150
 l89
 L11 210
-VVEXKa]8PET>RUzTKZa]@E1
-!s100 ^llaXdjm32C@4A;27?CKH1
+V1SL@4Rb8dFoQXR=iDAfO[2
+!s100 n>HEmX>XGJAfIPRoEH`H@1
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R136
-R137
+R144
+R150
+R151
 !i113 0
 R11
 R12
 Etcc_top_master
-Z139 w1693751904
-R95
-R96
+Z153 w1693762131
+R103
+R104
 R2
 R3
-!i122 23
+!i122 148
 R0
-Z140 8../hdl/tcc_top_master.vhd
-Z141 F../hdl/tcc_top_master.vhd
+Z154 8../hdl/tcc_top_master.vhd
+Z155 F../hdl/tcc_top_master.vhd
 l0
 L8 1
-V@8J6giJTf`J6_;HMC4;L43
-!s100 l`jn`dHD]I2dDEfOXWndg1
+VQa_[N2c95RE`g:DJocjAP1
+!s100 1cCjO;4jR0]EX>C7:oLOa1
 R6
 33
-R99
+R107
 !i10b 1
-R100
-Z142 !s90 -reportprogress|300|-2008|../hdl/tcc_top_master.vhd|
-Z143 !s107 ../hdl/tcc_top_master.vhd|
+R144
+Z156 !s90 -reportprogress|300|-2008|../hdl/tcc_top_master.vhd|
+Z157 !s107 ../hdl/tcc_top_master.vhd|
 !i113 0
 R11
 R12
 Aarch_tcc_top_master
-R105
-R122
-R95
-R96
+R113
+R135
+R103
+R104
 R2
 R3
-R138
-!i122 23
-l75
-L60 100
-VU9d7R`S]2h1jjXjnooY:G1
-!s100 Kgm3jf?[U?a^FIb7DAdVZ3
+R152
+!i122 148
+l73
+Z158 L60 97
+V0j`lhLl[oQcU:U4Sbb]:63
+!s100 mN]_Qj=3Sgi3f6M]azY]12
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R142
-R143
+R144
+R156
+R157
 !i113 0
 R11
 R12
 Etg_group
-Z144 w1693087472
-Z145 DPx4 work 9 tg_tm_pkg 0 22 Y6agi:1KT]g31f1oN?1QE1
-R95
+Z159 w1693087472
+Z160 DPx4 work 9 tg_tm_pkg 0 22 Y6agi:1KT]g31f1oN?1QE1
+R103
 R2
 R3
-!i122 32
+!i122 157
 R0
-Z146 8../hdl/test_tg/tg_group.vhd
-Z147 F../hdl/test_tg/tg_group.vhd
+Z161 8../hdl/test/test_tg/tg_group.vhd
+Z162 F../hdl/test/test_tg/tg_group.vhd
 l0
 L32 1
 V<z74bX=NBKHTH7?_:9Wd:0
 !s100 OeVk]ZCo[1_ZoSfSnoXM]2
 R6
 33
-Z148 !s110 1693759796
+R107
 !i10b 1
-Z149 !s108 1693759796.000000
-Z150 !s90 -reportprogress|300|-2008|../hdl/test_tg/tg_group.vhd|
-Z151 !s107 ../hdl/test_tg/tg_group.vhd|
+R144
+Z163 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tg_group.vhd|
+Z164 !s107 ../hdl/test/test_tg/tg_group.vhd|
 !i113 0
 R11
 R12
 Abehavioral
-R145
-R95
+R160
+R103
 R2
 R3
 DEx4 work 8 tg_group 0 22 <z74bX=NBKHTH7?_:9Wd:0
-!i122 32
+!i122 157
 l95
 L55 92
 VcFe`5Jn>B>SAFIOzTHo;e2
 !s100 hjHKSVgARFYSDd>7C_SW80
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R150
-R151
+R144
+R163
+R164
 !i113 0
 R11
 R12
 Etg_me
-R144
+R159
 R24
-Z152 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z165 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
 R2
 R3
-!i122 28
+!i122 153
 R0
-Z153 8../hdl/test_tg/tg_me.vhd
-Z154 F../hdl/test_tg/tg_me.vhd
+Z166 8../hdl/test/test_tg/tg_me.vhd
+Z167 F../hdl/test/test_tg/tg_me.vhd
 l0
 L6 1
 Vm1CHmEL5ca59O6T0TO0Y]2
 !s100 ]d7?iiI@Uh^3L[R7@aW240
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z155 !s90 -reportprogress|300|-2008|../hdl/test_tg/tg_me.vhd|
-Z156 !s107 ../hdl/test_tg/tg_me.vhd|
+R144
+Z168 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tg_me.vhd|
+Z169 !s107 ../hdl/test/test_tg/tg_me.vhd|
 !i113 0
 R11
 R12
 Abehavioral
 R24
-R152
+R165
 R2
 R3
 DEx4 work 5 tg_me 0 22 m1CHmEL5ca59O6T0TO0Y]2
-!i122 28
+!i122 153
 l42
 L25 186
 V`<B>5GFgjScYYi;n8Uai63
 !s100 F[>DBKgkjd`32<h7Aa2:i1
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R155
-R156
+R144
+R168
+R169
 !i113 0
 R11
 R12
 Etg_mo
-R144
+R159
 R24
-R152
+R165
 R2
 R3
-!i122 27
+!i122 152
 R0
-Z157 8../hdl/test_tg/tg_mo.vhd
-Z158 F../hdl/test_tg/tg_mo.vhd
+Z170 8../hdl/test/test_tg/tg_mo.vhd
+Z171 F../hdl/test/test_tg/tg_mo.vhd
 l0
 L6 1
 VM>VR4MbeRDIc=kf<ZY4bn2
 !s100 BGh9zY_n_eJY]Q^03`[YT3
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z159 !s90 -reportprogress|300|-2008|../hdl/test_tg/tg_mo.vhd|
-Z160 !s107 ../hdl/test_tg/tg_mo.vhd|
+R144
+Z172 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tg_mo.vhd|
+Z173 !s107 ../hdl/test/test_tg/tg_mo.vhd|
 !i113 0
 R11
 R12
 Abehavioral
 R24
-R152
+R165
 R2
 R3
-Z161 DEx4 work 5 tg_mo 0 22 M>VR4MbeRDIc=kf<ZY4bn2
-!i122 27
+Z174 DEx4 work 5 tg_mo 0 22 M>VR4MbeRDIc=kf<ZY4bn2
+!i122 152
 l41
 L25 169
 VO^3eCeCzoXb9iP15R83JN0
 !s100 c7^]MIgOPz4Sa1Z?ZoebA2
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R159
-R160
+R144
+R172
+R173
 !i113 0
 R11
 R12
 Etg_tb
-Z162 w1693602721
-R145
-R95
-R96
+Z175 w1693760494
+R160
+R103
+R104
 R2
 R3
-!i122 33
+!i122 158
 R0
-Z163 8../hdl/test_tg/tg_tb.vhd
-Z164 F../hdl/test_tg/tg_tb.vhd
+Z176 8../hdl/test/test_tg/tg_tb.vhd
+Z177 F../hdl/test/test_tg/tg_tb.vhd
 l0
 L9 1
 V<HOEVOBL^Xn8kCIi5IG=C3
 !s100 9XYadGBQe3b?4A_=Wz0c90
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z165 !s90 -reportprogress|300|-2008|../hdl/test_tg/tg_tb.vhd|
-Z166 !s107 ../hdl/test_tg/tg_tb.vhd|
+R144
+Z178 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tg_tb.vhd|
+Z179 !s107 ../hdl/test/test_tg/tg_tb.vhd|
 !i113 0
 R11
 R12
 Artl
-R80
+R88
 R24
-R152
-R161
-R145
-R95
-R96
+R165
+R174
+R160
+R103
+R104
 R2
 R3
-DEx4 work 5 tg_tb 0 22 <HOEVOBL^Xn8kCIi5IG=C3
-!i122 33
+Z180 DEx4 work 5 tg_tb 0 22 <HOEVOBL^Xn8kCIi5IG=C3
+!i122 158
 l53
-L12 118
-VM6QV7^Olh;`NJNM@Q2^8H0
-!s100 eKCKheGHH_fh3hMR3>`TJ2
+Z181 L12 118
+Z182 Vl]ofP70W3M4i1Ln<<^`8`0
+Z183 !s100 AfBk3H[THG4LEQKLD[`[Q1
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R165
-R166
+R144
+R178
+R179
 !i113 0
 R11
 R12
 Ptg_tm_pkg
-R95
+R103
 R2
 R3
-!i122 26
-R144
+!i122 151
+R159
 R0
-Z167 8../hdl/test_tg/xina_tg_tm.vhd
-Z168 F../hdl/test_tg/xina_tg_tm.vhd
+Z184 8../hdl/test/test_tg/xina_tg_tm.vhd
+Z185 F../hdl/test/test_tg/xina_tg_tm.vhd
 l0
 L5 1
 VY6agi:1KT]g31f1oN?1QE1
 !s100 >5C05RGm=>7Bi@>LFgnLB1
 R6
 33
-R99
+R107
 !i10b 1
-R100
-Z169 !s90 -reportprogress|300|-2008|../hdl/test_tg/xina_tg_tm.vhd|
-Z170 !s107 ../hdl/test_tg/xina_tg_tm.vhd|
+R144
+Z186 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/xina_tg_tm.vhd|
+Z187 !s107 ../hdl/test/test_tg/xina_tg_tm.vhd|
 !i113 0
 R11
 R12
 Etm_group
-R144
-R145
-R95
+R159
+R160
+R103
 R2
 R3
-!i122 31
+!i122 156
 R0
-Z171 8../hdl/test_tg/tm_group.vhd
-Z172 F../hdl/test_tg/tm_group.vhd
+Z188 8../hdl/test/test_tg/tm_group.vhd
+Z189 F../hdl/test/test_tg/tm_group.vhd
 l0
 L10 1
 V0ARzChD;1l1Z;?[3g`be>1
 !s100 Gdm3z>j?VBhNiie@Y@TXb1
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z173 !s90 -reportprogress|300|-2008|../hdl/test_tg/tm_group.vhd|
-Z174 !s107 ../hdl/test_tg/tm_group.vhd|
+R144
+Z190 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tm_group.vhd|
+Z191 !s107 ../hdl/test/test_tg/tm_group.vhd|
 !i113 0
 R11
 R12
 Abehavioral
-R145
-R95
+R160
+R103
 R2
 R3
 DEx4 work 8 tm_group 0 22 0ARzChD;1l1Z;?[3g`be>1
-!i122 31
+!i122 156
 l76
 L31 100
 VRba7z`B=JmE5UgjoM3:E23
 !s100 2[lN8iEi:]JCEhGi;9eej3
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R173
-R174
+R144
+R190
+R191
 !i113 0
 R11
 R12
 Etm_me
-R144
+R159
 R24
-R152
+R165
 R2
 R3
-!i122 29
+!i122 154
 R0
-Z175 8../hdl/test_tg/tm_me.vhd
-Z176 F../hdl/test_tg/tm_me.vhd
+Z192 8../hdl/test/test_tg/tm_me.vhd
+Z193 F../hdl/test/test_tg/tm_me.vhd
 l0
 L6 1
 V`42lB=n4d;`H0^TZnlaOO0
 !s100 I8KBzA;ZPoO7fkOEX;gd70
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z177 !s90 -reportprogress|300|-2008|../hdl/test_tg/tm_me.vhd|
-Z178 !s107 ../hdl/test_tg/tm_me.vhd|
+R144
+Z194 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tm_me.vhd|
+Z195 !s107 ../hdl/test/test_tg/tm_me.vhd|
 !i113 0
 R11
 R12
 Abehavioral
 R24
-R152
+R165
 R2
 R3
 DEx4 work 5 tm_me 0 22 `42lB=n4d;`H0^TZnlaOO0
-!i122 29
+!i122 154
 l52
 L28 244
 V8@?[U8RCH7Nz`@@zjKn5Z3
 !s100 4B<g`12^]eKnWJ>0^6?DG1
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R177
-R178
+R144
+R194
+R195
 !i113 0
 R11
 R12
 Etm_mo
-R144
+R159
 R24
-R152
+R165
 R2
 R3
-!i122 30
+!i122 155
 R0
-Z179 8../hdl/test_tg/tm_mo.vhd
-Z180 F../hdl/test_tg/tm_mo.vhd
+Z196 8../hdl/test/test_tg/tm_mo.vhd
+Z197 F../hdl/test/test_tg/tm_mo.vhd
 l0
 L6 1
 V0B4zF?dHj>oSRP8YEK5Wc3
 !s100 5bFFn3z4?cXLNA_JIdeI@0
 R6
 33
-R148
+R107
 !i10b 1
-R149
-Z181 !s90 -reportprogress|300|-2008|../hdl/test_tg/tm_mo.vhd|
-Z182 !s107 ../hdl/test_tg/tm_mo.vhd|
+R144
+Z198 !s90 -reportprogress|300|-2008|../hdl/test/test_tg/tm_mo.vhd|
+Z199 !s107 ../hdl/test/test_tg/tm_mo.vhd|
 !i113 0
 R11
 R12
 Abehavioral
 R24
-R152
+R165
 R2
 R3
 DEx4 work 5 tm_mo 0 22 0B4zF?dHj>oSRP8YEK5Wc3
-!i122 30
+!i122 155
 l52
 L28 220
 VXEQLf]hn`5b:4l4]F=4md1
 !s100 f3`=PZba2RR80hRdX1nYH0
 R6
 33
-R148
+R107
 !i10b 1
-R149
-R181
-R182
+R144
+R198
+R199
 !i113 0
 R11
 R12
 Exina
-Z183 w1693596653
-R95
+Z200 w1693596653
+R103
 R2
 R3
-!i122 15
+!i122 119
 R0
-Z184 8../hdl/dependencies/xina/rtl/xina.vhd
-Z185 F../hdl/dependencies/xina/rtl/xina.vhd
+Z201 8../hdl/dependencies/xina/rtl/xina.vhd
+Z202 F../hdl/dependencies/xina/rtl/xina.vhd
 l0
 L29 1
 V3M[dnGK42la<EDM3_ez4l2
 !s100 8Y:jViA8>S1DFGmD8Vb7a0
 R6
 33
-R76
+R35
 !i10b 1
-R77
-Z186 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/xina.vhd|
-Z187 !s107 ../hdl/dependencies/xina/rtl/xina.vhd|
+R36
+Z203 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/rtl/xina.vhd|
+Z204 !s107 ../hdl/dependencies/xina/rtl/xina.vhd|
 !i113 0
 R11
 R12
 Artl
-R80
-R95
+R88
+R103
 R2
 R3
-Z188 DEx4 work 4 xina 0 22 3M[dnGK42la<EDM3_ez4l2
-!i122 15
+Z205 DEx4 work 4 xina 0 22 3M[dnGK42la<EDM3_ez4l2
+!i122 119
 l77
-L60 97
+R158
 V^PiS`nD0iG[^fWk60IWC71
 !s100 mY9JWeB8edID8508d``j]3
 R6
 33
-R76
+R35
 !i10b 1
-R77
-R186
-R187
+R36
+R203
+R204
 !i113 0
 R11
 R12
 Pxina_pkg
 R2
 R3
-!i122 15
-R183
+!i122 119
+R200
 R0
-R184
-R185
+R201
+R202
 l0
 L4 1
 VT_fRIdFRnglJeUcVQWj1W0
 !s100 IO422VlD8Sc8IYe?7b5HX1
 R6
 33
-R76
+R35
 !i10b 1
-R77
-R186
-R187
+R36
+R203
+R204
 !i113 0
 R11
 R12
 Exina_tb
 R1
-R95
+R103
 R2
 R3
-!i122 16
+!i122 120
 R0
-Z189 8../hdl/dependencies/xina/tb/xina_tb.vhd
-Z190 F../hdl/dependencies/xina/tb/xina_tb.vhd
+Z206 8../hdl/dependencies/xina/tb/xina_tb.vhd
+Z207 F../hdl/dependencies/xina/tb/xina_tb.vhd
 l0
 L6 1
 V8`F5aBO:_Mbj?8Q`5hY2l3
 !s100 hNCPjT^2S;X`;33bOkFXk2
 R6
 33
-R76
+R35
 !i10b 1
-R77
-Z191 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/tb/xina_tb.vhd|
-Z192 !s107 ../hdl/dependencies/xina/tb/xina_tb.vhd|
+R36
+Z208 !s90 -reportprogress|300|-2008|../hdl/dependencies/xina/tb/xina_tb.vhd|
+Z209 !s107 ../hdl/dependencies/xina/tb/xina_tb.vhd|
 !i113 0
 R11
 R12
 Atb
-R188
-R95
+R205
+R103
 R2
 R3
 DEx4 work 7 xina_tb 0 22 8`F5aBO:_Mbj?8Q`5hY2l3
-!i122 16
+!i122 120
 l38
 L25 41
 V4IZ3mIE=29Hm<?L255G@h3
 !s100 nfYdOVgdo;;O9M_UijbJM2
 R6
 33
-R76
+R35
 !i10b 1
-R77
-R191
-R192
+R36
+R208
+R209
 !i113 0
 R11
 R12
 Exina_tg_tm
-R144
-R145
-R95
+R159
+R160
+R103
 R24
 R2
 R3
-!i122 26
+!i122 151
 R0
-R167
-R168
+R184
+R185
 l0
 L17 1
 V7h^h]akf[QAUMMn@2CXPS1
 !s100 g[530NSQlUHVj<DUUcB^22
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R169
-R170
+R144
+R186
+R187
 !i113 0
 R11
 R12
 Abehavioral
-R188
-R145
-R95
+R205
+R160
+R103
 R24
 R2
 R3
 DEx4 work 10 xina_tg_tm 0 22 7h^h]akf[QAUMMn@2CXPS1
-!i122 26
+!i122 151
 l178
 L53 308
 V1HjJI4z_kc8kobb_D]BnX0
 !s100 25=`;nD4;5Sj@IfJe[GY=0
 R6
 33
-R99
+R107
 !i10b 1
-R100
-R169
-R170
+R144
+R186
+R187
 !i113 0
 R11
 R12

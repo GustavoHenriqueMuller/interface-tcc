@@ -26,7 +26,7 @@ architecture arch_tcc_tb of tcc_tb is
         -- Write data signals.
         signal t_WVALID : std_logic := '0';
         signal t_WREADY : std_logic := '0';
-        signal t_WDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t_WDATA  : std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
         signal t_WLAST  : std_logic := '0';
 
         -- Write response signals.
@@ -46,43 +46,43 @@ architecture arch_tcc_tb of tcc_tb is
         -- Read data signals.
         signal t_RVALID : std_logic := '0';
         signal t_RREADY : std_logic := '0';
-        signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RDATA  : std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between backend and XINA router.
-    signal t_l_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
     signal t_l_in_ack_o  : std_logic;
-    signal t_l_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_l_out_data_o: std_logic_vector(data_width_c downto 0);
     signal t_l_out_val_o : std_logic;
     signal t_l_out_ack_i : std_logic;
 
-    signal t_n_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_n_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_n_in_val_i  : std_logic;
     signal t_n_in_ack_o  : std_logic;
-    signal t_n_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_n_out_data_o: std_logic_vector(data_width_c downto 0);
     signal t_n_out_val_o : std_logic;
     signal t_n_out_ack_i : std_logic;
 
-    signal t_e_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_e_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_e_in_val_i  : std_logic;
     signal t_e_in_ack_o  : std_logic;
-    signal t_e_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_e_out_data_o: std_logic_vector(data_width_c downto 0);
     signal t_e_out_val_o : std_logic;
     signal t_e_out_ack_i : std_logic;
 
-    signal t_s_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_s_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_s_in_val_i  : std_logic;
     signal t_s_in_ack_o  : std_logic;
-    signal t_s_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_s_out_data_o: std_logic_vector(data_width_c downto 0);
     signal t_s_out_val_o : std_logic;
     signal t_s_out_ack_i : std_logic;
 
-    signal t_w_in_data_i : std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_w_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_w_in_val_i  : std_logic;
     signal t_w_in_ack_o  : std_logic;
-    signal t_w_out_data_o: std_logic_vector(c_DATA_WIDTH downto 0);
+    signal t_w_out_data_o: std_logic_vector(data_width_c downto 0);
     signal t_w_out_val_o : std_logic;
     signal t_w_out_ack_i : std_logic;
 
