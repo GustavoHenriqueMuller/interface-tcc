@@ -39,4 +39,47 @@ sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_READ_BUFFER \
 sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_BUFFER_FIFO/fifo/ring/fifo_r
+sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_BUFFER_FIFO/data_o
+
+add wave -position insertpoint  \
+sim:/tcc_tb/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_BUFFER_FIFO/fifo/shift/fifo_r
+
+add wave -position insertpoint  \
+sim:/tcc_tb/t_l_in_data_i \
+sim:/tcc_tb/t_l_in_val_i \
+sim:/tcc_tb/t_l_in_ack_o \
+sim:/tcc_tb/t_l_out_data_o \
+sim:/tcc_tb/t_l_out_val_o \
+sim:/tcc_tb/t_l_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tcc_tb/t_n_in_data_i \
+sim:/tcc_tb/t_n_in_val_i \
+sim:/tcc_tb/t_n_in_ack_o \
+sim:/tcc_tb/t_n_out_data_o \
+sim:/tcc_tb/t_n_out_val_o \
+sim:/tcc_tb/t_n_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tcc_tb/t_e_in_data_i \
+sim:/tcc_tb/t_e_in_val_i \
+sim:/tcc_tb/t_e_in_ack_o \
+sim:/tcc_tb/t_e_out_data_o \
+sim:/tcc_tb/t_e_out_val_o \
+sim:/tcc_tb/t_e_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tcc_tb/t_s_in_data_i \
+sim:/tcc_tb/t_s_in_val_i \
+sim:/tcc_tb/t_s_in_ack_o \
+sim:/tcc_tb/t_s_out_data_o \
+sim:/tcc_tb/t_s_out_val_o \
+sim:/tcc_tb/t_s_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tcc_tb/t_w_in_data_i \
+sim:/tcc_tb/t_w_in_val_i \
+sim:/tcc_tb/t_w_in_ack_o \
+sim:/tcc_tb/t_w_out_data_o \
+sim:/tcc_tb/t_w_out_val_o \
+sim:/tcc_tb/t_w_out_ack_i

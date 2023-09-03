@@ -14,6 +14,7 @@ entity tcc_backend_master_send_control is
         -- Buffer signals.
         i_READ_OK_BUFFER: in std_logic;
 		o_READ_BUFFER: out std_logic;
+        o_ENABLE_REG_BUFFER_DATA_OUT: out std_logic;
 
         -- XINA signals.
         l_in_val_i: out std_logic;
@@ -71,6 +72,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
-    l_in_val_i  <= '1' when (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE) else '0';
+    l_in_val_i <= '1' when (r_CURRENT_STATE = S_IDLE and i_READ_OK_BUFFER = '1') or
+                           (r_CURRENT_STATE = S_WAITING_FOR_ACK_TO_ONE) else '0';
 
 end arch_tcc_backend_master_send_control;
