@@ -93,6 +93,8 @@ begin
         end case;
     end process;
 
+    -- @TODO: FAZER COM QUE O PRIMEIRO FLIT SEJA O ENDEREÇO.
+
     ---------------------------------------------------------------------------------------------
     -- Output values.
     o_FLIT_SELECTOR <= "00" when (r_CURRENT_STATE = S_HEADER_1) else

@@ -36,6 +36,11 @@ end tcc_backend_master;
 architecture arch_tcc_backend_master of tcc_backend_master is
     signal w_ARESET: std_logic;
 
+    -- Routing table.
+    signal w_OPERATION_ADDR: std_logic_vector(c_ADDR_WIDTH / 2);
+    signal w_DEST_X: std_logic_vector(c_ADDR_WIDTH / 2);
+    signal w_DEST_Y: std_logic_vector(c_ADDR_WIDTH / 2);
+
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_SELECTOR: std_logic_vector(1 downto 0);
@@ -61,17 +66,30 @@ begin
             o_READY         => o_READY
         );
 
+    u_TCC_BACKEND_MASTER_ROUTING_TABLE: entity work.tcc_backend_master_routing_table
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            i_ADDR  => i_ADDR,
+            o_OPERATION_ADDR => w_OPERATION_ADDR,
+            o_DEST_X => w_DEST_X,
+            o_DEST_Y => w_DEST_Y
+        );
+
     u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH: entity work.tcc_backend_master_packetizer_datapath
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
             i_OPC    => i_OPC,
-            i_ADDR   => i_ADDR,
             i_BURST  => i_BURST,
             i_LENGTH => i_LENGTH,
             i_ID     => i_ID,
             i_DATA   => i_DATA,
+            i_OPERATION_ADDR => w_OPERATION_ADDR,
+            i_DEST_X => w_DEST_X,
+            i_DEST_Y => w_DEST_Y,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
 
             o_FLIT  => w_FLIT
