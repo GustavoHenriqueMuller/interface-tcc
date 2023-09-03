@@ -190,7 +190,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Reset.
-    process (all)
+    process
     begin
         t_RESET <= not t_RESETn;
     end process;
@@ -199,41 +199,22 @@ begin
     -- Tests.
     process
     begin
-        wait for 100 ns;
-
         -- Simple write transaction.
         t_AWVALID <= '1';
         t_AWADDR <= "10101010";
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
 
-        if t_AWREADY /= '1' then
-            wait until t_AWREADY = '1';
-        end if;
+        wait on t_ACLK until t_ACLK = '1' and t_AWREADY = '1';
 
-        -- First transfer.
-        wait until t_ACLK = '1';
         t_AWVALID <= '0';
-
         t_WVALID <= '1';
-        t_WDATA <= "00001111000011110000111100001111";
-
-        if t_WREADY /= '1' then
-            wait until t_WREADY = '1';
-        end if;
-
-        -- Second (last) transfer.
-        wait until t_ACLK = '1';
-        t_WVALID <= '1';
-        t_WDATA <= "01010101010101010101010101010101";
+        t_WDATA <= "bc1qzk3kxhdxnzkpdgdn9ueg34y08smxgfv0hxvcu3";
         t_WLAST <= '1';
 
-        if t_WREADY /= '1' then
-            wait until t_WREADY = '1';
-        end if;
-
-        wait until t_ACLK = '1';
+        wait on t_ACLK until t_ACLK = '1' and t_WREADY = '1';
+        t_WDATA <= "00000000000000000000000000000000";
         t_WVALID <= '0';
-        t_WLAST <= '0';
     end process;
+
 end arch_tcc_tb;
