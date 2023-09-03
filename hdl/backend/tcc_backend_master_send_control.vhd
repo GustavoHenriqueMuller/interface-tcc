@@ -11,8 +11,8 @@ entity tcc_backend_master_send_control is
         ACLK   : in std_logic;
         ARESETn: in std_logic;
 
-        -- Backend signals.
-        i_VALID      : in std_logic;
+        -- Buffer signals.
+        i_READ_OK_BUFFER: in std_logic;
 		o_READ_BUFFER: out std_logic;
 
         -- XINA signals.
@@ -40,10 +40,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_VALID, l_in_ack_o)
+    process (ACLK, i_READ_OK_BUFFER, l_in_ack_o)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_VALID = '1') then
+            when S_IDLE => if (i_READ_OK_BUFFER = '1') then
                                r_NEXT_STATE <= S_WAITING_FOR_ACK_TO_ONE;
                            else
                                r_NEXT_STATE <= S_IDLE;

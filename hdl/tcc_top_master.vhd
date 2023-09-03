@@ -70,6 +70,7 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     signal w_BACKEND_READY_OUT: std_logic;
+    signal w_BACKEND_READY_START_PACKET_OUT: std_logic;
 
 begin
     u_TCC_FRONTEND_MASTER: entity work.tcc_frontend_master
@@ -117,7 +118,6 @@ begin
             -- Backend signals.
             i_BACKEND_READY => w_BACKEND_READY_OUT,
 
-            o_BACKEND_START_PACKET => w_BACKEND_START_PACKET_IN,
             o_BACKEND_VALID => w_BACKEND_VALID_IN,
             o_BACKEND_LAST => w_BACKEND_LAST_IN,
             o_BACKEND_OPC => w_BACKEND_OPC_IN,
@@ -145,6 +145,7 @@ begin
 			i_DATA   => w_BACKEND_DATA_IN,
 
 			o_READY  => w_BACKEND_READY_OUT,
+            o_READY_START_PACKET => w_BACKEND_READY_START_PACKET_OUT,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

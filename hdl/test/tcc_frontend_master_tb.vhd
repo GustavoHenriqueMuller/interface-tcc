@@ -132,15 +132,16 @@ begin
         t_AW_ID <= "00001";
         t_AWLEN <= "00000001";
 
-        wait on t_ACLK until t_ACLK = '1' and t_AWREADY = '1';
+        wait until rising_edge(t_ACLK) and t_AWREADY = '1';
 
         t_AWVALID <= '0';
         t_WVALID <= '1';
         t_WDATA <= "10101010101010101010101010101010";
         t_WLAST <= '1';
 
-        wait on t_ACLK until t_ACLK = '1' and t_WREADY = '1';
+        wait until rising_edge(t_ACLK) and t_WREADY = '1';
         t_WDATA <= "00000000000000000000000000000000";
         t_WVALID <= '0';
     end process;
+
 end arch_tcc_frontend_master_tb;

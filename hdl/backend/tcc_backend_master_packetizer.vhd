@@ -18,7 +18,6 @@ entity tcc_backend_master_packetizer is
 		i_LENGTH: in std_logic_vector(7 downto 0);
 		i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
-        i_START_PACKET   : in std_logic;
         i_VALID          : in std_logic;
         i_LAST           : in std_logic;
         i_WRITE_OK_BUFFER: in std_logic;
@@ -51,10 +50,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_START_PACKET, i_WRITE_OK_BUFFER, i_VALID, i_LAST)
+    process (ACLK, i_WRITE_OK_BUFFER, i_VALID, i_LAST)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_START_PACKET = '1') then
+            when S_IDLE => if (i_VALID = '1') then
                                r_NEXT_STATE <= S_HEADER_1;
                            else
                                r_NEXT_STATE <= S_IDLE;
@@ -74,13 +73,17 @@ begin
                                            r_NEXT_STATE <= S_HEADER_2_WAIT_OK;
                                        end if;
 
-            when S_PAYLOAD => if (i_VALID = '1' and i_LAST = '1') then
+            when S_PAYLOAD => if (i_VALID = '1') then
                                  r_NEXT_STATE <= S_PAYLOAD_WAIT_OK;
                               else
                                  r_NEXT_STATE <= S_PAYLOAD;
                               end if;
             when S_PAYLOAD_WAIT_OK => if (i_WRITE_OK_BUFFER = '1') then
-                                          r_NEXT_STATE <= S_PAYLOAD;
+                                          if (i_LAST = '1') then
+                                            r_NEXT_STATE <= S_TRAILER;
+                                          else
+                                            r_NEXT_STATE <= S_PAYLOAD;
+                                          end if;
                                       else
                                           r_NEXT_STATE <= S_PAYLOAD_WAIT_OK;
                                       end if;
@@ -98,19 +101,19 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-    o_FLIT <= '1' & "1111111111111111" & "1111111111111111" when (r_CURRENT_STATE = S_HEADER_1_WAIT_OK) else
-              '0' & "1100110011001100" & "1100110011001100" when (r_CURRENT_STATE = S_HEADER_2_WAIT_OK) else
-              '0' & i_DATA when (r_CURRENT_STATE = S_PAYLOAD_WAIT_OK) else
-              '1' & "10101010101010101010101010101010" when (r_CURRENT_STATE = S_TRAILER_WAIT_OK) else
+    o_FLIT <= '1' & "1111111111111111" & "1111111111111111" when (r_CURRENT_STATE = S_HEADER_1) else
+              '0' & "1100110011001100" & "1100110011001100" when (r_CURRENT_STATE = S_HEADER_2) else
+              '0' & i_DATA when (r_CURRENT_STATE = S_PAYLOAD) else
+              '1' & "10101010101010101010101010101010" when (r_CURRENT_STATE = S_TRAILER) else
               (data_width_c downto 0 => '0');
-
-              -- @TODO: Mudar código acima.
 
     o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
                                (r_CURRENT_STATE = S_PAYLOAD and i_VALID = '1') or
-                               (r_CURRENT_STATE = S_TRAILER) else '0';
+                               (r_CURRENT_STATE  = S_TRAILER) else '0';
 
-    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE or r_CURRENT_STATE = S_PAYLOAD) else '0';
+    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE) or
+                        (r_NEXT_STATE = S_PAYLOAD)
+                        else '0';
 
 end arch_tcc_backend_master_packetizer;

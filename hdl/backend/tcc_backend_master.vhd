@@ -22,6 +22,7 @@ entity tcc_backend_master is
 		i_DATA        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 		o_READY : out std_logic;
+        o_READY_START_PACKET: out std_logic;
 
         -- XINA signals.
         l_in_data_i  : out std_logic_vector(c_DATA_WIDTH downto 0);
@@ -57,7 +58,6 @@ begin
             i_LENGTH => i_LENGTH,
             i_DATA   => i_DATA,
 
-            i_START_PACKET => i_START_PACKET,
             i_VALID  => i_VALID,
             i_LAST   => i_LAST,
             i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
@@ -90,7 +90,7 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_VALID  => w_READ_OK_BUFFER,
+            i_READ_OK_BUFFER  => w_READ_OK_BUFFER,
             o_READ_BUFFER  => w_READ_BUFFER,
 
             l_in_val_i  => l_in_val_i,
