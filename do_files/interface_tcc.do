@@ -11,7 +11,7 @@ vcom -2008 ../hdl/master/frontend/tcc_frontend_master.vhd
 vcom -2008 ../hdl/master/backend/tcc_backend_master_routing_table.vhd
 vcom -2008 ../hdl/master/backend/tcc_backend_master_packetizer_control.vhd
 vcom -2008 ../hdl/master/backend/tcc_backend_master_packetizer_datapath.vhd
-vcom -2008 ../hdl/master/backend/tcc_backend_master_send_control.vhd
+vcom -2008 ../hdl/master/backend/tcc_backend_master_flow_control.vhd
 vcom -2008 ../hdl/master/backend/tcc_backend_master.vhd
 
 vcom -2008 ../hdl/master/tcc_top_master.vhd

@@ -52,6 +52,17 @@ architecture arch_tcc_backend_master of tcc_backend_master is
     signal w_READ_OK_BUFFER : std_logic;
 
 begin
+    u_TCC_BACKEND_MASTER_ROUTING_TABLE: entity work.tcc_backend_master_routing_table
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            i_ADDR  => i_ADDR,
+            o_OPERATION_ADDR => w_OPERATION_ADDR,
+            o_DEST_X => w_DEST_X,
+            o_DEST_Y => w_DEST_Y
+        );
+
     u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL: entity work.tcc_backend_master_packetizer_control
         port map(
             ACLK    => ACLK,
@@ -64,17 +75,6 @@ begin
             o_FLIT_SELECTOR => w_FLIT_SELECTOR,
             o_WRITE_BUFFER  => w_WRITE_BUFFER,
             o_READY         => o_READY
-        );
-
-    u_TCC_BACKEND_MASTER_ROUTING_TABLE: entity work.tcc_backend_master_routing_table
-        port map(
-            ACLK    => ACLK,
-            ARESETn => ARESETn,
-
-            i_ADDR  => i_ADDR,
-            o_OPERATION_ADDR => w_OPERATION_ADDR,
-            o_DEST_X => w_DEST_X,
-            o_DEST_Y => w_DEST_Y
         );
 
     u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH: entity work.tcc_backend_master_packetizer_datapath
@@ -114,7 +114,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_TCC_BACKEND_MASTER_SEND_CONTROL: entity work.tcc_backend_master_send_control
+    u_TCC_BACKEND_MASTER_FLOW_CONTROL: entity work.tcc_backend_master_flow_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
