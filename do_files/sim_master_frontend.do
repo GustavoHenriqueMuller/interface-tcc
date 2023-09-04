@@ -1,4 +1,4 @@
-vsim -voptargs=+acc work.tb_master_frontend
+vsim -voptargs=+acc -debugDB work.tb_master_frontend
 
 add wave -position insertpoint  \
 sim:/tb_master_frontend/t_ACLK \
