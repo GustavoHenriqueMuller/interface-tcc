@@ -49,16 +49,16 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between front-end and back-end.
-    signal t_BACKEND_VALID_IN  : std_logic;
-    signal t_BACKEND_LAST_IN   : std_logic;
-    signal t_BACKEND_OPC_IN    : std_logic;
-    signal t_BACKEND_ADDR_IN   : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal t_BACKEND_BURST_IN  : std_logic_vector(1 downto 0);
-    signal t_BACKEND_LENGTH_IN : std_logic_vector(7 downto 0);
-    signal t_BACKEND_DATA_IN   : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_BACKEND_ID_IN     : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal t_BACKEND_VALID_IN : std_logic;
+    signal t_BACKEND_LAST_IN  : std_logic;
+    signal t_BACKEND_OPC_IN   : std_logic;
+    signal t_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+    signal t_BACKEND_BURST_IN : std_logic_vector(1 downto 0);
+    signal t_BACKEND_LENGTH_IN: std_logic_vector(7 downto 0);
+    signal t_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal t_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
-    signal t_BACKEND_READY_OUT : std_logic := '1';
+    signal t_BACKEND_READY_OUT: std_logic := '1';
 
 begin
     u_TCC_FRONTEND_MASTER: entity work.tcc_frontend_master
