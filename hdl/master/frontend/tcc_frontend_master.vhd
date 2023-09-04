@@ -86,7 +86,7 @@ begin
             -- Signals to back-end.
             o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_LAST   => o_BACKEND_LAST,
-            o_OPC            => w_OPERATION
+            o_OPC            => w_OPC
         );
 
     u_TCC_FRONTEND_MASTER_DATA_MULTIPLEXER: entity work.tcc_frontend_master_data_multiplexer
