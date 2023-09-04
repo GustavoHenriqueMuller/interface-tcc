@@ -57,10 +57,10 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_ADDR  => i_ADDR,
+            i_ADDR     => i_ADDR,
             o_OPC_ADDR => w_OPC_ADDR,
-            o_DEST_X => w_DEST_X,
-            o_DEST_Y => w_DEST_Y
+            o_DEST_X   => w_DEST_X,
+            o_DEST_Y   => w_DEST_Y
         );
 
     u_BACKEND_MASTER_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
@@ -97,7 +97,7 @@ begin
 
     u_BUFFER_FIFO: entity work.buffering
         generic map(
-            data_width_p => data_width_c + 1,
+            data_width_p => c_FLIT_WIDTH,
             buffer_depth_p => 4,
             mode_p => 1
         )

@@ -1,0 +1,1 @@
+vsim -voptargs=+acc -debugDB work.tb_master_reception_write
