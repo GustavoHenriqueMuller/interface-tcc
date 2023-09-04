@@ -20,13 +20,13 @@ architecture arch_tb_master_injection_write of tb_master_injection_write is
         signal t_AW_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_AWSIZE : std_logic_vector(2 downto 0) := "101";
+        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
         signal t_AWBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Write data signals.
         signal t_WVALID : std_logic := '0';
         signal t_WREADY : std_logic := '0';
-        signal t_WDATA  : std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
+        signal t_WDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_WLAST  : std_logic := '0';
 
         -- Write response signals.
@@ -40,13 +40,13 @@ architecture arch_tb_master_injection_write of tb_master_injection_write is
         signal t_AR_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_ARSIZE : std_logic_vector(2 downto 0) := "101";
+        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Read data signals.
         signal t_RVALID : std_logic := '0';
         signal t_RREADY : std_logic := '0';
-        signal t_RDATA  : std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
+        signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 

@@ -13,38 +13,38 @@ entity tcc_frontend_master is
             -- Write request signals.
             AWVALID: in std_logic;
             AWREADY: out std_logic;
-            AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
-            AWLEN  : in std_logic_vector(7 downto 0) := (others => '0');
-            AWSIZE : in std_logic_vector(2 downto 0) := (others => '0');
-            AWBURST: in std_logic_vector(1 downto 0) := (others => '0');
+            AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+            AWLEN  : in std_logic_vector(7 downto 0);
+            AWSIZE : in std_logic_vector(2 downto 0);
+            AWBURST: in std_logic_vector(1 downto 0);
 
             -- Write data signals.
             WVALID : in std_logic;
             WREADY : out std_logic;
-            WDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+            WDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
             WLAST  : in std_logic;
 
             -- Write response signals.
             BVALID : out std_logic;
             BREADY : in std_logic;
-            BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
+            BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0);
 
             -- Read request signals.
             ARVALID: in std_logic;
             ARREADY: out std_logic;
-            AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
-            ARLEN  : in std_logic_vector(7 downto 0) := (others => '0');
-            ARSIZE : in std_logic_vector(2 downto 0) := (others => '0');
-            ARBURST: in std_logic_vector(1 downto 0) := (others => '0');
+            AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+            ARLEN  : in std_logic_vector(7 downto 0);
+            ARSIZE : in std_logic_vector(2 downto 0);
+            ARBURST: in std_logic_vector(1 downto 0);
 
             -- Read data signals.
             RVALID : out std_logic;
             RREADY : in std_logic;
-            RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+            RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
             RLAST  : out std_logic;
-            RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
+            RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0);
 
         -- Backend signals.
         i_BACKEND_READY : in std_logic;
@@ -54,14 +54,14 @@ entity tcc_frontend_master is
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BACKEND_BURST : out std_logic_vector(1 downto 0);
         o_BACKEND_LENGTH: out std_logic_vector(7 downto 0);
-        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
         o_BACKEND_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_BACKEND_OPC: out std_logic
+        o_BACKEND_OPC   : out std_logic;
+        o_BACKEND_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0)
     );
 end tcc_frontend_master;
 
 architecture arch_tcc_frontend_master of tcc_frontend_master is
-    signal w_OPERATION: std_logic;
+    signal w_OPC: std_logic;
 
 begin
     u_TCC_FRONTEND_MASTER_SEND_CONTROL: entity work.tcc_frontend_master_send_control
@@ -86,7 +86,7 @@ begin
             -- Signals to back-end.
             o_BACKEND_VALID  => o_BACKEND_VALID,
             o_BACKEND_LAST   => o_BACKEND_LAST,
-            o_OPERATION      => w_OPERATION
+            o_OPC            => w_OPERATION
         );
 
     u_TCC_FRONTEND_MASTER_DATA_MULTIPLEXER: entity work.tcc_frontend_master_data_multiplexer
@@ -106,22 +106,22 @@ begin
             ARLEN   => ARLEN,
             ARBURST => ARBURST,
 
-            i_OPC => w_OPERATION,
+            i_OPC => w_OPC,
 
             -- Signals to back-end.
-            o_BACKEND_OPC => o_BACKEND_OPC,
-            o_BACKEND_ADDR      => o_BACKEND_ADDR,
-            o_BACKEND_BURST     => o_BACKEND_BURST,
-            o_BACKEND_LENGTH    => o_BACKEND_LENGTH,
-            o_BACKEND_DATA      => o_BACKEND_DATA,
-            o_BACKEND_ID        => o_BACKEND_ID
+            o_BACKEND_OPC    => o_BACKEND_OPC,
+            o_BACKEND_ADDR   => o_BACKEND_ADDR,
+            o_BACKEND_BURST  => o_BACKEND_BURST,
+            o_BACKEND_LENGTH => o_BACKEND_LENGTH,
+            o_BACKEND_DATA   => o_BACKEND_DATA,
+            o_BACKEND_ID     => o_BACKEND_ID
         );
 
     -- @TODO: Os sinais abaixo vão sair de um controlador de receber pacotes do backend.
     -- BVALID : out std_logic;
-    -- BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
+    -- BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0);
     -- RVALID : out std_logic;
-    -- RDATA  : out std_logic_vector(data_width_c - 1 downto 0) := (others => '0');
+    -- RDATA  : out std_logic_vector(data_width_c - 1 downto 0);
     -- RLAST  : out std_logic;
-    -- RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
+    -- RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0);
 end arch_tcc_frontend_master;

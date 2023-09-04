@@ -49,8 +49,9 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between front-end and back-end.
-    signal t_BACKEND_VALID_IN  : std_logic := '0';
-    signal t_BACKEND_OPC_IN    : std_logic := '0';
+    signal t_BACKEND_VALID_IN  : std_logic;
+    signal t_BACKEND_LAST_IN   : std_logic;
+    signal t_BACKEND_OPC_IN    : std_logic;
     signal t_BACKEND_ADDR_IN   : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal t_BACKEND_BURST_IN  : std_logic_vector(1 downto 0);
     signal t_BACKEND_LENGTH_IN : std_logic_vector(7 downto 0);
@@ -105,12 +106,13 @@ begin
             -- Backend signals.
             i_BACKEND_READY  => t_BACKEND_READY_OUT,
 
-            o_BACKEND_OPC    => t_BACKEND_OPC_IN,
+            o_BACKEND_VALID  => t_BACKEND_VALID_IN,
+            o_BACKEND_LAST   => t_BACKEND_LAST_IN,
             o_BACKEND_ADDR   => t_BACKEND_ADDR_IN,
             o_BACKEND_BURST  => t_BACKEND_BURST_IN,
             o_BACKEND_LENGTH => t_BACKEND_LENGTH_IN,
-            o_BACKEND_VALID  => t_BACKEND_VALID_IN,
             o_BACKEND_DATA   => t_BACKEND_DATA_IN,
+            o_BACKEND_OPC    => t_BACKEND_OPC_IN,
             o_BACKEND_ID     => t_BACKEND_ID_IN
         );
 

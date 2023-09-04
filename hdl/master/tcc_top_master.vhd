@@ -2,6 +2,7 @@ library IEEE;
 library work;
 
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
@@ -17,7 +18,7 @@ entity tcc_top_master is
             AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             AWLEN  : in std_logic_vector(7 downto 0) := "00000000";
-            AWSIZE : in std_logic_vector(2 downto 0) := "101"; -- @TODO: Default: data_width_c / 8;
+            AWSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
             AWBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Write data signals.
@@ -37,7 +38,7 @@ entity tcc_top_master is
             AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             ARLEN  : in std_logic_vector(7 downto 0) := "00000000";
-            ARSIZE : in std_logic_vector(2 downto 0) := "101"; -- @TODO: Default: data_width_c / 8;
+            ARSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
             ARBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Read data signals.
@@ -48,12 +49,12 @@ entity tcc_top_master is
             RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
-        l_in_data_i  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        l_in_val_i   : out std_logic;
-        l_in_ack_o   : in std_logic;
-        l_out_data_o : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        l_out_val_o  : in std_logic;
-        l_out_ack_i  : out std_logic
+        l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        l_in_val_i  : out std_logic;
+        l_in_ack_o  : in std_logic;
+        l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        l_out_val_o : in std_logic;
+        l_out_ack_i : out std_logic
     );
 end tcc_top_master;
 
@@ -61,11 +62,11 @@ architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
     signal w_BACKEND_VALID_IN : std_logic;
     signal w_BACKEND_LAST_IN  : std_logic;
-    signal w_BACKEND_OPC_IN   : std_logic;
     signal w_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal w_BACKEND_BURST_IN : std_logic_vector(1 downto 0);
     signal w_BACKEND_LENGTH_IN: std_logic_vector(7 downto 0);
     signal w_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_BACKEND_OPC_IN   : std_logic;
     signal w_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     signal w_BACKEND_READY_OUT: std_logic;
@@ -116,14 +117,14 @@ begin
             -- Backend signals.
             i_BACKEND_READY => w_BACKEND_READY_OUT,
 
-            o_BACKEND_VALID => w_BACKEND_VALID_IN,
-            o_BACKEND_LAST => w_BACKEND_LAST_IN,
-            o_BACKEND_OPC => w_BACKEND_OPC_IN,
-            o_BACKEND_ADDR => w_BACKEND_ADDR_IN,
-            o_BACKEND_BURST => w_BACKEND_BURST_IN,
+            o_BACKEND_VALID  => w_BACKEND_VALID_IN,
+            o_BACKEND_LAST   => w_BACKEND_LAST_IN,
+            o_BACKEND_ADDR   => w_BACKEND_ADDR_IN,
+            o_BACKEND_BURST  => w_BACKEND_BURST_IN,
             o_BACKEND_LENGTH => w_BACKEND_LENGTH_IN,
-            o_BACKEND_DATA => w_BACKEND_DATA_IN,
-            o_BACKEND_ID => w_BACKEND_ID_IN
+            o_BACKEND_DATA   => w_BACKEND_DATA_IN,
+            o_BACKEND_OPC    => w_BACKEND_OPC_IN,
+            o_BACKEND_ID     => w_BACKEND_ID_IN
         );
 
     u_TCC_BACKEND_MASTER: entity work.tcc_backend_master
@@ -135,12 +136,12 @@ begin
             -- Backend signals.
             i_VALID  => w_BACKEND_VALID_IN,
             i_LAST   => w_BACKEND_LAST_IN,
-			i_OPC    => w_BACKEND_OPC_IN,
 			i_ADDR   => w_BACKEND_ADDR_IN,
 			i_BURST  => w_BACKEND_BURST_IN,
 			i_LENGTH => w_BACKEND_LENGTH_IN,
+            i_DATA   => w_BACKEND_DATA_IN,
+            i_OPC    => w_BACKEND_OPC_IN,
             i_ID     => w_BACKEND_ID_IN,
-			i_DATA   => w_BACKEND_DATA_IN,
 
 			o_READY  => w_BACKEND_READY_OUT,
 

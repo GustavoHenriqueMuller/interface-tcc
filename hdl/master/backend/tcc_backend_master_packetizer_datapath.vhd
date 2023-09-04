@@ -12,16 +12,16 @@ entity tcc_backend_master_packetizer_datapath is
         ARESETn: in std_logic;
 
         -- Backend signals.
-		i_BURST    : in std_logic_vector(1 downto 0);
-		i_LENGTH   : in std_logic_vector(7 downto 0);
-        i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
-		i_DATA     : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC: in std_logic;
-        i_OPC_ADDR: in std_logic_vector((c_ADDR_WIDTH / 2) - 1 downto 0);
-        i_DEST_X: in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
-        i_DEST_Y: in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
-
+		i_OPC_ADDR: in std_logic_vector((c_ADDR_WIDTH / 2) - 1 downto 0);
+        i_BURST   : in std_logic_vector(1 downto 0);
+		i_LENGTH  : in std_logic_vector(7 downto 0);
+        i_DATA    : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_OPC     : in std_logic;
+        i_ID      : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        i_DEST_X  : in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        i_DEST_Y  : in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
         i_FLIT_SELECTOR: in std_logic_vector(1 downto 0);
+
 		o_FLIT         : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
     );
 end tcc_backend_master_packetizer_datapath;
