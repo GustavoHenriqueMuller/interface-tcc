@@ -106,8 +106,9 @@ begin
                                (r_CURRENT_STATE = S_PAYLOAD and i_VALID = '1') or
                                (r_CURRENT_STATE  = S_TRAILER) else '0';
 
-    o_READY <= '1' when (r_CURRENT_STATE = S_IDLE or r_NEXT_STATE = S_IDLE) or
-                        (r_NEXT_STATE = S_PAYLOAD)
+    o_READY <= '1' when r_CURRENT_STATE = S_IDLE or
+                        r_NEXT_STATE = S_IDLE or
+                        r_NEXT_STATE = S_PAYLOAD
                         else '0';
 
 end arch_tcc_backend_master_packetizer_control;

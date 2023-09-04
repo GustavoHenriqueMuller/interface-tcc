@@ -1,4 +1,4 @@
-vsim -voptargs=+acc work.tb_master_injection_write
+vsim -voptargs=+acc -debugDB work.tb_master_injection_write
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/t_ACLK \
