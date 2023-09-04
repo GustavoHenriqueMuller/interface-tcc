@@ -46,7 +46,6 @@ begin
     o_BACKEND_LENGTH <= AWLEN   when (i_OPC = '0') else ARLEN when (i_OPC = '1');
 
     o_BACKEND_DATA   <= WDATA   when (i_OPC = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    -- @TODO: FAZER O ARADDR QUANDO É LEITURA.
 
     o_BACKEND_ID     <= AW_ID   when (i_OPC = '0') else AR_ID when (i_OPC = '1');
 
