@@ -2,13 +2,13 @@ vsim -voptargs=+acc -debugDB work.tb_master_injection_read
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/t_ACLK \
-sim:/tb_master_injection_read/t_AWADDR \
-sim:/tb_master_injection_read/t_AW_ID \
-sim:/tb_master_injection_read/t_AWLEN \
-sim:/tb_master_injection_read/t_AWSIZE \
-sim:/tb_master_injection_read/t_AWBURST \
-sim:/tb_master_injection_read/t_AWVALID \
-sim:/tb_master_injection_read/t_AWREADY
+sim:/tb_master_injection_read/t_ARADDR \
+sim:/tb_master_injection_read/t_AR_ID \
+sim:/tb_master_injection_read/t_ARLEN \
+sim:/tb_master_injection_read/t_ARSIZE \
+sim:/tb_master_injection_read/t_ARBURST \
+sim:/tb_master_injection_read/t_ARVALID \
+sim:/tb_master_injection_read/t_ARREADY
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/t_RESET \
@@ -21,28 +21,28 @@ sim:/tb_master_injection_read/t_WREADY \
 sim:/tb_master_injection_read/t_WVALID
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_FRONTEND_MASTER/u_tcc_FRONTEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TOP_MASTER/u_FRONTEND_MASTER/u_FRONTEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/u_TCC_BACKEND_MASTER_FLOW_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_DATA_IN \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_LAST_IN \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_READY_OUT \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_VALID_IN \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/w_BACKEND_ID_IN
+sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_DATA_IN \
+sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_LAST_IN \
+sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_READY_OUT \
+sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_VALID_IN \
+sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_ID_IN
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_ARESET \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_FLIT \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_WRITE_BUFFER \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_WRITE_OK_BUFFER \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_READ_BUFFER \
-sim:/tb_master_injection_read/u_TCC_TOP_MASTER/u_TCC_BACKEND_MASTER/w_READ_OK_BUFFER
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_ARESET \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_FLIT \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_OK_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_OK_BUFFER
 
 
 

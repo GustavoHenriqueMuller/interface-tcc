@@ -62,12 +62,12 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 ; Legal Notice ;
 ----------------
 Copyright (C) 2023  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and any partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and any partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
 the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
@@ -1241,10 +1241,10 @@ Info (332142): No user constrained base clocks found in the design. Calling "der
 Info (332105): Deriving Clocks
     Info (332105): create_clock -period 1.000 -name ACLK ACLK
 Warning (332125): Found combinational loop of 4 nodes File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 38
-    Warning (332126): Node "u_TCC_FRONTEND_MASTER|u_tcc_FRONTEND_MASTER_SEND_CONTROL|o_BACKEND_VALID~1|combout"
-    Warning (332126): Node "u_TCC_BACKEND_MASTER|u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY|datab"
-    Warning (332126): Node "u_TCC_BACKEND_MASTER|u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY|combout"
-    Warning (332126): Node "u_TCC_FRONTEND_MASTER|u_tcc_FRONTEND_MASTER_SEND_CONTROL|o_BACKEND_VALID~1|datab"
+    Warning (332126): Node "u_FRONTEND_MASTER|u_FRONTEND_MASTER_SEND_CONTROL|o_BACKEND_VALID~1|combout"
+    Warning (332126): Node "u_BACKEND_MASTER|u_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY|datab"
+    Warning (332126): Node "u_BACKEND_MASTER|u_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY|combout"
+    Warning (332126): Node "u_FRONTEND_MASTER|u_FRONTEND_MASTER_SEND_CONTROL|o_BACKEND_VALID~1|datab"
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
@@ -1252,19 +1252,19 @@ Info: Analyzing Slow 1100mV 85C Model
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
 Info (332146): Worst-case setup slack is -5.112
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.112            -694.702 ACLK 
+    Info (332119):    -5.112            -694.702 ACLK
 Info (332146): Worst-case hold slack is 0.465
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):     0.465               0.000 ACLK 
+    Info (332119):     0.465               0.000 ACLK
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.724
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.724            -170.625 ACLK 
+    Info (332119):    -0.724            -170.625 ACLK
 Info: Analyzing Slow 1100mV 0C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
@@ -1272,19 +1272,19 @@ Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Tim
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
 Info (332146): Worst-case setup slack is -5.050
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -5.050            -686.042 ACLK 
+    Info (332119):    -5.050            -686.042 ACLK
 Info (332146): Worst-case hold slack is 0.442
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):     0.442               0.000 ACLK 
+    Info (332119):     0.442               0.000 ACLK
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.724
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.724            -170.889 ACLK 
+    Info (332119):    -0.724            -170.889 ACLK
 Info: Analyzing Fast 1100mV 85C Model
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
@@ -1292,37 +1292,37 @@ Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Tim
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
 Info (332146): Worst-case setup slack is -1.538
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.538            -196.106 ACLK 
+    Info (332119):    -1.538            -196.106 ACLK
 Info (332146): Worst-case hold slack is 0.182
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):     0.182               0.000 ACLK 
+    Info (332119):     0.182               0.000 ACLK
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.090
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.090             -12.639 ACLK 
+    Info (332119):    -0.090             -12.639 ACLK
 Info: Analyzing Fast 1100mV 0C Model
 Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Critical Warning (332148): Timing requirements not met
     Info (11105): For recommendations on closing timing, run Report Timing Closure Recommendations in the Timing Analyzer.
 Info (332146): Worst-case setup slack is -1.311
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -1.311            -166.564 ACLK 
+    Info (332119):    -1.311            -166.564 ACLK
 Info (332146): Worst-case hold slack is 0.172
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):     0.172               0.000 ACLK 
+    Info (332119):     0.172               0.000 ACLK
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -0.088
-    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119):     Slack       End Point TNS Clock
     Info (332119): ========= =================== =====================
-    Info (332119):    -0.088             -12.798 ACLK 
+    Info (332119):    -0.088             -12.798 ACLK
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 11 warnings

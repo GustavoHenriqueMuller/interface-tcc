@@ -19,7 +19,7 @@ sim:/tb_master_frontend/t_BACKEND_DATA_IN \
 sim:/tb_master_frontend/t_BACKEND_READY_OUT
 
 add wave -position insertpoint  \
-sim:/tb_master_frontend/u_TCC_FRONTEND_MASTER/u_tcc_FRONTEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
+sim:/tb_master_frontend/u_FRONTEND_MASTER/u_FRONTEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_frontend/u_TCC_FRONTEND_MASTER/u_tcc_FRONTEND_MASTER_SEND_CONTROL/r_NEXT_STATE
+sim:/tb_master_frontend/u_FRONTEND_MASTER/u_FRONTEND_MASTER_SEND_CONTROL/r_NEXT_STATE

@@ -13,16 +13,16 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
-  9. State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|r_CURRENT_STATE
- 10. State Machine - |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+  8. State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
+  9. State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|r_CURRENT_STATE
+ 10. State Machine - |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE
  11. Logic Cells Representing Combinational Loops
  12. General Register Statistics
  13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4
- 15. Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO
- 16. Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift
- 17. Port Connectivity Checks: "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4"
+ 14. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4
+ 15. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO
+ 16. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift
+ 17. Port Connectivity Checks: "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4"
  18. Post-Synthesis Netlist Statistics for Top Partition
  19. Elapsed Time Per Partition
  20. Analysis & Synthesis Messages
@@ -33,12 +33,12 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 ; Legal Notice ;
 ----------------
 Copyright (C) 2023  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and any partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and any partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
 the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
@@ -239,22 +239,22 @@ https://fpgasoftware.intel.com/eula.
 ; Compilation Hierarchy Node                                                              ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                 ; Entity Name                            ; Library Name ;
 +-----------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+--------------+
 ; |tcc_top_master                                                                         ; 100 (0)             ; 153 (0)                   ; 0                 ; 0          ; 206  ; 0            ; |tcc_top_master                                                                                                                                     ; tcc_top_master                         ; work         ;
-;    |tcc_backend_master:u_TCC_BACKEND_MASTER|                                            ; 90 (0)              ; 147 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER                                                                                             ; tcc_backend_master                     ; work         ;
-;       |buffering:u_BUFFER_FIFO|                                                         ; 49 (0)              ; 135 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO                                                                     ; buffering                              ; work         ;
-;          |buffering_fifo:\fifo:shift|                                                   ; 49 (49)             ; 135 (135)                 ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift                                          ; buffering_fifo                         ; work         ;
-;       |tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|   ; 11 (11)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL               ; tcc_backend_master_packetizer_control  ; work         ;
-;       |tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH| ; 26 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH             ; tcc_backend_master_packetizer_datapath ; work         ;
-;          |mux4:u_MUX4|                                                                  ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ; mux4                                   ; work         ;
-;       |tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|               ; 4 (4)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL                           ; tcc_backend_master_send_control        ; work         ;
-;    |tcc_frontend_master:u_TCC_FRONTEND_MASTER|                                          ; 10 (0)              ; 6 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER                                                                                           ; tcc_frontend_master                    ; work         ;
-;       |tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|             ; 10 (10)             ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL                       ; tcc_frontend_master_send_control       ; work         ;
+;    |tcc_backend_master:u_BACKEND_MASTER|                                            ; 90 (0)              ; 147 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER                                                                                             ; tcc_backend_master                     ; work         ;
+;       |buffering:u_BUFFER_FIFO|                                                         ; 49 (0)              ; 135 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO                                                                     ; buffering                              ; work         ;
+;          |buffering_fifo:\fifo:shift|                                                   ; 49 (49)             ; 135 (135)                 ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift                                          ; buffering_fifo                         ; work         ;
+;       |tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|   ; 11 (11)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL               ; tcc_backend_master_packetizer_control  ; work         ;
+;       |tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH| ; 26 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH             ; tcc_backend_master_packetizer_datapath ; work         ;
+;          |mux4:u_MUX4|                                                                  ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ; mux4                                   ; work         ;
+;       |tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|               ; 4 (4)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL                           ; tcc_backend_master_send_control        ; work         ;
+;    |tcc_frontend_master:u_FRONTEND_MASTER|                                          ; 10 (0)              ; 6 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER                                                                                           ; tcc_frontend_master                    ; work         ;
+;       |tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|             ; 10 (10)             ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL                       ; tcc_frontend_master_send_control       ; work         ;
 +-----------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE ;
+; State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|r_CURRENT_STATE ;
 +------------------------------------+------------------------------------+-----------------------------------+---------------------------------------------+
 ; Name                               ; r_CURRENT_STATE.S_WAITING_ACK_ZERO ; r_CURRENT_STATE.S_WAITING_ACK_ONE ; r_CURRENT_STATE.S_IDLE                      ;
 +------------------------------------+------------------------------------+-----------------------------------+---------------------------------------------+
@@ -266,7 +266,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|r_CURRENT_STATE                                                                                                                                                           ;
+; State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|r_CURRENT_STATE                                                                                                                                                           ;
 +------------------------------------+-----------------------------------+---------------------------+-----------------------------------+---------------------------+------------------------------------+----------------------------+------------------------------------+----------------------------+------------------------+
 ; Name                               ; r_CURRENT_STATE.S_TRAILER_WAIT_OK ; r_CURRENT_STATE.S_TRAILER ; r_CURRENT_STATE.S_PAYLOAD_WAIT_OK ; r_CURRENT_STATE.S_PAYLOAD ; r_CURRENT_STATE.S_HEADER_2_WAIT_OK ; r_CURRENT_STATE.S_HEADER_2 ; r_CURRENT_STATE.S_HEADER_1_WAIT_OK ; r_CURRENT_STATE.S_HEADER_1 ; r_CURRENT_STATE.S_IDLE ;
 +------------------------------------+-----------------------------------+---------------------------+-----------------------------------+---------------------------+------------------------------------+----------------------------+------------------------------------+----------------------------+------------------------+
@@ -284,7 +284,7 @@ Encoding Type:  One-Hot
 
 Encoding Type:  One-Hot
 +--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE                                                                                    ;
+; State Machine - |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|r_CURRENT_STATE                                                                                    ;
 +--------------------------------------+--------------------------------+---------------------------------+----------------------------------+-------------------------------------+--------------------------------------+------------------------+
 ; Name                                 ; r_CURRENT_STATE.S_WAIT_TRAILER ; r_CURRENT_STATE.S_READ_TRANSFER ; r_CURRENT_STATE.S_WRITE_TRANSFER ; r_CURRENT_STATE.S_WAIT_HEADERS_READ ; r_CURRENT_STATE.S_WAIT_HEADERS_WRITE ; r_CURRENT_STATE.S_IDLE ;
 +--------------------------------------+--------------------------------+---------------------------------+----------------------------------+-------------------------------------+--------------------------------------+------------------------+
@@ -302,7 +302,7 @@ Encoding Type:  One-Hot
 +---------------------------------------------------------------------------------------------------------------------------------+---+
 ; Logic Cell Name                                                                                                                 ;   ;
 +---------------------------------------------------------------------------------------------------------------------------------+---+
-; tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY~0 ;   ;
+; tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY~0 ;   ;
 ; Number of logic cells representing combinational loops                                                                          ; 1 ;
 +---------------------------------------------------------------------------------------------------------------------------------+---+
 Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
@@ -328,16 +328,16 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
-; 5:1                ; 11 bits   ; 33 LEs        ; 22 LEs               ; 11 LEs                 ; Yes        ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][31] ;
-; 6:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][5]  ;
-; 7:1                ; 13 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][13] ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][6]  ;
-; 8:1                ; 33 bits   ; 165 LEs       ; 66 LEs               ; 99 LEs                 ; No         ; |tcc_top_master|tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|data_o[9]     ;
+; 5:1                ; 11 bits   ; 33 LEs        ; 22 LEs               ; 11 LEs                 ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][31] ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][5]  ;
+; 7:1                ; 13 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][13] ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][6]  ;
+; 8:1                ; 33 bits   ; 165 LEs       ; 66 LEs               ; 99 LEs                 ; No         ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|data_o[9]     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ;
+; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ;
 +----------------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                                                                                    ;
 +----------------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -347,7 +347,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO ;
+; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO ;
 +----------------+-------+-------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                ;
 +----------------+-------+-------------------------------------------------------------------------------------+
@@ -359,7 +359,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift ;
+; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift ;
 +----------------+-------+----------------------------------------------------------------------------------------------------------------+
 ; Parameter Name ; Value ; Type                                                                                                           ;
 +----------------+-------+----------------------------------------------------------------------------------------------------------------+
@@ -370,7 +370,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" ;
+; Port Connectivity Checks: "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" ;
 +------------------+-------+----------+---------------------------------------------------------------------------------------------------------------------------+
 ; Port             ; Type  ; Severity ; Details                                                                                                                   ;
 +------------------+-------+----------+---------------------------------------------------------------------------------------------------------------------------+
@@ -515,56 +515,56 @@ Info (12021): Found 2 design units, including 1 entities, in source file /repos/
     Info (12022): Found design unit 1: arbitration-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 17
     Info (12023): Found entity 1: arbitration File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_send_control.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 24
+    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 24
     Info (12023): Found entity 1: tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_packetizer_datapath.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_packetizer_datapath-arch_tcc_backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 27
+    Info (12022): Found design unit 1: tcc_backend_master_packetizer_datapath-arch_backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 27
     Info (12023): Found entity 1: tcc_backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_packetizer_control.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_packetizer_control-arch_tcc_backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 25
+    Info (12022): Found design unit 1: tcc_backend_master_packetizer_control-arch_backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 25
     Info (12023): Found entity 1: tcc_backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master.vhd
-    Info (12022): Found design unit 1: tcc_backend_master-arch_tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 36
+    Info (12022): Found design unit 1: tcc_backend_master-arch_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 36
     Info (12023): Found entity 1: tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/basic/mux4.vhd
     Info (12022): Found design unit 1: mux4-arch_mux4 File: E:/repos/InterfaceTCC/hdl/basic/mux4.vhd Line: 20
     Info (12023): Found entity 1: mux4 File: E:/repos/InterfaceTCC/hdl/basic/mux4.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/frontend/tcc_frontend_master_send_control.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master_send_control-arch_tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 49
+    Info (12022): Found design unit 1: tcc_frontend_master_send_control-arch_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 49
     Info (12023): Found entity 1: tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/frontend/tcc_frontend_master.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master-arch_tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 63
+    Info (12022): Found design unit 1: tcc_frontend_master-arch_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 63
     Info (12023): Found entity 1: tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/test/tcc_tb.vhd
-    Info (12022): Found design unit 1: tcc_tb-arch_tcc_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 11
+    Info (12022): Found design unit 1: tcc_tb-arch_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 11
     Info (12023): Found entity 1: tcc_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/test/tcc_frontend_master_tb.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master_tb-arch_tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 10
+    Info (12022): Found design unit 1: tcc_frontend_master_tb-arch_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 10
     Info (12023): Found entity 1: tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 7
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/tcc_top_master.vhd
-    Info (12022): Found design unit 1: tcc_top_master-arch_tcc_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 60
+    Info (12022): Found design unit 1: tcc_top_master-arch_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 60
     Info (12023): Found entity 1: tcc_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 8
 Info (12021): Found 1 design units, including 0 entities, in source file /repos/interfacetcc/hdl/tcc_package.vhd
     Info (12022): Found design unit 1: tcc_package File: E:/repos/InterfaceTCC/hdl/tcc_package.vhd Line: 6
 Info (12127): Elaborating entity "tcc_top_master" for the top level hierarchy
-Info (12128): Elaborating entity "tcc_frontend_master" for hierarchy "tcc_frontend_master:u_TCC_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 74
+Info (12128): Elaborating entity "tcc_frontend_master" for hierarchy "tcc_frontend_master:u_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 74
 Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(29): used implicit default value for signal "BVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 29
 Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(31): used explicit default value for signal "BRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 31
 Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(43): used implicit default value for signal "RVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 43
 Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(45): used explicit default value for signal "RDATA" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 45
 Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(46): used implicit default value for signal "RLAST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 46
 Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(47): used explicit default value for signal "RRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 47
-Info (12128): Elaborating entity "tcc_frontend_master_send_control" for hierarchy "tcc_frontend_master:u_TCC_FRONTEND_MASTER|tcc_frontend_master_send_control:u_tcc_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 65
+Info (12128): Elaborating entity "tcc_frontend_master_send_control" for hierarchy "tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 65
 Warning (10492): VHDL Process Statement warning at tcc_frontend_master_send_control.vhd(72): signal "r_CURRENT_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 72
-Info (12128): Elaborating entity "tcc_backend_master" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 129
+Info (12128): Elaborating entity "tcc_backend_master" for hierarchy "tcc_backend_master:u_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 129
 Warning (10541): VHDL Signal Declaration warning at tcc_backend_master.vhd(32): used implicit default value for signal "l_out_ack_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 32
-Info (12128): Elaborating entity "tcc_backend_master_packetizer_control" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_TCC_BACKEND_MASTER_PACKETIZER_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 50
+Info (12128): Elaborating entity "tcc_backend_master_packetizer_control" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 50
 Warning (10492): VHDL Process Statement warning at tcc_backend_master_packetizer_control.vhd(49): signal "r_CURRENT_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 49
-Info (12128): Elaborating entity "tcc_backend_master_packetizer_datapath" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 64
-Info (12128): Elaborating entity "mux4" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_TCC_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 34
-Info (12128): Elaborating entity "buffering" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 80
-Info (12129): Elaborating entity "buffering_fifo" using architecture "A:shift" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift" File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 31
-Info (12128): Elaborating entity "tcc_backend_master_send_control" for hierarchy "tcc_backend_master:u_TCC_BACKEND_MASTER|tcc_backend_master_send_control:u_TCC_BACKEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 99
+Info (12128): Elaborating entity "tcc_backend_master_packetizer_datapath" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 64
+Info (12128): Elaborating entity "mux4" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 34
+Info (12128): Elaborating entity "buffering" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 80
+Info (12129): Elaborating entity "buffering_fifo" using architecture "A:shift" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift" File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 31
+Info (12128): Elaborating entity "tcc_backend_master_send_control" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 99
 Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(45): signal "r_CURRENT_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 45
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "BVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 30

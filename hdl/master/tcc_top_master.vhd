@@ -72,7 +72,7 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_BACKEND_READY_OUT: std_logic;
 
 begin
-    u_TCC_FRONTEND_MASTER: entity work.tcc_frontend_master
+    u_FRONTEND_MASTER: entity work.frontend_master
         port map(
             -- AMBA AXI 5 signals.
             ACLK => ACLK,
@@ -127,7 +127,7 @@ begin
             o_BACKEND_ID     => w_BACKEND_ID_IN
         );
 
-    u_TCC_BACKEND_MASTER: entity work.tcc_backend_master
+    u_BACKEND_MASTER: entity work.backend_master
         port map(
             -- AMBA AXI 5 signals.
             ACLK => ACLK,
