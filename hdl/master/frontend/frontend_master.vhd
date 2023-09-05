@@ -28,7 +28,7 @@ entity frontend_master is
             -- Write response signals.
             BVALID : out std_logic;
             BREADY : in std_logic;
-            BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0);
+            BRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
             -- Read request signals.
             ARVALID: in std_logic;
@@ -44,7 +44,7 @@ entity frontend_master is
             RREADY : in std_logic;
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
             RLAST  : out std_logic;
-            RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0);
+            RRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Backend signals (injection).
         o_START_SEND_PACKET: out std_logic;
@@ -65,7 +65,9 @@ entity frontend_master is
         o_READY_RECEIVE_PACKET: out std_logic;
         i_VALID_RECEIVE_PACKET: in std_logic;
         i_LAST_RECEIVE_DATA   : in std_logic;
-        i_DATA_RECEIVE        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0)
+        i_DATA_RECEIVE        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_OPC_RECEIVE         : in std_logic;
+        i_STATUS_RECEIVE      : in std_logic_vector(c_RESP_WIDTH - 1 downto 0)
     );
 end frontend_master;
 
@@ -112,23 +114,11 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Reception.
-    -- @TODO
-    --w_OPC_RECEIVE <= '0' when (BREADY = '1') else '1' when (RREADY = '1');
-    --u_OPC_RECEIVE_REG: entity work.reg1b
-        --port map(
-            --ACLK     => ACLK,
-            --ARESETn  => ARESETn,
-            --i_WRITE  => i_READY_SEND_PACKET,
-            --i_DATA   => w_OPC_RECEIVE,
-            --o_DATA   => w_OPC_RECEIVE_OUT
-        --);
 
-    --o_READY_RECEIVE_PACKET <= '1' ;
-
-    -- BVALID <=
-    -- BRESP  <=
-    -- RVALID <=
-    -- RLAST  <=
-    -- RRESP  <=
+    BVALID <= '1' when(i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '0') else '0';
+    BRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_PACKET = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
+    RVALID <= '1' when(i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '1') else '0';
+    RLAST  <= '1' when(i_LAST_RECEIVE_DATA = '1') else '0';
+    RRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_PACKET = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
 end arch_frontend_master;

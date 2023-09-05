@@ -21,8 +21,8 @@ entity backend_master_depacketizer_control is
         i_READ_OK_BUFFER: in std_logic;
 
         -- Headers.
-        i_HEADER_1: in std_logic(c_FLIT_WIDTH - 1 downto 0);
-        i_HEADER_2: in std_logic(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_1: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_2: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         o_WRITE_HEADER_1_REG: out std_logic;
         o_WRITE_HEADER_2_REG: out std_logic
@@ -30,7 +30,7 @@ entity backend_master_depacketizer_control is
 end backend_master_depacketizer_control;
 
 architecture arch_backend_master_depacketizer_control of backend_master_depacketizer_control is
-    type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_2, S_REST);
+    type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -69,8 +69,8 @@ begin
                                        r_NEXT_STATE <= S_WRITE_RESPONSE;
                                    else
                                        -- Packet is read response.
-                                       r_NEXT_STATE <= S_REST;
-                                   end;
+                                       r_NEXT_STATE <= S_HEADER_2;
+                                   end if;
                                else
                                    r_NEXT_STATE <= S_HEADER_2;
                                end if;
@@ -79,7 +79,7 @@ begin
                                          r_NEXT_STATE <= S_IDLE;
                                      else
                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
-                                     end;
+                                     end if;
 
             -- @TODO: Por enquanto a FSM assume que sempre tem um flit de payload.
             --when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1') then
@@ -98,7 +98,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-	o_READ_BUFFER  <= '1' when (r_CURRENT_STATE = S_IDLE)
+	o_READ_BUFFER  <= '1' when (r_CURRENT_STATE = S_IDLE) or
                                (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
                                (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';

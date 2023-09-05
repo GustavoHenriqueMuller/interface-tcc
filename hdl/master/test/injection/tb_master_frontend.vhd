@@ -30,7 +30,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         -- Write response signals.
         signal t_BVALID : std_logic := '0';
         signal t_BREADY : std_logic := '0';
-        signal t_BRESP  : std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_BRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Read request signals.
         signal t_ARVALID: std_logic := '0';
@@ -46,7 +46,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RREADY : std_logic := '0';
         signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
-        signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between front-end and back-end.
     signal t_START_SEND_PACKET: std_logic;
@@ -66,7 +66,9 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     signal t_READY_RECEIVE_PACKET: std_logic;
     signal t_VALID_RECEIVE_PACKET: std_logic;
     signal t_LAST_RECEIVE_DATA   : std_logic;
-    signal t_DATA_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal t_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal t_OPC_RECEIVE   : std_logic;
+    signal t_STATUS_RECEIVE: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND_MASTER: entity work.frontend_master
@@ -129,7 +131,9 @@ begin
             o_READY_RECEIVE_PACKET => t_READY_RECEIVE_PACKET,
             i_VALID_RECEIVE_PACKET => t_VALID_RECEIVE_PACKET,
             i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA,
-            i_DATA_RECEIVE => t_DATA_RECEIVE
+            i_DATA_RECEIVE         => t_DATA_RECEIVE,
+            i_OPC_RECEIVE          => t_OPC_RECEIVE,
+            i_STATUS_RECEIVE       => t_STATUS_RECEIVE
         );
 
     ---------------------------------------------------------------------------------------------

@@ -30,6 +30,8 @@ entity backend_master is
         o_VALID_RECEIVE_PACKET: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
         o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_OPC_RECEIVE         : out std_logic;
+        o_STATUS_RECEIVE      : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -75,6 +77,8 @@ begin
             o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => o_DATA_RECEIVE,
+            o_OPC_RECEIVE          => o_OPC_RECEIVE,
+            o_STATUS_RECEIVE       => o_STATUS_RECEIVE,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,

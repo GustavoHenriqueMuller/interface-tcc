@@ -33,7 +33,7 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
         -- Write response signals.
         signal t_BVALID : std_logic := '0';
         signal t_BREADY : std_logic := '0';
-        signal t_BRESP  : std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_BRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Read request signals.
         signal t_ARVALID: std_logic := '0';
@@ -49,7 +49,7 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
         signal t_RREADY : std_logic := '0';
         signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
-        signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between backend and XINA router.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);

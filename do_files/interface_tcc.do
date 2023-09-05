@@ -40,5 +40,5 @@ vcom -2008 ../hdl/master/test/injection/test_tg/tm_group.vhd
 vcom -2008 ../hdl/master/test/injection/test_tg/tg_group.vhd
 vcom -2008 ../hdl/master/test/injection/test_tg/tg_tb.vhd
 
-vcom -2008 ../hdl/master/test/reception/response_injector.vhd
+vcom -2008 ../hdl/master/test/reception/write_response_injector.vhd
 vcom -2008 ../hdl/master/test/reception/tb_master_reception_write.vhd

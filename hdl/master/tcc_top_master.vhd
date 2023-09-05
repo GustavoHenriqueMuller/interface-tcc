@@ -30,7 +30,7 @@ entity tcc_top_master is
             -- Write response signals.
             BVALID : out std_logic := '0';
             BREADY : in std_logic  := '0';
-            BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0) := (others => '0');
+            BRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
             ARVALID: in std_logic  := '0';
@@ -46,7 +46,7 @@ entity tcc_top_master is
             RREADY : in std_logic  := '1';
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
             RLAST  : out std_logic := '0';
-            RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
+            RRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -79,7 +79,9 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_READY_RECEIVE_PACKET: std_logic;
     signal w_VALID_RECEIVE_PACKET: std_logic;
     signal w_LAST_RECEIVE_DATA   : std_logic;
-    signal w_DATA_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_OPC_RECEIVE   : std_logic;
+    signal w_STATUS_RECEIVE: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND: entity work.frontend_master
@@ -143,7 +145,9 @@ begin
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             i_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
-            i_DATA_RECEIVE         => w_DATA_RECEIVE
+            i_DATA_RECEIVE         => w_DATA_RECEIVE,
+            i_OPC_RECEIVE          => w_OPC_RECEIVE,
+            i_STATUS_RECEIVE       => w_STATUS_RECEIVE
         );
 
     u_BACKEND: entity work.backend_master
@@ -172,6 +176,8 @@ begin
             o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
+            o_OPC_RECEIVE          => w_OPC_RECEIVE,
+            o_STATUS_RECEIVE       => w_STATUS_RECEIVE,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,
