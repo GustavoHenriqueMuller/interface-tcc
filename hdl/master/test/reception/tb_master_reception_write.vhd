@@ -139,4 +139,15 @@ begin
         t_RESET <= not t_RESETn;
     end process;
 
+    ---------------------------------------------------------------------------------------------
+    -- Tests.
+    process
+    begin
+        t_BREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_BVALID = '1';
+
+        t_BREADY <= '0';
+        wait for 100 ns;
+    end process;
+
 end arch_tb_master_reception_write;

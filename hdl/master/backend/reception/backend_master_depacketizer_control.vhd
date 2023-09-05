@@ -30,7 +30,7 @@ entity backend_master_depacketizer_control is
 end backend_master_depacketizer_control;
 
 architecture arch_backend_master_depacketizer_control of backend_master_depacketizer_control is
-    type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE);
+    type t_STATE is (S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -40,7 +40,7 @@ begin
     process (ACLK, ARESETn)
     begin
         if (ARESETn = '0') then
-            r_CURRENT_STATE <= S_IDLE;
+            r_CURRENT_STATE <= S_HEADER_1;
         elsif (rising_edge(ACLK)) then
             r_CURRENT_STATE <= r_NEXT_STATE;
         end if;
@@ -48,35 +48,23 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK)
+    process (ACLK, i_READ_OK_BUFFER, i_READY_RECEIVE_PACKET)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_READ_OK_BUFFER = '1') then
-                               r_NEXT_STATE <= S_HEADER_1;
-                           else
-                               r_NEXT_STATE <= S_IDLE;
-                           end if;
-
             when S_HEADER_1 => if (i_READ_OK_BUFFER = '1') then
                                    r_NEXT_STATE <= S_HEADER_2;
                                else
                                    r_NEXT_STATE <= S_HEADER_1;
-                               end if;
+                              end if;
 
             when S_HEADER_2 => if (i_READ_OK_BUFFER = '1') then
-                                   if (i_HEADER_2(0) = '0') then
-                                       -- Packet is write response.
-                                       r_NEXT_STATE <= S_WRITE_RESPONSE;
-                                   else
-                                       -- Packet is read response.
-                                       r_NEXT_STATE <= S_HEADER_2;
-                                   end if;
+                                   r_NEXT_STATE <= S_WRITE_RESPONSE;
                                else
                                    r_NEXT_STATE <= S_HEADER_2;
                                end if;
 
             when S_WRITE_RESPONSE => if (i_READY_RECEIVE_PACKET = '1') then
-                                         r_NEXT_STATE <= S_IDLE;
+                                         r_NEXT_STATE <= S_HEADER_1;
                                      else
                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
                                      end if;
@@ -98,15 +86,14 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-	o_READ_BUFFER  <= '1' when (r_CURRENT_STATE = S_IDLE) or
-                               (r_CURRENT_STATE = S_HEADER_1) or
-                               (r_CURRENT_STATE = S_HEADER_2) or
-                               (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';
+	o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') or
+                              (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') or
+                              (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') else '0';
 
     o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';
-    o_LAST_RECEIVE_DATA <= '0'; -- @TODO
+    o_LAST_RECEIVE_DATA    <= '0'; -- @TODO
 
-    o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
-    o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2) else '0';
+    o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') else '0';
+    o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') else '0';
 
 end arch_backend_master_depacketizer_control;
