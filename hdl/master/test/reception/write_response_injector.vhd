@@ -56,7 +56,7 @@ begin
         id_w <= 0;
     elsif (rising_edge(clk_i)) then
         if (enb_counter_w = '1') then
-            if (id_w > 2) then
+            if (id_w >= 2) then
                 id_w <= 0;
             else
                 id_w <= id_w + 1;

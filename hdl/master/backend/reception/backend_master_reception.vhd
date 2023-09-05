@@ -46,7 +46,7 @@ architecture arch_backend_master_reception of backend_master_reception is
     signal w_READ_OK_BUFFER : std_logic;
 
 begin
-    -- @TODO: Talvez criar um processo ao invés de fazer registradores separados assim.
+    -- Registering.
     u_HEADER_1_REG: entity work.reg
         generic map(
             p_DATA_WIDTH => c_FLIT_WIDTH

@@ -30,7 +30,9 @@ entity backend_master_depacketizer_control is
 end backend_master_depacketizer_control;
 
 architecture arch_backend_master_depacketizer_control of backend_master_depacketizer_control is
-    type t_STATE is (S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE, S_READ_RESPONSE);
+    type t_STATE is (S_HEADER_1, S_HEADER_2,
+                     S_WRITE_RESPONSE_TRAILER, S_WRITE_RESPONSE,
+                     S_READ_RESPONSE);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -46,7 +48,6 @@ begin
         end if;
     end process;
 
-    -- @TODO: CUIDAR DO TRAILER.
     ---------------------------------------------------------------------------------------------
     -- State machine.
     process (ACLK, i_READ_OK_BUFFER, i_READY_RECEIVE_PACKET)
@@ -60,8 +61,8 @@ begin
 
             when S_HEADER_2 => if (i_READ_OK_BUFFER = '1') then
                                    if (i_FLIT(0) = '0') then
-                                       -- Write response.
-                                       r_NEXT_STATE <= S_WRITE_RESPONSE;
+                                       -- Write response. Next flit is trailer.
+                                       r_NEXT_STATE <= S_WRITE_RESPONSE_TRAILER;
                                    else
                                        -- Read response.
                                        r_NEXT_STATE <= S_READ_RESPONSE;
@@ -70,13 +71,18 @@ begin
                                    r_NEXT_STATE <= S_HEADER_2;
                                end if;
 
+            when S_WRITE_RESPONSE_TRAILER => if (i_READ_OK_BUFFER = '1') then
+                                                 r_NEXT_STATE <= S_WRITE_RESPONSE;
+                                             else
+                                                 r_NEXT_STATE <= S_WRITE_RESPONSE_TRAILER;
+                                             end if;
+
             when S_WRITE_RESPONSE => if (i_READY_RECEIVE_PACKET = '1') then
                                          r_NEXT_STATE <= S_HEADER_1;
                                      else
                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
                                      end if;
 
-            -- @TODO: Por enquanto a FSM assume que sempre tem um flit de payload.
             when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
                                         -- Flit is trailer.
                                         r_NEXT_STATE <= S_HEADER_1;
@@ -90,10 +96,10 @@ begin
     -- Output values.
 	o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') or
                               (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') or
-                              (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') else '0';
+                              (r_CURRENT_STATE = S_WRITE_RESPONSE_TRAILER and i_READ_OK_BUFFER = '1') else '0';
 
     o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';
-    o_LAST_RECEIVE_DATA    <= '0'; -- @TODO
+    o_LAST_RECEIVE_DATA    <= '0';
 
     o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') else '0';
     o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') else '0';

@@ -82,8 +82,7 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Injection.
 
-    -- @TODO: Registrar outros sinais que vem do IP (AWADDR, AW_ID, etc...).
-    -- Transaction information registering.
+    -- Registering.
     w_OPC_SEND <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
     u_OPC_SEND_REG: entity work.reg1b
         port map(
