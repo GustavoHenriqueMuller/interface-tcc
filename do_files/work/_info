@@ -22,6 +22,7 @@ R0
 R0
 R0
 R0
+R0
 !s11e vcom 2021.2 2021.04, Apr 14 2021
 13
 !s112 1.1
@@ -31,16 +32,15 @@ R0
 cModel Technology
 Z1 dE:/repos/InterfaceTCC/do_files
 T_opt
-!s110 1693940184
-V3[N:HC>9@M`C=Rmn_CoWd2
-04 18 23 work tb_master_frontend arch_tb_master_frontend 1
-=1-04d9f579f44a-64f779d8-305-24cc
-!s124 OEM10U3 
+!s110 1693940473
+VgNVGK75KDPL=oj0>W>1m>2
+04 25 30 work tb_master_reception_write arch_tb_master_reception_write 1
+=1-04d9f579f44a-64f77af9-1d0-1054
+!s124 OEM10U21 
 Z2 o-quiet -auto_acc_if_foreign -work work -debugdb +acc
 Z3 tCvgOpt 0
 n@_opt
 Z4 OL;O;2021.2;73
-R1
 T_opt1
 !s110 1693940205
 VgKYF4FTe7H>8bP4V1J@]W3
@@ -62,6 +62,7 @@ R2
 R3
 n@_opt2
 R4
+R1
 Earbitration
 Z6 w1693447583
 Z7 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
