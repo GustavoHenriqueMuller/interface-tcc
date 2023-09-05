@@ -54,17 +54,18 @@ entity frontend_master is
         i_READY_SEND_DATA  : in std_logic;
         i_READY_SEND_PACKET: in std_logic;
 
-        o_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-        o_BURST : out std_logic_vector(1 downto 0);
-        o_LENGTH: out std_logic_vector(7 downto 0);
-        o_DATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_OPC   : out std_logic;
-        o_ID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        o_ADDR     : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+        o_BURST    : out std_logic_vector(1 downto 0);
+        o_LENGTH   : out std_logic_vector(7 downto 0);
+        o_DATA_SEND: out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_OPC      : out std_logic;
+        o_ID       : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
         -- Backend signals (reception).
         o_READY_RECEIVE_PACKET: out std_logic;
         i_VALID_RECEIVE_PACKET: in std_logic;
-        i_LAST_RECEIVE_DATA   : in std_logic
+        i_LAST_RECEIVE_DATA   : in std_logic;
+        i_DATA_RECEIVE        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0)
     );
 end frontend_master;
 
@@ -89,12 +90,12 @@ begin
         );
 
     -- Transaction information.
-    o_ADDR   <= AWADDR  when (w_OPC_OUT = '0') else ARADDR when (w_OPC_OUT = '1');
-    o_BURST  <= AWBURST when (w_OPC_OUT = '0') else ARBURST when (w_OPC_OUT = '1');
-    o_LENGTH <= AWLEN   when (w_OPC_OUT = '0') else ARLEN when (w_OPC_OUT = '1');
-    o_DATA   <= WDATA   when (w_OPC_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    o_OPC    <= w_OPC_OUT;
-    o_ID     <= AW_ID   when (w_OPC_OUT = '0') else AR_ID when (w_OPC_OUT = '1');
+    o_ADDR      <= AWADDR  when (w_OPC_OUT = '0') else ARADDR when (w_OPC_OUT = '1');
+    o_BURST     <= AWBURST when (w_OPC_OUT = '0') else ARBURST when (w_OPC_OUT = '1');
+    o_LENGTH    <= AWLEN   when (w_OPC_OUT = '0') else ARLEN when (w_OPC_OUT = '1');
+    o_DATA_SEND <= WDATA   when (w_OPC_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    o_OPC       <= w_OPC_OUT;
+    o_ID        <= AW_ID   when (w_OPC_OUT = '0') else AR_ID when (w_OPC_OUT = '1');
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';

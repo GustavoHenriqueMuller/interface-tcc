@@ -18,17 +18,18 @@ entity backend_master is
         o_READY_SEND_PACKET: out std_logic;
 		o_READY_SEND_DATA  : out std_logic;
 
-		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-		i_BURST : in std_logic_vector(1 downto 0);
-        i_LENGTH: in std_logic_vector(7 downto 0);
-        i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC   : in std_logic;
-        i_ID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+		i_ADDR     : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+		i_BURST    : in std_logic_vector(1 downto 0);
+        i_LENGTH   : in std_logic_vector(7 downto 0);
+        i_DATA_SEND: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_OPC      : in std_logic;
+        i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
         -- Signals (reception).
         i_READY_RECEIVE_PACKET: in std_logic;
         o_VALID_RECEIVE_PACKET: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
+        o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -53,12 +54,12 @@ begin
             o_READY_SEND_PACKET => o_READY_SEND_PACKET,
             o_READY_SEND_DATA   => o_READY_SEND_DATA,
 
-            i_ADDR   => i_ADDR,
-            i_BURST  => i_BURST,
-            i_LENGTH => i_LENGTH,
-            i_DATA   => i_DATA,
-            i_OPC    => i_OPC,
-            i_ID     => i_ID,
+            i_ADDR      => i_ADDR,
+            i_BURST     => i_BURST,
+            i_LENGTH    => i_LENGTH,
+            i_DATA_SEND => i_DATA_SEND,
+            i_OPC       => i_OPC,
+            i_ID        => i_ID,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
@@ -73,6 +74,7 @@ begin
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
+            o_DATA_RECEIVE         => o_DATA_RECEIVE,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,

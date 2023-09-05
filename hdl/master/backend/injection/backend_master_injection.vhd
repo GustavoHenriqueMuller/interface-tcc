@@ -19,12 +19,12 @@ entity backend_master_injection is
         o_READY_SEND_PACKET: out std_logic;
 		o_READY_SEND_DATA  : out std_logic;
 
-		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-		i_BURST : in std_logic_vector(1 downto 0);
-        i_LENGTH: in std_logic_vector(7 downto 0);
-        i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC   : in std_logic;
-        i_ID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+		i_ADDR     : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+		i_BURST    : in std_logic_vector(1 downto 0);
+        i_LENGTH   : in std_logic_vector(7 downto 0);
+        i_DATA_SEND: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_OPC      : in std_logic;
+        i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -85,14 +85,14 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_OPC_ADDR => w_OPC_ADDR,
-            i_BURST    => i_BURST,
-            i_LENGTH   => i_LENGTH,
-            i_DATA     => i_DATA,
-            i_OPC      => i_OPC,
-            i_ID       => i_ID,
-            i_DEST_X   => w_DEST_X,
-            i_DEST_Y   => w_DEST_Y,
+            i_OPC_ADDR  => w_OPC_ADDR,
+            i_BURST     => i_BURST,
+            i_LENGTH    => i_LENGTH,
+            i_DATA_SEND => i_DATA_SEND,
+            i_OPC       => i_OPC,
+            i_ID        => i_ID,
+            i_DEST_X    => w_DEST_X,
+            i_DEST_Y    => w_DEST_Y,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
 
             o_FLIT => w_FLIT

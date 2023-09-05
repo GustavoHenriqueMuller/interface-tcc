@@ -27,7 +27,7 @@ add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/w_DATA \
+sim:/tb_master_injection_write/u_TOP_MASTER/w_DATA_SEND \
 sim:/tb_master_injection_write/u_TOP_MASTER/w_LAST_SEND_DATA \
 sim:/tb_master_injection_write/u_TOP_MASTER/w_READY_SEND_DATA \
 sim:/tb_master_injection_write/u_TOP_MASTER/w_VALID_SEND_DATA \

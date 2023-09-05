@@ -56,16 +56,17 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     signal t_READY_SEND_PACKET: std_logic := '1';
     signal t_READY_SEND_DATA  : std_logic := '1';
 
-    signal t_ADDR  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal t_BURST : std_logic_vector(1 downto 0);
-    signal t_LENGTH: std_logic_vector(7 downto 0);
-    signal t_DATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_OPC   : std_logic;
-    signal t_ID    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal t_ADDR     : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+    signal t_BURST    : std_logic_vector(1 downto 0);
+    signal t_LENGTH   : std_logic_vector(7 downto 0);
+    signal t_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal t_OPC      : std_logic;
+    signal t_ID       : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     signal t_READY_RECEIVE_PACKET: std_logic;
     signal t_VALID_RECEIVE_PACKET: std_logic;
     signal t_LAST_RECEIVE_DATA   : std_logic;
+    signal t_DATA_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND_MASTER: entity work.frontend_master
@@ -117,17 +118,18 @@ begin
             i_READY_SEND_PACKET => t_READY_SEND_PACKET,
 
             o_LAST_SEND_DATA => t_LAST_SEND_DATA,
-            o_ADDR   => t_ADDR,
-            o_BURST  => t_BURST,
-            o_LENGTH => t_LENGTH,
-            o_DATA   => t_DATA,
-            o_OPC    => t_OPC,
-            o_ID     => t_ID,
+            o_ADDR      => t_ADDR,
+            o_BURST     => t_BURST,
+            o_LENGTH    => t_LENGTH,
+            o_DATA_SEND => t_DATA_SEND,
+            o_OPC       => t_OPC,
+            o_ID        => t_ID,
 
             -- Backend signals (reception).
             o_READY_RECEIVE_PACKET => t_READY_RECEIVE_PACKET,
             i_VALID_RECEIVE_PACKET => t_VALID_RECEIVE_PACKET,
-            i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA
+            i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA,
+            i_DATA_RECEIVE => t_DATA_RECEIVE
         );
 
     ---------------------------------------------------------------------------------------------
