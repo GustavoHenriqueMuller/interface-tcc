@@ -51,10 +51,11 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     -- Signals between front-end and back-end.
     signal t_START_SEND_PACKET: std_logic;
     signal t_VALID_SEND_DATA  : std_logic;
+    signal t_LAST_SEND_DATA   : std_logic;
+
     signal t_READY_SEND_PACKET: std_logic := '1';
     signal t_READY_SEND_DATA  : std_logic := '1';
 
-    signal t_LAST  : std_logic;
     signal t_ADDR  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal t_BURST : std_logic_vector(1 downto 0);
     signal t_LENGTH: std_logic_vector(7 downto 0);
@@ -115,7 +116,7 @@ begin
             i_READY_SEND_DATA   => t_READY_SEND_DATA,
             i_READY_SEND_PACKET => t_READY_SEND_PACKET,
 
-            o_LAST   => t_LAST,
+            o_LAST_SEND_DATA => t_LAST_SEND_DATA,
             o_ADDR   => t_ADDR,
             o_BURST  => t_BURST,
             o_LENGTH => t_LENGTH,

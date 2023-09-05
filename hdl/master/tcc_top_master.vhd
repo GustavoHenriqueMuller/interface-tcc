@@ -62,10 +62,11 @@ architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
     signal w_START_SEND_PACKET: std_logic;
     signal w_VALID_SEND_DATA  : std_logic;
+    signal w_LAST_SEND_DATA   : std_logic;
+
     signal w_READY_SEND_PACKET: std_logic;
     signal w_READY_SEND_DATA  : std_logic;
 
-    signal w_LAST  : std_logic;
     signal w_ADDR  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal w_BURST : std_logic_vector(1 downto 0);
     signal w_LENGTH: std_logic_vector(7 downto 0);
@@ -123,10 +124,11 @@ begin
             -- Backend signals.
             o_START_SEND_PACKET => w_START_SEND_PACKET,
             o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
+            o_LAST_SEND_DATA    => w_LAST_SEND_DATA,
+
             i_READY_SEND_DATA   => w_READY_SEND_DATA,
             i_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            o_LAST   => w_LAST,
             o_ADDR   => w_ADDR,
             o_BURST  => w_BURST,
             o_LENGTH => w_LENGTH,
@@ -149,10 +151,11 @@ begin
             -- Backend signals.
             i_START_SEND_PACKET => w_START_SEND_PACKET,
             i_VALID_SEND_DATA   => w_VALID_SEND_DATA,
+            i_LAST_SEND_DATA    => w_LAST_SEND_DATA,
+
             o_READY_SEND_DATA   => w_READY_SEND_DATA,
             o_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            i_LAST   => w_LAST,
             i_ADDR   => w_ADDR,
             i_BURST  => w_BURST,
             i_LENGTH => w_LENGTH,

@@ -49,10 +49,11 @@ entity frontend_master is
         -- Backend signals (injection).
         o_START_SEND_PACKET: out std_logic;
         o_VALID_SEND_DATA  : out std_logic;
+        o_LAST_SEND_DATA   : out std_logic;
+
         i_READY_SEND_DATA  : in std_logic;
         i_READY_SEND_PACKET: in std_logic;
 
-        o_LAST  : out std_logic;
         o_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
         o_BURST : out std_logic_vector(1 downto 0);
         o_LENGTH: out std_logic_vector(7 downto 0);
@@ -98,7 +99,7 @@ begin
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';
     o_VALID_SEND_DATA   <= '1' when (w_OPC_OUT = '0' and WVALID = '1') or (w_OPC_OUT = '1') else '0';
-    o_LAST              <= '1' when (w_OPC_OUT = '0' and WLAST = '1') or (w_OPC_OUT = '1') else '0';
+    o_LAST_SEND_DATA    <= '1' when (w_OPC_OUT = '0' and WLAST = '1') or (w_OPC_OUT = '1') else '0';
 
     -- Ready information to front-end.
     AWREADY <= i_READY_SEND_PACKET;

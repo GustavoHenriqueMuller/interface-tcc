@@ -13,11 +13,11 @@ entity backend_master_packetizer_control is
 
         -- Backend signals.
         i_START_SEND_PACKET: in std_logic;
-        o_READY_SEND_PACKET: out std_logic;
         i_VALID_SEND_DATA  : in std_logic;
-        o_READY_SEND_DATA  : out std_logic;
+        i_LAST_SEND_DATA: in std_logic;
 
-        i_LAST: in std_logic;
+        o_READY_SEND_PACKET: out std_logic;
+        o_READY_SEND_DATA  : out std_logic;
 
         i_WRITE_OK_BUFFER: in std_logic;
         o_FLIT_SELECTOR  : out std_logic_vector(1 downto 0);
@@ -52,7 +52,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_START_SEND_PACKET, i_WRITE_OK_BUFFER, i_VALID_SEND_DATA, i_LAST)
+    process (ACLK, i_START_SEND_PACKET, i_WRITE_OK_BUFFER, i_VALID_SEND_DATA, i_LAST_SEND_DATA)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => if (i_START_SEND_PACKET = '1') then
@@ -76,7 +76,7 @@ begin
                                        end if;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1') then
-                                 if (i_LAST = '1') then
+                                 if (i_LAST_SEND_DATA = '1') then
                                     r_NEXT_STATE <= S_PAYLOAD_WAIT_OK_LAST;
                                  else
                                     r_NEXT_STATE <= S_PAYLOAD_WAIT_OK;
