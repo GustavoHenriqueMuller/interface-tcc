@@ -59,70 +59,6 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
     signal t_l_out_val_o : std_logic;
     signal t_l_out_ack_i : std_logic;
 
-    signal t_n_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_n_in_val_i  : std_logic;
-    signal t_n_in_ack_o  : std_logic;
-    signal t_n_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t_n_out_val_o : std_logic;
-    signal t_n_out_ack_i : std_logic;
-
-    signal t_e_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_e_in_val_i  : std_logic;
-    signal t_e_in_ack_o  : std_logic;
-    signal t_e_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t_e_out_val_o : std_logic;
-    signal t_e_out_ack_i : std_logic;
-
-    signal t_s_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_s_in_val_i  : std_logic;
-    signal t_s_in_ack_o  : std_logic;
-    signal t_s_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t_s_out_val_o : std_logic;
-    signal t_s_out_ack_i : std_logic;
-
-    signal t_w_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t_w_in_val_i  : std_logic;
-    signal t_w_in_ack_o  : std_logic;
-    signal t_w_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t_w_out_val_o : std_logic;
-    signal t_w_out_ack_i : std_logic;
-
-    -- Signals of router 2.
-    signal t2_l_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t2_l_in_val_i  : std_logic;
-    signal t2_l_in_ack_o  : std_logic;
-    signal t2_l_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t2_l_out_val_o : std_logic;
-    signal t2_l_out_ack_i : std_logic;
-
-    signal t2_n_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t2_n_in_val_i  : std_logic;
-    signal t2_n_in_ack_o  : std_logic;
-    signal t2_n_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t2_n_out_val_o : std_logic;
-    signal t2_n_out_ack_i : std_logic;
-
-    signal t2_e_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t2_e_in_val_i  : std_logic;
-    signal t2_e_in_ack_o  : std_logic;
-    signal t2_e_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t2_e_out_val_o : std_logic;
-    signal t2_e_out_ack_i : std_logic;
-
-    signal t2_s_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t2_s_in_val_i  : std_logic;
-    signal t2_s_in_ack_o  : std_logic;
-    signal t2_s_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t2_s_out_val_o : std_logic;
-    signal t2_s_out_ack_i : std_logic;
-
-    signal t2_w_in_data_i : std_logic_vector(data_width_c downto 0);
-    signal t2_w_in_val_i  : std_logic;
-    signal t2_w_in_ack_o  : std_logic;
-    signal t2_w_out_data_o: std_logic_vector(data_width_c downto 0);
-    signal t2_w_out_val_o : std_logic;
-    signal t2_w_out_ack_i : std_logic;
-
 begin
     u_RESPONSE_INJECTOR: entity work.response_injector
         generic map(
@@ -135,98 +71,6 @@ begin
             data_o => t_l_in_data_i,
             val_o  => t_l_in_val_i,
             ack_i  => t_l_in_ack_o
-        );
-
-    u_XINA_ROUTER_1: entity work.router
-        generic map(
-            x_id_p => 0,
-            y_id_p => 0
-        )
-        port map(
-            clk_i => t_ACLK,
-            rst_i => t_RESET,
-
-            -- local channel interface
-            l_in_data_i  => t_l_in_data_i,
-            l_in_val_i   => t_l_in_val_i,
-            l_in_ack_o   => t_l_in_ack_o,
-            l_out_data_o => t_l_out_data_o,
-            l_out_val_o  => t_l_out_val_o,
-            l_out_ack_i  => t_l_out_ack_i,
-            -- north channel interface
-            n_in_data_i  => t_n_in_data_i,
-            n_in_val_i   => t_n_in_val_i,
-            n_in_ack_o   => t_n_in_ack_o,
-            n_out_data_o => t_n_out_data_o,
-            n_out_val_o  => t_n_out_val_o,
-            n_out_ack_i  => t_n_out_ack_i,
-            -- east channel interface
-            e_in_data_i  => t2_w_in_data_i,
-            e_in_val_i   => t2_w_in_val_i,
-            e_in_ack_o   => t2_w_in_ack_o,
-            e_out_data_o => t2_w_out_data_o,
-            e_out_val_o  => t2_w_out_val_o,
-            e_out_ack_i  => t2_w_out_ack_i,
-            -- south channel interface
-            s_in_data_i  => t_s_in_data_i,
-            s_in_val_i   => t_s_in_val_i,
-            s_in_ack_o   => t_s_in_ack_o,
-            s_out_data_o => t_s_out_data_o,
-            s_out_val_o  => t_s_out_val_o,
-            s_out_ack_i  => t_s_out_ack_i,
-            -- west port interface
-            w_in_data_i  => t_w_in_data_i,
-            w_in_val_i   => t_w_in_val_i,
-            w_in_ack_o   => t_w_in_ack_o,
-            w_out_data_o => t_w_out_data_o,
-            w_out_val_o  => t_w_out_val_o,
-            w_out_ack_i  => t_w_out_ack_i
-        );
-
-    u_XINA_ROUTER_2: entity work.router
-        generic map(
-            x_id_p => 1,
-            y_id_p => 0
-        )
-        port map(
-            clk_i => t_ACLK,
-            rst_i => t_RESET,
-
-            -- local channel interface
-            l_in_data_i  => t2_l_in_data_i,
-            l_in_val_i   => t2_l_in_val_i,
-            l_in_ack_o   => t2_l_in_ack_o,
-            l_out_data_o => t2_l_out_data_o,
-            l_out_val_o  => t2_l_out_val_o,
-            l_out_ack_i  => t2_l_out_ack_i,
-            -- north channel interface
-            n_in_data_i  => t2_n_in_data_i,
-            n_in_val_i   => t2_n_in_val_i,
-            n_in_ack_o   => t2_n_in_ack_o,
-            n_out_data_o => t2_n_out_data_o,
-            n_out_val_o  => t2_n_out_val_o,
-            n_out_ack_i  => t2_n_out_ack_i,
-            -- east channel interface
-            e_in_data_i  => t2_e_in_data_i,
-            e_in_val_i   => t2_e_in_val_i,
-            e_in_ack_o   => t2_e_in_ack_o,
-            e_out_data_o => t2_e_out_data_o,
-            e_out_val_o  => t2_e_out_val_o,
-            e_out_ack_i  => t2_e_out_ack_i,
-            -- south channel interface
-            s_in_data_i  => t2_s_in_data_i,
-            s_in_val_i   => t2_s_in_val_i,
-            s_in_ack_o   => t2_s_in_ack_o,
-            s_out_data_o => t2_s_out_data_o,
-            s_out_val_o  => t2_s_out_val_o,
-            s_out_ack_i  => t2_s_out_ack_i,
-            -- west port interface
-            w_in_data_i  => t2_w_in_data_i,
-            w_in_val_i   => t2_w_in_val_i,
-            w_in_ack_o   => t2_w_in_ack_o,
-            w_out_data_o => t2_w_out_data_o,
-            w_out_val_o  => t2_w_out_val_o,
-            w_out_ack_i  => t2_w_out_ack_i
         );
 
     u_TOP_MASTER: entity work.tcc_top_master
@@ -272,12 +116,13 @@ begin
                 RRESP   => t_RRESP,
 
             -- XINA signals.
-            l_in_data_i  => t2_l_in_data_i,
-            l_in_val_i   => t2_l_in_val_i,
-            l_in_ack_o   => t2_l_in_ack_o,
-            l_out_data_o => t2_l_out_data_o,
-            l_out_val_o  => t2_l_out_val_o,
-            l_out_ack_i  => t2_l_out_ack_i
+            l_in_data_i  => t_l_out_data_o,
+            l_in_val_i   => t_l_out_val_o,
+            l_in_ack_o   => t_l_out_ack_i,
+
+            l_out_data_o => t_l_in_data_i,
+            l_out_val_o  => t_l_in_val_i,
+            l_out_ack_i  => t_l_in_ack_o
         );
 
     ---------------------------------------------------------------------------------------------
