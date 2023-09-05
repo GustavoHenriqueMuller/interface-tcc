@@ -68,7 +68,7 @@ architecture arch_frontend_master of frontend_master is
 
 begin
     -- @TODO: Registrar outros sinais que vem do IP (AWADDR, AW_ID, etc...).
-    -- OPC registering.
+    -- Transaction information registering.
     w_OPC <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
     u_OPC_REG: entity work.reg1b
         port map(
