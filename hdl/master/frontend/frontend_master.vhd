@@ -115,10 +115,13 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    BVALID <= '1' when(i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '0') else '0';
+    o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and i_OPC_RECEIVE = '0') or
+                                       (RREADY = '1' and i_OPC_RECEIVE = '1') else '0';
+
+    BVALID <= '1' when (i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '0') else '0';
     BRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_PACKET = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
-    RVALID <= '1' when(i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '1') else '0';
-    RLAST  <= '1' when(i_LAST_RECEIVE_DATA = '1') else '0';
+    RVALID <= '1' when (i_VALID_RECEIVE_PACKET = '1' and i_OPC_RECEIVE = '1') else '0';
+    RLAST  <= '1' when (i_LAST_RECEIVE_DATA = '1') else '0';
     RRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_PACKET = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
 end arch_frontend_master;

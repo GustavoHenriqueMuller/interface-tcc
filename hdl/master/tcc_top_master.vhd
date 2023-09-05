@@ -160,7 +160,6 @@ begin
             i_START_SEND_PACKET => w_START_SEND_PACKET,
             i_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             i_LAST_SEND_DATA    => w_LAST_SEND_DATA,
-
             o_READY_SEND_DATA   => w_READY_SEND_DATA,
             o_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
