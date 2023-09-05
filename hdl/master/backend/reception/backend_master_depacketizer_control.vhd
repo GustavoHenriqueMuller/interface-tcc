@@ -30,7 +30,7 @@ entity backend_master_depacketizer_control is
 end backend_master_depacketizer_control;
 
 architecture arch_backend_master_depacketizer_control of backend_master_depacketizer_control is
-    type t_STATE is (S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE);
+    type t_STATE is (S_HEADER_1, S_HEADER_2, S_WRITE_RESPONSE, S_READ_RESPONSE);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -46,6 +46,7 @@ begin
         end if;
     end process;
 
+    -- @TODO: CUIDAR DO TRAILER.
     ---------------------------------------------------------------------------------------------
     -- State machine.
     process (ACLK, i_READ_OK_BUFFER, i_READY_RECEIVE_PACKET)
@@ -58,7 +59,13 @@ begin
                               end if;
 
             when S_HEADER_2 => if (i_READ_OK_BUFFER = '1') then
-                                   r_NEXT_STATE <= S_WRITE_RESPONSE;
+                                   if (i_FLIT(0) = '0') then
+                                       -- Write response.
+                                       r_NEXT_STATE <= S_WRITE_RESPONSE;
+                                   else
+                                       -- Read response.
+                                       r_NEXT_STATE <= S_READ_RESPONSE;
+                                   end if;
                                else
                                    r_NEXT_STATE <= S_HEADER_2;
                                end if;
@@ -70,17 +77,12 @@ begin
                                      end if;
 
             -- @TODO: Por enquanto a FSM assume que sempre tem um flit de payload.
-            --when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1') then
-            --                   if (i_FLIT(c_FLIT_WIDTH - 1) = '1') then
-            --                       -- Flit is trailer.
-            --                       r_NEXT_STATE <= S_IDLE;
-            --                   else
-            --                       -- Flit is payload.
-            --                       r_NEXT_STATE <= S_REST;
-            --                   end if;
-            --               else
-            --                   r_NEXT_STATE <= S_REST;
-            --               end if;
+            when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
+                                        -- Flit is trailer.
+                                        r_NEXT_STATE <= S_HEADER_1;
+                                    else
+                                        r_NEXT_STATE <= S_READ_RESPONSE;
+                                    end if;
         end case;
     end process;
 

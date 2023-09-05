@@ -24,7 +24,7 @@ architecture arch_write_response_injector of write_response_injector is
     signal enb_counter_w: std_logic;
     signal id_w: integer range 0 to 3 := 0;
     signal header1_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000001" & "0000000000000000";
-    signal header2_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000000000000000";
+    signal header2_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000000000101000";
     signal trailer_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000000" & "0000000000000000";
     signal data_out_w: std_logic_vector(data_width_p downto 0);
 
