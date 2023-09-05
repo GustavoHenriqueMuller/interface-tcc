@@ -12,6 +12,7 @@ entity backend_master is
         ARESETn: in std_logic;
 
         -- Backend signals.
+        i_READY_RECEIVE_PACKET: in std_logic;
         i_START_PACKET: in std_logic;
         i_VALID : in std_logic;
         i_LAST  : in std_logic;
@@ -24,6 +25,8 @@ entity backend_master is
 
         o_READY_START_PACKET: out std_logic;
 		o_READY : out std_logic;
+        o_VALID_PACKET: out std_logic;
+        o_LAST: out std_logic;
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -37,7 +40,7 @@ end backend_master;
 
 architecture arch_backend_master of backend_master is
 begin
-    u_BACKEND_MASTER_INJECTION: entity work.backend_master_injection
+    u_INJECTION: entity work.backend_master_injection
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -60,10 +63,14 @@ begin
             l_in_ack_o  => l_in_ack_o
         );
 
-    u_BACKEND_MASTER_RECEPTION: entity work.backend_master_reception
+    u_RECEPTION: entity work.backend_master_reception
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
+
+            i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
+            o_VALID_PACKET => o_VALID_PACKET,
+            o_LAST => o_LAST,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,

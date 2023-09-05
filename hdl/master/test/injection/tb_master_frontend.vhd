@@ -41,7 +41,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_ARSIZE : std_logic_vector(2 downto 0) := "101";
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
-        -- Read data signals.
+        -- Read response/data signals.
         signal t_RVALID : std_logic := '0';
         signal t_RREADY : std_logic := '0';
         signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
@@ -98,7 +98,7 @@ begin
                 ARSIZE  => t_ARSIZE,
                 ARBURST => t_ARBURST,
 
-                -- Read data signals.
+                -- Read response/data signals.
                 RVALID  => t_RVALID,
                 RREADY  => t_RREADY,
                 RDATA   => t_RDATA,

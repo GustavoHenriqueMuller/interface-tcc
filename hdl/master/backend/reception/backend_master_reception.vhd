@@ -12,6 +12,9 @@ entity backend_master_reception is
         ARESETn: in std_logic;
 
         -- Backend signals.
+        i_READY_RECEIVE_PACKET: in std_logic;
+        o_VALID_PACKET: out std_logic;
+        o_LAST: out std_logic;
 
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -26,13 +29,61 @@ architecture arch_backend_master_reception of backend_master_reception is
     -- Depacketizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
+    -- Registers.
+    signal w_WRITE_HEADER_1_REG: std_logic;
+    signal w_HEADER_1: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
+    signal w_WRITE_HEADER_2_REG: std_logic;
+    signal w_HEADER_2: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
     signal w_WRITE_OK_BUFFER: std_logic;
-    signal w_READ_BUFFER    : std_logic := '0';
+    signal w_READ_BUFFER    : std_logic;
     signal w_READ_OK_BUFFER : std_logic;
 
 begin
+    -- @TODO: Talvez criar um processo ao invés de fazer registradores separados assim.
+    u_HEADER_1_REG: entity work.reg
+        generic map(
+            p_DATA_WIDTH => c_FLIT_WIDTH
+        )
+        port map(
+            ACLK => ACLK,
+            ARESETn => ARESETn,
+            i_WRITE => w_WRITE_HEADER_1_REG,
+            i_DATA => w_FLIT,
+            o_DATA => w_HEADER_1
+        );
+
+    u_HEADER_2_REG: entity work.reg
+        generic map(
+            p_DATA_WIDTH => c_FLIT_WIDTH
+        )
+        port map(
+            ACLK => ACLK,
+            ARESETn => ARESETn,
+            i_WRITE => w_WRITE_HEADER_2_REG,
+            i_DATA => w_FLIT,
+            o_DATA => w_HEADER_2
+        );
+
+    u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
+        port map(
+            ACLK => ACLK,
+            ARESETn => ARESETn,
+
+            i_FLIT => w_FLIT,
+            i_READ_OK_BUFFER => w_READ_OK_BUFFER,
+            i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
+
+            o_READ_BUFFER => w_READ_BUFFER,
+            o_VALID_PACKET => o_VALID_PACKET,
+            o_LAST => o_LAST,
+            o_WRITE_HEADER_1_REG => w_WRITE_HEADER_1_REG,
+            o_WRITE_HEADER_2_REG => w_WRITE_HEADER_2_REG
+        );
+
     u_BUFFER_FIFO: entity work.buffering
         generic map(
             data_width_p => c_FLIT_WIDTH,
@@ -52,7 +103,7 @@ begin
             data_i => l_out_data_o
         );
 
-    u_BACKEND_MASTER_RECEIVE_CONTROL: entity work.backend_master_receive_control
+    u_RECEIVE_CONTROL: entity work.backend_master_receive_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

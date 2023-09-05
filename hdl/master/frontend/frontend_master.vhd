@@ -39,7 +39,7 @@ entity frontend_master is
             ARSIZE : in std_logic_vector(2 downto 0);
             ARBURST: in std_logic_vector(1 downto 0);
 
-            -- Read data signals.
+            -- Read response/data signals.
             RVALID : out std_logic;
             RREADY : in std_logic;
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
@@ -72,8 +72,8 @@ begin
     w_OPC <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
     u_OPC_REG: entity work.reg1b
         port map(
-            i_CLK    => ACLK,
-            i_RESETn => ARESETn,
+            ACLK     => ACLK,
+            ARESETn  => ARESETn,
             i_WRITE  => i_BACKEND_READY_START_PACKET,
             i_DATA   => w_OPC,
             o_DATA   => w_OPC_OUT

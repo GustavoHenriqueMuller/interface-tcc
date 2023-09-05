@@ -41,7 +41,7 @@ entity tcc_top_master is
             ARSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
             ARBURST: in std_logic_vector(1 downto 0) := "01";
 
-            -- Read data signals.
+            -- Read response/data signals.
             RVALID : out std_logic := '0';
             RREADY : in std_logic  := '1';
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
@@ -60,6 +60,7 @@ end tcc_top_master;
 
 architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
+    signal w_BACKEND_RECEIVE_PACKET_IN: std_logic;
     signal w_BACKEND_START_PACKET_IN: std_logic;
     signal w_BACKEND_VALID_IN : std_logic;
     signal w_BACKEND_LAST_IN  : std_logic;
@@ -70,11 +71,13 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_BACKEND_OPC_IN   : std_logic;
     signal w_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
-    signal w_BACKEND_READY_OUT: std_logic;
     signal w_BACKEND_READY_START_PACKET_OUT: std_logic;
+    signal w_BACKEND_READY_OUT: std_logic;
+    signal w_BACKEND_VALID_PACKET_OUT: std_logic;
+    signal w_BACKEND_LAST_OUT: std_logic;
 
 begin
-    u_FRONTEND_MASTER: entity work.frontend_master
+    u_FRONTEND: entity work.frontend_master
         port map(
             -- AMBA AXI 5 signals.
             ACLK => ACLK,
@@ -109,7 +112,7 @@ begin
                 ARSIZE  => ARSIZE,
                 ARBURST => ARBURST,
 
-                -- Read data signals.
+                -- Read response/data signals.
                 RVALID  => RVALID,
                 RREADY  => RREADY,
                 RDATA   => RDATA,
@@ -131,13 +134,14 @@ begin
             o_BACKEND_ID     => w_BACKEND_ID_IN
         );
 
-    u_BACKEND_MASTER: entity work.backend_master
+    u_BACKEND: entity work.backend_master
         port map(
             -- AMBA AXI 5 signals.
             ACLK => ACLK,
             ARESETn => ARESETn,
 
             -- Backend signals.
+            i_READY_RECEIVE_PACKET => w_BACKEND_RECEIVE_PACKET_IN,
             i_START_PACKET => w_BACKEND_START_PACKET_IN,
             i_VALID  => w_BACKEND_VALID_IN,
             i_LAST   => w_BACKEND_LAST_IN,
@@ -148,8 +152,10 @@ begin
             i_OPC    => w_BACKEND_OPC_IN,
             i_ID     => w_BACKEND_ID_IN,
 
-			o_READY  => w_BACKEND_READY_OUT,
             o_READY_START_PACKET  => w_BACKEND_READY_START_PACKET_OUT,
+            o_READY  => w_BACKEND_READY_OUT,
+            o_VALID_PACKET => w_BACKEND_VALID_PACKET_OUT,
+            o_LAST => w_BACKEND_LAST_OUT,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

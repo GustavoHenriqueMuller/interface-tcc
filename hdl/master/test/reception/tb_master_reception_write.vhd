@@ -44,7 +44,7 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
         signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
-        -- Read data signals.
+        -- Read response/data signals.
         signal t_RVALID : std_logic := '0';
         signal t_RREADY : std_logic := '0';
         signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
@@ -62,8 +62,7 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
 begin
     u_RESPONSE_INJECTOR: entity work.response_injector
         generic map(
-            data_width_p => c_DATA_WIDTH,
-            qnt_flits_p  => 3
+            data_width_p => c_DATA_WIDTH
         )
         port map(
             clk_i  => t_ACLK,
@@ -108,7 +107,7 @@ begin
                 ARSIZE  => t_ARSIZE,
                 ARBURST => t_ARBURST,
 
-                -- Read data signals.
+                -- Read response/data signals.
                 RVALID  => t_RVALID,
                 RREADY  => t_RREADY,
                 RDATA   => t_RDATA,
@@ -138,17 +137,6 @@ begin
     process(t_RESETn)
     begin
         t_RESET <= not t_RESETn;
-    end process;
-
-    ---------------------------------------------------------------------------------------------
-    -- Tests.
-    process
-    begin
-        -- @TODO
-        --t_RESETn <= '0';
-        --wait for 50 ns;
-        --t_RESETn <= '1';
-        wait;
     end process;
 
 end arch_tb_master_reception_write;

@@ -5,8 +5,7 @@ use IEEE.NUMERIC_STD.all;
 
 entity response_injector is
     generic(
-        data_width_p: positive;
-        qnt_flits_p : positive
+        data_width_p: positive
     );
     port(
         clk_i : in std_logic;
@@ -26,8 +25,9 @@ architecture arch_response_injector of response_injector is
     signal y: std_logic_vector(1 downto 0) := "00";
 
     signal enb_counter_w: std_logic;
-    signal id_w: integer range 0 to qnt_flits_p := 0;
-    signal header_w: std_logic_vector(data_width_p downto 0)  := "1" & "0000000000000001" & "0000000000000000";
+    signal id_w: integer range 0 to 4 := 0;
+    signal header1_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000001" & "0000000000000000";
+    signal header2_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000000000001" & "0000000000000000";
     signal payload_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000000000000" & "0000000000000000";
     signal trailer_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000000" & "0000000000000000";
     signal data_out_w: std_logic_vector(data_width_p downto 0);
@@ -46,8 +46,10 @@ begin
   process(all)
     begin
         if id_w = 0 then
-            data_out_w <= header_w;
-        elsif id_w < qnt_flits_p - 1 then
+            data_out_w <= header1_w;
+        elsif id_w = 0 then
+            data_out_w <= header2_w;
+        elsif id_w < 3 then
             data_out_w <= payload_w;
         else
             data_out_w <= trailer_w;
@@ -60,7 +62,7 @@ begin
         id_w <= 0;
     elsif (rising_edge(clk_i)) then
         if(enb_counter_w = '1') then
-            if(id_w >= qnt_flits_p - 1) then
+            if(id_w >= 3) then
                 id_w <= 0;
             else
                 id_w <= id_w + 1;

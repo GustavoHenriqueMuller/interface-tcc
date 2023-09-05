@@ -1,6 +1,7 @@
 vlib work
 
 vcom -2008 ../hdl/basic/mux4.vhd
+vcom -2008 ../hdl/basic/reg.vhd
 vcom -2008 ../hdl/basic/reg1b.vhd
 
 vcom -2008 ../hdl/tcc_package.vhd
@@ -14,6 +15,7 @@ vcom -2008 ../hdl/master/backend/injection/backend_master_send_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_injection.vhd
 
 vcom -2008 ../hdl/master/backend/reception/backend_master_receive_control.vhd
+vcom -2008 ../hdl/master/backend/reception/backend_master_depacketizer_control.vhd
 vcom -2008 ../hdl/master/backend/reception/backend_master_reception.vhd
 
 vcom -2008 ../hdl/master/backend/backend_master.vhd

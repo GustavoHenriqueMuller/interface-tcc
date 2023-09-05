@@ -4,14 +4,14 @@ use IEEE.std_logic_arith.all;
 
 entity reg1b is
     generic (
-        p_DEFAULT_VALUE : natural := 0
+        p_DEFAULT_VALUE: natural := 0
     );
     port (
-        i_CLK   : in  std_logic;
-        i_RESETn: in  std_logic;
-        i_WRITE : in  std_logic;
-        i_DATA  : in  std_logic;
-        o_DATA  : out std_logic
+        ACLK   : in std_logic;
+        ARESETn: in std_logic;
+        i_WRITE: in std_logic;
+        i_DATA : in std_logic;
+        o_DATA : out std_logic
     );
 end reg1b;
 
@@ -19,11 +19,11 @@ architecture arch_reg1b of reg1b is
     signal r_DATA: std_logic;
 
 begin
-    process (i_CLK, i_RESETn)
+    process (ACLK, ARESETn)
     begin
-        if (i_RESETn = '0') then
+        if (ARESETn = '0') then
             r_DATA <= i_DATA;
-        elsif (rising_edge(i_CLK)) then
+        elsif (rising_edge(ACLK)) then
             if (i_WRITE = '1') then
                 r_DATA <= i_DATA;
             end if;

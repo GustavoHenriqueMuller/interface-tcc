@@ -3,17 +3,17 @@ use IEEE.std_logic_1164.all;
 
 entity mux4 is
     generic (
-        data_width_p : natural := 32
+        p_DATA_WIDTH: natural := 32
     );
 
     port (
-        i_DATA_A  : in  std_logic_vector(data_width_p - 1 downto 0);
-        i_DATA_B  : in  std_logic_vector(data_width_p - 1 downto 0);
-        i_DATA_C  : in  std_logic_vector(data_width_p - 1 downto 0);
-        i_DATA_D  : in  std_logic_vector(data_width_p - 1 downto 0);
-        i_SELECTOR: in  std_logic_vector(1 downto 0);
+        i_DATA_A  : in std_logic_vector(p_DATA_WIDTH - 1 downto 0);
+        i_DATA_B  : in std_logic_vector(p_DATA_WIDTH - 1 downto 0);
+        i_DATA_C  : in std_logic_vector(p_DATA_WIDTH - 1 downto 0);
+        i_DATA_D  : in std_logic_vector(p_DATA_WIDTH - 1 downto 0);
+        i_SELECTOR: in std_logic_vector(1 downto 0);
 
-        o_DATA    : out std_logic_vector(data_width_p - 1 downto 0)
+        o_DATA    : out std_logic_vector(p_DATA_WIDTH - 1 downto 0)
     );
 end mux4;
 

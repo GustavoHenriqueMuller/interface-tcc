@@ -51,7 +51,7 @@ architecture arch_backend_master_injection of backend_master_injection is
     signal w_READ_OK_BUFFER : std_logic;
 
 begin
-    u_BACKEND_MASTER_ROUTING_TABLE: entity work.backend_master_routing_table
+    u_ROUTING_TABLE: entity work.backend_master_routing_table
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -62,7 +62,7 @@ begin
             o_DEST_Y   => w_DEST_Y
         );
 
-    u_BACKEND_MASTER_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
+    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -78,7 +78,7 @@ begin
             o_READY_START_PACKET => o_READY_START_PACKET
         );
 
-    u_BACKEND_MASTER_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath
+    u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -115,7 +115,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_BACKEND_MASTER_SEND_CONTROL: entity work.backend_master_send_control
+    u_SEND_CONTROL: entity work.backend_master_send_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
