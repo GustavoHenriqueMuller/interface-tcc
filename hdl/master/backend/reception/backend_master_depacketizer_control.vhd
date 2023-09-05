@@ -101,7 +101,7 @@ begin
     o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';
     o_LAST_RECEIVE_DATA    <= '0';
 
-    o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') else '0';
-    o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') else '0';
+    o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
+    o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2) else '0';
 
 end arch_backend_master_depacketizer_control;
