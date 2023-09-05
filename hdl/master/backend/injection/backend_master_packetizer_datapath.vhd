@@ -51,6 +51,7 @@ begin
     -- do primeiro flit como o endereço de destino, e não o flit inteiro.
     -- w_FLIT_HEADER_1 <= '1' & c_SRC_X & c_SRC_Y & i_DEST_X & i_DEST_Y;
     -- @TODO: Ver a questão de cada pacote precisar ter no mínimo um flit de payload.
+
     w_FLIT_HEADER_1 <= '1' & "1111111111111111" & "1111111111111111";
     w_FLIT_HEADER_2 <= '0' & "00000000000" & i_ID & i_LENGTH & i_BURST & "000" & "1" & "0" & i_OPC;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;

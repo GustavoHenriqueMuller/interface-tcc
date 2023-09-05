@@ -82,6 +82,9 @@ begin
             o_READ_BUFFER => w_READ_BUFFER,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
+            i_HEADER_1 => w_HEADER_1,
+            i_HEADER_2 => w_HEADER_2
+
             o_WRITE_HEADER_1_REG => w_WRITE_HEADER_1_REG,
             o_WRITE_HEADER_2_REG => w_WRITE_HEADER_2_REG
         );

@@ -70,8 +70,11 @@ entity frontend_master is
 end frontend_master;
 
 architecture arch_frontend_master of frontend_master is
-    signal w_OPC: std_logic;
-    signal w_OPC_OUT: std_logic;
+    signal w_OPC_SEND: std_logic;
+    signal w_OPC_SEND_OUT: std_logic;
+
+    signal w_OPC_RECEIVE: std_logic;
+    signal w_OPC_RECEIVE_OUT: std_logic;
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -79,28 +82,28 @@ begin
 
     -- @TODO: Registrar outros sinais que vem do IP (AWADDR, AW_ID, etc...).
     -- Transaction information registering.
-    w_OPC <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
-    u_OPC_REG: entity work.reg1b
+    w_OPC_SEND <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
+    u_OPC_SEND_REG: entity work.reg1b
         port map(
             ACLK     => ACLK,
             ARESETn  => ARESETn,
             i_WRITE  => i_READY_SEND_PACKET,
-            i_DATA   => w_OPC,
-            o_DATA   => w_OPC_OUT
+            i_DATA   => w_OPC_SEND,
+            o_DATA   => w_OPC_SEND_OUT
         );
 
     -- Transaction information.
-    o_ADDR      <= AWADDR  when (w_OPC_OUT = '0') else ARADDR when (w_OPC_OUT = '1');
-    o_BURST     <= AWBURST when (w_OPC_OUT = '0') else ARBURST when (w_OPC_OUT = '1');
-    o_LENGTH    <= AWLEN   when (w_OPC_OUT = '0') else ARLEN when (w_OPC_OUT = '1');
-    o_DATA_SEND <= WDATA   when (w_OPC_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    o_OPC       <= w_OPC_OUT;
-    o_ID        <= AW_ID   when (w_OPC_OUT = '0') else AR_ID when (w_OPC_OUT = '1');
+    o_ADDR      <= AWADDR  when (w_OPC_SEND_OUT = '0') else ARADDR when (w_OPC_SEND_OUT = '1');
+    o_BURST     <= AWBURST when (w_OPC_SEND_OUT = '0') else ARBURST when (w_OPC_SEND_OUT = '1');
+    o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN when (w_OPC_SEND_OUT = '1');
+    o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    o_OPC       <= w_OPC_SEND_OUT;
+    o_ID        <= AW_ID   when (w_OPC_SEND_OUT = '0') else AR_ID when (w_OPC_SEND_OUT = '1');
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';
-    o_VALID_SEND_DATA   <= '1' when (w_OPC_OUT = '0' and WVALID = '1') or (w_OPC_OUT = '1') else '0';
-    o_LAST_SEND_DATA    <= '1' when (w_OPC_OUT = '0' and WLAST = '1') or (w_OPC_OUT = '1') else '0';
+    o_VALID_SEND_DATA   <= '1' when (w_OPC_SEND_OUT = '0' and WVALID = '1') or (w_OPC_SEND_OUT = '1') else '0';
+    o_LAST_SEND_DATA    <= '1' when (w_OPC_SEND_OUT = '0' and WLAST = '1') or (w_OPC_SEND_OUT = '1') else '0';
 
     -- Ready information to front-end.
     AWREADY <= i_READY_SEND_PACKET;
@@ -110,7 +113,22 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
     -- @TODO
+    --w_OPC_RECEIVE <= '0' when (BREADY = '1') else '1' when (RREADY = '1');
+    --u_OPC_RECEIVE_REG: entity work.reg1b
+        --port map(
+            --ACLK     => ACLK,
+            --ARESETn  => ARESETn,
+            --i_WRITE  => i_READY_SEND_PACKET,
+            --i_DATA   => w_OPC_RECEIVE,
+            --o_DATA   => w_OPC_RECEIVE_OUT
+        --);
 
-    -- BVALID  <=
+    --o_READY_RECEIVE_PACKET <= '1' ;
+
+    -- BVALID <=
+    -- BRESP  <=
+    -- RVALID <=
+    -- RLAST  <=
+    -- RRESP  <=
 
 end arch_frontend_master;

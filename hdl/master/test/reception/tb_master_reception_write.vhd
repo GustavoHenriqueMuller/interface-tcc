@@ -60,7 +60,7 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
     signal t_l_out_ack_i : std_logic;
 
 begin
-    u_RESPONSE_INJECTOR: entity work.response_injector
+    u_WRITE_RESPONSE_INJECTOR: entity work.write_response_injector
         generic map(
             data_width_p => c_DATA_WIDTH
         )
