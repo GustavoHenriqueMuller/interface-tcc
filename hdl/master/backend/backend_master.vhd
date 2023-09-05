@@ -59,4 +59,14 @@ begin
             l_in_val_i  => l_in_val_i,
             l_in_ack_o  => l_in_ack_o
         );
+
+    u_BACKEND_MASTER_RECEPTION: entity work.backend_master_reception
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            l_out_data_o => l_out_data_o,
+            l_out_val_o  => l_out_val_o,
+            l_out_ack_i  => l_out_ack_i
+        );
 end arch_backend_master;

@@ -14,6 +14,7 @@ vcom -2008 ../hdl/master/backend/injection/backend_master_send_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_injection.vhd
 
 vcom -2008 ../hdl/master/backend/reception/backend_master_receive_control.vhd
+vcom -2008 ../hdl/master/backend/reception/backend_master_reception.vhd
 
 vcom -2008 ../hdl/master/backend/backend_master.vhd
 
