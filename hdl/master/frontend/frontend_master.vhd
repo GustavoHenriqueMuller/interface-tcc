@@ -48,7 +48,9 @@ entity frontend_master is
 
         -- Backend signals.
         i_BACKEND_READY : in std_logic;
+        i_BACKEND_READY_START_PACKET: in std_logic;
 
+        o_BACKEND_START_PACKET: out std_logic;
         o_BACKEND_VALID : out std_logic;
         o_BACKEND_LAST  : out std_logic;
         o_BACKEND_ADDR  : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
@@ -62,66 +64,37 @@ end frontend_master;
 
 architecture arch_frontend_master of frontend_master is
     signal w_OPC: std_logic;
+    signal w_OPC_OUT: std_logic;
 
 begin
-    u_FRONTEND_MASTER_SEND_CONTROL: entity work.frontend_master_send_control
-        port map (
-            ACLK => ACLK,
-            ARESETn => ARESETn,
-
-            -- Signals from front-end.
-            AWVALID => AWVALID,
-            WLAST   => WLAST,
-            WVALID  => WVALID,
-            ARVALID => ARVALID,
-
-            -- Signals to front-end.
-            AWREADY => AWREADY,
-            WREADY  => WREADY,
-            ARREADY => ARREADY,
-
-            -- Signals from back-end.
-            i_BACKEND_READY => i_BACKEND_READY,
-
-            -- Signals to back-end.
-            o_BACKEND_VALID  => o_BACKEND_VALID,
-            o_BACKEND_LAST   => o_BACKEND_LAST,
-            o_OPC            => w_OPC
-        );
-
-    u_FRONTEND_MASTER_DATA_MULTIPLEXER: entity work.frontend_master_data_multiplexer
+    -- @TODO: Registrar outros sinais que vem do IP (AWADDR, AW_ID, etc...).
+    -- OPC registering.
+    w_OPC <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
+    u_OPC_REG: entity work.reg1b
         port map(
-            ACLK => ACLK,
-            ARESETn => ARESETn,
-
-            -- Signals from front-end.
-            AW_ID   => AW_ID,
-            AWADDR  => AWADDR,
-            AWLEN   => AWLEN,
-            AWBURST => AWBURST,
-            WDATA   => WDATA,
-
-            AR_ID   => AR_ID,
-            ARADDR  => ARADDR,
-            ARLEN   => ARLEN,
-            ARBURST => ARBURST,
-
-            i_OPC => w_OPC,
-
-            -- Signals to back-end.
-            o_BACKEND_OPC    => o_BACKEND_OPC,
-            o_BACKEND_ADDR   => o_BACKEND_ADDR,
-            o_BACKEND_BURST  => o_BACKEND_BURST,
-            o_BACKEND_LENGTH => o_BACKEND_LENGTH,
-            o_BACKEND_DATA   => o_BACKEND_DATA,
-            o_BACKEND_ID     => o_BACKEND_ID
+            i_CLK    => ACLK,
+            i_RESETn => ARESETn,
+            i_WRITE  => i_BACKEND_READY_START_PACKET,
+            i_DATA   => w_OPC,
+            o_DATA   => w_OPC_OUT
         );
 
-    -- @TODO: Os sinais abaixo vão sair de um controlador de receber pacotes do backend.
-    -- BVALID : out std_logic;
-    -- BRESP  : out std_logic_vector(c_BRESP_WIDTH - 1 downto 0);
-    -- RVALID : out std_logic;
-    -- RDATA  : out std_logic_vector(data_width_c - 1 downto 0);
-    -- RLAST  : out std_logic;
-    -- RRESP  : out std_logic_vector(c_RRESP_WIDTH - 1 downto 0);
+    -- Transaction information.
+    o_BACKEND_ADDR   <= AWADDR  when (w_OPC_OUT = '0') else ARADDR when (w_OPC_OUT = '1');
+    o_BACKEND_BURST  <= AWBURST when (w_OPC_OUT = '0') else ARBURST when (w_OPC_OUT = '1');
+    o_BACKEND_LENGTH <= AWLEN   when (w_OPC_OUT = '0') else ARLEN when (w_OPC_OUT = '1');
+    o_BACKEND_DATA   <= WDATA   when (w_OPC_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    o_BACKEND_OPC    <= w_OPC_OUT;
+    o_BACKEND_ID     <= AW_ID   when (w_OPC_OUT = '0') else AR_ID when (w_OPC_OUT = '1');
+
+    -- Control information.
+    o_BACKEND_START_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';
+    o_BACKEND_VALID  <= '1' when (w_OPC_OUT = '0' and WVALID = '1') or (w_OPC_OUT = '1') else '0';
+    o_BACKEND_LAST   <= '1' when (w_OPC_OUT = '0' and WLAST = '1') or (w_OPC_OUT = '1') else '0';
+
+    -- Ready information to front-end.
+    AWREADY <= i_BACKEND_READY_START_PACKET;
+    WREADY  <= i_BACKEND_READY;
+    ARREADY <= i_BACKEND_READY_START_PACKET;
+
 end arch_frontend_master;

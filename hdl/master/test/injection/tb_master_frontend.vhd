@@ -49,6 +49,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between front-end and back-end.
+    signal t_BACKEND_START_PACKET_IN: std_logic;
     signal t_BACKEND_VALID_IN : std_logic;
     signal t_BACKEND_LAST_IN  : std_logic;
     signal t_BACKEND_OPC_IN   : std_logic;
@@ -59,6 +60,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     signal t_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     signal t_BACKEND_READY_OUT: std_logic := '1';
+    signal t_BACKEND_READY_START_PACKET_OUT: std_logic := '1';
 
 begin
     u_FRONTEND_MASTER: entity work.frontend_master
@@ -105,7 +107,9 @@ begin
 
             -- Backend signals.
             i_BACKEND_READY  => t_BACKEND_READY_OUT,
+            i_BACKEND_READY_START_PACKET => t_BACKEND_READY_START_PACKET_OUT,
 
+            o_BACKEND_START_PACKET => t_BACKEND_START_PACKET_IN,
             o_BACKEND_VALID  => t_BACKEND_VALID_IN,
             o_BACKEND_LAST   => t_BACKEND_LAST_IN,
             o_BACKEND_ADDR   => t_BACKEND_ADDR_IN,

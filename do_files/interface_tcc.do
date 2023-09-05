@@ -1,11 +1,10 @@
 vlib work
 
 vcom -2008 ../hdl/basic/mux4.vhd
+vcom -2008 ../hdl/basic/reg1b.vhd
 
 vcom -2008 ../hdl/tcc_package.vhd
 
-vcom -2008 ../hdl/master/frontend/injection/frontend_master_data_multiplexer.vhd
-vcom -2008 ../hdl/master/frontend/injection/frontend_master_send_control.vhd
 vcom -2008 ../hdl/master/frontend/frontend_master.vhd
 
 vcom -2008 ../hdl/master/backend/injection/backend_master_routing_table.vhd

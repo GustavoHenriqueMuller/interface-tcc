@@ -21,9 +21,6 @@ sim:/tb_master_injection_write/t_WREADY \
 sim:/tb_master_injection_write/t_WVALID
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/u_FRONTEND_MASTER/u_FRONTEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
-
-add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
@@ -43,6 +40,9 @@ sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_BUFFER \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_OK_BUFFER \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_BUFFER \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_OK_BUFFER
+
+add wave -position insertpoint  \
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND_MASTER/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 
 
