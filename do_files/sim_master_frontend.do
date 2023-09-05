@@ -16,4 +16,5 @@ sim:/tb_master_frontend/t_BVALID \
 sim:/tb_master_frontend/t_VALID_SEND_DATA \
 sim:/tb_master_frontend/t_OPC \
 sim:/tb_master_frontend/t_DATA_SEND \
-sim:/tb_master_frontend/t_READY_SEND_DATA
+sim:/tb_master_frontend/t_READY_SEND_DATA \
+sim:/tb_master_frontend/t_READY_RECEIVE_DATA \

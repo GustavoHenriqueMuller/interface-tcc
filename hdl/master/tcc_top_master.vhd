@@ -65,8 +65,8 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_VALID_SEND_DATA  : std_logic;
     signal w_LAST_SEND_DATA   : std_logic;
 
-    signal w_READY_SEND_PACKET: std_logic;
-    signal w_READY_SEND_DATA  : std_logic;
+    signal w_READY_SEND_PACKET : std_logic;
+    signal w_READY_SEND_DATA   : std_logic;
 
     signal w_ADDR     : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal w_BURST    : std_logic_vector(1 downto 0);
@@ -77,6 +77,8 @@ architecture arch_tcc_top_master of tcc_top_master is
 
     -- Reception.
     signal w_READY_RECEIVE_PACKET: std_logic;
+    signal w_READY_RECEIVE_DATA  : std_logic;
+
     signal w_VALID_RECEIVE_PACKET: std_logic;
     signal w_LAST_RECEIVE_DATA   : std_logic;
     signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
@@ -143,6 +145,8 @@ begin
 
             -- Backend signals (reception).
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
+            o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
+
             i_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
@@ -172,6 +176,8 @@ begin
 
             -- Backend signals (reception).
             i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
+            i_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
+
             o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,

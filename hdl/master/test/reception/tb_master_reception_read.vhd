@@ -2,15 +2,18 @@ library IEEE;
 library work;
 
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 use work.tcc_package.all;
+use work.xina_pkg.all;
 
-entity tb_master_frontend is
-end tb_master_frontend;
+entity tb_master_reception_read is
+end tb_master_reception_read;
 
-architecture arch_tb_master_frontend of tb_master_frontend is
+architecture arch_tb_master_reception_read of tb_master_reception_read is
     -- AMBA-AXI 5 signals.
-    signal t_ACLK: std_logic := '0';
+    signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
+    signal t_RESET : std_logic := '0';
 
         -- Write request signals.
         signal t_AWVALID: std_logic := '0';
@@ -18,7 +21,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_AW_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_AWSIZE : std_logic_vector(2 downto 0) := "101";
+        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
         signal t_AWBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Write data signals.
@@ -38,7 +41,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_AR_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_ARSIZE : std_logic_vector(2 downto 0) := "101";
+        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Read response/data signals.
@@ -48,32 +51,28 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
-    -- Signals between front-end and back-end.
-    signal t_START_SEND_PACKET: std_logic;
-    signal t_VALID_SEND_DATA  : std_logic;
-    signal t_LAST_SEND_DATA   : std_logic;
-
-    signal t_READY_SEND_PACKET: std_logic := '1';
-    signal t_READY_SEND_DATA  : std_logic := '1';
-
-    signal t_ADDR     : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal t_BURST    : std_logic_vector(1 downto 0);
-    signal t_LENGTH   : std_logic_vector(7 downto 0);
-    signal t_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_OPC      : std_logic;
-    signal t_ID       : std_logic_vector(c_ID_WIDTH - 1 downto 0);
-
-    signal t_READY_RECEIVE_PACKET: std_logic;
-    signal t_READY_RECEIVE_DATA: std_logic;
-
-    signal t_VALID_RECEIVE_PACKET: std_logic;
-    signal t_LAST_RECEIVE_DATA   : std_logic;
-    signal t_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_OPC_RECEIVE   : std_logic;
-    signal t_STATUS_RECEIVE: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+    -- Signals of router 1.
+    signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t_l_in_val_i  : std_logic;
+    signal t_l_in_ack_o  : std_logic;
+    signal t_l_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t_l_out_val_o : std_logic;
+    signal t_l_out_ack_i : std_logic;
 
 begin
-    u_FRONTEND_MASTER: entity work.frontend_master
+    u_READ_RESPONSE_INJECTOR: entity work.read_response_injector
+        generic map(
+            data_width_p => c_DATA_WIDTH
+        )
+        port map(
+            clk_i  => t_ACLK,
+            rst_i  => t_RESET,
+            data_o => t_l_in_data_i,
+            val_o  => t_l_in_val_i,
+            ack_i  => t_l_in_ack_o
+        );
+
+    u_TOP_MASTER: entity work.tcc_top_master
         port map(
             -- AMBA AXI 5 signals.
             ACLK    => t_ACLK,
@@ -115,29 +114,14 @@ begin
                 RLAST   => t_RLAST,
                 RRESP   => t_RRESP,
 
-            -- Backend signals.
-            o_START_SEND_PACKET => t_START_SEND_PACKET,
-            o_VALID_SEND_DATA   => t_VALID_SEND_DATA,
-            i_READY_SEND_DATA   => t_READY_SEND_DATA,
-            i_READY_SEND_PACKET => t_READY_SEND_PACKET,
+            -- XINA signals.
+            l_in_data_i  => t_l_out_data_o,
+            l_in_val_i   => t_l_out_val_o,
+            l_in_ack_o   => t_l_out_ack_i,
 
-            o_LAST_SEND_DATA => t_LAST_SEND_DATA,
-            o_ADDR      => t_ADDR,
-            o_BURST     => t_BURST,
-            o_LENGTH    => t_LENGTH,
-            o_DATA_SEND => t_DATA_SEND,
-            o_OPC       => t_OPC,
-            o_ID        => t_ID,
-
-            -- Backend signals (reception).
-            o_READY_RECEIVE_PACKET => t_READY_RECEIVE_PACKET,
-            o_READY_RECEIVE_DATA => t_READY_RECEIVE_DATA,
-
-            i_VALID_RECEIVE_PACKET => t_VALID_RECEIVE_PACKET,
-            i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA,
-            i_DATA_RECEIVE         => t_DATA_RECEIVE,
-            i_OPC_RECEIVE          => t_OPC_RECEIVE,
-            i_STATUS_RECEIVE       => t_STATUS_RECEIVE
+            l_out_data_o => t_l_in_data_i,
+            l_out_val_o  => t_l_in_val_i,
+            l_out_ack_i  => t_l_in_ack_o
         );
 
     ---------------------------------------------------------------------------------------------
@@ -149,25 +133,41 @@ begin
     end process;
 
     ---------------------------------------------------------------------------------------------
+    -- Reset.
+    process(t_RESETn)
+    begin
+        t_RESET <= not t_RESETn;
+    end process;
+
+    ---------------------------------------------------------------------------------------------
     -- Tests.
     process
     begin
-        -- Simple write transaction.
-        t_AWVALID <= '1';
-        t_AWADDR <= "10101010101010101010101010101010" & "10101010101010101010101010101010";
-        t_AW_ID <= "00001";
-        t_AWLEN <= "00000001";
+        t_RREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_RVALID = '1';
 
-        wait until rising_edge(t_ACLK) and t_AWREADY = '1';
+                -- Flit 1.
+                t_WVALID <= '1';
+                t_WDATA <= "bc1qzk3kxhdxnzkpdgdn9ueg34y08smxgfv0hxvcu3";
 
-        t_AWVALID <= '0';
-        t_WVALID <= '1';
-        t_WDATA <= "10101010101010101010101010101010";
-        t_WLAST <= '1';
+                wait until rising_edge(t_ACLK) and t_WREADY = '1';
 
-        wait until rising_edge(t_ACLK) and t_WREADY = '1';
-        t_WDATA <= "00000000000000000000000000000000";
-        t_WVALID <= '0';
+                -- Flit 2.
+                t_WVALID <= '1';
+                t_WDATA <= "bc1qzk3kxhdxnzkpdgdn9ueg34y08smxgfv0hxvcu3";
+                t_WLAST <= '1';
+
+                wait until rising_edge(t_ACLK) and t_WREADY = '1';
+
+                -- Reset.
+                t_WDATA <= "00000000000000000000000000000000";
+                t_WVALID <= '0';
+                t_WLAST <= '0';
+
+        -- @TODO: RECEBER O PAYLOAD.
+
+        t_RREADY <= '0';
+        wait for 100 ns;
     end process;
 
-end arch_tb_master_frontend;
+end arch_tb_master_reception_read;

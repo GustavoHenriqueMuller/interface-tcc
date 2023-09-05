@@ -27,6 +27,8 @@ entity backend_master is
 
         -- Signals (reception).
         i_READY_RECEIVE_PACKET: in std_logic;
+        i_READY_RECEIVE_DATA  : in std_logic;
+
         o_VALID_RECEIVE_PACKET: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
         o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
@@ -74,6 +76,8 @@ begin
             ARESETn => ARESETn,
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
+            i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
+
             o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => o_DATA_RECEIVE,

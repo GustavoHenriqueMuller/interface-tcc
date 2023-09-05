@@ -13,6 +13,8 @@ entity backend_master_reception is
 
         -- Backend signals.
         i_READY_RECEIVE_PACKET: in std_logic;
+        i_READY_RECEIVE_DATA  : in std_logic;
+
         o_VALID_RECEIVE_PACKET: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
         o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
@@ -71,8 +73,9 @@ begin
             o_DATA => w_HEADER_2
         );
 
-    o_OPC_RECEIVE <= w_HEADER_2(0);
+    o_OPC_RECEIVE    <= w_HEADER_2(0);
     o_STATUS_RECEIVE <= w_HEADER_2(5 downto 3);
+    o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
         port map(
@@ -80,6 +83,7 @@ begin
             ARESETn => ARESETn,
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
+            i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
             o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 

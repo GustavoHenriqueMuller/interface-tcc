@@ -13,9 +13,11 @@ entity backend_master_depacketizer_control is
 
         -- Backend signals.
         i_READY_RECEIVE_PACKET: in std_logic;
+        i_READY_RECEIVE_DATA  : in std_logic;
         o_VALID_RECEIVE_PACKET: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
+        -- Buffer.
         i_FLIT          : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_READ_BUFFER   : out std_logic;
         i_READ_OK_BUFFER: in std_logic;
@@ -83,6 +85,7 @@ begin
                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
                                      end if;
 
+            -- @TODO;
             when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
                                         -- Flit is trailer.
                                         r_NEXT_STATE <= S_HEADER_1;
@@ -96,7 +99,9 @@ begin
     -- Output values.
 	o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') or
                               (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') or
-                              (r_CURRENT_STATE = S_WRITE_RESPONSE_TRAILER and i_READ_OK_BUFFER = '1') else '0';
+                              (r_CURRENT_STATE = S_WRITE_RESPONSE_TRAILER and i_READ_OK_BUFFER = '1') or
+                              (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1')
+                              else '0';
 
     o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) else '0';
     o_LAST_RECEIVE_DATA    <= '0';
