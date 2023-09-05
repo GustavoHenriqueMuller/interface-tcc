@@ -11,6 +11,7 @@ vcom -2008 ../hdl/master/backend/injection/backend_master_routing_table.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_datapath.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_send_control.vhd
+vcom -2008 ../hdl/master/backend/injection/backend_master_injection.vhd
 
 vcom -2008 ../hdl/master/backend/reception/backend_master_receive_control.vhd
 

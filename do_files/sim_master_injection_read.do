@@ -21,10 +21,10 @@ sim:/tb_master_injection_read/t_WREADY \
 sim:/tb_master_injection_read/t_WVALID
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/u_BACKEND_MASTER_PACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/u_BACKEND_MASTER_SEND_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_DATA_IN \
@@ -34,15 +34,15 @@ sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_VALID_IN \
 sim:/tb_master_injection_read/u_TOP_MASTER/w_BACKEND_ID_IN
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_ARESET \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_FLIT \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_BUFFER \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_WRITE_OK_BUFFER \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_BUFFER \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/w_READ_OK_BUFFER
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_ARESET \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_FLIT \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_WRITE_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_WRITE_OK_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_READ_BUFFER \
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND_MASTER/u_BACKEND_MASTER_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 
 
