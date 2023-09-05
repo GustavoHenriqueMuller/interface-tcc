@@ -12,15 +12,16 @@ entity backend_master_packetizer_control is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_START_PACKET   : in std_logic;
-        i_VALID          : in std_logic;
-        i_LAST           : in std_logic;
-        i_WRITE_OK_BUFFER: in std_logic;
+        i_START_SEND_PACKET: in std_logic;
+        o_READY_SEND_PACKET: out std_logic;
+        i_VALID_SEND_DATA  : in std_logic;
+        o_READY_SEND_DATA  : out std_logic;
 
-        o_FLIT_SELECTOR: out std_logic_vector(1 downto 0);
-        o_WRITE_BUFFER : out std_logic;
-        o_READY        : out std_logic;
-        o_READY_START_PACKET: out std_logic
+        i_LAST: in std_logic;
+
+        i_WRITE_OK_BUFFER: in std_logic;
+        o_FLIT_SELECTOR  : out std_logic_vector(1 downto 0);
+        o_WRITE_BUFFER   : out std_logic
     );
 end backend_master_packetizer_control;
 
@@ -51,10 +52,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_START_PACKET, i_WRITE_OK_BUFFER, i_VALID, i_LAST)
+    process (ACLK, i_START_SEND_PACKET, i_WRITE_OK_BUFFER, i_VALID_SEND_DATA, i_LAST)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_START_PACKET = '1') then
+            when S_IDLE => if (i_START_SEND_PACKET = '1') then
                                r_NEXT_STATE <= S_HEADER_1;
                            else
                                r_NEXT_STATE <= S_IDLE;
@@ -74,7 +75,7 @@ begin
                                            r_NEXT_STATE <= S_HEADER_2_WAIT_OK;
                                        end if;
 
-            when S_PAYLOAD => if (i_VALID = '1') then
+            when S_PAYLOAD => if (i_VALID_SEND_DATA = '1') then
                                  if (i_LAST = '1') then
                                     r_NEXT_STATE <= S_PAYLOAD_WAIT_OK_LAST;
                                  else
@@ -115,11 +116,11 @@ begin
 
     o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
-                               (r_CURRENT_STATE = S_PAYLOAD and i_VALID = '1') or
+                               (r_CURRENT_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1') or
                                (r_CURRENT_STATE  = S_TRAILER) else '0';
 
-    o_READY <= '1' when r_CURRENT_STATE = S_PAYLOAD else '0';
+    o_READY_SEND_DATA <= '1' when r_CURRENT_STATE = S_PAYLOAD else '0';
 
-    o_READY_START_PACKET <= '1' when r_CURRENT_STATE = S_IDLE else '0';
+    o_READY_SEND_PACKET <= '1' when r_CURRENT_STATE = S_IDLE else '0';
 
 end arch_backend_master_packetizer_control;

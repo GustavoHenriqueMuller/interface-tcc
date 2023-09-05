@@ -12,8 +12,11 @@ entity backend_master_injection is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_START_PACKET: in std_logic;
-        i_VALID : in std_logic;
+        i_START_SEND_PACKET: in std_logic;
+        o_READY_SEND_PACKET: out std_logic;
+        i_VALID_SEND_DATA  : in std_logic;
+		o_READY_SEND_DATA  : out std_logic;
+
         i_LAST  : in std_logic;
 		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 		i_BURST : in std_logic_vector(1 downto 0);
@@ -21,9 +24,6 @@ entity backend_master_injection is
         i_DATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_OPC   : in std_logic;
         i_ID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
-
-        o_READY_START_PACKET: out std_logic;
-		o_READY : out std_logic;
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -67,15 +67,16 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_START_PACKET => i_START_PACKET,
-            i_VALID  => i_VALID,
-            i_LAST   => i_LAST,
-            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+            i_START_SEND_PACKET  => i_START_SEND_PACKET,
+            o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
+            i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
+            o_READY_SEND_DATA    => o_READY_SEND_DATA,
 
+            i_LAST => i_LAST,
+
+            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
             o_FLIT_SELECTOR => w_FLIT_SELECTOR,
-            o_WRITE_BUFFER  => w_WRITE_BUFFER,
-            o_READY         => o_READY,
-            o_READY_START_PACKET => o_READY_START_PACKET
+            o_WRITE_BUFFER  => w_WRITE_BUFFER
         );
 
     u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath

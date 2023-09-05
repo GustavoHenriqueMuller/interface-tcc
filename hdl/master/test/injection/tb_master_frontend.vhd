@@ -49,18 +49,22 @@ architecture arch_tb_master_frontend of tb_master_frontend is
         signal t_RRESP  : std_logic_vector(c_RRESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between front-end and back-end.
-    signal t_BACKEND_START_PACKET_IN: std_logic;
-    signal t_BACKEND_VALID_IN : std_logic;
-    signal t_BACKEND_LAST_IN  : std_logic;
-    signal t_BACKEND_OPC_IN   : std_logic;
-    signal t_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal t_BACKEND_BURST_IN : std_logic_vector(1 downto 0);
-    signal t_BACKEND_LENGTH_IN: std_logic_vector(7 downto 0);
-    signal t_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal t_START_SEND_PACKET: std_logic;
+    signal t_VALID_SEND_DATA  : std_logic;
+    signal t_READY_SEND_PACKET: std_logic := '1';
+    signal t_READY_SEND_DATA  : std_logic := '1';
 
-    signal t_BACKEND_READY_OUT: std_logic := '1';
-    signal t_BACKEND_READY_START_PACKET_OUT: std_logic := '1';
+    signal t_LAST  : std_logic;
+    signal t_ADDR  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+    signal t_BURST : std_logic_vector(1 downto 0);
+    signal t_LENGTH: std_logic_vector(7 downto 0);
+    signal t_DATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal t_OPC   : std_logic;
+    signal t_ID    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+
+    signal t_READY_RECEIVE_PACKET: std_logic;
+    signal t_VALID_RECEIVE_PACKET: std_logic;
+    signal t_LAST_RECEIVE_DATA   : std_logic;
 
 begin
     u_FRONTEND_MASTER: entity work.frontend_master
@@ -106,18 +110,23 @@ begin
                 RRESP   => t_RRESP,
 
             -- Backend signals.
-            i_BACKEND_READY  => t_BACKEND_READY_OUT,
-            i_BACKEND_READY_START_PACKET => t_BACKEND_READY_START_PACKET_OUT,
+            o_START_SEND_PACKET => t_START_SEND_PACKET,
+            o_VALID_SEND_DATA   => t_VALID_SEND_DATA,
+            i_READY_SEND_DATA   => t_READY_SEND_DATA,
+            i_READY_SEND_PACKET => t_READY_SEND_PACKET,
 
-            o_BACKEND_START_PACKET => t_BACKEND_START_PACKET_IN,
-            o_BACKEND_VALID  => t_BACKEND_VALID_IN,
-            o_BACKEND_LAST   => t_BACKEND_LAST_IN,
-            o_BACKEND_ADDR   => t_BACKEND_ADDR_IN,
-            o_BACKEND_BURST  => t_BACKEND_BURST_IN,
-            o_BACKEND_LENGTH => t_BACKEND_LENGTH_IN,
-            o_BACKEND_DATA   => t_BACKEND_DATA_IN,
-            o_BACKEND_OPC    => t_BACKEND_OPC_IN,
-            o_BACKEND_ID     => t_BACKEND_ID_IN
+            o_LAST   => t_LAST,
+            o_ADDR   => t_ADDR,
+            o_BURST  => t_BURST,
+            o_LENGTH => t_LENGTH,
+            o_DATA   => t_DATA,
+            o_OPC    => t_OPC,
+            o_ID     => t_ID,
+
+            -- Backend signals (reception).
+            o_READY_RECEIVE_PACKET => t_READY_RECEIVE_PACKET,
+            i_VALID_RECEIVE_PACKET => t_VALID_RECEIVE_PACKET,
+            i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA
         );
 
     ---------------------------------------------------------------------------------------------

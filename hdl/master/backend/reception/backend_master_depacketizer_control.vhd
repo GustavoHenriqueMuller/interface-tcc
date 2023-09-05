@@ -12,13 +12,14 @@ entity backend_master_depacketizer_control is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_FLIT: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_READ_OK_BUFFER: in std_logic;
         i_READY_RECEIVE_PACKET: in std_logic;
+        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_LAST_RECEIVE_DATA   : out std_logic;
 
-		o_READ_BUFFER : out std_logic;
-        o_VALID_PACKET: out std_logic;
-        o_LAST        : out std_logic;
+        i_FLIT: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_READ_BUFFER: out std_logic;
+        i_READ_OK_BUFFER: in std_logic;
+
         o_WRITE_HEADER_1_REG: out std_logic;
         o_WRITE_HEADER_2_REG: out std_logic
     );
@@ -84,8 +85,9 @@ begin
 	o_READ_BUFFER  <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
                                (r_CURRENT_STATE = S_HEADER_2) or
                                (r_CURRENT_STATE = S_REST) else '0';
-    o_VALID_PACKET <= '1' when (r_CURRENT_STATE = S_REST) else '0';
-    o_LAST <= '0';
+    o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_REST) else '0';
+    o_LAST_RECEIVE_DATA <= '0';
+
     o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
     o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2) else '0';
 

@@ -60,21 +60,22 @@ end tcc_top_master;
 
 architecture arch_tcc_top_master of tcc_top_master is
     -- Signals between front-end and back-end.
-    signal w_BACKEND_RECEIVE_PACKET_IN: std_logic;
-    signal w_BACKEND_START_PACKET_IN: std_logic;
-    signal w_BACKEND_VALID_IN : std_logic;
-    signal w_BACKEND_LAST_IN  : std_logic;
-    signal w_BACKEND_ADDR_IN  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
-    signal w_BACKEND_BURST_IN : std_logic_vector(1 downto 0);
-    signal w_BACKEND_LENGTH_IN: std_logic_vector(7 downto 0);
-    signal w_BACKEND_DATA_IN  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_BACKEND_OPC_IN   : std_logic;
-    signal w_BACKEND_ID_IN    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal w_START_SEND_PACKET: std_logic;
+    signal w_VALID_SEND_DATA  : std_logic;
+    signal w_READY_SEND_PACKET: std_logic;
+    signal w_READY_SEND_DATA  : std_logic;
 
-    signal w_BACKEND_READY_START_PACKET_OUT: std_logic;
-    signal w_BACKEND_READY_OUT: std_logic;
-    signal w_BACKEND_VALID_PACKET_OUT: std_logic;
-    signal w_BACKEND_LAST_OUT: std_logic;
+    signal w_LAST  : std_logic;
+    signal w_ADDR  : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+    signal w_BURST : std_logic_vector(1 downto 0);
+    signal w_LENGTH: std_logic_vector(7 downto 0);
+    signal w_DATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_OPC   : std_logic;
+    signal w_ID    : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+
+    signal w_READY_RECEIVE_PACKET: std_logic;
+    signal w_VALID_RECEIVE_PACKET: std_logic;
+    signal w_LAST_RECEIVE_DATA   : std_logic;
 
 begin
     u_FRONTEND: entity work.frontend_master
@@ -120,18 +121,23 @@ begin
                 RRESP   => RRESP,
 
             -- Backend signals.
-            i_BACKEND_READY => w_BACKEND_READY_OUT,
-            i_BACKEND_READY_START_PACKET => w_BACKEND_READY_START_PACKET_OUT,
+            o_START_SEND_PACKET => w_START_SEND_PACKET,
+            o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
+            i_READY_SEND_DATA   => w_READY_SEND_DATA,
+            i_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            o_BACKEND_START_PACKET => w_BACKEND_START_PACKET_IN,
-            o_BACKEND_VALID  => w_BACKEND_VALID_IN,
-            o_BACKEND_LAST   => w_BACKEND_LAST_IN,
-            o_BACKEND_ADDR   => w_BACKEND_ADDR_IN,
-            o_BACKEND_BURST  => w_BACKEND_BURST_IN,
-            o_BACKEND_LENGTH => w_BACKEND_LENGTH_IN,
-            o_BACKEND_DATA   => w_BACKEND_DATA_IN,
-            o_BACKEND_OPC    => w_BACKEND_OPC_IN,
-            o_BACKEND_ID     => w_BACKEND_ID_IN
+            o_LAST   => w_LAST,
+            o_ADDR   => w_ADDR,
+            o_BURST  => w_BURST,
+            o_LENGTH => w_LENGTH,
+            o_DATA   => w_DATA,
+            o_OPC    => w_OPC,
+            o_ID     => w_ID,
+
+            -- Backend signals (reception).
+            o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
+            i_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
+            i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA
         );
 
     u_BACKEND: entity work.backend_master
@@ -141,21 +147,23 @@ begin
             ARESETn => ARESETn,
 
             -- Backend signals.
-            i_READY_RECEIVE_PACKET => w_BACKEND_RECEIVE_PACKET_IN,
-            i_START_PACKET => w_BACKEND_START_PACKET_IN,
-            i_VALID  => w_BACKEND_VALID_IN,
-            i_LAST   => w_BACKEND_LAST_IN,
-			i_ADDR   => w_BACKEND_ADDR_IN,
-			i_BURST  => w_BACKEND_BURST_IN,
-			i_LENGTH => w_BACKEND_LENGTH_IN,
-            i_DATA   => w_BACKEND_DATA_IN,
-            i_OPC    => w_BACKEND_OPC_IN,
-            i_ID     => w_BACKEND_ID_IN,
+            i_START_SEND_PACKET => w_START_SEND_PACKET,
+            i_VALID_SEND_DATA   => w_VALID_SEND_DATA,
+            o_READY_SEND_DATA   => w_READY_SEND_DATA,
+            o_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            o_READY_START_PACKET  => w_BACKEND_READY_START_PACKET_OUT,
-            o_READY  => w_BACKEND_READY_OUT,
-            o_VALID_PACKET => w_BACKEND_VALID_PACKET_OUT,
-            o_LAST => w_BACKEND_LAST_OUT,
+            i_LAST   => w_LAST,
+            i_ADDR   => w_ADDR,
+            i_BURST  => w_BURST,
+            i_LENGTH => w_LENGTH,
+            i_DATA   => w_DATA,
+            i_OPC    => w_OPC,
+            i_ID     => w_ID,
+
+            -- Backend signals (reception).
+            i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
+            o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
+            o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

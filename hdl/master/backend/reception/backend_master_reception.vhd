@@ -13,8 +13,8 @@ entity backend_master_reception is
 
         -- Backend signals.
         i_READY_RECEIVE_PACKET: in std_logic;
-        o_VALID_PACKET: out std_logic;
-        o_LAST: out std_logic;
+        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_LAST_RECEIVE_DATA   : out std_logic;
 
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -73,13 +73,14 @@ begin
             ACLK => ACLK,
             ARESETn => ARESETn,
 
-            i_FLIT => w_FLIT,
-            i_READ_OK_BUFFER => w_READ_OK_BUFFER,
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
+            o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
+            o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
+            i_FLIT => w_FLIT,
             o_READ_BUFFER => w_READ_BUFFER,
-            o_VALID_PACKET => o_VALID_PACKET,
-            o_LAST => o_LAST,
+            i_READ_OK_BUFFER => w_READ_OK_BUFFER,
+
             o_WRITE_HEADER_1_REG => w_WRITE_HEADER_1_REG,
             o_WRITE_HEADER_2_REG => w_WRITE_HEADER_2_REG
         );
@@ -108,8 +109,8 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_WRITE_OK_BUFFER  => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER  => w_WRITE_BUFFER,
+            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+            o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
             l_out_val_o => l_out_val_o,
             l_out_ack_i => l_out_ack_i

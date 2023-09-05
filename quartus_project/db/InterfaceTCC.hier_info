@@ -641,7 +641,7 @@ i_DATA[28] => tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER
 i_DATA[29] => tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH.i_DATA[29]
 i_DATA[30] => tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH.i_DATA[30]
 i_DATA[31] => tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH.i_DATA[31]
-o_READY <= tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL.o_READY
+o_READY_SEND_PAYLOAD<= tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL.o_READY
 l_in_data_i[0] <= buffering:u_BUFFER_FIFO.data_o[0]
 l_in_data_i[1] <= buffering:u_BUFFER_FIFO.data_o[1]
 l_in_data_i[2] <= buffering:u_BUFFER_FIFO.data_o[2]
@@ -736,7 +736,7 @@ i_WRITE_OK_BUFFER => Selector5.IN2
 o_FLIT_SELECTOR[0] <= o_FLIT_SELECTOR.DB_MAX_OUTPUT_PORT_TYPE
 o_FLIT_SELECTOR[1] <= o_FLIT_SELECTOR.DB_MAX_OUTPUT_PORT_TYPE
 o_WRITE_BUFFER <= o_WRITE_BUFFER.DB_MAX_OUTPUT_PORT_TYPE
-o_READY <= o_READY.DB_MAX_OUTPUT_PORT_TYPE
+o_READY_SEND_PAYLOAD<= o_READY.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH

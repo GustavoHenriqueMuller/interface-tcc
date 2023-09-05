@@ -11,10 +11,12 @@ entity backend_master is
         ACLK   : in std_logic;
         ARESETn: in std_logic;
 
-        -- Backend signals.
-        i_READY_RECEIVE_PACKET: in std_logic;
-        i_START_PACKET: in std_logic;
-        i_VALID : in std_logic;
+        -- Signals (injection).
+        i_START_SEND_PACKET: in std_logic;
+        i_VALID_SEND_DATA  : in std_logic;
+        o_READY_SEND_PACKET: out std_logic;
+		o_READY_SEND_DATA  : out std_logic;
+
         i_LAST  : in std_logic;
 		i_ADDR  : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
 		i_BURST : in std_logic_vector(1 downto 0);
@@ -23,10 +25,10 @@ entity backend_master is
         i_OPC   : in std_logic;
         i_ID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
-        o_READY_START_PACKET: out std_logic;
-		o_READY : out std_logic;
-        o_VALID_PACKET: out std_logic;
-        o_LAST: out std_logic;
+        -- Signals (reception).
+        i_READY_RECEIVE_PACKET: in std_logic;
+        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_LAST_RECEIVE_DATA   : out std_logic;
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -45,8 +47,11 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_START_PACKET => i_START_PACKET,
-            i_VALID  => i_VALID,
+            i_START_SEND_PACKET => i_START_SEND_PACKET,
+            i_VALID_SEND_DATA   => i_VALID_SEND_DATA,
+            o_READY_SEND_PACKET => o_READY_SEND_PACKET,
+            o_READY_SEND_DATA   => o_READY_SEND_DATA,
+
             i_LAST   => i_LAST,
             i_ADDR   => i_ADDR,
             i_BURST  => i_BURST,
@@ -54,9 +59,6 @@ begin
             i_DATA   => i_DATA,
             i_OPC    => i_OPC,
             i_ID     => i_ID,
-
-            o_READY_START_PACKET => o_READY_START_PACKET,
-            o_READY => o_READY,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
@@ -69,11 +71,12 @@ begin
             ARESETn => ARESETn,
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
-            o_VALID_PACKET => o_VALID_PACKET,
-            o_LAST => o_LAST,
+            o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
+            o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
+
 end arch_backend_master;
