@@ -124,55 +124,17 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
     signal t2_w_out_ack_i : std_logic;
 
 begin
-    u_TOP_MASTER: entity work.tcc_top_master
+    u_RESPONSE_INJECTOR: entity work.response_injector
+        generic map(
+            data_width_p => c_DATA_WIDTH,
+            qnt_flits_p  => 3
+        )
         port map(
-            -- AMBA AXI 5 signals.
-            ACLK    => t_ACLK,
-            ARESETn => t_RESETn,
-
-                -- Write request signals.
-                AWVALID => t_AWVALID,
-                AWREADY => t_AWREADY,
-                AW_ID   => t_AW_ID,
-                AWADDR  => t_AWADDR,
-                AWLEN   => t_AWLEN,
-                AWSIZE  => t_AWSIZE,
-                AWBURST => t_AWBURST,
-
-                -- Write data signals.
-                WVALID  => t_WVALID,
-                WREADY  => t_WREADY,
-                WDATA   => t_WDATA,
-                WLAST   => t_WLAST,
-
-                -- Write response signals.
-                BVALID  => t_BVALID,
-                BREADY  => t_BREADY,
-                BRESP   => t_BRESP,
-
-                -- Read request signals.
-                ARVALID => t_ARVALID,
-                ARREADY => t_ARREADY,
-                AR_ID   => t_AR_ID,
-                ARADDR  => t_ARADDR,
-                ARLEN   => t_ARLEN,
-                ARSIZE  => t_ARSIZE,
-                ARBURST => t_ARBURST,
-
-                -- Read data signals.
-                RVALID  => t_RVALID,
-                RREADY  => t_RREADY,
-                RDATA   => t_RDATA,
-                RLAST   => t_RLAST,
-                RRESP   => t_RRESP,
-
-            -- XINA signals.
-            l_in_data_i  => t_l_in_data_i,
-            l_in_val_i   => t_l_in_val_i,
-            l_in_ack_o   => t_l_in_ack_o,
-            l_out_data_o => t_l_out_data_o,
-            l_out_val_o  => t_l_out_val_o,
-            l_out_ack_i  => t_l_out_ack_i
+            clk_i  => t_ACLK,
+            rst_i  => t_RESET,
+            data_o => t_l_in_data_i,
+            val_o  => t_l_in_val_i,
+            ack_i  => t_l_in_ack_o
         );
 
     u_XINA_ROUTER_1: entity work.router
@@ -267,17 +229,55 @@ begin
             w_out_ack_i  => t2_w_out_ack_i
         );
 
-    u_RESPONSE_INJECTOR: entity work.response_injector
-        generic map(
-            data_width_p => c_DATA_WIDTH,
-            qnt_flits_p  => 3
-        )
+    u_TOP_MASTER: entity work.tcc_top_master
         port map(
-            clk_i  => t_ACLK,
-            rst_i  => t_RESET,
-            data_o => t2_l_in_data_i,
-            val_o  => t2_l_in_val_i,
-            ack_i  => t2_l_in_ack_o
+            -- AMBA AXI 5 signals.
+            ACLK    => t_ACLK,
+            ARESETn => t_RESETn,
+
+                -- Write request signals.
+                AWVALID => t_AWVALID,
+                AWREADY => t_AWREADY,
+                AW_ID   => t_AW_ID,
+                AWADDR  => t_AWADDR,
+                AWLEN   => t_AWLEN,
+                AWSIZE  => t_AWSIZE,
+                AWBURST => t_AWBURST,
+
+                -- Write data signals.
+                WVALID  => t_WVALID,
+                WREADY  => t_WREADY,
+                WDATA   => t_WDATA,
+                WLAST   => t_WLAST,
+
+                -- Write response signals.
+                BVALID  => t_BVALID,
+                BREADY  => t_BREADY,
+                BRESP   => t_BRESP,
+
+                -- Read request signals.
+                ARVALID => t_ARVALID,
+                ARREADY => t_ARREADY,
+                AR_ID   => t_AR_ID,
+                ARADDR  => t_ARADDR,
+                ARLEN   => t_ARLEN,
+                ARSIZE  => t_ARSIZE,
+                ARBURST => t_ARBURST,
+
+                -- Read data signals.
+                RVALID  => t_RVALID,
+                RREADY  => t_RREADY,
+                RDATA   => t_RDATA,
+                RLAST   => t_RLAST,
+                RRESP   => t_RRESP,
+
+            -- XINA signals.
+            l_in_data_i  => t2_l_in_data_i,
+            l_in_val_i   => t2_l_in_val_i,
+            l_in_ack_o   => t2_l_in_ack_o,
+            l_out_data_o => t2_l_out_data_o,
+            l_out_val_o  => t2_l_out_val_o,
+            l_out_ack_i  => t2_l_out_ack_i
         );
 
     ---------------------------------------------------------------------------------------------
@@ -299,7 +299,10 @@ begin
     -- Tests.
     process
     begin
-        -- @TODO.
+        -- @TODO
+        --t_RESETn <= '0';
+        --wait for 50 ns;
+        --t_RESETn <= '1';
         wait;
     end process;
 

@@ -22,9 +22,12 @@ architecture arch_response_injector of response_injector is
     signal current_state : std_logic := '0';
     signal next_state    : std_logic;
 
+    signal x: std_logic_vector(1 downto 0) := "01";
+    signal y: std_logic_vector(1 downto 0) := "00";
+
     signal enb_counter_w: std_logic;
     signal id_w: integer range 0 to qnt_flits_p := 0;
-    signal header_w: std_logic_vector(data_width_p downto 0)  := "1" & "0000000000000000" & "0000000000000000";
+    signal header_w: std_logic_vector(data_width_p downto 0)  := "1" & "0000000000000001" & "0000000000000000";
     signal payload_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000000000000" & "0000000000000000";
     signal trailer_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000000" & "0000000000000000";
     signal data_out_w: std_logic_vector(data_width_p downto 0);
@@ -44,7 +47,7 @@ begin
     begin
         if id_w = 0 then
             data_out_w <= header_w;
-        elsif id_w = qnt_flits_p - 1 then
+        elsif id_w < qnt_flits_p - 1 then
             data_out_w <= payload_w;
         else
             data_out_w <= trailer_w;
