@@ -3,9 +3,6 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
 entity reg1b is
-    generic (
-        p_DEFAULT_VALUE: natural := 0
-    );
     port (
         ACLK   : in std_logic;
         ARESETn: in std_logic;

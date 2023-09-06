@@ -144,30 +144,10 @@ begin
     process
     begin
         t_RREADY <= '1';
-        wait until rising_edge(t_ACLK) and t_RVALID = '1';
-
-                -- Flit 1.
-                t_WVALID <= '1';
-                t_WDATA <= "bc1qzk3kxhdxnzkpdgdn9ueg34y08smxgfv0hxvcu3";
-
-                wait until rising_edge(t_ACLK) and t_WREADY = '1';
-
-                -- Flit 2.
-                t_WVALID <= '1';
-                t_WDATA <= "bc1qzk3kxhdxnzkpdgdn9ueg34y08smxgfv0hxvcu3";
-                t_WLAST <= '1';
-
-                wait until rising_edge(t_ACLK) and t_WREADY = '1';
-
-                -- Reset.
-                t_WDATA <= "00000000000000000000000000000000";
-                t_WVALID <= '0';
-                t_WLAST <= '0';
-
-        -- @TODO: RECEBER O PAYLOAD.
+        wait until rising_edge(t_ACLK) and t_RVALID = '1' and t_RLAST = '1';
 
         t_RREADY <= '0';
-        wait for 100 ns;
+        wait;
     end process;
 
 end arch_tb_master_reception_read;

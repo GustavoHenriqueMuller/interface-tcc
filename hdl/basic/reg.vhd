@@ -17,7 +17,7 @@ entity reg is
 end reg;
 
 architecture arch_reg of reg is
-    signal r_DATA: std_logic_vector(p_DATA_WIDTH - 1 downto 0);
+    signal r_DATA: std_logic_vector(p_DATA_WIDTH - 1 downto 0) := conv_std_logic_vector(p_DEFAULT_VALUE, p_DATA_WIDTH);
 
 begin
     process (ACLK, ARESETn)

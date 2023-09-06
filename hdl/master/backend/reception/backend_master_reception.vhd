@@ -51,7 +51,7 @@ begin
     -- Registering.
     u_HEADER_1_REG: entity work.reg
         generic map(
-            p_DATA_WIDTH => c_FLIT_WIDTH
+            p_DATA_WIDTH    => c_FLIT_WIDTH
         )
         port map(
             ACLK => ACLK,

@@ -22,11 +22,6 @@ vcom -2008 ../hdl/master/backend/backend_master.vhd
 
 vcom -2008 ../hdl/master/tcc_top_master.vhd
 
-
-
-
-
-
 vcom -2008 ../hdl/master/test/injection/tb_master_frontend.vhd
 vcom -2008 ../hdl/master/test/injection/tb_master_injection_read.vhd
 vcom -2008 ../hdl/master/test/injection/tb_master_injection_write.vhd
@@ -42,3 +37,5 @@ vcom -2008 ../hdl/master/test/injection/test_tg/tg_tb.vhd
 
 vcom -2008 ../hdl/master/test/reception/write_response_injector.vhd
 vcom -2008 ../hdl/master/test/reception/tb_master_reception_write.vhd
+vcom -2008 ../hdl/master/test/reception/read_response_injector.vhd
+vcom -2008 ../hdl/master/test/reception/tb_master_reception_read.vhd
