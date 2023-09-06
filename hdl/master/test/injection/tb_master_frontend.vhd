@@ -66,7 +66,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     signal t_READY_RECEIVE_PACKET: std_logic;
     signal t_READY_RECEIVE_DATA: std_logic;
 
-    signal t_VALID_RECEIVE_PACKET: std_logic;
+    signal t_VALID_RECEIVE_DATA: std_logic;
     signal t_LAST_RECEIVE_DATA   : std_logic;
     signal t_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
     signal t_OPC_RECEIVE   : std_logic;
@@ -133,7 +133,7 @@ begin
             o_READY_RECEIVE_PACKET => t_READY_RECEIVE_PACKET,
             o_READY_RECEIVE_DATA => t_READY_RECEIVE_DATA,
 
-            i_VALID_RECEIVE_PACKET => t_VALID_RECEIVE_PACKET,
+            i_VALID_RECEIVE_DATA => t_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => t_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => t_DATA_RECEIVE,
             i_OPC_RECEIVE          => t_OPC_RECEIVE,

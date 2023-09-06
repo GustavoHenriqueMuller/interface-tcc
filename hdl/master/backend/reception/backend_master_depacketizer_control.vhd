@@ -14,7 +14,7 @@ entity backend_master_depacketizer_control is
         -- Backend signals.
         i_READY_RECEIVE_PACKET: in std_logic;
         i_READY_RECEIVE_DATA  : in std_logic;
-        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_VALID_RECEIVE_DATA: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
         -- Buffer.
@@ -102,7 +102,7 @@ begin
                               (r_CURRENT_STATE = S_READ_RESPONSE and i_READY_RECEIVE_DATA = '1')
                               else '0';
 
-    o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') or
+    o_VALID_RECEIVE_DATA <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') or
                                        (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
                                        else '0';
     o_LAST_RECEIVE_DATA    <= '0';

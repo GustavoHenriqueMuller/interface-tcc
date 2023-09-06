@@ -11,7 +11,7 @@ sim:/tb_master_reception_write/t_BRESP
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/i_READY_RECEIVE_PACKET \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/o_VALID_RECEIVE_PACKET \
+sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/o_VALID_RECEIVE_DATA \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/o_LAST_RECEIVE_DATA
 
 add wave -position insertpoint  \

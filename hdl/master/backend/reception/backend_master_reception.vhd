@@ -15,7 +15,7 @@ entity backend_master_reception is
         i_READY_RECEIVE_PACKET: in std_logic;
         i_READY_RECEIVE_DATA  : in std_logic;
 
-        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_VALID_RECEIVE_DATA: out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
         o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_OPC_RECEIVE         : out std_logic;
@@ -84,7 +84,7 @@ begin
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
-            o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
+            o_VALID_RECEIVE_DATA => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
             i_FLIT => w_FLIT,
