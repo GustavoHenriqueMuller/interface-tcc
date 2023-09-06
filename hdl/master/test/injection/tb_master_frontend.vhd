@@ -60,7 +60,7 @@ architecture arch_tb_master_frontend of tb_master_frontend is
     signal t_BURST    : std_logic_vector(1 downto 0);
     signal t_LENGTH   : std_logic_vector(7 downto 0);
     signal t_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal t_OPC      : std_logic;
+    signal t_OPC_SEND : std_logic;
     signal t_ID       : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     signal t_READY_RECEIVE_PACKET: std_logic;
@@ -126,7 +126,7 @@ begin
             o_BURST     => t_BURST,
             o_LENGTH    => t_LENGTH,
             o_DATA_SEND => t_DATA_SEND,
-            o_OPC       => t_OPC,
+            o_OPC_SEND  => t_OPC_SEND,
             o_ID        => t_ID,
 
             -- Backend signals (reception).

@@ -23,7 +23,7 @@ entity backend_master_injection is
 		i_BURST    : in std_logic_vector(1 downto 0);
         i_LENGTH   : in std_logic_vector(7 downto 0);
         i_DATA_SEND: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC      : in std_logic;
+        i_OPC_SEND : in std_logic;
         i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
         -- XINA signals.
@@ -89,7 +89,7 @@ begin
             i_BURST     => i_BURST,
             i_LENGTH    => i_LENGTH,
             i_DATA_SEND => i_DATA_SEND,
-            i_OPC       => i_OPC,
+            i_OPC_SEND  => i_OPC_SEND,
             i_ID        => i_ID,
             i_DEST_X    => w_DEST_X,
             i_DEST_Y    => w_DEST_Y,

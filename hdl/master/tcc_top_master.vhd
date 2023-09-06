@@ -72,7 +72,7 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_BURST    : std_logic_vector(1 downto 0);
     signal w_LENGTH   : std_logic_vector(7 downto 0);
     signal w_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_OPC      : std_logic;
+    signal w_OPC_SEND : std_logic;
     signal w_ID       : std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
     -- Reception.
@@ -140,7 +140,7 @@ begin
             o_BURST     => w_BURST,
             o_LENGTH    => w_LENGTH,
             o_DATA_SEND => w_DATA_SEND,
-            o_OPC       => w_OPC,
+            o_OPC_SEND  => w_OPC_SEND,
             o_ID        => w_ID,
 
             -- Backend signals (reception).
@@ -171,7 +171,7 @@ begin
             i_BURST     => w_BURST,
             i_LENGTH    => w_LENGTH,
             i_DATA_SEND => w_DATA_SEND,
-            i_OPC       => w_OPC,
+            i_OPC_SEND  => w_OPC_SEND,
             i_ID        => w_ID,
 
             -- Backend signals (reception).

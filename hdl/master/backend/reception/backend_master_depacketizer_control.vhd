@@ -85,7 +85,6 @@ begin
                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
                                      end if;
 
-            -- @TODO;
             when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
                                         -- Flit is trailer.
                                         r_NEXT_STATE <= S_HEADER_1;
@@ -97,14 +96,14 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-	o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1 and i_READ_OK_BUFFER = '1') or
-                              (r_CURRENT_STATE = S_HEADER_2 and i_READ_OK_BUFFER = '1') or
-                              (r_CURRENT_STATE = S_WRITE_RESPONSE_TRAILER and i_READ_OK_BUFFER = '1') or
-                              (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1')
+	o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
+                              (r_CURRENT_STATE = S_HEADER_2) or
+                              (r_CURRENT_STATE = S_WRITE_RESPONSE_TRAILER) or
+                              (r_CURRENT_STATE = S_READ_RESPONSE and i_READY_RECEIVE_DATA = '1')
                               else '0';
 
-    o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) or
-                                       (r_CURRENT_STATE = S_READ_RESPONSE)
+    o_VALID_RECEIVE_PACKET <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') or
+                                       (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
                                        else '0';
     o_LAST_RECEIVE_DATA    <= '0';
 
