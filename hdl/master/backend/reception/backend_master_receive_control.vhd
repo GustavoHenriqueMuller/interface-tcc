@@ -22,7 +22,7 @@ entity backend_master_receive_control is
 end backend_master_receive_control;
 
 architecture arch_backend_master_receive_control of backend_master_receive_control is
-    type t_STATE is (S_IDLE, S_WRITING_TO_BUFFER, S_FINISH_WRITING);
+    type t_STATE is (S_IDLE, S_WRITE_BUFFER, S_WAIT_VAL_ZERO);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -43,19 +43,11 @@ begin
     process (ACLK, i_WRITE_OK_BUFFER, l_out_val_o)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (l_out_val_o = '1') then
-                               r_NEXT_STATE <= S_WRITING_TO_BUFFER;
-                           else
-                               r_NEXT_STATE <= S_IDLE;
-                           end if;
+            when S_IDLE => r_NEXT_STATE <= S_WRITE_BUFFER when (l_out_val_o = '1') else S_IDLE;
 
-            when S_WRITING_TO_BUFFER => if (i_WRITE_OK_BUFFER = '1') then
-                                            r_NEXT_STATE <= S_FINISH_WRITING;
-                                        else
-                                            r_NEXT_STATE <= S_WRITING_TO_BUFFER;
-                                        end if;
+            when S_WRITE_BUFFER => r_NEXT_STATE <= S_WAIT_VAL_ZERO when (i_WRITE_OK_BUFFER = '1') else S_WRITE_BUFFER;
 
-            when S_FINISH_WRITING => r_NEXT_STATE <= S_IDLE;
+            when S_WAIT_VAL_ZERO => r_NEXT_STATE <= S_IDLE when (l_out_val_o = '0') else S_WAIT_VAL_ZERO;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;
@@ -63,7 +55,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (buffer).
-    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_WRITING_TO_BUFFER) else '0';
+    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_WRITE_BUFFER) else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
