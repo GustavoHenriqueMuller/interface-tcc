@@ -50,25 +50,13 @@ begin
     process (ACLK, i_START_SEND_PACKET, i_WRITE_OK_BUFFER, i_VALID_SEND_DATA, i_LAST_SEND_DATA)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_START_SEND_PACKET = '1') then
-                               r_NEXT_STATE <= S_HEADER_1;
-                           else
-                               r_NEXT_STATE <= S_IDLE;
-                           end if;
+            when S_IDLE => r_NEXT_STATE <= S_HEADER_1 when (i_START_SEND_PACKET = '1') else S_IDLE;
 
-            when S_HEADER_1 => r_NEXT_STATE <= S_HEADER_1_WAIT_OK;
-            when S_HEADER_1_WAIT_OK => if (i_WRITE_OK_BUFFER = '1') then
-                                           r_NEXT_STATE <= S_HEADER_2;
-                                       else
-                                           r_NEXT_STATE <= S_HEADER_1_WAIT_OK;
-                                       end if;
+            when S_HEADER_1 => r_NEXT_STATE <= S_HEADER_2 when (i_WRITE_OK_BUFFER = '1') else S_HEADER_1_WAIT_OK;
+            when S_HEADER_1_WAIT_OK => r_NEXT_STATE <= S_HEADER_2 when (i_WRITE_OK_BUFFER = '1') else S_HEADER_1_WAIT_OK;
 
-            when S_HEADER_2 => r_NEXT_STATE <= S_HEADER_2_WAIT_OK;
-            when S_HEADER_2_WAIT_OK => if (i_WRITE_OK_BUFFER = '1') then
-                                           r_NEXT_STATE <= S_PAYLOAD;
-                                       else
-                                           r_NEXT_STATE <= S_HEADER_2_WAIT_OK;
-                                       end if;
+            when S_HEADER_2 => r_NEXT_STATE <= S_PAYLOAD when (i_WRITE_OK_BUFFER = '1') else S_HEADER_2_WAIT_OK;
+            when S_HEADER_2_WAIT_OK => r_NEXT_STATE <= S_PAYLOAD when (i_WRITE_OK_BUFFER = '1') else S_HEADER_2_WAIT_OK;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1') then
                                  if (i_LAST_SEND_DATA = '1') then
@@ -79,23 +67,11 @@ begin
                               else
                                  r_NEXT_STATE <= S_PAYLOAD;
                               end if;
-            when S_PAYLOAD_WAIT_OK_LAST => if (i_WRITE_OK_BUFFER = '1') then
-                                               r_NEXT_STATE <= S_TRAILER;
-                                           else
-                                               r_NEXT_STATE <= S_PAYLOAD_WAIT_OK_LAST;
-                                           end if;
-            when S_PAYLOAD_WAIT_OK => if (i_WRITE_OK_BUFFER = '1') then
-                                          r_NEXT_STATE <= S_PAYLOAD;
-                                      else
-                                          r_NEXT_STATE <= S_PAYLOAD_WAIT_OK;
-                                      end if;
+            when S_PAYLOAD_WAIT_OK_LAST => r_NEXT_STATE <= S_TRAILER when (i_WRITE_OK_BUFFER = '1') else S_PAYLOAD_WAIT_OK_LAST;
+            when S_PAYLOAD_WAIT_OK => r_NEXT_STATE <= S_PAYLOAD when (i_WRITE_OK_BUFFER = '1') else S_PAYLOAD_WAIT_OK;
 
-            when S_TRAILER => r_NEXT_STATE <= S_TRAILER_WAIT_OK;
-            when S_TRAILER_WAIT_OK => if (i_WRITE_OK_BUFFER = '1') then
-                                          r_NEXT_STATE <= S_IDLE;
-                                      else
-                                          r_NEXT_STATE <= S_TRAILER_WAIT_OK;
-                                      end if;
+            when S_TRAILER => r_NEXT_STATE <= S_IDLE when (i_WRITE_OK_BUFFER = '1') else S_TRAILER_WAIT_OK;
+            when S_TRAILER_WAIT_OK => r_NEXT_STATE <= S_IDLE when (i_WRITE_OK_BUFFER = '1') else S_TRAILER_WAIT_OK;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;

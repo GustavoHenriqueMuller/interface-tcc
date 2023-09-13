@@ -96,9 +96,9 @@ begin
         );
 
     -- Transaction information.
-    o_ADDR      <= AWADDR  when (w_OPC_SEND_OUT = '0') else ARADDR when (w_OPC_SEND_OUT = '1');
+    o_ADDR      <= AWADDR  when (w_OPC_SEND_OUT = '0') else ARADDR  when (w_OPC_SEND_OUT = '1');
     o_BURST     <= AWBURST when (w_OPC_SEND_OUT = '0') else ARBURST when (w_OPC_SEND_OUT = '1');
-    o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN when (w_OPC_SEND_OUT = '1');
+    o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN   when (w_OPC_SEND_OUT = '1');
     o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
     o_OPC_SEND  <= w_OPC_SEND_OUT;
     o_ID        <= AW_ID   when (w_OPC_SEND_OUT = '0') else AR_ID when (w_OPC_SEND_OUT = '1');
