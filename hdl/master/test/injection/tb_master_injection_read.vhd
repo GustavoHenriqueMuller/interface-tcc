@@ -200,9 +200,9 @@ begin
     -- Tests.
     process
     begin
-        -- Simple write transaction.
+        -- Simple read transaction.
         t_ARVALID <= '1';
-        t_ARADDR <= "10101010101010101010101010101010" & "10101010101010101010101010101010";
+        t_ARADDR <= "1011101110111011" & "1011101110111011" & "1011101110111011" & "1011101110111011";
         t_AR_ID <= "00001";
         t_ARLEN <= "00000001";
 
