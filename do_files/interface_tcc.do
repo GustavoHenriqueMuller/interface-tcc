@@ -11,10 +11,10 @@ vcom -2008 ../hdl/master/frontend/frontend_master.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_routing_table.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_datapath.vhd
-vcom -2008 ../hdl/master/backend/injection/backend_master_send_control.vhd
+vcom -2008 ../hdl/common/send_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_injection.vhd
 
-vcom -2008 ../hdl/master/backend/reception/backend_master_receive_control.vhd
+vcom -2008 ../hdl/common/receive_control.vhd
 vcom -2008 ../hdl/master/backend/reception/backend_master_depacketizer_control.vhd
 vcom -2008 ../hdl/master/backend/reception/backend_master_reception.vhd
 

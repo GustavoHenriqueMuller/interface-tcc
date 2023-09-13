@@ -5,7 +5,7 @@ use IEEE.std_logic_1164.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity backend_master_send_control is
+entity send_control is
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
@@ -19,9 +19,9 @@ entity backend_master_send_control is
         l_in_val_i: out std_logic;
         l_in_ack_o: in std_logic
     );
-end backend_master_send_control;
+end send_control;
 
-architecture arch_backend_master_send_control of backend_master_send_control is
+architecture arch_send_control of send_control is
     type t_STATE is (S_IDLE, S_WAITING_ACK_ONE, S_WAITING_ACK_ZERO, S_READ_BUFFER);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -64,4 +64,4 @@ begin
     l_in_val_i <= '1' when (r_CURRENT_STATE = S_IDLE and i_READ_OK_BUFFER = '1') or
                            (r_CURRENT_STATE = S_WAITING_ACK_ONE) else '0';
 
-end arch_backend_master_send_control;
+end arch_send_control;
