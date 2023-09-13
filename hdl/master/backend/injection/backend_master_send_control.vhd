@@ -22,7 +22,7 @@ entity backend_master_send_control is
 end backend_master_send_control;
 
 architecture arch_backend_master_send_control of backend_master_send_control is
-    type t_STATE is (S_IDLE, S_WAITING_ACK_ONE, S_WAITING_ACK_ZERO);
+    type t_STATE is (S_IDLE, S_WAITING_ACK_ONE, S_WAITING_ACK_ZERO, S_READ_BUFFER);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -43,23 +43,13 @@ begin
     process (ACLK, i_READ_OK_BUFFER, l_in_ack_o)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => if (i_READ_OK_BUFFER = '1') then
-                               r_NEXT_STATE <= S_WAITING_ACK_ONE;
-                           else
-                               r_NEXT_STATE <= S_IDLE;
-                           end if;
+            when S_IDLE => r_NEXT_STATE <= S_WAITING_ACK_ONE when (i_READ_OK_BUFFER = '1') else S_IDLE;
 
-            when S_WAITING_ACK_ONE => if (l_in_ack_o = '1') then
-                                          r_NEXT_STATE <= S_WAITING_ACK_ZERO;
-                                      else
-                                          r_NEXT_STATE <= S_WAITING_ACK_ONE;
-                                      end if;
+            when S_WAITING_ACK_ONE => r_NEXT_STATE <= S_WAITING_ACK_ZERO when (l_in_ack_o = '1') else S_WAITING_ACK_ONE;
 
-            when S_WAITING_ACK_ZERO => if (l_in_ack_o = '0') then
-                                          r_NEXT_STATE <= S_IDLE;
-                                       else
-                                          r_NEXT_STATE <= S_WAITING_ACK_ZERO;
-                                       end if;
+            when S_WAITING_ACK_ZERO => r_NEXT_STATE <= S_READ_BUFFER when (l_in_ack_o = '0') else S_WAITING_ACK_ZERO;
+
+            when S_READ_BUFFER => r_NEXT_STATE <= S_WAITING_ACK_ONE when (i_READ_OK_BUFFER = '1') else S_IDLE;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;
@@ -67,7 +57,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (buffer).
-    o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_IDLE) else '0';
+    o_READ_BUFFER <= '1' when (r_CURRENT_STATE = S_READ_BUFFER) else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).

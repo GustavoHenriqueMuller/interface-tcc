@@ -59,7 +59,7 @@ begin
                                    r_NEXT_STATE <= S_HEADER_2;
                                else
                                    r_NEXT_STATE <= S_HEADER_1;
-                              end if;
+                               end if;
 
             when S_HEADER_2 => if (i_READ_OK_BUFFER = '1') then
                                    if (i_FLIT(0) = '0') then
@@ -103,8 +103,8 @@ begin
                               else '0';
 
     o_VALID_RECEIVE_DATA <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') or
-                                       (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
-                                       else '0';
+                                     (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
+                                     else '0';
     o_LAST_RECEIVE_DATA    <= '0';
 
     o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
