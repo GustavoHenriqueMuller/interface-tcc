@@ -33,11 +33,6 @@ architecture arch_backend_master_packetizer_control of backend_master_packetizer
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
-    -- @NOTE: Seria uma boa ideia fazer um contador que conta de 0 até o comprimento do pacote,
-    -- (que vem do AWLEN para escrita ou ARLEN para leitura). Desse modo, mesmo que o pacote não tenha payload,
-    -- não será escrito um flit com tudo zero no buffer. Mas pra fazer esse contador é necessário saber se
-    -- a XINA requer que cada pacote tenha no mínimo um flit de payload.
-
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
