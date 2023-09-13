@@ -14,7 +14,7 @@ entity backend_master_depacketizer_control is
         -- Backend signals.
         i_READY_RECEIVE_PACKET: in std_logic;
         i_READY_RECEIVE_DATA  : in std_logic;
-        o_VALID_RECEIVE_DATA: out std_logic;
+        o_VALID_RECEIVE_DATA  : out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
         -- Buffer.
@@ -23,9 +23,6 @@ entity backend_master_depacketizer_control is
         i_READ_OK_BUFFER: in std_logic;
 
         -- Headers.
-        i_HEADER_1: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_HEADER_2: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-
         o_WRITE_HEADER_1_REG: out std_logic;
         o_WRITE_HEADER_2_REG: out std_logic
     );
@@ -41,7 +38,7 @@ architecture arch_backend_master_depacketizer_control of backend_master_depacket
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (ACLK, ARESETn)
+    process (all)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_HEADER_1;
@@ -52,14 +49,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_READ_OK_BUFFER, i_READY_RECEIVE_PACKET)
+    process (all)
     begin
         case r_CURRENT_STATE is
-            when S_HEADER_1 => if (i_READ_OK_BUFFER = '1') then
-                                   r_NEXT_STATE <= S_HEADER_2;
-                               else
-                                   r_NEXT_STATE <= S_HEADER_1;
-                               end if;
+            when S_HEADER_1 => r_NEXT_STATE <= S_HEADER_2 when (i_READ_OK_BUFFER = '1') else S_HEADER_1;
 
             when S_HEADER_2 => if (i_READ_OK_BUFFER = '1') then
                                    if (i_FLIT(0) = '0') then
@@ -73,17 +66,9 @@ begin
                                    r_NEXT_STATE <= S_HEADER_2;
                                end if;
 
-            when S_WRITE_RESPONSE_TRAILER => if (i_READ_OK_BUFFER = '1') then
-                                                 r_NEXT_STATE <= S_WRITE_RESPONSE;
-                                             else
-                                                 r_NEXT_STATE <= S_WRITE_RESPONSE_TRAILER;
-                                             end if;
+            when S_WRITE_RESPONSE_TRAILER => r_NEXT_STATE <= S_WRITE_RESPONSE when (i_READ_OK_BUFFER = '1') else S_WRITE_RESPONSE_TRAILER;
 
-            when S_WRITE_RESPONSE => if (i_READY_RECEIVE_PACKET = '1') then
-                                         r_NEXT_STATE <= S_HEADER_1;
-                                     else
-                                         r_NEXT_STATE <= S_WRITE_RESPONSE;
-                                     end if;
+            when S_WRITE_RESPONSE => r_NEXT_STATE <= S_HEADER_1 when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_RESPONSE;
 
             when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
                                         -- Flit is trailer.

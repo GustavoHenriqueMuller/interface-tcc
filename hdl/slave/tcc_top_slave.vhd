@@ -15,7 +15,7 @@ entity tcc_top_slave is
             -- Write request signals.
             AWVALID: out std_logic := '0';
             AWREADY: in std_logic  := '1';
-            AW_ID  : out std_logic_vector(c_ID_WIDTH - 1 downto 0)   := (others => '0');
+            AW_ID  : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             AWADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             AWLEN  : out std_logic_vector(7 downto 0) := "00000000";
             AWSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
@@ -59,16 +59,14 @@ entity tcc_top_slave is
 end tcc_top_slave;
 
 architecture arch_tcc_top_slave of tcc_top_slave is
-    -- Signals between front-end and back-end.
     -- Injection.
     signal w_START_SEND_PACKET: std_logic;
     signal w_VALID_SEND_DATA  : std_logic;
     signal w_LAST_SEND_DATA   : std_logic;
 
-    signal w_READY_SEND_PACKET : std_logic;
-    signal w_READY_SEND_DATA   : std_logic;
+    signal w_READY_SEND_PACKET: std_logic;
+    signal w_READY_SEND_DATA  : std_logic;
 
-    signal w_ADDR     : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal w_BURST    : std_logic_vector(1 downto 0);
     signal w_LENGTH   : std_logic_vector(7 downto 0);
     signal w_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
@@ -80,10 +78,12 @@ architecture arch_tcc_top_slave of tcc_top_slave is
     signal w_READY_RECEIVE_DATA  : std_logic;
 
     signal w_VALID_RECEIVE_DATA: std_logic;
-    signal w_LAST_RECEIVE_DATA   : std_logic;
+    signal w_LAST_RECEIVE_DATA : std_logic;
     signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_OPC_RECEIVE   : std_logic;
-    signal w_STATUS_RECEIVE: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+
+    signal w_HEADER_1_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_ADDRESS_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND: entity work.frontend_slave
@@ -136,7 +136,6 @@ begin
             i_READY_SEND_DATA   => w_READY_SEND_DATA,
             i_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            o_ADDR      => w_ADDR,
             o_BURST     => w_BURST,
             o_LENGTH    => w_LENGTH,
             o_DATA_SEND => w_DATA_SEND,
@@ -147,11 +146,12 @@ begin
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
-            i_VALID_RECEIVE_DATA => w_VALID_RECEIVE_DATA,
+            i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_OPC_RECEIVE          => w_OPC_RECEIVE,
-            i_STATUS_RECEIVE       => w_STATUS_RECEIVE
+            i_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
+            i_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
+            i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE
         );
 
     u_BACKEND: entity work.backend_slave
@@ -167,7 +167,6 @@ begin
             o_READY_SEND_DATA   => w_READY_SEND_DATA,
             o_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            i_ADDR      => w_ADDR,
             i_BURST     => w_BURST,
             i_LENGTH    => w_LENGTH,
             i_DATA_SEND => w_DATA_SEND,
@@ -178,11 +177,12 @@ begin
             i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
-            o_VALID_RECEIVE_DATA => w_VALID_RECEIVE_DATA,
+            o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_OPC_RECEIVE          => w_OPC_RECEIVE,
-            o_STATUS_RECEIVE       => w_STATUS_RECEIVE,
+            o_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
+            o_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
+            o_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

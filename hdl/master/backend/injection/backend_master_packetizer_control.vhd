@@ -38,7 +38,7 @@ architecture arch_backend_master_packetizer_control of backend_master_packetizer
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (ACLK, ARESETn)
+    process (all)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -49,7 +49,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_START_SEND_PACKET, i_WRITE_OK_BUFFER, i_VALID_SEND_DATA, i_LAST_SEND_DATA)
+    process (all)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => r_NEXT_STATE <= S_HEADER_1 when (i_START_SEND_PACKET = '1' and i_WRITE_OK_BUFFER = '1') else S_IDLE;

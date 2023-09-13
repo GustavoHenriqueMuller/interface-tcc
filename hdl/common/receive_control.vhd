@@ -29,7 +29,7 @@ architecture arch_receive_control of receive_control is
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (ACLK, ARESETn)
+    process (all)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -40,7 +40,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_WRITE_OK_BUFFER, l_out_val_o)
+    process (all)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => r_NEXT_STATE <= S_WRITE_BUFFER when (l_out_val_o = '1') else S_IDLE;

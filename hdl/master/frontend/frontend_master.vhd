@@ -114,8 +114,8 @@ begin
 
     -- Ready information to front-end.
     AWREADY <= i_READY_SEND_PACKET;
-    WREADY  <= i_READY_SEND_DATA;
     ARREADY <= i_READY_SEND_PACKET;
+    WREADY  <= i_READY_SEND_DATA;
 
     ---------------------------------------------------------------------------------------------
     -- Reception.

@@ -29,7 +29,7 @@ architecture arch_send_control of send_control is
 begin
     ---------------------------------------------------------------------------------------------
     -- Update current state on clock rising edge.
-    process (ACLK, ARESETn)
+    process (all)
     begin
         if (ARESETn = '0') then
             r_CURRENT_STATE <= S_IDLE;
@@ -40,7 +40,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- State machine.
-    process (ACLK, i_READ_OK_BUFFER, l_in_ack_o)
+    process (all)
     begin
         case r_CURRENT_STATE is
             when S_IDLE => r_NEXT_STATE <= S_WAITING_ACK_ONE when (i_READ_OK_BUFFER = '1') else S_IDLE;
