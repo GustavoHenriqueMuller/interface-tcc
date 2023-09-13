@@ -43,7 +43,7 @@ architecture arch_backend_master_injection of backend_master_injection is
 
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_SELECTOR: std_logic_vector(1 downto 0);
+    signal w_FLIT_SELECTOR: std_logic_vector(2 downto 0);
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -68,6 +68,7 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
+            i_OPC_SEND => i_OPC_SEND,
             i_START_SEND_PACKET  => i_START_SEND_PACKET,
             i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
             i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
@@ -76,8 +77,8 @@ begin
             o_READY_SEND_DATA    => o_READY_SEND_DATA,
 
             i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_FLIT_SELECTOR => w_FLIT_SELECTOR,
-            o_WRITE_BUFFER  => w_WRITE_BUFFER
+            o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
+            o_WRITE_BUFFER    => w_WRITE_BUFFER
         );
 
     u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath

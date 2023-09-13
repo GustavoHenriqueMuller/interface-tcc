@@ -1,6 +1,6 @@
 vlib work
 
-vcom -2008 ../hdl/basic/mux4.vhd
+vcom -2008 ../hdl/basic/mux5.vhd
 vcom -2008 ../hdl/basic/reg.vhd
 vcom -2008 ../hdl/basic/reg1b.vhd
 

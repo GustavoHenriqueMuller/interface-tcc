@@ -84,7 +84,7 @@ begin
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
-            o_VALID_RECEIVE_DATA => o_VALID_RECEIVE_DATA,
+            o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
             i_FLIT => w_FLIT,
