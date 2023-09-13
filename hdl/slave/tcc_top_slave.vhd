@@ -13,28 +13,28 @@ entity tcc_top_slave is
         ARESETn: in std_logic := '1';
 
             -- Write request signals.
-            AWVALID: out std_logic  := '0';
-            AWREADY: in std_logic := '1';
-            AW_ID  : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
+            AWVALID: out std_logic := '0';
+            AWREADY: in std_logic  := '1';
+            AW_ID  : out std_logic_vector(c_ID_WIDTH - 1 downto 0)   := (others => '0');
             AWADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             AWLEN  : out std_logic_vector(7 downto 0) := "00000000";
             AWSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
             AWBURST: out std_logic_vector(1 downto 0) := "01";
 
             -- Write data signals.
-            WVALID : out std_logic  := '0';
-            WREADY : in std_logic := '0';
+            WVALID : out std_logic := '0';
+            WREADY : in std_logic  := '0';
             WDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
-            WLAST  : out std_logic  := '0';
+            WLAST  : out std_logic := '0';
 
             -- Write response signals.
-            BVALID : in std_logic := '0';
-            BREADY : out std_logic  := '0';
+            BVALID : in std_logic  := '0';
+            BREADY : out std_logic := '0';
             BRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
-            ARVALID: out std_logic  := '0';
-            ARREADY: in std_logic := '1';
+            ARVALID: out std_logic := '0';
+            ARREADY: in std_logic  := '1';
             AR_ID  : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             ARADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             ARLEN  : out std_logic_vector(7 downto 0) := "00000000";
@@ -42,10 +42,10 @@ entity tcc_top_slave is
             ARBURST: out std_logic_vector(1 downto 0) := "01";
 
             -- Read response/data signals.
-            RVALID : in std_logic := '0';
-            RREADY : out std_logic  := '1';
+            RVALID : in std_logic  := '0';
+            RREADY : out std_logic := '1';
             RDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
-            RLAST  : in std_logic := '0';
+            RLAST  : in std_logic  := '0';
             RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.

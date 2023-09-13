@@ -63,10 +63,11 @@ entity frontend_master is
 
         -- Backend signals (reception).
         i_VALID_RECEIVE_DATA: in std_logic;
-        i_LAST_RECEIVE_DATA   : in std_logic;
-        i_DATA_RECEIVE        : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC_RECEIVE         : in std_logic;
-        i_STATUS_RECEIVE      : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+        i_LAST_RECEIVE_DATA : in std_logic;
+
+        i_DATA_RECEIVE      : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_HEADER_1_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_2_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         o_READY_RECEIVE_PACKET: out std_logic;
         o_READY_RECEIVE_DATA  : out std_logic
@@ -74,11 +75,13 @@ entity frontend_master is
 end frontend_master;
 
 architecture arch_frontend_master of frontend_master is
+    -- Injection.
     signal w_OPC_SEND: std_logic;
     signal w_OPC_SEND_OUT: std_logic;
 
+    -- Reception.
     signal w_OPC_RECEIVE: std_logic;
-    signal w_OPC_RECEIVE_OUT: std_logic;
+    signal w_STATUS_RECEIVE: std_logic_vector(2 downto 0);
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -86,6 +89,7 @@ begin
 
     -- Registering.
     w_OPC_SEND <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
+
     u_OPC_SEND_REG: entity work.reg1b
         port map(
             ACLK     => ACLK,
@@ -116,17 +120,20 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and i_OPC_RECEIVE = '0') or
-                                       (RREADY = '1' and i_OPC_RECEIVE = '1') else '0';
+    w_OPC_RECEIVE    <= i_HEADER_2_RECEIVE(0);
+    w_STATUS_RECEIVE <= i_HEADER_2_RECEIVE(5 downto 3);
+
+    o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and w_OPC_RECEIVE = '0') or
+                                       (RREADY = '1' and w_OPC_RECEIVE = '1') else '0';
 
     o_READY_RECEIVE_DATA   <= '1' when (RREADY = '1') else '0';
 
-    BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '0') else '0';
-    BRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
+    BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
+    BRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
-    RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '1') else '0';
+    RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
     RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
     RLAST  <= '1' when (i_LAST_RECEIVE_DATA = '1') else '0';
-    RRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
+    RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
 end arch_frontend_master;

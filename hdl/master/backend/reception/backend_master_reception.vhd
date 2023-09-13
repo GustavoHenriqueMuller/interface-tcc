@@ -16,10 +16,11 @@ entity backend_master_reception is
         i_READY_RECEIVE_DATA  : in std_logic;
 
         o_VALID_RECEIVE_DATA: out std_logic;
-        o_LAST_RECEIVE_DATA   : out std_logic;
-        o_DATA_RECEIVE        : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_OPC_RECEIVE         : out std_logic;
-        o_STATUS_RECEIVE      : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+        o_LAST_RECEIVE_DATA : out std_logic;
+
+        o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_HEADER_1_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_HEADER_2_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -48,33 +49,17 @@ architecture arch_backend_master_reception of backend_master_reception is
     signal w_READ_OK_BUFFER : std_logic;
 
 begin
-    -- Registering.
-    u_HEADER_1_REG: entity work.reg
-        generic map(
-            p_DATA_WIDTH    => c_FLIT_WIDTH
-        )
-        port map(
-            ACLK => ACLK,
-            ARESETn => ARESETn,
-            i_WRITE => w_WRITE_HEADER_1_REG,
-            i_DATA => w_FLIT,
-            o_DATA => w_HEADER_1
-        );
+    -- Registering headers.
+    registering: process(ACLK, w_WRITE_HEADER_1_REG, w_WRITE_HEADER_2_REG)
+    begin
+        if (rising_edge(ACLK)) then
+            if (w_WRITE_HEADER_1_REG) then w_HEADER_1 <= w_FLIT; end if;
+            if (w_WRITE_HEADER_2_REG) then w_HEADER_2 <= w_FLIT; end if;
+        end if;
+    end process registering;
 
-    u_HEADER_2_REG: entity work.reg
-        generic map(
-            p_DATA_WIDTH => c_FLIT_WIDTH
-        )
-        port map(
-            ACLK => ACLK,
-            ARESETn => ARESETn,
-            i_WRITE => w_WRITE_HEADER_2_REG,
-            i_DATA => w_FLIT,
-            o_DATA => w_HEADER_2
-        );
-
-    o_OPC_RECEIVE    <= w_HEADER_2(0);
-    o_STATUS_RECEIVE <= w_HEADER_2(5 downto 3);
+    o_HEADER_1_RECEIVE <= w_HEADER_1;
+    o_HEADER_2_RECEIVE <= w_HEADER_2;
     o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control

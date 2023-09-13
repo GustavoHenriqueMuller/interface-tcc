@@ -15,8 +15,6 @@ add wave -position insertpoint  \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_VALID_RECEIVE_DATA \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_LAST_RECEIVE_DATA \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_DATA_RECEIVE \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_OPC_RECEIVE \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_STATUS_RECEIVE \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_PACKET \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_DATA
 

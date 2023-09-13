@@ -59,14 +59,13 @@ entity tcc_top_master is
 end tcc_top_master;
 
 architecture arch_tcc_top_master of tcc_top_master is
-    -- Signals between front-end and back-end.
     -- Injection.
     signal w_START_SEND_PACKET: std_logic;
     signal w_VALID_SEND_DATA  : std_logic;
     signal w_LAST_SEND_DATA   : std_logic;
 
-    signal w_READY_SEND_PACKET : std_logic;
-    signal w_READY_SEND_DATA   : std_logic;
+    signal w_READY_SEND_PACKET: std_logic;
+    signal w_READY_SEND_DATA  : std_logic;
 
     signal w_ADDR     : std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
     signal w_BURST    : std_logic_vector(1 downto 0);
@@ -80,10 +79,11 @@ architecture arch_tcc_top_master of tcc_top_master is
     signal w_READY_RECEIVE_DATA  : std_logic;
 
     signal w_VALID_RECEIVE_DATA: std_logic;
-    signal w_LAST_RECEIVE_DATA   : std_logic;
+    signal w_LAST_RECEIVE_DATA : std_logic;
     signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_OPC_RECEIVE   : std_logic;
-    signal w_STATUS_RECEIVE: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+
+    signal w_HEADER_1_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND: entity work.frontend_master
@@ -147,11 +147,11 @@ begin
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
-            i_VALID_RECEIVE_DATA => w_VALID_RECEIVE_DATA,
+            i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_OPC_RECEIVE          => w_OPC_RECEIVE,
-            i_STATUS_RECEIVE       => w_STATUS_RECEIVE
+            i_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
+            i_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE
         );
 
     u_BACKEND: entity work.backend_master
@@ -178,11 +178,11 @@ begin
             i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
-            o_VALID_RECEIVE_DATA => w_VALID_RECEIVE_DATA,
+            o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_OPC_RECEIVE          => w_OPC_RECEIVE,
-            o_STATUS_RECEIVE       => w_STATUS_RECEIVE,
+            o_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
+            o_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

@@ -22,7 +22,6 @@ vcom -2008 ../hdl/master/backend/backend_master.vhd
 
 vcom -2008 ../hdl/master/tcc_top_master.vhd
 
-vcom -2008 ../hdl/master/test/injection/tb_master_frontend.vhd
 vcom -2008 ../hdl/master/test/injection/tb_master_injection_read.vhd
 vcom -2008 ../hdl/master/test/injection/tb_master_injection_write.vhd
 
