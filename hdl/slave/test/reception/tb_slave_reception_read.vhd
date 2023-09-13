@@ -140,14 +140,14 @@ begin
     end process;
 
     ---------------------------------------------------------------------------------------------
-    -- Tests. @TODO
+    -- Tests.
     process
     begin
-        t_RREADY <= '1';
-        wait until rising_edge(t_ACLK) and t_RVALID = '1' and t_RLAST = '1';
+        t_ARREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_ARVALID = '1';
 
-        t_RREADY <= '0';
-        wait;
+        t_ARREADY <= '0';
+        wait for 100 ns;
     end process;
 
 end arch_tb_slave_reception_read;
