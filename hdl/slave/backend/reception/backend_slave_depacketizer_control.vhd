@@ -83,11 +83,7 @@ begin
                                                r_NEXT_STATE <= S_READ_REQUEST_TRAILER;
                                            end if;
 
-            when S_READ_REQUEST => if (i_READY_RECEIVE_PACKET = '1') then
-                                       r_NEXT_STATE <= S_HEADER_1;
-                                   else
-                                       r_NEXT_STATE <= S_READ_REQUEST;
-                                   end if;
+            when S_READ_REQUEST => r_NEXT_STATE <= S_HEADER_1 when (i_READ_OK_BUFFER = '1') else S_READ_REQUEST;
         end case;
     end process;
 
@@ -101,7 +97,7 @@ begin
                               else '0';
 
     o_VALID_RECEIVE_DATA <= '1' when (r_CURRENT_STATE = S_READ_REQUEST) or
-                                     (r_CURRENT_STATE = S_READ_REQUEST and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
+                                     (r_CURRENT_STATE = S_WRITE_REQUEST and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
                                      else '0';
     o_LAST_RECEIVE_DATA  <= '0';
 

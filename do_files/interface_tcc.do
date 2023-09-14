@@ -66,5 +66,6 @@ vcom -2008 ../hdl/slave/tcc_top_slave.vhd
 
 vcom -2008 ../hdl/slave/test/reception/read_request_injector.vhd
 vcom -2008 ../hdl/slave/test/reception/tb_slave_reception_read.vhd
-
+vcom -2008 ../hdl/slave/test/reception/write_request_injector.vhd
+vcom -2008 ../hdl/slave/test/reception/tb_slave_reception_write.vhd
 
