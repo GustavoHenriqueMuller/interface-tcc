@@ -352,11 +352,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "AW_ID[0]",
+					"name" : "AWID[0]",
 					"strict" : false
 				},
 				{
-					"name" : "AR_ID[0]",
+					"name" : "ARID[0]",
 					"strict" : false
 				},
 				{
@@ -364,11 +364,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "AW_ID[1]",
+					"name" : "AWID[1]",
 					"strict" : false
 				},
 				{
-					"name" : "AR_ID[1]",
+					"name" : "ARID[1]",
 					"strict" : false
 				},
 				{
@@ -376,11 +376,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "AW_ID[2]",
+					"name" : "AWID[2]",
 					"strict" : false
 				},
 				{
-					"name" : "AR_ID[2]",
+					"name" : "ARID[2]",
 					"strict" : false
 				},
 				{
@@ -388,11 +388,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "AW_ID[3]",
+					"name" : "AWID[3]",
 					"strict" : false
 				},
 				{
-					"name" : "AR_ID[3]",
+					"name" : "ARID[3]",
 					"strict" : false
 				},
 				{
@@ -400,11 +400,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "AW_ID[4]",
+					"name" : "AWID[4]",
 					"strict" : false
 				},
 				{
-					"name" : "AR_ID[4]",
+					"name" : "ARID[4]",
 					"strict" : false
 				},
 				{

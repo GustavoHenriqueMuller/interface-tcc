@@ -7,7 +7,7 @@ sim:/tb_slave_reception_read/t_RESETn
 add wave -position insertpoint  \
 sim:/tb_slave_reception_read/t_ARVALID \
 sim:/tb_slave_reception_read/t_ARREADY \
-sim:/tb_slave_reception_read/t_AR_ID \
+sim:/tb_slave_reception_read/t_ARID \
 sim:/tb_slave_reception_read/t_ARADDR \
 sim:/tb_slave_reception_read/t_ARLEN \
 sim:/tb_slave_reception_read/t_ARSIZE \

@@ -13,7 +13,7 @@ entity frontend_master is
             -- Write request signals.
             AWVALID: in std_logic;
             AWREADY: out std_logic;
-            AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            AWID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
             AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
             AWLEN  : in std_logic_vector(7 downto 0);
             AWSIZE : in std_logic_vector(2 downto 0);
@@ -33,7 +33,7 @@ entity frontend_master is
             -- Read request signals.
             ARVALID: in std_logic;
             ARREADY: out std_logic;
-            AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            ARID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
             ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
             ARLEN  : in std_logic_vector(7 downto 0);
             ARSIZE : in std_logic_vector(2 downto 0);
@@ -105,7 +105,7 @@ begin
     o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN   when (w_OPC_SEND_OUT = '1');
     o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
     o_OPC_SEND  <= w_OPC_SEND_OUT;
-    o_ID        <= AW_ID   when (w_OPC_SEND_OUT = '0') else AR_ID when (w_OPC_SEND_OUT = '1');
+    o_ID        <= AWID   when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1');
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';

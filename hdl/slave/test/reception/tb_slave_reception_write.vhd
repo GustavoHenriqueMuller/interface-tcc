@@ -18,7 +18,7 @@ architecture arch_tb_slave_reception_write of tb_slave_reception_write is
         -- Write request signals.
         signal t_AWVALID: std_logic := '0';
         signal t_AWREADY: std_logic := '0';
-        signal t_AW_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_AWID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
         signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
@@ -38,7 +38,7 @@ architecture arch_tb_slave_reception_write of tb_slave_reception_write is
         -- Read request signals.
         signal t_ARVALID: std_logic := '0';
         signal t_ARREADY: std_logic := '0';
-        signal t_AR_ID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_ARID  : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
         signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
@@ -81,7 +81,7 @@ begin
                 -- Write request signals.
                 AWVALID => t_AWVALID,
                 AWREADY => t_AWREADY,
-                AW_ID   => t_AW_ID,
+                AWID   => t_AWID,
                 AWADDR  => t_AWADDR,
                 AWLEN   => t_AWLEN,
                 AWSIZE  => t_AWSIZE,
@@ -101,7 +101,7 @@ begin
                 -- Read request signals.
                 ARVALID => t_ARVALID,
                 ARREADY => t_ARREADY,
-                AR_ID   => t_AR_ID,
+                ARID   => t_ARID,
                 ARADDR  => t_ARADDR,
                 ARLEN   => t_ARLEN,
                 ARSIZE  => t_ARSIZE,

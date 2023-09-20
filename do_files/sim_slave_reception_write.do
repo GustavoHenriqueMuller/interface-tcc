@@ -7,7 +7,7 @@ sim:/tb_slave_reception_write/t_RESETn
 add wave -position insertpoint  \
 sim:/tb_slave_reception_write/t_AWVALID \
 sim:/tb_slave_reception_write/t_AWREADY \
-sim:/tb_slave_reception_write/t_AW_ID \
+sim:/tb_slave_reception_write/t_AWID \
 sim:/tb_slave_reception_write/t_AWADDR \
 sim:/tb_slave_reception_write/t_AWLEN \
 sim:/tb_slave_reception_write/t_AWSIZE \

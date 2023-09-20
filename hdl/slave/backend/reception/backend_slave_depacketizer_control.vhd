@@ -83,7 +83,7 @@ begin
                                                r_NEXT_STATE <= S_READ_REQUEST_TRAILER;
                                            end if;
 
-            when S_READ_REQUEST => r_NEXT_STATE <= S_HEADER_1 when (i_READ_OK_BUFFER = '1') else S_READ_REQUEST;
+            when S_READ_REQUEST => r_NEXT_STATE <= S_HEADER_1 when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
         end case;
     end process;
 

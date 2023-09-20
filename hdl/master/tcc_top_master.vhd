@@ -15,7 +15,7 @@ entity tcc_top_master is
             -- Write request signals.
             AWVALID: in std_logic  := '0';
             AWREADY: out std_logic := '1';
-            AW_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
+            AWID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             AWLEN  : in std_logic_vector(7 downto 0) := "00000000";
             AWSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
@@ -35,7 +35,7 @@ entity tcc_top_master is
             -- Read request signals.
             ARVALID: in std_logic  := '0';
             ARREADY: out std_logic := '1';
-            AR_ID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
+            ARID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
             ARLEN  : in std_logic_vector(7 downto 0) := "00000000";
             ARSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
@@ -95,7 +95,7 @@ begin
                 -- Write request signals.
                 AWVALID => AWVALID,
                 AWREADY => AWREADY,
-                AW_ID   => AW_ID,
+                AWID   => AWID,
                 AWADDR  => AWADDR,
                 AWLEN   => AWLEN,
                 AWSIZE  => AWSIZE,
@@ -115,7 +115,7 @@ begin
                 -- Read request signals.
                 ARVALID => ARVALID,
                 ARREADY => ARREADY,
-                AR_ID   => AR_ID,
+                ARID   => ARID,
                 ARADDR  => ARADDR,
                 ARLEN   => ARLEN,
                 ARSIZE  => ARSIZE,

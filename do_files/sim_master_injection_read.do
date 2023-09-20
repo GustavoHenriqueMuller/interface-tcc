@@ -3,7 +3,7 @@ vsim -voptargs=+acc -debugDB work.tb_master_injection_read
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/t_ACLK \
 sim:/tb_master_injection_read/t_ARADDR \
-sim:/tb_master_injection_read/t_AR_ID \
+sim:/tb_master_injection_read/t_ARID \
 sim:/tb_master_injection_read/t_ARLEN \
 sim:/tb_master_injection_read/t_ARSIZE \
 sim:/tb_master_injection_read/t_ARBURST \
