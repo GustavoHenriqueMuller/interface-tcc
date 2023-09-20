@@ -85,19 +85,17 @@ architecture arch_frontend_slave of frontend_slave is
 
 begin
     ---------------------------------------------------------------------------------------------
-    -- Injection. @TODO: FAZENDO A RECEPTION PRIMEIRO
+    -- Injection.
 
     -- Registering.
     w_OPC_SEND <= '0' when (BVALID = '1') else '1' when (RVALID = '1');
 
-    u_OPC_SEND_REG: entity work.reg1b
-        port map(
-            ACLK     => ACLK,
-            ARESETn  => ARESETn,
-            i_WRITE  => i_READY_SEND_PACKET,
-            i_DATA   => w_OPC_SEND,
-            o_DATA   => w_OPC_SEND_OUT
-        );
+    registering: process(all)
+    begin
+        if (rising_edge(ACLK)) then
+            if (i_READY_SEND_PACKET) then w_OPC_SEND_OUT <= w_OPC_SEND; end if;
+        end if;
+    end process registering;
 
     -- Transaction information.
     --o_BURST     <=

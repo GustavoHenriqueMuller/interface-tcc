@@ -50,7 +50,7 @@ architecture arch_backend_master_reception of backend_master_reception is
 
 begin
     -- Registering headers.
-    registering: process(ACLK, w_WRITE_HEADER_1_REG, w_WRITE_HEADER_2_REG)
+    registering: process(all)
     begin
         if (rising_edge(ACLK)) then
             if (w_WRITE_HEADER_1_REG) then w_HEADER_1 <= w_FLIT; end if;
@@ -60,7 +60,7 @@ begin
 
     o_HEADER_1_RECEIVE <= w_HEADER_1;
     o_HEADER_2_RECEIVE <= w_HEADER_2;
-    o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
+    o_DATA_RECEIVE     <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
         port map(
