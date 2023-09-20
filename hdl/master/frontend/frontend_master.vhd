@@ -13,7 +13,7 @@ entity frontend_master is
             -- Write request signals.
             AWVALID: in std_logic;
             AWREADY: out std_logic;
-            AWID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            AWID   : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
             AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
             AWLEN  : in std_logic_vector(7 downto 0);
             AWSIZE : in std_logic_vector(2 downto 0);
@@ -33,7 +33,7 @@ entity frontend_master is
             -- Read request signals.
             ARVALID: in std_logic;
             ARREADY: out std_logic;
-            ARID  : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+            ARID   : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
             ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
             ARLEN  : in std_logic_vector(7 downto 0);
             ARSIZE : in std_logic_vector(2 downto 0);
@@ -124,14 +124,14 @@ begin
     o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (RREADY = '1' and w_OPC_RECEIVE = '1') else '0';
 
-    o_READY_RECEIVE_DATA   <= '1' when (RREADY = '1') else '0';
+    o_READY_RECEIVE_DATA   <= RREADY;
 
     BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
     BRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
     RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
     RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    RLAST  <= '1' when (i_LAST_RECEIVE_DATA = '1') else '0';
+    RLAST  <= i_LAST_RECEIVE_DATA;
     RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
 end arch_frontend_master;

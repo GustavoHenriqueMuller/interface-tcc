@@ -95,7 +95,7 @@ begin
                 -- Write request signals.
                 AWVALID => AWVALID,
                 AWREADY => AWREADY,
-                AWID   => AWID,
+                AWID    => AWID,
                 AWADDR  => AWADDR,
                 AWLEN   => AWLEN,
                 AWSIZE  => AWSIZE,
@@ -115,7 +115,7 @@ begin
                 -- Read request signals.
                 ARVALID => ARVALID,
                 ARREADY => ARREADY,
-                ARID   => ARID,
+                ARID    => ARID,
                 ARADDR  => ARADDR,
                 ARLEN   => ARLEN,
                 ARSIZE  => ARSIZE,
