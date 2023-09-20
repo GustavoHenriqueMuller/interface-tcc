@@ -6,10 +6,10 @@ use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tb_slave_reception_write is
-end tb_slave_reception_write;
+entity tb_slave_read is
+end tb_slave_read;
 
-architecture arch_tb_slave_reception_write of tb_slave_reception_write is
+architecture arch_tb_slave_read of tb_slave_read is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -51,7 +51,7 @@ architecture arch_tb_slave_reception_write of tb_slave_reception_write is
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
-    -- Signals of router 1.
+    -- Signals of router.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
     signal t_l_in_ack_o  : std_logic;
@@ -60,7 +60,7 @@ architecture arch_tb_slave_reception_write of tb_slave_reception_write is
     signal t_l_out_ack_i : std_logic;
 
 begin
-    u_WRITE_REQUEST_INJECTOR: entity work.write_request_injector
+    u_READ_REQUEST_INJECTOR: entity work.read_request_injector
         generic map(
             data_width_p => c_DATA_WIDTH
         )
@@ -143,15 +143,31 @@ begin
     -- Tests.
     process
     begin
-        t_AWREADY <= '1';
+        -- Receiving read transaction.
+        t_ARREADY <= '1';
         wait until rising_edge(t_ACLK) and t_ARVALID = '1';
 
-        t_AWREADY <= '0';
-        t_WREADY <= '1';
-        wait until rising_edge(t_ACLK) and t_WVALID = '1' and t_WLAST = '1';
+        t_ARREADY <= '0';
 
-        t_WREADY <= '0';
-        wait for 100 ns;
+        -- Sending read data (2 flits).
+        t_RVALID <= '1';
+        t_RDATA  <= "10101010101010101010101010101010";
+        t_RRESP  <= "101";
+        t_RLAST  <= '0';
+
+        wait until rising_edge(t_ACLK) and t_RREADY = '1';
+
+        t_RVALID <= '1';
+        t_RDATA  <= "11011101110111011101110111011101";
+        t_RRESP  <= "101";
+        t_RLAST  <= '1';
+
+        -- Ending transaction.
+        wait until rising_edge(t_ACLK) and t_RREADY = '1';
+
+        t_RVALID <= '0';
+        t_RLAST  <= '0';
+        wait 100 ns;
     end process;
 
-end arch_tb_slave_reception_write;
+end arch_tb_slave_read;

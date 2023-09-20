@@ -33,7 +33,8 @@ end backend_slave_depacketizer_control;
 
 architecture arch_backend_slave_depacketizer_control of backend_slave_depacketizer_control is
     type t_STATE is (S_HEADER_1, S_HEADER_2, S_ADDRESS,
-                     S_WRITE_REQUEST, S_READ_REQUEST_TRAILER, S_READ_REQUEST);
+                     S_WRITE_REQUEST, S_READ_REQUEST_TRAILER, S_READ_REQUEST,
+                     S_WAIT_FOR_READY);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -83,7 +84,8 @@ begin
                                                r_NEXT_STATE <= S_READ_REQUEST_TRAILER;
                                            end if;
 
-            when S_READ_REQUEST => r_NEXT_STATE <= S_HEADER_1 when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
+            when S_READ_REQUEST => r_NEXT_STATE <= S_WAIT_FOR_READY when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
+            when S_WAIT_FOR_READY => r_NEXT_STATE <= S_HEADER_1 when (i_READY_RECEIVE_PACKET = '1') else S_WAIT_FOR_READY;
         end case;
     end process;
 
@@ -99,10 +101,10 @@ begin
     o_VALID_RECEIVE_DATA <= '1' when (r_CURRENT_STATE = S_READ_REQUEST) or
                                      (r_CURRENT_STATE = S_WRITE_REQUEST and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
                                      else '0';
-    o_LAST_RECEIVE_DATA  <= '0';
+    o_LAST_RECEIVE_DATA  <= '0'; -- @TODO
 
     o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
     o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2) else '0';
-    o_WRITE_ADDRESS_REG  <= '1' when (r_CURRENT_STATE = S_ADDRESS) else '0';
+    o_WRITE_ADDRESS_REG  <= '1' when (r_CURRENT_STATE = S_ADDRESS)  else '0';
 
 end arch_backend_slave_depacketizer_control;

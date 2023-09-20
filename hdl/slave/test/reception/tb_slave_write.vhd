@@ -6,10 +6,10 @@ use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tb_slave_reception_read is
-end tb_slave_reception_read;
+entity tb_slave_write is
+end tb_slave_write;
 
-architecture arch_tb_slave_reception_read of tb_slave_reception_read is
+architecture arch_tb_slave_write of tb_slave_write is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -60,7 +60,7 @@ architecture arch_tb_slave_reception_read of tb_slave_reception_read is
     signal t_l_out_ack_i : std_logic;
 
 begin
-    u_READ_REQUEST_INJECTOR: entity work.read_request_injector
+    u_WRITE_REQUEST_INJECTOR: entity work.write_request_injector
         generic map(
             data_width_p => c_DATA_WIDTH
         )
@@ -143,11 +143,15 @@ begin
     -- Tests.
     process
     begin
-        t_ARREADY <= '1';
+        t_AWREADY <= '1';
         wait until rising_edge(t_ACLK) and t_ARVALID = '1';
 
-        t_ARREADY <= '0';
+        t_AWREADY <= '0';
+        t_WREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_WVALID = '1' and t_WLAST = '1';
+
+        t_WREADY <= '0';
         wait for 100 ns;
     end process;
 
-end arch_tb_slave_reception_read;
+end arch_tb_slave_write;
