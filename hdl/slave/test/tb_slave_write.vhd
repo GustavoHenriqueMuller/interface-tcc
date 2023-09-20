@@ -143,6 +143,8 @@ begin
     -- Tests.
     process
     begin
+        -- @TODO: FAZER ESSE TB.
+
         t_AWREADY <= '1';
         wait until rising_edge(t_ACLK) and t_ARVALID = '1';
 
