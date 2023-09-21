@@ -12,17 +12,12 @@ entity backend_slave is
         ARESETn: in std_logic;
 
         -- Signals (injection).
-        i_START_SEND_PACKET: in std_logic;
         i_VALID_SEND_DATA  : in std_logic;
         i_LAST_SEND_DATA   : in std_logic;
-        o_READY_SEND_PACKET: out std_logic;
 		o_READY_SEND_DATA  : out std_logic;
 
-		i_BURST    : in std_logic_vector(1 downto 0);
-        i_LENGTH   : in std_logic_vector(7 downto 0);
-        i_DATA_SEND: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_OPC_SEND : in std_logic;
-        i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        i_DATA_SEND : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_STATUS_SEND: in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Signals (reception).
         i_READY_RECEIVE_PACKET: in std_logic;
@@ -47,7 +42,30 @@ entity backend_slave is
 end backend_slave;
 
 architecture arch_backend_slave of backend_slave is
+    signal w_HEADER_1_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
 begin
+    u_INJECTION: entity work.backend_slave_reception
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            i_VALID_SEND_DATA => i_VALID_SEND_DATA,
+            i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
+            o_READY_SEND_DATA => o_READY_SEND_DATA,
+
+            i_DATA_SEND   => i_DATA_SEND,
+            i_STATUS_SEND => i_STATUS_SEND,
+
+            i_HEADER_1_RECEIVE => w_HEADER_1_RECEIVE,
+            i_HEADER_2_RECEIVE => w_HEADER_2_RECEIVE,
+
+            l_in_data_i => l_in_data_i,
+            l_in_val_i  => l_in_val_i,
+            l_in_ack_o  => l_in_ack_o
+        );
+
     u_RECEPTION: entity work.backend_slave_reception
         port map(
             ACLK    => ACLK,
@@ -59,8 +77,8 @@ begin
             o_VALID_RECEIVE_DATA => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA  => o_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE       => o_DATA_RECEIVE,
-            o_HEADER_1_RECEIVE   => o_HEADER_1_RECEIVE,
-            o_HEADER_2_RECEIVE   => o_HEADER_2_RECEIVE,
+            o_HEADER_1_RECEIVE   => w_HEADER_1_RECEIVE,
+            o_HEADER_2_RECEIVE   => w_HEADER_2_RECEIVE,
             o_ADDRESS_RECEIVE    => o_ADDRESS_RECEIVE,
 
             l_out_data_o => l_out_data_o,
@@ -68,4 +86,6 @@ begin
             l_out_ack_i  => l_out_ack_i
         );
 
+    o_HEADER_1_RECEIVE <= w_HEADER_1_RECEIVE;
+    o_HEADER_2_RECEIVE <= w_HEADER_2_RECEIVE;
 end arch_backend_slave;

@@ -47,18 +47,12 @@ entity frontend_slave is
             RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Backend signals (injection).
-        o_START_SEND_PACKET: out std_logic;
         o_VALID_SEND_DATA  : out std_logic;
         o_LAST_SEND_DATA   : out std_logic;
-
         i_READY_SEND_DATA  : in std_logic;
-        i_READY_SEND_PACKET: in std_logic;
 
-        o_BURST    : out std_logic_vector(1 downto 0);
-        o_LENGTH   : out std_logic_vector(7 downto 0);
-        o_DATA_SEND: out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_OPC_SEND : out std_logic;
-        o_ID       : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        o_DATA_SEND  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_STATUS_SEND: out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Backend signals (reception).
         i_VALID_RECEIVE_DATA: in std_logic;
@@ -75,49 +69,28 @@ entity frontend_slave is
 end frontend_slave;
 
 architecture arch_frontend_slave of frontend_slave is
-    -- Injection.
-    signal w_OPC_SEND: std_logic;
-    signal w_OPC_SEND_OUT: std_logic;
-
     -- Reception.
     signal w_OPC_RECEIVE: std_logic;
-    signal w_STATUS_RECEIVE: std_logic_vector(2 downto 0);
 
 begin
     ---------------------------------------------------------------------------------------------
     -- Injection.
 
-    -- Registering.
-    w_OPC_SEND <= '0' when (BVALID = '1') else '1' when (RVALID = '1');
-
-    registering: process(all)
-    begin
-        if (rising_edge(ACLK)) then
-            if (i_READY_SEND_PACKET) then w_OPC_SEND_OUT <= w_OPC_SEND; end if;
-        end if;
-    end process registering;
-
-    -- Transaction information.
-    --o_BURST     <=
-    --o_LENGTH    <=
-    --o_DATA_SEND <=
-    --o_OPC_SEND  <=
-    --o_ID        <=
-
     -- Control information.
-    --o_START_SEND_PACKET <=
-    --o_VALID_SEND_DATA   <=
-    --o_LAST_SEND_DATA    <=
+    --o_VALID_SEND_DATA   <= '1' when (BVALID = '1' or RVALID = '1') else '0';
+    --o_LAST_SEND_DATA    <= RLAST;
+    --o_DATA_SEND         <= RDATA when (RVALID = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    --o_STATUS_SEND       <= BRESP when (BVALID = '1' and w_OPC_RECEIVE = '0') or
+    --
 
     -- Ready information to front-end.
-    --BREADY <= i_READY_SEND_PACKET;
-    --RREADY <= i_READY_SEND_DATA;
+    --BREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
+    --RREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
     w_OPC_RECEIVE    <= i_HEADER_2_RECEIVE(0);
-    w_STATUS_RECEIVE <= i_HEADER_2_RECEIVE(5 downto 3);
 
     o_READY_RECEIVE_PACKET <= '1' when (AWREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (ARREADY = '1' and w_OPC_RECEIVE = '1') else '0';

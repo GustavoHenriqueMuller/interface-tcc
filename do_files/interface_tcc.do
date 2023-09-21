@@ -1,8 +1,7 @@
 vlib work
 
+vcom -2008 ../hdl/basic/mux4.vhd
 vcom -2008 ../hdl/basic/mux5.vhd
-vcom -2008 ../hdl/basic/reg.vhd
-vcom -2008 ../hdl/basic/reg1b.vhd
 
 vcom -2008 ../hdl/common/send_control.vhd
 vcom -2008 ../hdl/common/receive_control.vhd
@@ -60,12 +59,16 @@ vcom -2008 ../hdl/slave/frontend/frontend_slave.vhd
 vcom -2008 ../hdl/slave/backend/reception/backend_slave_depacketizer_control.vhd
 vcom -2008 ../hdl/slave/backend/reception/backend_slave_reception.vhd
 
+vcom -2008 ../hdl/slave/backend/injection/backend_slave_packetizer_control.vhd
+vcom -2008 ../hdl/slave/backend/injection/backend_slave_packetizer_datapath.vhd
+vcom -2008 ../hdl/slave/backend/injection/backend_slave_injection.vhd
+
 vcom -2008 ../hdl/slave/backend/backend_slave.vhd
 
 vcom -2008 ../hdl/slave/tcc_top_slave.vhd
 
-vcom -2008 ../hdl/slave/test/reception/read_request_injector.vhd
-vcom -2008 ../hdl/slave/test/reception/tb_slave_reception_read.vhd
-vcom -2008 ../hdl/slave/test/reception/write_request_injector.vhd
-vcom -2008 ../hdl/slave/test/reception/tb_slave_reception_write.vhd
+vcom -2008 ../hdl/slave/test/read_request_injector.vhd
+vcom -2008 ../hdl/slave/test/tb_slave_reception_read.vhd
+vcom -2008 ../hdl/slave/test/write_request_injector.vhd
+vcom -2008 ../hdl/slave/test/tb_slave_reception_write.vhd
 
