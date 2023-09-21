@@ -90,7 +90,7 @@ begin
     o_VALID_RECEIVE_DATA <= '1' when (r_CURRENT_STATE = S_WRITE_RESPONSE) or
                                      (r_CURRENT_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
                                      else '0';
-    o_LAST_RECEIVE_DATA  <= '0'; -- @TODO.
+    o_LAST_RECEIVE_DATA  <= '0';
 
     o_WRITE_HEADER_1_REG <= '1' when (r_CURRENT_STATE = S_HEADER_1) else '0';
     o_WRITE_HEADER_2_REG <= '1' when (r_CURRENT_STATE = S_HEADER_2) else '0';

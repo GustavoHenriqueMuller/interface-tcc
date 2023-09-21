@@ -19,6 +19,9 @@ sim:/tb_slave_read/t_RLAST \
 sim:/tb_slave_read/t_RRESP
 
 add wave -position insertpoint  \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_CURRENT_STATE
+
+add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
@@ -27,13 +30,93 @@ sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_2 \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_ADDRESS
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_WRITE_BUFFER \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_WRITE_OK_BUFFER \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_READ_BUFFER \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFER
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_WRITE_BUFFER \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_WRITE_OK_BUFFER \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_BUFFER \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_OK_BUFFER
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/data_o
+sim:/tb_slave_read/t_l_in_data_i \
+sim:/tb_slave_read/t_l_in_val_i \
+sim:/tb_slave_read/t_l_in_ack_o \
+sim:/tb_slave_read/t_l_out_data_o \
+sim:/tb_slave_read/t_l_out_val_o \
+sim:/tb_slave_read/t_l_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t_n_in_data_i \
+sim:/tb_slave_read/t_n_in_val_i \
+sim:/tb_slave_read/t_n_in_ack_o \
+sim:/tb_slave_read/t_n_out_data_o \
+sim:/tb_slave_read/t_n_out_val_o \
+sim:/tb_slave_read/t_n_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t_e_in_data_i \
+sim:/tb_slave_read/t_e_in_val_i \
+sim:/tb_slave_read/t_e_in_ack_o \
+sim:/tb_slave_read/t_e_out_data_o \
+sim:/tb_slave_read/t_e_out_val_o \
+sim:/tb_slave_read/t_e_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t_s_in_data_i \
+sim:/tb_slave_read/t_s_in_val_i \
+sim:/tb_slave_read/t_s_in_ack_o \
+sim:/tb_slave_read/t_s_out_data_o \
+sim:/tb_slave_read/t_s_out_val_o \
+sim:/tb_slave_read/t_s_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t_w_in_data_i \
+sim:/tb_slave_read/t_w_in_val_i \
+sim:/tb_slave_read/t_w_in_ack_o \
+sim:/tb_slave_read/t_w_out_data_o \
+sim:/tb_slave_read/t_w_out_val_o \
+sim:/tb_slave_read/t_w_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t2_l_in_data_i \
+sim:/tb_slave_read/t2_l_in_val_i \
+sim:/tb_slave_read/t2_l_in_ack_o \
+sim:/tb_slave_read/t2_l_out_data_o \
+sim:/tb_slave_read/t2_l_out_val_o \
+sim:/tb_slave_read/t2_l_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t2_n_in_data_i \
+sim:/tb_slave_read/t2_n_in_val_i \
+sim:/tb_slave_read/t2_n_in_ack_o \
+sim:/tb_slave_read/t2_n_out_data_o \
+sim:/tb_slave_read/t2_n_out_val_o \
+sim:/tb_slave_read/t2_n_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t2_e_in_data_i \
+sim:/tb_slave_read/t2_e_in_val_i \
+sim:/tb_slave_read/t2_e_in_ack_o \
+sim:/tb_slave_read/t2_e_out_data_o \
+sim:/tb_slave_read/t2_e_out_val_o \
+sim:/tb_slave_read/t2_e_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t2_s_in_data_i \
+sim:/tb_slave_read/t2_s_in_val_i \
+sim:/tb_slave_read/t2_s_in_ack_o \
+sim:/tb_slave_read/t2_s_out_data_o \
+sim:/tb_slave_read/t2_s_out_val_o \
+sim:/tb_slave_read/t2_s_out_ack_i
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/t2_w_in_data_i \
+sim:/tb_slave_read/t2_w_in_val_i \
+sim:/tb_slave_read/t2_w_in_ack_o \
+sim:/tb_slave_read/t2_w_out_data_o \
+sim:/tb_slave_read/t2_w_out_val_o \
+sim:/tb_slave_read/t2_w_out_ack_i

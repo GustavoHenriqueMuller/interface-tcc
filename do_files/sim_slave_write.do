@@ -18,6 +18,9 @@ sim:/tb_slave_write/t_WDATA \
 sim:/tb_slave_write/t_WLAST
 
 add wave -position insertpoint  \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_CURRENT_STATE
+
+add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
@@ -30,6 +33,9 @@ sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_WRITE_BUFFER \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_WRITE_OK_BUFFER \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_READ_BUFFER \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFER
+
+add wave -position insertpoint  \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r

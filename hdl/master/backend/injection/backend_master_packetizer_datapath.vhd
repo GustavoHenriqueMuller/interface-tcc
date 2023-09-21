@@ -36,7 +36,7 @@ architecture arch_backend_master_packetizer_datapath of backend_master_packetize
 begin
     u_MUX5: entity work.mux5
         generic map(
-            p_DATA_WIDTH => data_width_c + 1
+            p_DATA_WIDTH => c_FLIT_WIDTH
         )
         port map(
             i_SELECTOR => i_FLIT_SELECTOR,

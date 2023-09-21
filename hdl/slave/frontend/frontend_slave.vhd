@@ -76,15 +76,16 @@ begin
     -- Injection.
 
     -- Control information.
-    --o_VALID_SEND_DATA   <= '1' when (BVALID = '1' or RVALID = '1') else '0';
-    --o_LAST_SEND_DATA    <= RLAST;
-    --o_DATA_SEND         <= RDATA when (RVALID = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
-    --o_STATUS_SEND       <= BRESP when (BVALID = '1' and w_OPC_RECEIVE = '0') or
-    --
+    o_VALID_SEND_DATA   <= '1' when (BVALID = '1' or RVALID = '1') else '0';
+    o_LAST_SEND_DATA    <= RLAST;
+    o_DATA_SEND         <= RDATA when (RVALID = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    o_STATUS_SEND       <= BRESP when (w_OPC_RECEIVE = '0') else
+                           RRESP when (w_OPC_RECEIVE = '1') else
+                           (c_RESP_WIDTH - 1 downto 0 => '0');
 
     -- Ready information to front-end.
-    --BREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
-    --RREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
+    BREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
+    RREADY <= '1' when (i_READY_SEND_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Reception.
