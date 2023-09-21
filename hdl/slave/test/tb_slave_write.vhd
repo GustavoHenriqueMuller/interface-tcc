@@ -143,8 +143,6 @@ begin
     -- Tests.
     process
     begin
-        -- @TODO: FAZER ESSE TB.
-
         t_AWREADY <= '1';
         wait until rising_edge(t_ACLK) and t_ARVALID = '1';
 
@@ -154,6 +152,13 @@ begin
 
         t_WREADY <= '0';
         wait for 100 ns;
+
+        t_BVALID <= '1';
+        t_BRESP  <= "101";
+        wait until rising_edge(t_ACLK) and t_BREADY = '1';
+
+        t_BVALID <= '0';
+        wait;
     end process;
 
 end arch_tb_slave_write;

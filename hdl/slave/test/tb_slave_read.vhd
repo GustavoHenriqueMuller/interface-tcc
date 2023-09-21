@@ -167,7 +167,7 @@ begin
 
         t_RVALID <= '0';
         t_RLAST  <= '0';
-        wait 100 ns;
+        wait for 100 ns;
     end process;
 
 end arch_tb_slave_read;

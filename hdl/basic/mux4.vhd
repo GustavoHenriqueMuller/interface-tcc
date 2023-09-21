@@ -19,7 +19,7 @@ end mux4;
 
 architecture arch_mux4 of mux4 is
 begin
-  process (i_SELECTOR, i_DATA_A, i_DATA_B, i_DATA_C, i_DATA_D, i_DATA_E)
+  process (i_SELECTOR, i_DATA_A, i_DATA_B, i_DATA_C, i_DATA_D)
   begin
     case i_SELECTOR is
       when "00" =>

@@ -19,19 +19,15 @@ entity backend_master_packetizer_control is
 
         o_READY_SEND_PACKET: out std_logic;
         o_READY_SEND_DATA  : out std_logic;
+        o_FLIT_SELECTOR    : out std_logic_vector(2 downto 0);
 
         i_WRITE_OK_BUFFER: in std_logic;
-        o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
         o_WRITE_BUFFER   : out std_logic
     );
 end backend_master_packetizer_control;
 
 architecture arch_backend_master_packetizer_control of backend_master_packetizer_control is
-    type t_STATE is (S_IDLE, S_HEADER_1,
-                             S_HEADER_2,
-                             S_ADDRESS,
-                             S_PAYLOAD,
-                             S_TRAILER);
+    type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_2, S_ADDRESS, S_PAYLOAD, S_TRAILER);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 

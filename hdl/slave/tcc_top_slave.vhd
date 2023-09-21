@@ -60,18 +60,12 @@ end tcc_top_slave;
 
 architecture arch_tcc_top_slave of tcc_top_slave is
     -- Injection.
-    signal w_START_SEND_PACKET: std_logic;
     signal w_VALID_SEND_DATA  : std_logic;
     signal w_LAST_SEND_DATA   : std_logic;
-
-    signal w_READY_SEND_PACKET: std_logic;
     signal w_READY_SEND_DATA  : std_logic;
 
-    signal w_BURST    : std_logic_vector(1 downto 0);
-    signal w_LENGTH   : std_logic_vector(7 downto 0);
-    signal w_DATA_SEND: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_OPC_SEND : std_logic;
-    signal w_ID       : std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal w_DATA_SEND  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_STATUS_SEND: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
     -- Reception.
     signal w_READY_RECEIVE_PACKET: std_logic;
@@ -83,7 +77,7 @@ architecture arch_tcc_top_slave of tcc_top_slave is
 
     signal w_HEADER_1_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_ADDRESS_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_ADDRESS_RECEIVE : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND: entity work.frontend_slave
@@ -128,19 +122,13 @@ begin
                 RLAST   => RLAST,
                 RRESP   => RRESP,
 
-            -- Backend signals.
-            o_START_SEND_PACKET => w_START_SEND_PACKET,
+            -- Backend signals (injection).
             o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             o_LAST_SEND_DATA    => w_LAST_SEND_DATA,
-
             i_READY_SEND_DATA   => w_READY_SEND_DATA,
-            i_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            o_BURST     => w_BURST,
-            o_LENGTH    => w_LENGTH,
-            o_DATA_SEND => w_DATA_SEND,
-            o_OPC_SEND  => w_OPC_SEND,
-            o_ID        => w_ID,
+            o_DATA_SEND   => w_DATA_SEND,
+            o_STATUS_SEND => w_STATUS_SEND,
 
             -- Backend signals (reception).
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
@@ -148,8 +136,8 @@ begin
 
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
+
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
             i_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
             i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE
         );
@@ -160,18 +148,13 @@ begin
             ACLK => ACLK,
             ARESETn => ARESETn,
 
-            -- Backend signals.
-            i_START_SEND_PACKET => w_START_SEND_PACKET,
+            -- Backend signals (injection).
             i_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             i_LAST_SEND_DATA    => w_LAST_SEND_DATA,
             o_READY_SEND_DATA   => w_READY_SEND_DATA,
-            o_READY_SEND_PACKET => w_READY_SEND_PACKET,
 
-            i_BURST     => w_BURST,
-            i_LENGTH    => w_LENGTH,
-            i_DATA_SEND => w_DATA_SEND,
-            i_OPC_SEND  => w_OPC_SEND,
-            i_ID        => w_ID,
+            i_DATA_SEND   => w_DATA_SEND,
+            i_STATUS_SEND => w_STATUS_SEND,
 
             -- Backend signals (reception).
             i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
@@ -180,7 +163,6 @@ begin
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_HEADER_1_RECEIVE     => w_HEADER_1_RECEIVE,
             o_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
             o_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
 

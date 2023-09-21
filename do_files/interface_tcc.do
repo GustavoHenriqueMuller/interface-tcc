@@ -68,7 +68,7 @@ vcom -2008 ../hdl/slave/backend/backend_slave.vhd
 vcom -2008 ../hdl/slave/tcc_top_slave.vhd
 
 vcom -2008 ../hdl/slave/test/read_request_injector.vhd
-vcom -2008 ../hdl/slave/test/tb_slave_reception_read.vhd
+vcom -2008 ../hdl/slave/test/tb_slave_read.vhd
 vcom -2008 ../hdl/slave/test/write_request_injector.vhd
-vcom -2008 ../hdl/slave/test/tb_slave_reception_write.vhd
+vcom -2008 ../hdl/slave/test/tb_slave_write.vhd
 

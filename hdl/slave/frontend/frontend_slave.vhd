@@ -59,7 +59,6 @@ entity frontend_slave is
         i_LAST_RECEIVE_DATA : in std_logic;
 
         i_DATA_RECEIVE      : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_HEADER_1_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_HEADER_2_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_ADDRESS_RECEIVE   : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
@@ -90,7 +89,7 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    w_OPC_RECEIVE    <= i_HEADER_2_RECEIVE(0);
+    w_OPC_RECEIVE <= i_HEADER_2_RECEIVE(0);
 
     o_READY_RECEIVE_PACKET <= '1' when (AWREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (ARREADY = '1' and w_OPC_RECEIVE = '1') else '0';

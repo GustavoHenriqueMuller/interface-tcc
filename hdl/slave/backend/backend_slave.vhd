@@ -27,7 +27,6 @@ entity backend_slave is
         o_LAST_RECEIVE_DATA : out std_logic;
 
         o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_HEADER_1_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_HEADER_2_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_ADDRESS_RECEIVE   : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
@@ -46,7 +45,7 @@ architecture arch_backend_slave of backend_slave is
     signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
 begin
-    u_INJECTION: entity work.backend_slave_reception
+    u_INJECTION: entity work.backend_slave_injection
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -86,6 +85,5 @@ begin
             l_out_ack_i  => l_out_ack_i
         );
 
-    o_HEADER_1_RECEIVE <= w_HEADER_1_RECEIVE;
     o_HEADER_2_RECEIVE <= w_HEADER_2_RECEIVE;
 end arch_backend_slave;
