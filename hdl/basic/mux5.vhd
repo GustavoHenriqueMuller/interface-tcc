@@ -20,7 +20,7 @@ end mux5;
 
 architecture arch_mux5 of mux5 is
 begin
-  process (i_SELECTOR, i_DATA_A, i_DATA_B, i_DATA_C, i_DATA_D, i_DATA_E)
+  process (i_DATA_A, i_DATA_B, i_DATA_C, i_DATA_D, i_DATA_E, i_SELECTOR)
   begin
     case i_SELECTOR is
       when "000" =>

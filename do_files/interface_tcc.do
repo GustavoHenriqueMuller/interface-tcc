@@ -2,8 +2,8 @@ vlib work
 
 vcom -2008 ../hdl/tcc_package.vhd
 
-vcom -2008 ../hdl/basic/mux4.vhd
 vcom -2008 ../hdl/basic/mux5.vhd
+vcom -2008 ../hdl/basic/mux6.vhd
 
 vcom -2008 ../hdl/common/send_control.vhd
 vcom -2008 ../hdl/common/receive_control.vhd
