@@ -98,7 +98,7 @@ begin
 
     AWVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
     AWID    <= i_HEADER_2_RECEIVE(20 downto 16)         when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ID_WIDTH - 1 downto 0 => '0');
-    AWADDR  <= (31 downto 0 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ADDR_WIDTH - 1 downto 0 => '0');
+    AWADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ADDR_WIDTH - 1 downto 0 => '0');
     AWLEN   <= i_HEADER_2_RECEIVE(15 downto 8)          when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (7 downto 0 => '0');
     AWBURST <= i_HEADER_2_RECEIVE(7 downto 6)           when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (1 downto 0 => '0');
 
@@ -108,7 +108,7 @@ begin
 
     ARVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
     ARID    <= i_HEADER_2_RECEIVE(20 downto 16)         when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
-    ARADDR  <= (31 downto 0 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ADDR_WIDTH - 1 downto 0 => '0');
+    ARADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ADDR_WIDTH - 1 downto 0 => '0');
     ARLEN   <= i_HEADER_2_RECEIVE(15 downto 8)          when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (7 downto 0 => '0');
     ARBURST <= i_HEADER_2_RECEIVE(7 downto 6)           when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (1 downto 0 => '0');
 
