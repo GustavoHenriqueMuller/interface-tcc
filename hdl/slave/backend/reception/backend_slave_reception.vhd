@@ -43,7 +43,7 @@ architecture arch_backend_slave_reception of backend_slave_reception is
 
     signal w_HEADER_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_HEADER_ADDRESS : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_HEADER_ADDRESS : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;

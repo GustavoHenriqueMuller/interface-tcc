@@ -51,7 +51,7 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
-    -- Signals of router 1.
+    -- Signals of slave interface.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
     signal t_l_in_ack_o  : std_logic;
@@ -59,7 +59,43 @@ architecture arch_tb_master_reception_write of tb_master_reception_write is
     signal t_l_out_val_o : std_logic;
     signal t_l_out_ack_i : std_logic;
 
+    -- Signals of response injector.
+    signal t2_l_in_data_i : std_logic_vector(data_width_c downto 0);
+    signal t2_l_in_val_i  : std_logic;
+    signal t2_l_in_ack_o  : std_logic;
+    signal t2_l_out_data_o: std_logic_vector(data_width_c downto 0);
+    signal t2_l_out_val_o : std_logic;
+    signal t2_l_out_ack_i : std_logic;
+
+    -- Signals of XINA.
+    signal l_in_data_i : data_link_l_t;
+    signal l_in_val_i  : ctrl_link_l_t;
+    signal l_in_ack_o  : ctrl_link_l_t;
+    signal l_out_data_o: data_link_l_t;
+    signal l_out_val_o : ctrl_link_l_t;
+    signal l_out_ack_i : ctrl_link_l_t;
+
 begin
+    -- XINA signals.
+    l_in_data_i(0, 0) <= t_l_in_data_i;
+    l_in_data_i(1, 0) <= t2_l_in_data_i;
+
+    l_in_val_i(0, 0) <= t_l_in_val_i;
+    l_in_val_i(1, 0) <= t2_l_in_val_i;
+
+    t_l_in_ack_o <= l_in_ack_o(0, 0);
+    t2_l_in_ack_o <= l_in_ack_o(1, 0);
+
+    t_l_out_data_o <= l_out_data_o(0, 0);
+    t2_l_out_data_o <= l_out_data_o(1, 0);
+
+    t_l_out_val_o <= l_out_val_o(0, 0);
+    t2_l_out_val_o <= l_out_val_o(1, 0);
+
+    l_out_ack_i(0, 0) <= t_l_out_ack_i;
+    l_out_ack_i(1, 0) <= t2_l_out_ack_i;
+
+    -- Instances.
     u_WRITE_RESPONSE_INJECTOR: entity work.write_response_injector
         generic map(
             data_width_p => c_DATA_WIDTH
@@ -68,9 +104,9 @@ begin
         port map(
             clk_i  => t_ACLK,
             rst_i  => t_RESET,
-            data_o => t_l_in_data_i,
-            val_o  => t_l_in_val_i,
-            ack_i  => t_l_in_ack_o
+            data_o => t2_l_in_data_i,
+            val_o  => t2_l_in_val_i,
+            ack_i  => t2_l_in_ack_o
         );
 
     u_TOP_MASTER: entity work.tcc_top_master
@@ -121,13 +157,31 @@ begin
                 RRESP   => t_RRESP,
 
             -- XINA signals.
-            l_in_data_i  => t_l_out_data_o,
-            l_in_val_i   => t_l_out_val_o,
-            l_in_ack_o   => t_l_out_ack_i,
+            l_in_data_i  => t_l_in_data_i,
+            l_in_val_i   => t_l_in_val_i,
+            l_in_ack_o   => t_l_in_ack_o,
 
-            l_out_data_o => t_l_in_data_i,
-            l_out_val_o  => t_l_in_val_i,
-            l_out_ack_i  => t_l_in_ack_o
+            l_out_data_o => t_l_out_data_o,
+            l_out_val_o  => t_l_out_val_o,
+            l_out_ack_i  => t_l_out_ack_i
+        );
+
+    u_XINA_NETWORK: entity work.xina
+        generic map(
+            rows_p => 1,
+            cols_p => 2
+        )
+
+        port map(
+            clk_i => t_ACLK,
+            rst_i => t_RESET,
+
+            l_in_data_i  => l_in_data_i,
+            l_in_val_i   => l_in_val_i,
+            l_in_ack_o   => l_in_ack_o,
+            l_out_data_o => l_out_data_o,
+            l_out_val_o  => l_out_val_o,
+            l_out_ack_i  => l_out_ack_i
         );
 
     ---------------------------------------------------------------------------------------------
