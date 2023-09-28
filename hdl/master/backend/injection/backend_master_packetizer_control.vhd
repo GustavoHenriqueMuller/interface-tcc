@@ -54,19 +54,19 @@ begin
 
             when S_HEADER_DEST => r_NEXT_STATE <= S_HEADER_SRC when (i_WRITE_OK_BUFFER = '1') else S_HEADER_DEST;
 
-            when S_HEADER_SRC => r_NEXT_STATE <= S_HEADER_INTERFACE when (i_WRITE_OK_BUFFER = '1') else S_HEADER_SRC;
+            when S_HEADER_SRC  => r_NEXT_STATE <= S_HEADER_INTERFACE when (i_WRITE_OK_BUFFER = '1') else S_HEADER_SRC;
 
             when S_HEADER_INTERFACE => r_NEXT_STATE <= S_HEADER_ADDRESS when (i_WRITE_OK_BUFFER = '1') else S_HEADER_INTERFACE;
 
             when S_HEADER_ADDRESS => if (i_WRITE_OK_BUFFER = '1') then
-                                  if (i_OPC_SEND = '0') then
-                                      r_NEXT_STATE <= S_PAYLOAD; -- Write packet. Next flit is payload.
-                                  else
-                                      r_NEXT_STATE <= S_TRAILER; -- Read packet. Next flit is trailer.
-                                  end if;
-                              else
-                                  r_NEXT_STATE <= S_HEADER_ADDRESS;
-                              end if;
+                                         if (i_OPC_SEND = '0') then
+                                             r_NEXT_STATE <= S_PAYLOAD; -- Write packet. Next flit is payload.
+                                         else
+                                             r_NEXT_STATE <= S_TRAILER; -- Read packet. Next flit is trailer.
+                                         end if;
+                                     else
+                                         r_NEXT_STATE <= S_HEADER_ADDRESS;
+                                     end if;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1' and i_LAST_SEND_DATA = '1') then
                                  r_NEXT_STATE <= S_TRAILER;
