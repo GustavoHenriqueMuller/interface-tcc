@@ -61,7 +61,7 @@ entity frontend_slave is
         i_LAST_RECEIVE_DATA : in std_logic;
 
         i_DATA_RECEIVE      : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_HEADER_2_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_ADDRESS_RECEIVE   : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         o_READY_RECEIVE_PACKET: out std_logic;
@@ -92,26 +92,26 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    w_OPC_RECEIVE <= i_HEADER_2_RECEIVE(0);
+    w_OPC_RECEIVE <= i_HEADER_INTERFACE_RECEIVE(0);
 
     o_READY_RECEIVE_PACKET <= '1' when (AWREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (ARREADY = '1' and w_OPC_RECEIVE = '1') else '0';
     o_READY_RECEIVE_DATA   <= WREADY;
 
     AWVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
-    AWID    <= i_HEADER_2_RECEIVE(20 downto 16)         when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ID_WIDTH - 1 downto 0 => '0');
-    AWADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ADDR_WIDTH - 1 downto 0 => '0');
-    AWLEN   <= i_HEADER_2_RECEIVE(15 downto 8)          when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (7 downto 0 => '0');
-    AWBURST <= i_HEADER_2_RECEIVE(7 downto 6)           when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (1 downto 0 => '0');
+    AWID    <= i_HEADER_INTERFACE_RECEIVE(20 downto 16) when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ID_WIDTH - 1 downto 0 => '0');
+    AWADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE     when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ADDR_WIDTH - 1 downto 0 => '0');
+    AWLEN   <= i_HEADER_INTERFACE_RECEIVE(15 downto 8)  when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (7 downto 0 => '0');
+    AWBURST <= i_HEADER_INTERFACE_RECEIVE(7 downto 6)   when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (1 downto 0 => '0');
 
     WVALID <= i_VALID_RECEIVE_DATA;
     WDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
     WLAST  <= i_LAST_RECEIVE_DATA;
 
     ARVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
-    ARID    <= i_HEADER_2_RECEIVE(20 downto 16)         when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
-    ARADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ADDR_WIDTH - 1 downto 0 => '0');
-    ARLEN   <= i_HEADER_2_RECEIVE(15 downto 8)          when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (7 downto 0 => '0');
-    ARBURST <= i_HEADER_2_RECEIVE(7 downto 6)           when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (1 downto 0 => '0');
+    ARID    <= i_HEADER_INTERFACE_RECEIVE(20 downto 16) when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
+    ARADDR  <= (0 to 31 => '0') & i_ADDRESS_RECEIVE     when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ADDR_WIDTH - 1 downto 0 => '0');
+    ARLEN   <= i_HEADER_INTERFACE_RECEIVE(15 downto 8)  when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (7 downto 0 => '0');
+    ARBURST <= i_HEADER_INTERFACE_RECEIVE(7 downto 6)   when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (1 downto 0 => '0');
 
 end arch_frontend_slave;

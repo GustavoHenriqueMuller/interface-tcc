@@ -19,8 +19,8 @@ entity backend_slave_reception is
         o_LAST_RECEIVE_DATA : out std_logic;
 
         o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_HEADER_1_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_HEADER_2_RECEIVE  : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_HEADER_SRC_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_HEADER_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_ADDRESS_RECEIVE   : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         -- XINA signals.
@@ -37,13 +37,13 @@ architecture arch_backend_slave_reception of backend_slave_reception is
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- Registers.
-    signal w_WRITE_HEADER_1_REG: std_logic;
-    signal w_WRITE_HEADER_2_REG: std_logic;
-    signal w_WRITE_ADDRESS_REG : std_logic;
+    signal w_WRITE_HEADER_SRC_REG: std_logic;
+    signal w_WRITE_HEADER_INTERFACE_REG: std_logic;
+    signal w_WRITE_HEADER_ADDRESS_REG  : std_logic;
 
-    signal w_HEADER_1: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_HEADER_2: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_ADDRESS : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_HEADER_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_HEADER_ADDRESS : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -56,15 +56,15 @@ begin
     registering: process(all)
     begin
         if (rising_edge(ACLK)) then
-            if (w_WRITE_HEADER_1_REG) then w_HEADER_1 <= w_FLIT; end if;
-            if (w_WRITE_HEADER_2_REG) then w_HEADER_2 <= w_FLIT; end if;
-            if (w_WRITE_ADDRESS_REG)  then w_ADDRESS  <= w_FLIT(c_FLIT_WIDTH - 2 downto 0); end if;
+            if (w_WRITE_HEADER_SRC_REG)       then w_HEADER_SRC <= w_FLIT; end if;
+            if (w_WRITE_HEADER_INTERFACE_REG) then w_HEADER_INTERFACE <= w_FLIT; end if;
+            if (w_WRITE_HEADER_ADDRESS_REG)   then w_HEADER_ADDRESS   <= w_FLIT; end if;
         end if;
     end process registering;
 
-    o_HEADER_1_RECEIVE <= w_HEADER_1;
-    o_HEADER_2_RECEIVE <= w_HEADER_2;
-    o_ADDRESS_RECEIVE  <= w_ADDRESS;
+    o_HEADER_SRC_RECEIVE       <= w_HEADER_SRC;
+    o_HEADER_INTERFACE_RECEIVE <= w_HEADER_INTERFACE;
+    o_ADDRESS_RECEIVE  <= w_HEADER_ADDRESS(c_FLIT_WIDTH - 2 downto 0);
     o_DATA_RECEIVE     <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL: entity work.backend_slave_depacketizer_control
@@ -81,11 +81,11 @@ begin
             o_READ_BUFFER => w_READ_BUFFER,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
-            i_HEADER_2 => w_HEADER_2,
+            i_HEADER_INTERFACE => w_HEADER_INTERFACE,
 
-            o_WRITE_HEADER_1_REG => w_WRITE_HEADER_1_REG,
-            o_WRITE_HEADER_2_REG => w_WRITE_HEADER_2_REG,
-            o_WRITE_ADDRESS_REG => w_WRITE_ADDRESS_REG
+            o_WRITE_HEADER_SRC_REG => w_WRITE_HEADER_SRC_REG,
+            o_WRITE_HEADER_INTERFACE_REG => w_WRITE_HEADER_INTERFACE_REG,
+            o_WRITE_HEADER_ADDRESS_REG   => w_WRITE_HEADER_ADDRESS_REG
         );
 
     u_BUFFER_FIFO: entity work.buffering

@@ -20,8 +20,8 @@ entity backend_slave_injection is
         i_STATUS_SEND: in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Signals from reception.
-        i_HEADER_1_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_HEADER_2_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HEADER_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -35,7 +35,7 @@ architecture arch_backend_slave_injection of backend_slave_injection is
 
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_SELECTOR: std_logic_vector(1 downto 0);
+    signal w_FLIT_SELECTOR: std_logic_vector(2 downto 0);
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -48,7 +48,7 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_OPC_SEND => i_HEADER_2_RECEIVE(0),
+            i_OPC_SEND => i_HEADER_INTERFACE_RECEIVE(0),
             i_VALID_SEND_DATA => i_VALID_SEND_DATA,
             i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
             o_READY_SEND_DATA => o_READY_SEND_DATA,
@@ -63,10 +63,10 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_DATA_SEND        => i_DATA_SEND,
-            i_STATUS_SEND      => i_STATUS_SEND,
-            i_HEADER_1_RECEIVE => i_HEADER_1_RECEIVE,
-            i_HEADER_2_RECEIVE => i_HEADER_2_RECEIVE,
+            i_DATA_SEND          => i_DATA_SEND,
+            i_STATUS_SEND        => i_STATUS_SEND,
+            i_HEADER_SRC_RECEIVE => i_HEADER_SRC_RECEIVE,
+            i_HEADER_INTERFACE_RECEIVE => i_HEADER_INTERFACE_RECEIVE,
             i_FLIT_SELECTOR    => w_FLIT_SELECTOR,
 
             o_FLIT => w_FLIT

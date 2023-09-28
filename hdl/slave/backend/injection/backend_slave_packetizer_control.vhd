@@ -16,7 +16,7 @@ entity backend_slave_packetizer_control is
         i_VALID_SEND_DATA: in std_logic;
         i_LAST_SEND_DATA : in std_logic;
         o_READY_SEND_DATA: out std_logic;
-        o_FLIT_SELECTOR  : out std_logic_vector(1 downto 0);
+        o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
 
         i_WRITE_OK_BUFFER: in std_logic;
         o_WRITE_BUFFER   : out std_logic
@@ -24,7 +24,7 @@ entity backend_slave_packetizer_control is
 end backend_slave_packetizer_control;
 
 architecture arch_backend_slave_packetizer_control of backend_slave_packetizer_control is
-    type t_STATE is (S_IDLE, S_HEADER_1, S_HEADER_2, S_PAYLOAD, S_TRAILER);
+    type t_STATE is (S_IDLE, S_HEADER_DEST, S_HEADER_SRC, S_HEADER_INTERFACE, S_PAYLOAD, S_TRAILER);
     signal r_CURRENT_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -45,19 +45,21 @@ begin
     process (all)
     begin
         case r_CURRENT_STATE is
-            when S_IDLE => r_NEXT_STATE <= S_HEADER_1 when (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1') else S_IDLE;
+            when S_IDLE => r_NEXT_STATE <= S_HEADER_DEST when (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1') else S_IDLE;
 
-            when S_HEADER_1 => r_NEXT_STATE <= S_HEADER_2 when (i_WRITE_OK_BUFFER = '1') else S_HEADER_1;
+            when S_HEADER_DEST => r_NEXT_STATE <= S_HEADER_SRC when (i_WRITE_OK_BUFFER = '1') else S_HEADER_DEST;
 
-            when S_HEADER_2 => if (i_WRITE_OK_BUFFER = '1') then
-                                  if (i_OPC_SEND = '0') then
-                                      r_NEXT_STATE <= S_TRAILER; -- Write packet. Next flit trailer.
-                                  else
-                                      r_NEXT_STATE <= S_PAYLOAD; -- Read packet. Next flit is payload.
-                                  end if;
-                              else
-                                  r_NEXT_STATE <= S_HEADER_2;
-                              end if;
+            when S_HEADER_SRC => r_NEXT_STATE <= S_HEADER_INTERFACE when (i_WRITE_OK_BUFFER = '1') else S_HEADER_SRC;
+
+            when S_HEADER_INTERFACE => if (i_WRITE_OK_BUFFER = '1') then
+                                           if (i_OPC_SEND = '0') then
+                                               r_NEXT_STATE <= S_TRAILER; -- Write packet. Next flit trailer.
+                                           else
+                                               r_NEXT_STATE <= S_PAYLOAD; -- Read packet. Next flit is payload.
+                                           end if;
+                                       else
+                                           r_NEXT_STATE <= S_HEADER_INTERFACE;
+                                       end if;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1' and i_LAST_SEND_DATA = '1') then
                                  r_NEXT_STATE <= S_TRAILER;
@@ -73,16 +75,18 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-    o_FLIT_SELECTOR <= "00" when (r_CURRENT_STATE = S_HEADER_1) else
-                       "01" when (r_CURRENT_STATE = S_HEADER_2) else
-                       "10" when (r_CURRENT_STATE = S_PAYLOAD) else
-                       "11" when (r_CURRENT_STATE = S_TRAILER) else
-                       "XX";
+    o_FLIT_SELECTOR <= "000" when (r_CURRENT_STATE = S_HEADER_DEST) else
+                       "001" when (r_CURRENT_STATE = S_HEADER_SRC) else
+                       "010" when (r_CURRENT_STATE = S_HEADER_INTERFACE) else
+                       "011" when (r_CURRENT_STATE = S_PAYLOAD) else
+                       "100" when (r_CURRENT_STATE = S_TRAILER) else
+                       "111";
 
-    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_1) or
-                               (r_CURRENT_STATE = S_HEADER_2) or
+    o_WRITE_BUFFER <= '1' when (r_CURRENT_STATE = S_HEADER_DEST) or
+                               (r_CURRENT_STATE = S_HEADER_SRC) or
+                               (r_CURRENT_STATE = S_HEADER_INTERFACE) or
                                (r_CURRENT_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1') or
-                               (r_CURRENT_STATE  = S_TRAILER) else '0';
+                               (r_CURRENT_STATE = S_TRAILER) else '0';
 
     o_READY_SEND_DATA <= '1' when (r_CURRENT_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') else '0';
 

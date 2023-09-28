@@ -75,11 +75,10 @@ architecture arch_tcc_top_slave of tcc_top_slave is
 
     signal w_VALID_RECEIVE_DATA: std_logic;
     signal w_LAST_RECEIVE_DATA : std_logic;
-    signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_DATA_RECEIVE      : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
-    signal w_HEADER_1_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_HEADER_2_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_ADDRESS_RECEIVE : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_HEADER_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_ADDRESS_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 begin
     u_FRONTEND: entity work.frontend_slave
@@ -140,7 +139,7 @@ begin
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
 
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
+            i_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
             i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE
         );
 
@@ -165,7 +164,7 @@ begin
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_HEADER_2_RECEIVE     => w_HEADER_2_RECEIVE,
+            o_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
             o_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
 
             -- XINA signals.
