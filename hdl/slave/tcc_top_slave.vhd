@@ -30,6 +30,7 @@ entity tcc_top_slave is
             -- Write response signals.
             BVALID : in std_logic  := '0';
             BREADY : out std_logic := '0';
+            BID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             BRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
@@ -46,6 +47,7 @@ entity tcc_top_slave is
             RREADY : out std_logic := '1';
             RDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
             RLAST  : in std_logic  := '0';
+            RID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.

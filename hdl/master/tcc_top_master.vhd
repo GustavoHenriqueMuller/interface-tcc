@@ -30,6 +30,7 @@ entity tcc_top_master is
             -- Write response signals.
             BVALID : out std_logic := '0';
             BREADY : in std_logic  := '0';
+            BID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             BRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
@@ -46,6 +47,7 @@ entity tcc_top_master is
             RREADY : in std_logic  := '1';
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
             RLAST  : out std_logic := '0';
+            RID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
@@ -110,12 +112,13 @@ begin
                 -- Write response signals.
                 BVALID  => BVALID,
                 BREADY  => BREADY,
+                BID     => BID,
                 BRESP   => BRESP,
 
                 -- Read request signals.
                 ARVALID => ARVALID,
                 ARREADY => ARREADY,
-                ARID   => ARID,
+                ARID    => ARID,
                 ARADDR  => ARADDR,
                 ARLEN   => ARLEN,
                 ARSIZE  => ARSIZE,
@@ -126,6 +129,7 @@ begin
                 RREADY  => RREADY,
                 RDATA   => RDATA,
                 RLAST   => RLAST,
+                RID     => RID,
                 RRESP   => RRESP,
 
             -- Backend signals.

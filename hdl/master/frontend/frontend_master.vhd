@@ -28,6 +28,7 @@ entity frontend_master is
             -- Write response signals.
             BVALID : out std_logic;
             BREADY : in std_logic;
+            BID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             BRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
             -- Read request signals.
@@ -44,6 +45,7 @@ entity frontend_master is
             RREADY : in std_logic;
             RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
             RLAST  : out std_logic;
+            RID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Backend signals (injection).
@@ -82,6 +84,7 @@ architecture arch_frontend_master of frontend_master is
     -- Reception.
     signal w_OPC_RECEIVE: std_logic;
     signal w_STATUS_RECEIVE: std_logic_vector(2 downto 0);
+    signal w_ID_RECEIVE: std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -120,6 +123,7 @@ begin
 
     w_OPC_RECEIVE    <= i_HEADER_2_RECEIVE(0);
     w_STATUS_RECEIVE <= i_HEADER_2_RECEIVE(5 downto 3);
+    w_ID_RECEIVE     <= i_HEADER_2_RECEIVE(20 downto 16);
 
     o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (RREADY = '1' and w_OPC_RECEIVE = '1') else '0';
@@ -127,11 +131,13 @@ begin
     o_READY_RECEIVE_DATA   <= RREADY;
 
     BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
+    BID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ID_WIDTH - 1 downto 0 => '0');
     BRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
     RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
     RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
     RLAST  <= i_LAST_RECEIVE_DATA;
+    RID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
     RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
 
 end arch_frontend_master;
