@@ -91,6 +91,11 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
 
 begin
     u_TOP_MASTER: entity work.tcc_top_master
+        generic map(
+            SRC_X_p => (others => '0'),
+            SRC_Y_p => (others => '0')
+        )
+
         port map(
             -- AMBA AXI 5 signals.
             ACLK    => t_ACLK,

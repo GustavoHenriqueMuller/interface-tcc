@@ -64,6 +64,7 @@ begin
         generic map(
             data_width_p => c_DATA_WIDTH
         )
+
         port map(
             clk_i  => t_ACLK,
             rst_i  => t_RESET,
@@ -73,6 +74,11 @@ begin
         );
 
     u_TOP_MASTER: entity work.tcc_top_master
+        generic map(
+            SRC_X_p => (others => '0'),
+            SRC_Y_p => (others => '0')
+        )
+
         port map(
             -- AMBA AXI 5 signals.
             ACLK    => t_ACLK,

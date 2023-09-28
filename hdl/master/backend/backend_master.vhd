@@ -6,6 +6,11 @@ use work.tcc_package.all;
 use work.xina_pkg.all;
 
 entity backend_master is
+    generic(
+        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0)
+    );
+
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
@@ -48,6 +53,11 @@ end backend_master;
 architecture arch_backend_master of backend_master is
 begin
     u_INJECTION: entity work.backend_master_injection
+        generic map(
+            SRC_X_p => SRC_X_p,
+            SRC_Y_p => SRC_Y_p
+        )
+
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

@@ -6,6 +6,11 @@ use work.tcc_package.all;
 use work.xina_pkg.all;
 
 entity backend_master_packetizer_datapath is
+    generic(
+        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0)
+    );
+
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
@@ -52,7 +57,7 @@ begin
         );
 
     w_FLIT_HEADER_DEST <= '1' & i_DEST_X & i_DEST_Y;
-    w_FLIT_HEADER_SRC  <= '0' & c_SRC_X  & c_SRC_Y;
+    w_FLIT_HEADER_SRC  <= '0' & SRC_X_p  & SRC_Y_p;
     w_FLIT_HEADER_INTERFACE <= '0' & "00000000000" & i_ID & i_LENGTH & i_BURST & "000" & "1" & "0" & i_OPC_SEND;
     w_FLIT_HEADER_ADDRESS   <= '0' & i_OPC_ADDR;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;

@@ -7,6 +7,11 @@ use work.tcc_package.all;
 use work.xina_pkg.all;
 
 entity tcc_top_slave is
+    generic(
+        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0)
+    );
+
     port(
         -- AMBA AXI 5 signals.
         ACLK: in std_logic    := '0';
@@ -144,6 +149,11 @@ begin
         );
 
     u_BACKEND: entity work.backend_slave
+        generic map(
+            SRC_X_p => SRC_X_p,
+            SRC_Y_p => SRC_Y_p
+        )
+
         port map(
             -- AMBA AXI 5 signals.
             ACLK => ACLK,

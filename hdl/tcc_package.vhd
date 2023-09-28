@@ -12,6 +12,4 @@ package tcc_package is
 
 	-- Interface attributes.
 	constant c_FLIT_WIDTH: natural := c_DATA_WIDTH + 1;
-	constant c_SRC_X: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
-	constant c_SRC_Y: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0'); -- @TODO: FAZER GENERIC
 end package;

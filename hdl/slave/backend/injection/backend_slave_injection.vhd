@@ -6,6 +6,11 @@ use work.tcc_package.all;
 use work.xina_pkg.all;
 
 entity backend_slave_injection is
+    generic(
+        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0)
+    );
+
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
@@ -59,6 +64,11 @@ begin
         );
 
     u_PACKETIZER_DATAPATH: entity work.backend_slave_packetizer_datapath
+        generic map(
+            SRC_X_p => SRC_X_p,
+            SRC_Y_p => SRC_Y_p
+        )
+
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

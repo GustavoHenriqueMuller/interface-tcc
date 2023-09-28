@@ -1,2 +1,2 @@
 -- Os sinais BID e RID na interface escravo por enquanto não fazem nada (já que o ID está sendo pego da request).
--- Fazer generic map para endereços X e Y
+-- Trocar os roteadores do TB por XINA
