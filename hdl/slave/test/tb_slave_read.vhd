@@ -68,12 +68,12 @@ architecture arch_tb_slave_read of tb_slave_read is
     signal t2_l_out_ack_i : std_logic;
 
     -- Signals of XINA.
-    signal l_in_data_i  : data_link_l_t;
-    signal l_in_val_i   : ctrl_link_l_t;
-    signal l_in_ack_o   : ctrl_link_l_t;
-    signal l_out_data_o : data_link_l_t;
-    signal l_out_val_o  : ctrl_link_l_t;
-    signal l_out_ack_i  : ctrl_link_l_t;
+    signal l_in_data_i : data_link_l_t;
+    signal l_in_val_i  : ctrl_link_l_t;
+    signal l_in_ack_o  : ctrl_link_l_t;
+    signal l_out_data_o: data_link_l_t;
+    signal l_out_val_o : ctrl_link_l_t;
+    signal l_out_ack_i : ctrl_link_l_t;
 
 begin
     -- XINA signals.
@@ -95,6 +95,7 @@ begin
     l_out_ack_i(0, 0) <= t_l_out_ack_i;
     l_out_ack_i(1, 0) <= t2_l_out_ack_i;
 
+    -- Instances.
     u_READ_REQUEST_INJECTOR: entity work.read_request_injector
         generic map(
             data_width_p => c_DATA_WIDTH
