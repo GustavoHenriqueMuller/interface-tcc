@@ -23,8 +23,9 @@ architecture arch_write_request_injector of write_request_injector is
 
     signal enb_counter_w: std_logic;
     signal id_w: integer range 0 to 6 := 0;
-    signal header1_w  : std_logic_vector(data_width_p downto 0) := "1" & "0000000000000001" & "0000000000000000";
-    signal header2_w  : std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000000000101000";
+    signal header_dest_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000000" & "0000000000000000";
+    signal header_src_w : std_logic_vector(data_width_p downto 0) := "0" & "0000000000000001" & "0000000000000000";
+    signal header_interface_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000000000101000";
     signal address_w  : std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";
     signal payload1_w : std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";
     signal payload2_w : std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";
@@ -45,16 +46,18 @@ begin
   process(all)
     begin
         if id_w = 0 then
-            data_out_w <= header1_w;
+            data_out_w <= header_dest_w;
         elsif id_w = 1 then
-            data_out_w <= header2_w;
+            data_out_w <= header_src_w;
         elsif id_w = 2 then
-            data_out_w <= address_w;
+            data_out_w <= header_interface_w;
         elsif id_w = 3 then
-            data_out_w <= payload1_w;
+            data_out_w <= address_w;
         elsif id_w = 4 then
+            data_out_w <= payload1_w;
+        elsif id_w = 5 then
             data_out_w <= payload2_w;
-        else
+        elsif id_w = 6 then
             data_out_w <= trailer_w;
         end if;
   end process;
@@ -65,7 +68,7 @@ begin
         id_w <= 0;
     elsif (rising_edge(clk_i)) then
         if (enb_counter_w = '1') then
-            if (id_w >= 5) then
+            if (id_w >= 6) then
                 id_w <= 0;
             else
                 id_w <= id_w + 1;
