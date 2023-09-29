@@ -220,13 +220,13 @@ begin
 
         -- Flit 1.
         t_WVALID <= '1';
-        t_WDATA <= "10101010101010101010101010101010";
+        t_WDATA <= "10101010101010101010101010101010"; -- AA
 
         wait until rising_edge(t_ACLK) and t_WREADY = '1';
 
         -- Flit 2.
         t_WVALID <= '1';
-        t_WDATA <= "11011101110111011101110111011101";
+        t_WDATA <= "11011101110111011101110111011101"; -- DD
         t_WLAST <= '1';
 
         wait until rising_edge(t_ACLK) and t_WREADY = '1';

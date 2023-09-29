@@ -105,7 +105,7 @@ begin
     o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN   when (w_OPC_SEND_OUT = '1');
     o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
     o_OPC_SEND  <= w_OPC_SEND_OUT;
-    o_ID        <= AWID   when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1');
+    o_ID        <= AWID    when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';

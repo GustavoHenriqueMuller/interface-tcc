@@ -86,7 +86,7 @@ begin
                                                r_NEXT_STATE <= S_READ_REQUEST_TRAILER;
                                            end if;
 
-            when S_READ_REQUEST => r_NEXT_STATE   <= S_WAIT_FOR_READY when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
+            when S_READ_REQUEST   => r_NEXT_STATE <= S_WAIT_FOR_READY when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
             when S_WAIT_FOR_READY => r_NEXT_STATE <= S_HEADER_DEST    when (i_READY_RECEIVE_PACKET = '1') else S_WAIT_FOR_READY;
         end case;
     end process;

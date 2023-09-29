@@ -25,9 +25,9 @@ add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_CURRENT_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_1 \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_2 \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_ADDRESS
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_SRC \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_INTERFACE \
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_ADDRESS
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_WRITE_BUFFER \
