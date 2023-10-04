@@ -203,15 +203,13 @@ begin
     process
     begin
         t_AWREADY <= '1';
-        wait until rising_edge(t_ACLK) and t_ARVALID = '1';
+        wait until rising_edge(t_ACLK) and t_AWVALID = '1';
 
         t_AWREADY <= '0';
         t_WREADY <= '1';
         wait until rising_edge(t_ACLK) and t_WVALID = '1' and t_WLAST = '1';
 
         t_WREADY <= '0';
-        wait for 100 ns;
-
         t_BVALID <= '1';
         t_BRESP  <= "101";
         wait until rising_edge(t_ACLK) and t_BREADY = '1';

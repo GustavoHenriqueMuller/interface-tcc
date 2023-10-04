@@ -15,17 +15,25 @@ sim:/tb_slave_write/t_AWBURST \
 sim:/tb_slave_write/t_WVALID \
 sim:/tb_slave_write/t_WREADY \
 sim:/tb_slave_write/t_WDATA \
-sim:/tb_slave_write/t_WLAST
+sim:/tb_slave_write/t_WLAST \
+sim:/tb_slave_write/t_BVALID \
+sim:/tb_slave_write/t_BREADY \
+sim:/tb_slave_write/t_BRESP
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_CURRENT_STATE
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_CURRENT_STATE
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_SRC \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_INTERFACE \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_PAYLOAD_COUNTER \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_SET_PAYLOAD_COUNTER \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_SUBTRACT_PAYLOAD_COUNTER
+
+add wave -position insertpoint  \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_SRC \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_INTERFACE \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_ADDRESS
 
 add wave -position insertpoint  \

@@ -68,7 +68,7 @@ entity frontend_master is
         i_LAST_RECEIVE_DATA : in std_logic;
 
         i_DATA_RECEIVE: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_HEADER_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         o_READY_RECEIVE_PACKET: out std_logic;
         o_READY_RECEIVE_DATA  : out std_logic
@@ -120,9 +120,9 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    w_OPC_RECEIVE    <= i_HEADER_INTERFACE_RECEIVE(0);
-    w_STATUS_RECEIVE <= i_HEADER_INTERFACE_RECEIVE(5 downto 3);
-    w_ID_RECEIVE     <= i_HEADER_INTERFACE_RECEIVE(20 downto 16);
+    w_OPC_RECEIVE    <= i_H_INTERFACE_RECEIVE(0);
+    w_STATUS_RECEIVE <= i_H_INTERFACE_RECEIVE(5 downto 3);
+    w_ID_RECEIVE     <= i_H_INTERFACE_RECEIVE(20 downto 16);
 
     o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (RREADY = '1' and w_OPC_RECEIVE = '1') else '0';

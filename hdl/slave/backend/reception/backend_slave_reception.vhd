@@ -15,12 +15,13 @@ entity backend_slave_reception is
         i_READY_RECEIVE_PACKET: in std_logic;
         i_READY_RECEIVE_DATA  : in std_logic;
 
-        o_VALID_RECEIVE_DATA: out std_logic;
-        o_LAST_RECEIVE_DATA : out std_logic;
+        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_VALID_RECEIVE_DATA  : out std_logic;
+        o_LAST_RECEIVE_DATA   : out std_logic;
 
         o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_HEADER_SRC_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_HEADER_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_H_SRC_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_ADDRESS_RECEIVE   : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         -- XINA signals.
@@ -37,12 +38,12 @@ architecture arch_backend_slave_reception of backend_slave_reception is
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- Registers.
-    signal w_WRITE_HEADER_SRC_REG: std_logic;
-    signal w_WRITE_HEADER_INTERFACE_REG: std_logic;
+    signal w_WRITE_H_SRC_REG: std_logic;
+    signal w_WRITE_H_INTERFACE_REG: std_logic;
     signal w_WRITE_HEADER_ADDRESS_REG  : std_logic;
 
-    signal w_HEADER_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_HEADER_ADDRESS : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- FIFO.
@@ -56,14 +57,14 @@ begin
     registering: process(all)
     begin
         if (rising_edge(ACLK)) then
-            if (w_WRITE_HEADER_SRC_REG)       then w_HEADER_SRC <= w_FLIT; end if;
-            if (w_WRITE_HEADER_INTERFACE_REG) then w_HEADER_INTERFACE <= w_FLIT; end if;
+            if (w_WRITE_H_SRC_REG)       then w_H_SRC <= w_FLIT; end if;
+            if (w_WRITE_H_INTERFACE_REG) then w_H_INTERFACE <= w_FLIT; end if;
             if (w_WRITE_HEADER_ADDRESS_REG)   then w_HEADER_ADDRESS   <= w_FLIT; end if;
         end if;
     end process registering;
 
-    o_HEADER_SRC_RECEIVE       <= w_HEADER_SRC;
-    o_HEADER_INTERFACE_RECEIVE <= w_HEADER_INTERFACE;
+    o_H_SRC_RECEIVE       <= w_H_SRC;
+    o_H_INTERFACE_RECEIVE <= w_H_INTERFACE;
     o_ADDRESS_RECEIVE  <= w_HEADER_ADDRESS(c_FLIT_WIDTH - 2 downto 0);
     o_DATA_RECEIVE     <= w_FLIT(31 downto 0);
 
@@ -74,6 +75,7 @@ begin
 
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
+            o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
             o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
@@ -81,10 +83,10 @@ begin
             o_READ_BUFFER => w_READ_BUFFER,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
-            i_HEADER_INTERFACE => w_HEADER_INTERFACE,
+            i_H_INTERFACE => w_H_INTERFACE,
 
-            o_WRITE_HEADER_SRC_REG => w_WRITE_HEADER_SRC_REG,
-            o_WRITE_HEADER_INTERFACE_REG => w_WRITE_HEADER_INTERFACE_REG,
+            o_WRITE_H_SRC_REG => w_WRITE_H_SRC_REG,
+            o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
             o_WRITE_HEADER_ADDRESS_REG   => w_WRITE_HEADER_ADDRESS_REG
         );
 

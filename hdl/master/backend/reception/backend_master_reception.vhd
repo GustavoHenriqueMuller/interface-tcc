@@ -19,7 +19,7 @@ entity backend_master_reception is
         o_LAST_RECEIVE_DATA : out std_logic;
 
         o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_HEADER_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -35,8 +35,8 @@ architecture arch_backend_master_reception of backend_master_reception is
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- Registers.
-    signal w_WRITE_HEADER_INTERFACE_REG: std_logic;
-    signal w_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_WRITE_H_INTERFACE_REG: std_logic;
+    signal w_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -48,13 +48,13 @@ begin
     -- Registering headers.
     registering: process(all)
     begin
-        if (rising_edge(ACLK) and w_WRITE_HEADER_INTERFACE_REG = '1') then
-            w_HEADER_INTERFACE <= w_FLIT;
+        if (rising_edge(ACLK) and w_WRITE_H_INTERFACE_REG = '1') then
+            w_H_INTERFACE <= w_FLIT;
         end if;
     end process registering;
 
     o_DATA_RECEIVE <= w_FLIT(31 downto 0);
-    o_HEADER_INTERFACE_RECEIVE <= w_HEADER_INTERFACE;
+    o_H_INTERFACE_RECEIVE <= w_H_INTERFACE;
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
         port map(
@@ -70,7 +70,7 @@ begin
             o_READ_BUFFER => w_READ_BUFFER,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
-            o_WRITE_HEADER_INTERFACE_REG => w_WRITE_HEADER_INTERFACE_REG
+            o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG
         );
 
     u_BUFFER_FIFO: entity work.buffering

@@ -28,11 +28,12 @@ entity backend_slave is
         i_READY_RECEIVE_PACKET: in std_logic;
         i_READY_RECEIVE_DATA  : in std_logic;
 
-        o_VALID_RECEIVE_DATA: out std_logic;
-        o_LAST_RECEIVE_DATA : out std_logic;
+        o_VALID_RECEIVE_PACKET: out std_logic;
+        o_VALID_RECEIVE_DATA  : out std_logic;
+        o_LAST_RECEIVE_DATA   : out std_logic;
 
         o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        o_HEADER_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_ADDRESS_RECEIVE   : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         -- XINA signals.
@@ -46,8 +47,8 @@ entity backend_slave is
 end backend_slave;
 
 architecture arch_backend_slave of backend_slave is
-    signal w_HEADER_SRC_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_HEADER_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_SRC_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
 begin
     u_INJECTION: entity work.backend_slave_injection
@@ -67,8 +68,8 @@ begin
             i_DATA_SEND   => i_DATA_SEND,
             i_STATUS_SEND => i_STATUS_SEND,
 
-            i_HEADER_SRC_RECEIVE => w_HEADER_SRC_RECEIVE,
-            i_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
+            i_H_SRC_RECEIVE => w_H_SRC_RECEIVE,
+            i_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
@@ -83,17 +84,18 @@ begin
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
 
-            o_VALID_RECEIVE_DATA => o_VALID_RECEIVE_DATA,
-            o_LAST_RECEIVE_DATA  => o_LAST_RECEIVE_DATA,
-            o_DATA_RECEIVE       => o_DATA_RECEIVE,
-            o_HEADER_SRC_RECEIVE => w_HEADER_SRC_RECEIVE,
-            o_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
-            o_ADDRESS_RECEIVE    => o_ADDRESS_RECEIVE,
+            o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
+            o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
+            o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
+            o_DATA_RECEIVE         => o_DATA_RECEIVE,
+            o_H_SRC_RECEIVE   => w_H_SRC_RECEIVE,
+            o_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
+            o_ADDRESS_RECEIVE      => o_ADDRESS_RECEIVE,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
 
-    o_HEADER_INTERFACE_RECEIVE <= w_HEADER_INTERFACE_RECEIVE;
+    o_H_INTERFACE_RECEIVE <= w_H_INTERFACE_RECEIVE;
 end arch_backend_slave;

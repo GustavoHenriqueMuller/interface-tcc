@@ -78,11 +78,12 @@ architecture arch_tcc_top_slave of tcc_top_slave is
     signal w_READY_RECEIVE_PACKET: std_logic;
     signal w_READY_RECEIVE_DATA  : std_logic;
 
+    signal w_VALID_RECEIVE_PACKET: std_logic;
     signal w_VALID_RECEIVE_DATA: std_logic;
     signal w_LAST_RECEIVE_DATA : std_logic;
     signal w_DATA_RECEIVE      : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
-    signal w_HEADER_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_ADDRESS_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 begin
@@ -140,11 +141,12 @@ begin
             o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
+            i_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
 
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
+            i_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
             i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE
         );
 
@@ -171,10 +173,11 @@ begin
             i_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
 
+            o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_HEADER_INTERFACE_RECEIVE => w_HEADER_INTERFACE_RECEIVE,
+            o_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
             o_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
 
             -- XINA signals.

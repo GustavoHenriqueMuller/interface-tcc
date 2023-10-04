@@ -1,1 +1,0 @@
--- Os sinais BID e RID na interface escravo por enquanto não fazem nada (já que o ID está sendo pego da request).

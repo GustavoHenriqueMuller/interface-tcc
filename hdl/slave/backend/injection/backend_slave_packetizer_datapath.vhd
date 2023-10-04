@@ -19,8 +19,8 @@ entity backend_slave_packetizer_datapath is
         -- Backend signals.
         i_DATA_SEND       : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_STATUS_SEND     : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
-        i_HEADER_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_HEADER_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_FLIT_SELECTOR   : in std_logic_vector(2 downto 0);
 
 		o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
@@ -28,9 +28,9 @@ entity backend_slave_packetizer_datapath is
 end backend_slave_packetizer_datapath;
 
 architecture arch_backend_slave_packetizer_datapath of backend_slave_packetizer_datapath is
-    signal w_FLIT_HEADER_DEST: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_HEADER_SRC : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_DEST: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_SRC : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_PAYLOAD : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_TRAILER : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
@@ -46,22 +46,22 @@ begin
         )
         port map(
             i_SELECTOR => i_FLIT_SELECTOR,
-            i_DATA_A   => w_FLIT_HEADER_DEST,
-            i_DATA_B   => w_FLIT_HEADER_SRC,
-            i_DATA_C   => w_FLIT_HEADER_INTERFACE,
+            i_DATA_A   => w_FLIT_H_DEST,
+            i_DATA_B   => w_FLIT_H_SRC,
+            i_DATA_C   => w_FLIT_H_INTERFACE,
             i_DATA_D   => w_FLIT_PAYLOAD,
             i_DATA_E   => w_FLIT_TRAILER,
             o_DATA     => o_FLIT
         );
 
-    w_ID     <= i_HEADER_INTERFACE_RECEIVE(20 downto 16);
-    w_LENGTH <= i_HEADER_INTERFACE_RECEIVE(15 downto 8);
-    w_BURST  <= i_HEADER_INTERFACE_RECEIVE(7 downto 6);
-    w_OPC    <= i_HEADER_INTERFACE_RECEIVE(0);
+    w_ID     <= i_H_INTERFACE_RECEIVE(20 downto 16);
+    w_LENGTH <= i_H_INTERFACE_RECEIVE(15 downto 8);
+    w_BURST  <= i_H_INTERFACE_RECEIVE(7 downto 6);
+    w_OPC    <= i_H_INTERFACE_RECEIVE(0);
 
-    w_FLIT_HEADER_DEST <= '1' & i_HEADER_SRC_RECEIVE(31 downto 0);
-    w_FLIT_HEADER_SRC  <= '0' & SRC_X_p & SRC_Y_p;
-    w_FLIT_HEADER_INTERFACE <= '0' & "00000000000" & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & "0" & "1" & w_OPC;
+    w_FLIT_H_DEST <= '1' & i_H_SRC_RECEIVE(31 downto 0);
+    w_FLIT_H_SRC  <= '0' & SRC_X_p & SRC_Y_p;
+    w_FLIT_H_INTERFACE <= '0' & "00000000000" & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & "0" & "1" & w_OPC;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
     w_FLIT_TRAILER  <= '1' & "1010101010101010" & "1010101010101010";
 

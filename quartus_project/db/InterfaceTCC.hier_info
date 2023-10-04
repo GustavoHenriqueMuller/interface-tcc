@@ -408,8 +408,8 @@ o_BACKEND_ID[4] <= tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTR
 
 
 |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL
-ACLK => r_CURRENT_STATE~1.DATAIN
-ARESETn => r_CURRENT_STATE~3.DATAIN
+ACLK => r_STATE~1.DATAIN
+ARESETn => r_STATE~3.DATAIN
 AWVALID => process_1.IN0
 AWID[0] => o_BACKEND_ID.DATAB
 AWID[1] => o_BACKEND_ID.DATAB
@@ -715,8 +715,8 @@ l_out_ack_i <= comb.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL
-ACLK => r_CURRENT_STATE~1.DATAIN
-ARESETn => r_CURRENT_STATE~3.DATAIN
+ACLK => r_STATE~1.DATAIN
+ARESETn => r_STATE~3.DATAIN
 i_VALID => r_NEXT_STATE.S_HEADER_1.DATAB
 i_VALID => Selector4.IN3
 i_VALID => o_WRITE_BUFFER.IN0
@@ -1488,8 +1488,8 @@ data_i[32] => fifo_r.DATAB
 
 
 |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL
-ACLK => r_CURRENT_STATE~1.DATAIN
-ARESETn => r_CURRENT_STATE~3.DATAIN
+ACLK => r_STATE~1.DATAIN
+ARESETn => r_STATE~3.DATAIN
 i_READ_OK_BUFFER => Selector1.IN2
 i_READ_OK_BUFFER => l_in_val_i.IN0
 i_READ_OK_BUFFER => Selector0.IN1

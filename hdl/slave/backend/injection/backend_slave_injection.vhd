@@ -25,8 +25,8 @@ entity backend_slave_injection is
         i_STATUS_SEND: in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Signals from reception.
-        i_HEADER_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_HEADER_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -53,7 +53,7 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_OPC_SEND => i_HEADER_INTERFACE_RECEIVE(0),
+            i_OPC_SEND => i_H_INTERFACE_RECEIVE(0),
             i_VALID_SEND_DATA => i_VALID_SEND_DATA,
             i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
             o_READY_SEND_DATA => o_READY_SEND_DATA,
@@ -75,8 +75,8 @@ begin
 
             i_DATA_SEND          => i_DATA_SEND,
             i_STATUS_SEND        => i_STATUS_SEND,
-            i_HEADER_SRC_RECEIVE => i_HEADER_SRC_RECEIVE,
-            i_HEADER_INTERFACE_RECEIVE => i_HEADER_INTERFACE_RECEIVE,
+            i_H_SRC_RECEIVE => i_H_SRC_RECEIVE,
+            i_H_INTERFACE_RECEIVE => i_H_INTERFACE_RECEIVE,
             i_FLIT_SELECTOR    => w_FLIT_SELECTOR,
 
             o_FLIT => w_FLIT

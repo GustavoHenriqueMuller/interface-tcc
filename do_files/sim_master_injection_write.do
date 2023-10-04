@@ -21,10 +21,10 @@ sim:/tb_master_injection_write/t_WREADY \
 sim:/tb_master_injection_write/t_WVALID
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_SEND_CONTROL/r_CURRENT_STATE
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_SEND_CONTROL/r_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/w_DATA_SEND \

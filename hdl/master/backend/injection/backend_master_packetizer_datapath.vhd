@@ -32,9 +32,9 @@ entity backend_master_packetizer_datapath is
 end backend_master_packetizer_datapath;
 
 architecture arch_backend_master_packetizer_datapath of backend_master_packetizer_datapath is
-    signal w_FLIT_HEADER_DEST: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_HEADER_SRC : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_FLIT_HEADER_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_DEST: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_SRC : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_FLIT_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_HEADER_ADDRESS: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     signal w_FLIT_PAYLOAD : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -47,18 +47,18 @@ begin
         )
         port map(
             i_SELECTOR => i_FLIT_SELECTOR,
-            i_DATA_A   => w_FLIT_HEADER_DEST,
-            i_DATA_B   => w_FLIT_HEADER_SRC,
-            i_DATA_C   => w_FLIT_HEADER_INTERFACE,
+            i_DATA_A   => w_FLIT_H_DEST,
+            i_DATA_B   => w_FLIT_H_SRC,
+            i_DATA_C   => w_FLIT_H_INTERFACE,
             i_DATA_D   => w_FLIT_HEADER_ADDRESS,
             i_DATA_E   => w_FLIT_PAYLOAD,
             i_DATA_F   => w_FLIT_TRAILER,
             o_DATA     => o_FLIT
         );
 
-    w_FLIT_HEADER_DEST <= '1' & i_DEST_X & i_DEST_Y;
-    w_FLIT_HEADER_SRC  <= '0' & SRC_X_p  & SRC_Y_p;
-    w_FLIT_HEADER_INTERFACE <= '0' & "00000000000" & i_ID & i_LENGTH & i_BURST & "000" & "1" & "0" & i_OPC_SEND;
+    w_FLIT_H_DEST <= '1' & i_DEST_X & i_DEST_Y;
+    w_FLIT_H_SRC  <= '0' & SRC_X_p  & SRC_Y_p;
+    w_FLIT_H_INTERFACE <= '0' & "00000000000" & i_ID & i_LENGTH & i_BURST & "000" & "1" & "0" & i_OPC_SEND;
     w_FLIT_HEADER_ADDRESS   <= '0' & i_OPC_ADDR;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
     w_FLIT_TRAILER  <= '1' & "1010101010101010" & "1010101010101010";
