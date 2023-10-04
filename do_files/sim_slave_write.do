@@ -1,5 +1,8 @@
 vsim -voptargs=+acc -debugDB work.tb_slave_write
 
+#---------------------------------------------------------------------------------------------
+# AXI/interface signals.
+
 add wave -position insertpoint  \
 sim:/tb_slave_write/t_ACLK \
 sim:/tb_slave_write/t_RESETn

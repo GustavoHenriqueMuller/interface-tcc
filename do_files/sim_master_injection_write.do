@@ -1,5 +1,8 @@
 vsim -voptargs=+acc -debugDB work.tb_master_injection_write
 
+#---------------------------------------------------------------------------------------------
+# AXI/interface signals.
+
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/t_ACLK \
 sim:/tb_master_injection_write/t_AWADDR \
@@ -44,12 +47,8 @@ sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/w_READ_OK_BUFF
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
-
-
-
-
-
-
+#---------------------------------------------------------------------------------------------
+# Router signals.
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/t_l_in_data_i \

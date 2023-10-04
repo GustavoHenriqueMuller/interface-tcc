@@ -1,5 +1,8 @@
 vsim -voptargs=+acc -debugDB work.tb_slave_read
 
+#---------------------------------------------------------------------------------------------
+# AXI/interface signals.
+
 add wave -position insertpoint  \
 sim:/tb_slave_read/t_ACLK \
 sim:/tb_slave_read/t_RESETn
@@ -40,6 +43,9 @@ sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fi
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+
+#---------------------------------------------------------------------------------------------
+# Network signals.
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/t_l_in_data_i \

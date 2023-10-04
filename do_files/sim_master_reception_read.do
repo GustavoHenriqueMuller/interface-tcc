@@ -1,5 +1,8 @@
 vsim -voptargs=+acc -debugDB work.tb_master_reception_read
 
+#---------------------------------------------------------------------------------------------
+# AXI/interface signals.
+
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/t_ACLK \
 sim:/tb_master_reception_read/t_RESETn
@@ -39,6 +42,9 @@ sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFE
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+
+#---------------------------------------------------------------------------------------------
+# Network signals.
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/t_l_out_data_o \
