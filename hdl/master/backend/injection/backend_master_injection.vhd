@@ -38,7 +38,7 @@ entity backend_master_injection is
     );
 end backend_master_injection;
 
-architecture arch_backend_master_injection of backend_master_injection is
+architecture rtl of backend_master_injection is
     signal w_ARESET: std_logic;
 
     -- Routing table.
@@ -141,4 +141,4 @@ begin
         );
 
     w_ARESET <= not ARESETn;
-end arch_backend_master_injection;
+end rtl;

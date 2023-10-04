@@ -65,7 +65,7 @@ entity tcc_top_master is
     );
 end tcc_top_master;
 
-architecture arch_tcc_top_master of tcc_top_master is
+architecture rtl of tcc_top_master is
     -- Injection.
     signal w_START_SEND_PACKET: std_logic;
     signal w_VALID_SEND_DATA  : std_logic;
@@ -203,5 +203,4 @@ begin
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
-
-end arch_tcc_top_master;
+end rtl;

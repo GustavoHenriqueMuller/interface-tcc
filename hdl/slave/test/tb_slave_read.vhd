@@ -9,7 +9,7 @@ use work.xina_pkg.all;
 entity tb_slave_read is
 end tb_slave_read;
 
-architecture arch_tb_slave_read of tb_slave_read is
+architecture rtl of tb_slave_read is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -225,5 +225,4 @@ begin
         t_RLAST  <= '0';
         wait for 100 ns;
     end process;
-
-end arch_tb_slave_read;
+end rtl;

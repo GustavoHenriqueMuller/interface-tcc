@@ -16,7 +16,7 @@ entity read_request_injector is
     );
 end read_request_injector;
 
-architecture arch_read_request_injector of read_request_injector is
+architecture rtl of read_request_injector is
 
     signal current_state : std_logic := '0';
     signal next_state    : std_logic;
@@ -93,5 +93,4 @@ begin
   val_o  <= '1' when (current_state = '0') else '0';
   enb_counter_w <= '1' when (current_state = '1' and ack_i = '1') else '0';
   data_o <= data_out_w;
-
-end arch_read_request_injector;
+end rtl;

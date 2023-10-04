@@ -21,7 +21,7 @@ entity receive_control is
     );
 end receive_control;
 
-architecture arch_receive_control of receive_control is
+architecture rtl of receive_control is
     type t_STATE is (S_IDLE, S_WRITE_BUFFER, S_WAIT_VAL_ZERO);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -61,4 +61,4 @@ begin
     -- Output values (NoC).
     l_out_ack_i <= '1' when (r_STATE /= S_IDLE) else '0';
 
-end arch_receive_control;
+end rtl;

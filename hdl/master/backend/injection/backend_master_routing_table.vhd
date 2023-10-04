@@ -20,9 +20,9 @@ entity backend_master_routing_table is
     );
 end backend_master_routing_table;
 
-architecture arch_backend_master_routing_table of backend_master_routing_table is
+architecture rtl of backend_master_routing_table is
 begin
     o_OPC_ADDR <= i_ADDR((c_ADDR_WIDTH - 1) downto c_ADDR_WIDTH / 2);
     o_DEST_X   <= i_ADDR((c_ADDR_WIDTH / 2) - 1 downto c_ADDR_WIDTH / 4);
     o_DEST_Y   <= i_ADDR((c_ADDR_WIDTH / 4) - 1 downto 0);
-end arch_backend_master_routing_table;
+end rtl;

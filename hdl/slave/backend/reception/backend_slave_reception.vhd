@@ -31,7 +31,7 @@ entity backend_slave_reception is
     );
 end backend_slave_reception;
 
-architecture arch_backend_slave_reception of backend_slave_reception is
+architecture rtl of backend_slave_reception is
     signal w_ARESET: std_logic;
 
     -- Depacketizer.
@@ -122,4 +122,4 @@ begin
         );
 
     w_ARESET <= not ARESETn;
-end arch_backend_slave_reception;
+end rtl;

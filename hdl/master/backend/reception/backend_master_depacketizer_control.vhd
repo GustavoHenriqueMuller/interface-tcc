@@ -27,12 +27,16 @@ entity backend_master_depacketizer_control is
     );
 end backend_master_depacketizer_control;
 
-architecture arch_backend_master_depacketizer_control of backend_master_depacketizer_control is
+architecture rtl of backend_master_depacketizer_control is
     type t_STATE is (S_H_DEST, S_H_SRC, S_H_INTERFACE,
                      S_WRITE_RESPONSE_TRAILER, S_WRITE_RESPONSE,
                      S_READ_RESPONSE);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
+
+    signal r_PAYLOAD_COUNTER: unsigned(7 downto 0) := to_unsigned(255, 8);
+    signal r_SET_PAYLOAD_COUNTER: std_logic := '0';
+    signal r_SUBTRACT_PAYLOAD_COUNTER: std_logic := '0';
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -95,5 +99,4 @@ begin
     o_LAST_RECEIVE_DATA  <= '0';
 
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
-
-end arch_backend_master_depacketizer_control;
+end rtl;

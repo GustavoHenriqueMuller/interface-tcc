@@ -50,7 +50,7 @@ entity backend_master is
     );
 end backend_master;
 
-architecture arch_backend_master of backend_master is
+architecture rtl of backend_master is
 begin
     u_INJECTION: entity work.backend_master_injection
         generic map(
@@ -97,5 +97,4 @@ begin
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
-
-end arch_backend_master;
+end rtl;

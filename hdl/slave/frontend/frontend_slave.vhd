@@ -70,7 +70,7 @@ entity frontend_slave is
     );
 end frontend_slave;
 
-architecture arch_frontend_slave of frontend_slave is
+architecture rtl of frontend_slave is
     -- Reception.
     signal w_OPC_RECEIVE: std_logic;
 
@@ -116,5 +116,4 @@ begin
     ARLEN   <= i_H_INTERFACE_RECEIVE(15 downto 8)  when (i_VALID_RECEIVE_PACKET = '1' and w_OPC_RECEIVE = '1') else (7 downto 0 => '0');
     ARBURST <= i_H_INTERFACE_RECEIVE(7 downto 6)   when (i_VALID_RECEIVE_PACKET = '1' and w_OPC_RECEIVE = '1') else (1 downto 0 => '0');
     ARSIZE  <= "010";
-
-end arch_frontend_slave;
+end rtl;

@@ -46,7 +46,7 @@ entity backend_slave is
     );
 end backend_slave;
 
-architecture arch_backend_slave of backend_slave is
+architecture rtl of backend_slave is
     signal w_H_SRC_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
@@ -98,4 +98,4 @@ begin
         );
 
     o_H_INTERFACE_RECEIVE <= w_H_INTERFACE_RECEIVE;
-end arch_backend_slave;
+end rtl;

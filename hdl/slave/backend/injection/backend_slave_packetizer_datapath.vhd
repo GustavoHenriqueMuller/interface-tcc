@@ -27,7 +27,7 @@ entity backend_slave_packetizer_datapath is
     );
 end backend_slave_packetizer_datapath;
 
-architecture arch_backend_slave_packetizer_datapath of backend_slave_packetizer_datapath is
+architecture rtl of backend_slave_packetizer_datapath is
     signal w_FLIT_H_DEST: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_H_SRC : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -64,5 +64,4 @@ begin
     w_FLIT_H_INTERFACE <= '0' & "00000000000" & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & "0" & "1" & w_OPC;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
     w_FLIT_TRAILER  <= '1' & "1010101010101010" & "1010101010101010";
-
-end arch_backend_slave_packetizer_datapath;
+end rtl;

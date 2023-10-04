@@ -21,7 +21,7 @@ entity send_control is
     );
 end send_control;
 
-architecture arch_send_control of send_control is
+architecture rtl of send_control is
     type t_STATE is (S_IDLE, S_WAITING_ACK_ONE, S_WAITING_ACK_ZERO, S_READ_BUFFER);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -64,4 +64,4 @@ begin
     l_in_val_i <= '1' when (r_STATE = S_IDLE and i_READ_OK_BUFFER = '1') or
                            (r_STATE = S_WAITING_ACK_ONE) else '0';
 
-end arch_send_control;
+end rtl;

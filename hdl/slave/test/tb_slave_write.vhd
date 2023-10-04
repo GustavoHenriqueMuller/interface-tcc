@@ -9,7 +9,7 @@ use work.xina_pkg.all;
 entity tb_slave_write is
 end tb_slave_write;
 
-architecture arch_tb_slave_write of tb_slave_write is
+architecture rtl of tb_slave_write is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -217,5 +217,4 @@ begin
         t_BVALID <= '0';
         wait;
     end process;
-
-end arch_tb_slave_write;
+end rtl;

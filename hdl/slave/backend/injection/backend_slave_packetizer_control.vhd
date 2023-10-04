@@ -23,7 +23,7 @@ entity backend_slave_packetizer_control is
     );
 end backend_slave_packetizer_control;
 
-architecture arch_backend_slave_packetizer_control of backend_slave_packetizer_control is
+architecture rtl of backend_slave_packetizer_control is
     type t_STATE is (S_IDLE, S_H_DEST, S_H_SRC, S_H_INTERFACE, S_READ_PAYLOAD, S_TRAILER);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -91,5 +91,4 @@ begin
     o_READY_SEND_DATA <= '1' when (r_STATE = S_IDLE and i_OPC_SEND = '0') or -- For writes.
                                   (r_STATE = S_READ_PAYLOAD and i_WRITE_OK_BUFFER = '1') -- For reads.
                                   else '0';
-
-end arch_backend_slave_packetizer_control;
+end rtl;

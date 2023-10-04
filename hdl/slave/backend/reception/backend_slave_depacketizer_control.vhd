@@ -33,11 +33,12 @@ entity backend_slave_depacketizer_control is
     );
 end backend_slave_depacketizer_control;
 
-architecture arch_backend_slave_depacketizer_control of backend_slave_depacketizer_control is
+architecture rtl of backend_slave_depacketizer_control is
     type t_STATE is (S_H_DEST, S_H_SRC, S_H_INTERFACE, S_HEADER_ADDRESS,
                      S_WRITE_REQUEST, S_WRITE_REQUEST_PAYLOAD, S_READ_REQUEST, S_TRAILER, S_WAIT);
-    signal r_STATE  : t_STATE;
-    signal r_NEXT_STATE     : t_STATE;
+    signal r_STATE: t_STATE;
+    signal r_NEXT_STATE: t_STATE;
+
     signal r_PAYLOAD_COUNTER: unsigned(7 downto 0) := to_unsigned(255, 8);
     signal r_SET_PAYLOAD_COUNTER: std_logic := '0';
     signal r_SUBTRACT_PAYLOAD_COUNTER: std_logic := '0';
@@ -134,5 +135,4 @@ begin
     o_WRITE_H_SRC_REG       <= '1' when (r_STATE = S_H_SRC) else '0';
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
     o_WRITE_HEADER_ADDRESS_REG   <= '1' when (r_STATE = S_HEADER_ADDRESS)  else '0';
-
-end arch_backend_slave_depacketizer_control;
+end rtl;

@@ -28,7 +28,7 @@ entity backend_master_reception is
     );
 end backend_master_reception;
 
-architecture arch_backend_master_reception of backend_master_reception is
+architecture rtl of backend_master_reception is
     signal w_ARESET: std_logic;
 
     -- Depacketizer.
@@ -105,4 +105,4 @@ begin
         );
 
     w_ARESET <= not ARESETn;
-end arch_backend_master_reception;
+end rtl;

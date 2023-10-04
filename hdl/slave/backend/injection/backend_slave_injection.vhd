@@ -35,7 +35,7 @@ entity backend_slave_injection is
     );
 end backend_slave_injection;
 
-architecture arch_backend_slave_injection of backend_slave_injection is
+architecture rtl of backend_slave_injection is
     signal w_ARESET: std_logic;
 
     -- Packetizer.
@@ -114,5 +114,4 @@ begin
         );
 
     w_ARESET <= not ARESETn;
-
-end arch_backend_slave_injection;
+end rtl;

@@ -75,7 +75,7 @@ entity frontend_master is
     );
 end frontend_master;
 
-architecture arch_frontend_master of frontend_master is
+architecture rtl of frontend_master is
     -- Injection.
     signal w_OPC_SEND: std_logic;
     signal w_OPC_SEND_OUT: std_logic;
@@ -138,5 +138,4 @@ begin
     RLAST  <= i_LAST_RECEIVE_DATA;
     RID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
     RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
-
-end arch_frontend_master;
+end rtl;

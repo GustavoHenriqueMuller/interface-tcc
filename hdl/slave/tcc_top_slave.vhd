@@ -65,7 +65,7 @@ entity tcc_top_slave is
     );
 end tcc_top_slave;
 
-architecture arch_tcc_top_slave of tcc_top_slave is
+architecture rtl of tcc_top_slave is
     -- Injection.
     signal w_VALID_SEND_DATA  : std_logic;
     signal w_LAST_SEND_DATA   : std_logic;
@@ -188,5 +188,4 @@ begin
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
-
-end arch_tcc_top_slave;
+end rtl;
