@@ -17,11 +17,11 @@ entity backend_slave_packetizer_datapath is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_DATA_SEND       : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-        i_STATUS_SEND     : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+        i_DATA_SEND    : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_STATUS_SEND  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
         i_H_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_FLIT_SELECTOR   : in std_logic_vector(2 downto 0);
+        i_FLIT_SELECTOR: in std_logic_vector(2 downto 0);
 
 		o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
     );

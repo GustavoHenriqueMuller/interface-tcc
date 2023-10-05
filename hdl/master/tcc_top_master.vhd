@@ -158,7 +158,7 @@ begin
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE
+            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE
         );
 
     u_BACKEND: entity work.backend_master
