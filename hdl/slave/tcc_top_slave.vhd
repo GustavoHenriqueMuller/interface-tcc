@@ -146,7 +146,7 @@ begin
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
 
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
+            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
             i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE
         );
 

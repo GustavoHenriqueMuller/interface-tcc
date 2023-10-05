@@ -141,8 +141,8 @@ begin
             o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             o_LAST_SEND_DATA    => w_LAST_SEND_DATA,
 
-            i_READY_SEND_DATA   => w_READY_SEND_DATA,
             i_READY_SEND_PACKET => w_READY_SEND_PACKET,
+            i_READY_SEND_DATA   => w_READY_SEND_DATA,
 
             o_ADDR      => w_ADDR,
             o_BURST     => w_BURST,
