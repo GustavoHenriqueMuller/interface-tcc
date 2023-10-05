@@ -19,10 +19,8 @@ sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/o_LAST_RECEIVE
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_FLIT \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_HEADER_1_REG \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_HEADER_1 \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_HEADER_2_REG \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_HEADER_2 \
+sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_H_INTERFACE_REG \
+sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_H_INTERFACE \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_BUFFER \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFER
 

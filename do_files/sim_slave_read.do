@@ -30,7 +30,7 @@ sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_ST
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_SRC \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_INTERFACE \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_HEADER_ADDRESS
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_ADDRESS
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_WRITE_BUFFER \

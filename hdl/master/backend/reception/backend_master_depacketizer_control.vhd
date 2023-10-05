@@ -2,6 +2,7 @@ library IEEE;
 library work;
 
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
@@ -29,8 +30,7 @@ end backend_master_depacketizer_control;
 
 architecture rtl of backend_master_depacketizer_control is
     type t_STATE is (S_H_DEST, S_H_SRC, S_H_INTERFACE,
-                     S_WRITE_RESPONSE_TRAILER, S_WRITE_RESPONSE,
-                     S_READ_RESPONSE);
+                     S_READ_RESPONSE_PAYLOAD, S_WRITE_RESPONSE, S_TRAILER);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
 
@@ -60,43 +60,62 @@ begin
             when S_H_SRC => r_NEXT_STATE <= S_H_INTERFACE when (i_READ_OK_BUFFER = '1') else S_H_SRC;
 
             when S_H_INTERFACE => if (i_READ_OK_BUFFER = '1') then
-                                           if (i_FLIT(0) = '0') then
-                                               -- Write response. Next flit is trailer.
-                                               r_NEXT_STATE <= S_WRITE_RESPONSE_TRAILER;
-                                           else
-                                               -- Read response.
-                                               r_NEXT_STATE <= S_READ_RESPONSE;
-                                           end if;
-                                       else
-                                           r_NEXT_STATE <= S_H_INTERFACE;
-                                       end if;
+                                      if (i_FLIT(0) = '0') then
+                                          -- Write response. Next flit is trailer.
+                                          r_NEXT_STATE <= S_WRITE_RESPONSE;
+                                      else
+                                          -- Read response.
+                                          r_NEXT_STATE <= S_READ_RESPONSE_PAYLOAD;
+                                      end if;
+                                  else
+                                      r_NEXT_STATE <= S_H_INTERFACE;
+                                  end if;
 
-            when S_WRITE_RESPONSE_TRAILER => r_NEXT_STATE <= S_WRITE_RESPONSE when (i_READ_OK_BUFFER = '1') else S_WRITE_RESPONSE_TRAILER;
+            when S_READ_RESPONSE_PAYLOAD => if (r_PAYLOAD_COUNTER = to_unsigned(1, 8) and i_READY_RECEIVE_DATA = '1' and i_READ_OK_BUFFER = '1') then
+                                                r_NEXT_STATE <= S_TRAILER;
+                                            else
+                                                r_NEXT_STATE <= S_READ_RESPONSE_PAYLOAD;
+                                            end if;
 
-            when S_WRITE_RESPONSE => r_NEXT_STATE <= S_H_DEST when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_RESPONSE;
+            when S_WRITE_RESPONSE => r_NEXT_STATE <= S_TRAILER when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_RESPONSE;
 
-            when S_READ_RESPONSE => if (i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '1') then
-                                        -- Flit is trailer.
-                                        r_NEXT_STATE <= S_H_DEST;
-                                    else
-                                        r_NEXT_STATE <= S_READ_RESPONSE;
-                                    end if;
+            when S_TRAILER => r_NEXT_STATE <= S_H_DEST when (i_READ_OK_BUFFER = '1') else S_TRAILER;
         end case;
     end process;
+
+    ---------------------------------------------------------------------------------------------
+    -- Payload counter.
+    process (all)
+    begin
+        if (ARESETn = '0') then
+            r_PAYLOAD_COUNTER <= to_unsigned(255, 8);
+        elsif (rising_edge(ACLK)) then
+            if (r_SET_PAYLOAD_COUNTER = '1') then
+                r_PAYLOAD_COUNTER <= unsigned(i_FLIT(15 downto 8));
+            elsif (r_SUBTRACT_PAYLOAD_COUNTER = '1') then
+                r_PAYLOAD_COUNTER <= r_PAYLOAD_COUNTER - 1;
+            end if;
+        end if;
+    end process;
+
+    ---------------------------------------------------------------------------------------------
+    -- Internal signals.
+    r_SET_PAYLOAD_COUNTER      <= '1' when (r_STATE = S_H_INTERFACE) else '0';
+    r_SUBTRACT_PAYLOAD_COUNTER <= '1' when (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READ_OK_BUFFER = '1' and i_READY_RECEIVE_DATA = '1') else '0';
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
 	o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
                               (r_STATE = S_H_SRC) or
                               (r_STATE = S_H_INTERFACE) or
-                              (r_STATE = S_WRITE_RESPONSE_TRAILER) or
-                              (r_STATE = S_READ_RESPONSE and i_READY_RECEIVE_DATA = '1')
+                              (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READY_RECEIVE_DATA = '1') or
+                              (r_STATE = S_TRAILER)
                               else '0';
 
     o_VALID_RECEIVE_DATA <= '1' when (r_STATE = S_WRITE_RESPONSE) or
-                                     (r_STATE = S_READ_RESPONSE and i_READ_OK_BUFFER = '1' and i_FLIT(c_FLIT_WIDTH - 1) = '0')
+                                     (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READ_OK_BUFFER = '1')
                                      else '0';
-    o_LAST_RECEIVE_DATA  <= '0';
+    o_LAST_RECEIVE_DATA  <= '1' when (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READ_OK_BUFFER = '1' and r_PAYLOAD_COUNTER = to_unsigned(1, 8)) else '0';
 
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
 end rtl;

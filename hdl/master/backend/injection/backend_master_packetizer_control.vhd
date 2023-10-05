@@ -28,7 +28,7 @@ end backend_master_packetizer_control;
 
 architecture rtl of backend_master_packetizer_control is
     type t_STATE is (S_IDLE, S_H_DEST, S_H_SRC,
-                             S_H_INTERFACE, S_HEADER_ADDRESS,
+                             S_H_INTERFACE, S_H_ADDRESS,
                              S_PAYLOAD, S_TRAILER);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -56,16 +56,16 @@ begin
 
             when S_H_SRC  => r_NEXT_STATE <= S_H_INTERFACE when (i_WRITE_OK_BUFFER = '1') else S_H_SRC;
 
-            when S_H_INTERFACE => r_NEXT_STATE <= S_HEADER_ADDRESS when (i_WRITE_OK_BUFFER = '1') else S_H_INTERFACE;
+            when S_H_INTERFACE => r_NEXT_STATE <= S_H_ADDRESS when (i_WRITE_OK_BUFFER = '1') else S_H_INTERFACE;
 
-            when S_HEADER_ADDRESS => if (i_WRITE_OK_BUFFER = '1') then
+            when S_H_ADDRESS => if (i_WRITE_OK_BUFFER = '1') then
                                          if (i_OPC_SEND = '0') then
                                              r_NEXT_STATE <= S_PAYLOAD; -- Write packet. Next flit is payload.
                                          else
                                              r_NEXT_STATE <= S_TRAILER; -- Read packet. Next flit is trailer.
                                          end if;
                                      else
-                                         r_NEXT_STATE <= S_HEADER_ADDRESS;
+                                         r_NEXT_STATE <= S_H_ADDRESS;
                                      end if;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1' and i_LAST_SEND_DATA = '1') then
@@ -85,7 +85,7 @@ begin
     o_FLIT_SELECTOR <= "000" when (r_STATE = S_H_DEST) else
                        "001" when (r_STATE = S_H_SRC) else
                        "010" when (r_STATE = S_H_INTERFACE) else
-                       "011" when (r_STATE = S_HEADER_ADDRESS) else
+                       "011" when (r_STATE = S_H_ADDRESS) else
                        "100" when (r_STATE = S_PAYLOAD) else
                        "101" when (r_STATE = S_TRAILER) else
                        "111";
@@ -93,7 +93,7 @@ begin
     o_WRITE_BUFFER <= '1' when (r_STATE = S_H_DEST) or
                                (r_STATE = S_H_SRC) or
                                (r_STATE = S_H_INTERFACE) or
-                               (r_STATE = S_HEADER_ADDRESS) or
+                               (r_STATE = S_H_ADDRESS) or
                                (r_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1') or
                                (r_STATE  = S_TRAILER) else '0';
 

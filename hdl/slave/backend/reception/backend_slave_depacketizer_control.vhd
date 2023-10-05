@@ -29,12 +29,12 @@ entity backend_slave_depacketizer_control is
 
         o_WRITE_H_SRC_REG: out std_logic;
         o_WRITE_H_INTERFACE_REG: out std_logic;
-        o_WRITE_HEADER_ADDRESS_REG  : out std_logic
+        o_WRITE_H_ADDRESS_REG  : out std_logic
     );
 end backend_slave_depacketizer_control;
 
 architecture rtl of backend_slave_depacketizer_control is
-    type t_STATE is (S_H_DEST, S_H_SRC, S_H_INTERFACE, S_HEADER_ADDRESS,
+    type t_STATE is (S_H_DEST, S_H_SRC, S_H_INTERFACE, S_H_ADDRESS,
                      S_WRITE_REQUEST, S_WRITE_REQUEST_PAYLOAD, S_READ_REQUEST, S_TRAILER, S_WAIT);
     signal r_STATE: t_STATE;
     signal r_NEXT_STATE: t_STATE;
@@ -64,9 +64,9 @@ begin
 
             when S_H_SRC  => r_NEXT_STATE <= S_H_INTERFACE when (i_READ_OK_BUFFER = '1') else S_H_SRC;
 
-            when S_H_INTERFACE => r_NEXT_STATE <= S_HEADER_ADDRESS when (i_READ_OK_BUFFER = '1') else S_H_INTERFACE;
+            when S_H_INTERFACE => r_NEXT_STATE <= S_H_ADDRESS when (i_READ_OK_BUFFER = '1') else S_H_INTERFACE;
 
-            when S_HEADER_ADDRESS => if (i_READ_OK_BUFFER = '1') then
+            when S_H_ADDRESS => if (i_READ_OK_BUFFER = '1') then
                                          if (i_H_INTERFACE(0) = '0') then
                                              -- Write request.
                                              r_NEXT_STATE <= S_WRITE_REQUEST;
@@ -75,7 +75,7 @@ begin
                                              r_NEXT_STATE <= S_READ_REQUEST;
                                          end if;
                                      else
-                                         r_NEXT_STATE <= S_HEADER_ADDRESS;
+                                         r_NEXT_STATE <= S_H_ADDRESS;
                                      end if;
 
             when S_WRITE_REQUEST => r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_REQUEST;
@@ -110,7 +110,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Internal signals.
-    r_SET_PAYLOAD_COUNTER      <= '1' when (r_STATE = S_HEADER_ADDRESS) else '0';
+    r_SET_PAYLOAD_COUNTER      <= '1' when (r_STATE = S_H_INTERFACE) else '0';
     r_SUBTRACT_PAYLOAD_COUNTER <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1' and i_READY_RECEIVE_DATA = '1') else '0';
 
     ---------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ begin
 	o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
                               (r_STATE = S_H_SRC) or
                               (r_STATE = S_H_INTERFACE) or
-                              (r_STATE = S_HEADER_ADDRESS) or
+                              (r_STATE = S_H_ADDRESS) or
                               (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READY_RECEIVE_DATA = '1') or
                               (r_STATE = S_TRAILER)
                               else '0';
@@ -134,5 +134,5 @@ begin
 
     o_WRITE_H_SRC_REG       <= '1' when (r_STATE = S_H_SRC) else '0';
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
-    o_WRITE_HEADER_ADDRESS_REG   <= '1' when (r_STATE = S_HEADER_ADDRESS)  else '0';
+    o_WRITE_H_ADDRESS_REG   <= '1' when (r_STATE = S_H_ADDRESS)  else '0';
 end rtl;
