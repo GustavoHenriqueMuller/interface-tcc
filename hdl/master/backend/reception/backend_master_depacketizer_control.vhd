@@ -55,9 +55,9 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_H_DEST => r_NEXT_STATE <= S_H_SRC when (i_READ_OK_BUFFER = '1') else S_H_DEST;
+            when S_H_DEST => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_SRC; else r_NEXT_STATE <= S_H_DEST; end if;
 
-            when S_H_SRC => r_NEXT_STATE <= S_H_INTERFACE when (i_READ_OK_BUFFER = '1') else S_H_SRC;
+            when S_H_SRC => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_INTERFACE; else r_NEXT_STATE <= S_H_SRC; end if;
 
             when S_H_INTERFACE => if (i_READ_OK_BUFFER = '1') then
                                       if (i_FLIT(0) = '0') then
@@ -77,9 +77,9 @@ begin
                                                 r_NEXT_STATE <= S_READ_RESPONSE_PAYLOAD;
                                             end if;
 
-            when S_WRITE_RESPONSE => r_NEXT_STATE <= S_TRAILER when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_RESPONSE;
+            when S_WRITE_RESPONSE => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_TRAILER; else r_NEXT_STATE <= S_WRITE_RESPONSE; end if;
 
-            when S_TRAILER => r_NEXT_STATE <= S_H_DEST when (i_READ_OK_BUFFER = '1') else S_TRAILER;
+            when S_TRAILER => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_TRAILER; end if;
         end case;
     end process;
 

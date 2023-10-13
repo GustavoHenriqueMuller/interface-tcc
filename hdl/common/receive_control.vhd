@@ -43,11 +43,11 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_IDLE => r_NEXT_STATE <= S_WRITE_BUFFER when (l_out_val_o = '1') else S_IDLE;
+            when S_IDLE => if (l_out_val_o = '1') then r_NEXT_STATE <= S_WRITE_BUFFER; else r_NEXT_STATE <= S_IDLE; end if;
 
-            when S_WRITE_BUFFER => r_NEXT_STATE <= S_WAIT_VAL_ZERO when (i_WRITE_OK_BUFFER = '1') else S_WRITE_BUFFER;
+            when S_WRITE_BUFFER => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAIT_VAL_ZERO; else r_NEXT_STATE <= S_WRITE_BUFFER; end if;
 
-            when S_WAIT_VAL_ZERO => r_NEXT_STATE <= S_IDLE when (l_out_val_o = '0') else S_WAIT_VAL_ZERO;
+            when S_WAIT_VAL_ZERO => if (l_out_val_o = '0') then r_NEXT_STATE <= S_IDLE; else r_NEXT_STATE <= S_WAIT_VAL_ZERO; end if;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;

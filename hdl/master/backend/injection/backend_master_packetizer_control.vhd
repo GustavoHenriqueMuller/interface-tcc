@@ -50,13 +50,13 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_IDLE => r_NEXT_STATE <= S_H_DEST when (i_START_SEND_PACKET = '1' and i_WRITE_OK_BUFFER = '1') else S_IDLE;
+            when S_IDLE => if (i_START_SEND_PACKET = '1' and i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_IDLE; end if;
 
-            when S_H_DEST => r_NEXT_STATE <= S_H_SRC when (i_WRITE_OK_BUFFER = '1') else S_H_DEST;
+            when S_H_DEST => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_SRC; else r_NEXT_STATE <= S_H_DEST; end if;
 
-            when S_H_SRC  => r_NEXT_STATE <= S_H_INTERFACE when (i_WRITE_OK_BUFFER = '1') else S_H_SRC;
+            when S_H_SRC  => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_INTERFACE; else r_NEXT_STATE <= S_H_SRC; end if;
 
-            when S_H_INTERFACE => r_NEXT_STATE <= S_H_ADDRESS when (i_WRITE_OK_BUFFER = '1') else S_H_INTERFACE;
+            when S_H_INTERFACE => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_ADDRESS; else r_NEXT_STATE <= S_H_INTERFACE; end if;
 
             when S_H_ADDRESS => if (i_WRITE_OK_BUFFER = '1') then
                                          if (i_OPC_SEND = '0') then
@@ -74,7 +74,7 @@ begin
                                  r_NEXT_STATE <= S_PAYLOAD;
                               end if;
 
-            when S_TRAILER => r_NEXT_STATE <= S_IDLE when (i_WRITE_OK_BUFFER = '1') else S_TRAILER;
+            when S_TRAILER => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_IDLE; else r_NEXT_STATE <= S_TRAILER; end if;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;

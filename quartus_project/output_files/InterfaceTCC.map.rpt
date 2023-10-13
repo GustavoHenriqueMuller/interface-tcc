@@ -1,5 +1,5 @@
 Analysis & Synthesis report for InterfaceTCC
-Sun Sep  3 15:32:56 2023
+Fri Oct 13 00:10:59 2023
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -13,19 +13,28 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|r_STATE
-  9. State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|r_STATE
- 10. State Machine - |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|r_STATE
- 11. Logic Cells Representing Combinational Loops
- 12. General Register Statistics
- 13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4
- 15. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO
- 16. Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift
- 17. Port Connectivity Checks: "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4"
- 18. Post-Synthesis Netlist Statistics for Top Partition
- 19. Elapsed Time Per Partition
- 20. Analysis & Synthesis Messages
+  8. State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|receive_control:u_RECEIVE_CONTROL|r_STATE
+  9. State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_STATE
+ 10. State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|send_control:u_SEND_CONTROL|r_STATE
+ 11. State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_control:u_PACKETIZER_CONTROL|r_STATE
+ 12. User-Specified and Inferred Latches
+ 13. Registers Removed During Synthesis
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Parameter Settings for User Entity Instance: Top-level Entity: |tcc_top_master
+ 18. Parameter Settings for User Entity Instance: backend_master:u_BACKEND
+ 19. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION
+ 20. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH
+ 21. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6
+ 22. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO
+ 23. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift
+ 24. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO
+ 25. Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift
+ 26. Port Connectivity Checks: "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6"
+ 27. Post-Synthesis Netlist Statistics for Top Partition
+ 28. Elapsed Time Per Partition
+ 29. Analysis & Synthesis Messages
 
 
 
@@ -33,12 +42,12 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 ; Legal Notice ;
 ----------------
 Copyright (C) 2023  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions
-and other software and tools, and any partner logic
-functions, and any output files from any of the foregoing
-(including device programming or simulation files), and any
-associated documentation or information are expressly subject
-to the terms and conditions of the Intel Program License
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
 the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
@@ -52,14 +61,14 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Sep  3 15:32:56 2023          ;
+; Analysis & Synthesis Status     ; Successful - Fri Oct 13 00:10:59 2023          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; InterfaceTCC                                   ;
 ; Top-level Entity Name           ; tcc_top_master                                 ;
 ; Family                          ; Cyclone V                                      ;
 ; Logic utilization (in ALMs)     ; N/A                                            ;
-; Total registers                 ; 153                                            ;
-; Total pins                      ; 206                                            ;
+; Total registers                 ; 303                                            ;
+; Total pins                      ; 328                                            ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0                                              ;
 ; Total DSP Blocks                ; 0                                              ;
@@ -77,7 +86,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
+; Device                                                                          ; 5CGXFC9E7F35C8     ;                    ;
 ; Top-level entity name                                                           ; tcc_top_master     ; InterfaceTCC       ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; VHDL Show LMF Mapping Messages                                                  ; Off                ;                    ;
@@ -177,33 +186,37 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                 ;
-+-----------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path                          ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                 ; Library ;
-+-----------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
-; ../hdl/dependencies/xina/rtl/xina.vhd                     ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd                     ;         ;
-; ../hdl/dependencies/xina/rtl/switch.vhd                   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd                   ;         ;
-; ../hdl/dependencies/xina/rtl/routing.vhd                  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd                  ;         ;
-; ../hdl/dependencies/xina/rtl/router.vhd                   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd                   ;         ;
-; ../hdl/dependencies/xina/rtl/flow_out.vhd                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd                 ;         ;
-; ../hdl/dependencies/xina/rtl/flow_in.vhd                  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd                  ;         ;
-; ../hdl/dependencies/xina/rtl/crossbar.vhd                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd                 ;         ;
-; ../hdl/dependencies/xina/rtl/channel_out.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd              ;         ;
-; ../hdl/dependencies/xina/rtl/channel_in.vhd               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd               ;         ;
-; ../hdl/dependencies/xina/rtl/buffering_fifo.vhd           ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd           ;         ;
-; ../hdl/dependencies/xina/rtl/buffering.vhd                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd                ;         ;
-; ../hdl/dependencies/xina/rtl/arbitration.vhd              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd              ;         ;
-; ../hdl/backend/tcc_backend_master_send_control.vhd        ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd        ;         ;
-; ../hdl/backend/tcc_backend_master_packetizer_datapath.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd ;         ;
-; ../hdl/backend/tcc_backend_master_packetizer_control.vhd  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd  ;         ;
-; ../hdl/backend/tcc_backend_master.vhd                     ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd                     ;         ;
-; ../hdl/basic/mux4.vhd                                     ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/basic/mux4.vhd                                     ;         ;
-; ../hdl/frontend/tcc_frontend_master_send_control.vhd      ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd      ;         ;
-; ../hdl/frontend/tcc_frontend_master.vhd                   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd                   ;         ;
-; ../hdl/tcc_top_master.vhd                                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd                                 ;         ;
-; ../hdl/tcc_package.vhd                                    ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_package.vhd                                    ;         ;
-+-----------------------------------------------------------+-----------------+-----------------+------------------------------------------------------------------------------+---------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                             ;
++-------------------------------------------------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path                                        ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                               ; Library ;
++-------------------------------------------------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+---------+
+; ../hdl/tcc_package.vhd                                                  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/tcc_package.vhd                                                  ;         ;
+; ../hdl/master/frontend/frontend_master.vhd                              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd                              ;         ;
+; ../hdl/master/backend/reception/backend_master_reception.vhd            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_reception.vhd            ;         ;
+; ../hdl/master/backend/reception/backend_master_depacketizer_control.vhd ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_depacketizer_control.vhd ;         ;
+; ../hdl/master/backend/injection/backend_master_routing_table.vhd        ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_routing_table.vhd        ;         ;
+; ../hdl/master/backend/injection/backend_master_packetizer_datapath.vhd  ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_datapath.vhd  ;         ;
+; ../hdl/master/backend/injection/backend_master_packetizer_control.vhd   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_control.vhd   ;         ;
+; ../hdl/master/backend/injection/backend_master_injection.vhd            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd            ;         ;
+; ../hdl/master/backend/backend_master.vhd                                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/backend/backend_master.vhd                                ;         ;
+; ../hdl/master/tcc_top_master.vhd                                        ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd                                        ;         ;
+; ../hdl/dependencies/xina/rtl/xina.vhd                                   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd                                   ;         ;
+; ../hdl/dependencies/xina/rtl/switch.vhd                                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/switch.vhd                                 ;         ;
+; ../hdl/dependencies/xina/rtl/routing.vhd                                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/routing.vhd                                ;         ;
+; ../hdl/dependencies/xina/rtl/router.vhd                                 ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/router.vhd                                 ;         ;
+; ../hdl/dependencies/xina/rtl/flow_out.vhd                               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_out.vhd                               ;         ;
+; ../hdl/dependencies/xina/rtl/flow_in.vhd                                ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/flow_in.vhd                                ;         ;
+; ../hdl/dependencies/xina/rtl/crossbar.vhd                               ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/crossbar.vhd                               ;         ;
+; ../hdl/dependencies/xina/rtl/channel_out.vhd                            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_out.vhd                            ;         ;
+; ../hdl/dependencies/xina/rtl/channel_in.vhd                             ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/channel_in.vhd                             ;         ;
+; ../hdl/dependencies/xina/rtl/buffering_fifo.vhd                         ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering_fifo.vhd                         ;         ;
+; ../hdl/dependencies/xina/rtl/buffering.vhd                              ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd                              ;         ;
+; ../hdl/dependencies/xina/rtl/arbitration.vhd                            ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd                            ;         ;
+; ../hdl/common/send_control.vhd                                          ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/common/send_control.vhd                                          ;         ;
+; ../hdl/common/receive_control.vhd                                       ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/common/receive_control.vhd                                       ;         ;
+; ../hdl/basic/mux6.vhd                                                   ; yes             ; User VHDL File  ; E:/repos/InterfaceTCC/hdl/basic/mux6.vhd                                                   ;         ;
++-------------------------------------------------------------------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+---------+
 
 
 +----------------------------------------------------------+
@@ -211,101 +224,127 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimate of Logic utilization (ALMs needed) ; 104        ;
+; Estimate of Logic utilization (ALMs needed) ; 221        ;
 ;                                             ;            ;
-; Combinational ALUT usage for logic          ; 100        ;
-;     -- 7 input functions                    ; 4          ;
-;     -- 6 input functions                    ; 44         ;
-;     -- 5 input functions                    ; 35         ;
-;     -- 4 input functions                    ; 6          ;
-;     -- <=3 input functions                  ; 11         ;
+; Combinational ALUT usage for logic          ; 257        ;
+;     -- 7 input functions                    ; 1          ;
+;     -- 6 input functions                    ; 124        ;
+;     -- 5 input functions                    ; 45         ;
+;     -- 4 input functions                    ; 40         ;
+;     -- <=3 input functions                  ; 47         ;
 ;                                             ;            ;
-; Dedicated logic registers                   ; 153        ;
+; Dedicated logic registers                   ; 303        ;
 ;                                             ;            ;
-; I/O pins                                    ; 206        ;
+; I/O pins                                    ; 328        ;
 ;                                             ;            ;
 ; Total DSP Blocks                            ; 0          ;
 ;                                             ;            ;
 ; Maximum fan-out node                        ; ACLK~input ;
-; Maximum fan-out                             ; 153        ;
-; Total fan-out                               ; 1268       ;
-; Average fan-out                             ; 1.91       ;
+; Maximum fan-out                             ; 303        ;
+; Total fan-out                               ; 2667       ;
+; Average fan-out                             ; 2.19       ;
 +---------------------------------------------+------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                                            ;
-+-----------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+--------------+
-; Compilation Hierarchy Node                                                              ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                 ; Entity Name                            ; Library Name ;
-+-----------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+--------------+
-; |tcc_top_master                                                                         ; 100 (0)             ; 153 (0)                   ; 0                 ; 0          ; 206  ; 0            ; |tcc_top_master                                                                                                                                     ; tcc_top_master                         ; work         ;
-;    |tcc_backend_master:u_BACKEND_MASTER|                                            ; 90 (0)              ; 147 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER                                                                                             ; tcc_backend_master                     ; work         ;
-;       |buffering:u_BUFFER_FIFO|                                                         ; 49 (0)              ; 135 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO                                                                     ; buffering                              ; work         ;
-;          |buffering_fifo:\fifo:shift|                                                   ; 49 (49)             ; 135 (135)                 ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift                                          ; buffering_fifo                         ; work         ;
-;       |tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|   ; 11 (11)             ; 9 (9)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL               ; tcc_backend_master_packetizer_control  ; work         ;
-;       |tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH| ; 26 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH             ; tcc_backend_master_packetizer_datapath ; work         ;
-;          |mux4:u_MUX4|                                                                  ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ; mux4                                   ; work         ;
-;       |tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|               ; 4 (4)               ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL                           ; tcc_backend_master_send_control        ; work         ;
-;    |tcc_frontend_master:u_FRONTEND_MASTER|                                          ; 10 (0)              ; 6 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER                                                                                           ; tcc_frontend_master                    ; work         ;
-;       |tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|             ; 10 (10)             ; 6 (6)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL                       ; tcc_frontend_master_send_control       ; work         ;
-+-----------------------------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                                      ;
++-----------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------+--------------+
+; Compilation Hierarchy Node                                            ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                ; Entity Name                         ; Library Name ;
++-----------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------+--------------+
+; |tcc_top_master                                                       ; 257 (0)             ; 303 (0)                   ; 0                 ; 0          ; 328  ; 0            ; |tcc_top_master                                                                                                                                    ; tcc_top_master                      ; work         ;
+;    |backend_master:u_BACKEND|                                         ; 191 (0)             ; 302 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND                                                                                                           ; backend_master                      ; work         ;
+;       |backend_master_injection:u_INJECTION|                          ; 135 (0)             ; 146 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION                                                                      ; backend_master_injection            ; work         ;
+;          |backend_master_packetizer_control:u_PACKETIZER_CONTROL|     ; 9 (9)               ; 7 (7)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_control:u_PACKETIZER_CONTROL               ; backend_master_packetizer_control   ; work         ;
+;          |backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|   ; 68 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH             ; backend_master_packetizer_datapath  ; work         ;
+;             |mux6:u_MUX6|                                             ; 68 (68)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6 ; mux6                                ; work         ;
+;          |buffering:u_BUFFER_FIFO|                                    ; 53 (0)              ; 135 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO                                              ; buffering                           ; work         ;
+;             |buffering_fifo:\fifo:shift|                              ; 53 (53)             ; 135 (135)                 ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift                   ; buffering_fifo                      ; work         ;
+;          |send_control:u_SEND_CONTROL|                                ; 5 (5)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|send_control:u_SEND_CONTROL                                          ; send_control                        ; work         ;
+;       |backend_master_reception:u_RECEPTION|                          ; 56 (0)              ; 156 (9)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION                                                                      ; backend_master_reception            ; work         ;
+;          |backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL| ; 29 (29)             ; 14 (14)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL           ; backend_master_depacketizer_control ; work         ;
+;          |buffering:u_BUFFER_FIFO|                                    ; 25 (0)              ; 131 (0)                   ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO                                              ; buffering                           ; work         ;
+;             |buffering_fifo:\fifo:shift|                              ; 25 (25)             ; 131 (131)                 ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift                   ; buffering_fifo                      ; work         ;
+;          |receive_control:u_RECEIVE_CONTROL|                          ; 2 (2)               ; 2 (2)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|receive_control:u_RECEIVE_CONTROL                                    ; receive_control                     ; work         ;
+;    |frontend_master:u_FRONTEND|                                       ; 66 (66)             ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |tcc_top_master|frontend_master:u_FRONTEND                                                                                                         ; frontend_master                     ; work         ;
++-----------------------------------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL|r_STATE ;
-+------------------------------------+------------------------------------+-----------------------------------+---------------------------------------------+
-; Name                               ; r_STATE.S_WAITING_ACK_ZERO ; r_STATE.S_WAITING_ACK_ONE ; r_STATE.S_IDLE                      ;
-+------------------------------------+------------------------------------+-----------------------------------+---------------------------------------------+
-; r_STATE.S_IDLE             ; 0                                  ; 0                                 ; 0                                           ;
-; r_STATE.S_WAITING_ACK_ONE  ; 0                                  ; 1                                 ; 1                                           ;
-; r_STATE.S_WAITING_ACK_ZERO ; 1                                  ; 0                                 ; 1                                           ;
-+------------------------------------+------------------------------------+-----------------------------------+---------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|receive_control:u_RECEIVE_CONTROL|r_STATE ;
++-------------------------+-------------------------+------------------------+------------------------------------------------------------+
+; Name                    ; r_STATE.S_WAIT_VAL_ZERO ; r_STATE.S_WRITE_BUFFER ; r_STATE.S_IDLE                                             ;
++-------------------------+-------------------------+------------------------+------------------------------------------------------------+
+; r_STATE.S_IDLE          ; 0                       ; 0                      ; 0                                                          ;
+; r_STATE.S_WRITE_BUFFER  ; 0                       ; 1                      ; 1                                                          ;
+; r_STATE.S_WAIT_VAL_ZERO ; 1                       ; 0                      ; 1                                                          ;
++-------------------------+-------------------------+------------------------+------------------------------------------------------------+
 
 
 Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|r_STATE                                                                                                                                                           ;
-+------------------------------------+-----------------------------------+---------------------------+-----------------------------------+---------------------------+------------------------------------+----------------------------+------------------------------------+----------------------------+------------------------+
-; Name                               ; r_STATE.S_TRAILER_WAIT_OK ; r_STATE.S_TRAILER ; r_STATE.S_PAYLOAD_WAIT_OK ; r_STATE.S_PAYLOAD ; r_STATE.S_HEADER_2_WAIT_OK ; r_STATE.S_HEADER_2 ; r_STATE.S_HEADER_1_WAIT_OK ; r_STATE.S_HEADER_1 ; r_STATE.S_IDLE ;
-+------------------------------------+-----------------------------------+---------------------------+-----------------------------------+---------------------------+------------------------------------+----------------------------+------------------------------------+----------------------------+------------------------+
-; r_STATE.S_IDLE             ; 0                                 ; 0                         ; 0                                 ; 0                         ; 0                                  ; 0                          ; 0                                  ; 0                          ; 0                      ;
-; r_STATE.S_HEADER_1         ; 0                                 ; 0                         ; 0                                 ; 0                         ; 0                                  ; 0                          ; 0                                  ; 1                          ; 1                      ;
-; r_STATE.S_HEADER_1_WAIT_OK ; 0                                 ; 0                         ; 0                                 ; 0                         ; 0                                  ; 0                          ; 1                                  ; 0                          ; 1                      ;
-; r_STATE.S_HEADER_2         ; 0                                 ; 0                         ; 0                                 ; 0                         ; 0                                  ; 1                          ; 0                                  ; 0                          ; 1                      ;
-; r_STATE.S_HEADER_2_WAIT_OK ; 0                                 ; 0                         ; 0                                 ; 0                         ; 1                                  ; 0                          ; 0                                  ; 0                          ; 1                      ;
-; r_STATE.S_PAYLOAD          ; 0                                 ; 0                         ; 0                                 ; 1                         ; 0                                  ; 0                          ; 0                                  ; 0                          ; 1                      ;
-; r_STATE.S_PAYLOAD_WAIT_OK  ; 0                                 ; 0                         ; 1                                 ; 0                         ; 0                                  ; 0                          ; 0                                  ; 0                          ; 1                      ;
-; r_STATE.S_TRAILER          ; 0                                 ; 1                         ; 0                                 ; 0                         ; 0                                  ; 0                          ; 0                                  ; 0                          ; 1                      ;
-; r_STATE.S_TRAILER_WAIT_OK  ; 1                                 ; 0                         ; 0                                 ; 0                         ; 0                                  ; 0                          ; 0                                  ; 0                          ; 1                      ;
-+------------------------------------+-----------------------------------+---------------------------+-----------------------------------+---------------------------+------------------------------------+----------------------------+------------------------------------+----------------------------+------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_STATE              ;
++---------------------------------+-------------------+--------------------------+---------------------------------+-----------------------+-----------------+------------------+
+; Name                            ; r_STATE.S_TRAILER ; r_STATE.S_WRITE_RESPONSE ; r_STATE.S_READ_RESPONSE_PAYLOAD ; r_STATE.S_H_INTERFACE ; r_STATE.S_H_SRC ; r_STATE.S_H_DEST ;
++---------------------------------+-------------------+--------------------------+---------------------------------+-----------------------+-----------------+------------------+
+; r_STATE.S_H_DEST                ; 0                 ; 0                        ; 0                               ; 0                     ; 0               ; 0                ;
+; r_STATE.S_H_SRC                 ; 0                 ; 0                        ; 0                               ; 0                     ; 1               ; 1                ;
+; r_STATE.S_H_INTERFACE           ; 0                 ; 0                        ; 0                               ; 1                     ; 0               ; 1                ;
+; r_STATE.S_READ_RESPONSE_PAYLOAD ; 0                 ; 0                        ; 1                               ; 0                     ; 0               ; 1                ;
+; r_STATE.S_WRITE_RESPONSE        ; 0                 ; 1                        ; 0                               ; 0                     ; 0               ; 1                ;
+; r_STATE.S_TRAILER               ; 1                 ; 0                        ; 0                               ; 0                     ; 0               ; 1                ;
++---------------------------------+-------------------+--------------------------+---------------------------------+-----------------------+-----------------+------------------+
 
 
 Encoding Type:  One-Hot
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |tcc_top_master|tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL|r_STATE                                                                                    ;
-+--------------------------------------+--------------------------------+---------------------------------+----------------------------------+-------------------------------------+--------------------------------------+------------------------+
-; Name                                 ; r_STATE.S_WAIT_TRAILER ; r_STATE.S_READ_TRANSFER ; r_STATE.S_WRITE_TRANSFER ; r_STATE.S_WAIT_HEADERS_READ ; r_STATE.S_WAIT_HEADERS_WRITE ; r_STATE.S_IDLE ;
-+--------------------------------------+--------------------------------+---------------------------------+----------------------------------+-------------------------------------+--------------------------------------+------------------------+
-; r_STATE.S_IDLE               ; 0                              ; 0                               ; 0                                ; 0                                   ; 0                                    ; 0                      ;
-; r_STATE.S_WAIT_HEADERS_WRITE ; 0                              ; 0                               ; 0                                ; 0                                   ; 1                                    ; 1                      ;
-; r_STATE.S_WAIT_HEADERS_READ  ; 0                              ; 0                               ; 0                                ; 1                                   ; 0                                    ; 1                      ;
-; r_STATE.S_WRITE_TRANSFER     ; 0                              ; 0                               ; 1                                ; 0                                   ; 0                                    ; 1                      ;
-; r_STATE.S_READ_TRANSFER      ; 0                              ; 1                               ; 0                                ; 0                                   ; 0                                    ; 1                      ;
-; r_STATE.S_WAIT_TRAILER       ; 1                              ; 0                               ; 0                                ; 0                                   ; 0                                    ; 1                      ;
-+--------------------------------------+--------------------------------+---------------------------------+----------------------------------+-------------------------------------+--------------------------------------+------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|send_control:u_SEND_CONTROL|r_STATE ;
++----------------------------+-----------------------+----------------------------+---------------------------+---------------------+
+; Name                       ; r_STATE.S_READ_BUFFER ; r_STATE.S_WAITING_ACK_ZERO ; r_STATE.S_WAITING_ACK_ONE ; r_STATE.S_IDLE      ;
++----------------------------+-----------------------+----------------------------+---------------------------+---------------------+
+; r_STATE.S_IDLE             ; 0                     ; 0                          ; 0                         ; 0                   ;
+; r_STATE.S_WAITING_ACK_ONE  ; 0                     ; 0                          ; 1                         ; 1                   ;
+; r_STATE.S_WAITING_ACK_ZERO ; 0                     ; 1                          ; 0                         ; 1                   ;
+; r_STATE.S_READ_BUFFER      ; 1                     ; 0                          ; 0                         ; 1                   ;
++----------------------------+-----------------------+----------------------------+---------------------------+---------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Logic Cells Representing Combinational Loops                                                                                        ;
-+---------------------------------------------------------------------------------------------------------------------------------+---+
-; Logic Cell Name                                                                                                                 ;   ;
-+---------------------------------------------------------------------------------------------------------------------------------+---+
-; tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL|o_READY~0 ;   ;
-; Number of logic cells representing combinational loops                                                                          ; 1 ;
-+---------------------------------------------------------------------------------------------------------------------------------+---+
-Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_control:u_PACKETIZER_CONTROL|r_STATE      ;
++-----------------------+-------------------+-------------------+---------------------+-----------------------+-----------------+------------------+----------------+
+; Name                  ; r_STATE.S_TRAILER ; r_STATE.S_PAYLOAD ; r_STATE.S_H_ADDRESS ; r_STATE.S_H_INTERFACE ; r_STATE.S_H_SRC ; r_STATE.S_H_DEST ; r_STATE.S_IDLE ;
++-----------------------+-------------------+-------------------+---------------------+-----------------------+-----------------+------------------+----------------+
+; r_STATE.S_IDLE        ; 0                 ; 0                 ; 0                   ; 0                     ; 0               ; 0                ; 0              ;
+; r_STATE.S_H_DEST      ; 0                 ; 0                 ; 0                   ; 0                     ; 0               ; 1                ; 1              ;
+; r_STATE.S_H_SRC       ; 0                 ; 0                 ; 0                   ; 0                     ; 1               ; 0                ; 1              ;
+; r_STATE.S_H_INTERFACE ; 0                 ; 0                 ; 0                   ; 1                     ; 0               ; 0                ; 1              ;
+; r_STATE.S_H_ADDRESS   ; 0                 ; 0                 ; 1                   ; 0                     ; 0               ; 0                ; 1              ;
+; r_STATE.S_PAYLOAD     ; 0                 ; 1                 ; 0                   ; 0                     ; 0               ; 0                ; 1              ;
+; r_STATE.S_TRAILER     ; 1                 ; 0                 ; 0                   ; 0                     ; 0               ; 0                ; 1              ;
++-----------------------+-------------------+-------------------+---------------------+-----------------------+-----------------+------------------+----------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; frontend_master:u_FRONTEND|w_OPC_SEND              ; GND                 ; yes                    ;
+; Number of user-specified and inferred latches = 1  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                           ;
++-------------------------------------------------------------------------------------------------------------------------+--------------------+
+; Register name                                                                                                           ; Reason for Removal ;
++-------------------------------------------------------------------------------------------------------------------------+--------------------+
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|receive_control:u_RECEIVE_CONTROL|r_STATE.S_WAIT_VAL_ZERO ; Lost fanout        ;
+; Total Number of Removed Registers = 1                                                                                   ;                    ;
++-------------------------------------------------------------------------------------------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -313,106 +352,193 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 153   ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 24    ;
-; Number of registers using Asynchronous Clear ; 21    ;
+; Total registers                              ; 303   ;
+; Number of registers using Synchronous Clear  ; 15    ;
+; Number of registers using Synchronous Load   ; 31    ;
+; Number of registers using Asynchronous Clear ; 33    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 132   ;
+; Number of registers using Clock Enable       ; 284   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                         ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
-; 5:1                ; 11 bits   ; 33 LEs        ; 22 LEs               ; 11 LEs                 ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][31] ;
-; 6:1                ; 5 bits    ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][5]  ;
-; 7:1                ; 13 bits   ; 52 LEs        ; 52 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][13] ;
-; 8:1                ; 2 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][6]  ;
-; 8:1                ; 33 bits   ; 165 LEs       ; 66 LEs               ; 99 LEs                 ; No         ; |tcc_top_master|tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|data_o[9]     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Inverted Register Statistics                                                                                                                            ;
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; Inverted Register                                                                                                                             ; Fan out ;
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[7] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[6] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[5] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[4] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[3] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[2] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[1] ; 2       ;
+; backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[0] ; 2       ;
+; Total number of inverted registers = 8                                                                                                        ;         ;
++-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4 ;
-+----------------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                                                                                                                    ;
-+----------------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-; data_width_p   ; 33    ; Signed Integer                                                                                                                                          ;
-+----------------+-------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; 11:1               ; 16 bits   ; 112 LEs       ; 96 LEs               ; 16 LEs                 ; Yes        ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][24]                ;
+; 12:1               ; 15 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; Yes        ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|fifo_r[0][6]                 ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL|r_PAYLOAD_COUNTER[3] ;
+; 8:1                ; 33 bits   ; 165 LEs       ; 66 LEs               ; 99 LEs                 ; No         ; |tcc_top_master|backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|data_o[21]                   ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; No         ; |tcc_top_master|backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift|data_o[10]                   ;
+; 9:1                ; 15 bits   ; 90 LEs        ; 45 LEs               ; 45 LEs                 ; No         ; |tcc_top_master|frontend_master:u_FRONTEND|RDATA[2]                                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |tcc_top_master ;
++----------------+------------------+--------------------------------------------+
+; Parameter Name ; Value            ; Type                                       ;
++----------------+------------------+--------------------------------------------+
+; SRC_X_p        ; 0000000000000000 ; Unsigned Binary                            ;
+; SRC_Y_p        ; 0000000000000000 ; Unsigned Binary                            ;
++----------------+------------------+--------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO ;
-+----------------+-------+-------------------------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                                                ;
-+----------------+-------+-------------------------------------------------------------------------------------+
-; mode_p         ; 1     ; Signed Integer                                                                      ;
-; data_width_p   ; 33    ; Signed Integer                                                                      ;
-; buffer_depth_p ; 4     ; Signed Integer                                                                      ;
-+----------------+-------+-------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND ;
++----------------+------------------+-----------------------------------+
+; Parameter Name ; Value            ; Type                              ;
++----------------+------------------+-----------------------------------+
+; SRC_X_p        ; 0000000000000000 ; Unsigned Binary                   ;
+; SRC_Y_p        ; 0000000000000000 ; Unsigned Binary                   ;
++----------------+------------------+-----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift ;
-+----------------+-------+----------------------------------------------------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                                                                           ;
-+----------------+-------+----------------------------------------------------------------------------------------------------------------+
-; data_width_p   ; 33    ; Signed Integer                                                                                                 ;
-; buffer_depth_p ; 4     ; Signed Integer                                                                                                 ;
-+----------------+-------+----------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION ;
++----------------+------------------+------------------------------------------------------------------------+
+; Parameter Name ; Value            ; Type                                                                   ;
++----------------+------------------+------------------------------------------------------------------------+
+; SRC_X_p        ; 0000000000000000 ; Unsigned Binary                                                        ;
+; SRC_Y_p        ; 0000000000000000 ; Unsigned Binary                                                        ;
++----------------+------------------+------------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" ;
-+------------------+-------+----------+---------------------------------------------------------------------------------------------------------------------------+
-; Port             ; Type  ; Severity ; Details                                                                                                                   ;
-+------------------+-------+----------+---------------------------------------------------------------------------------------------------------------------------+
-; i_data_a         ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_b[32..21] ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_b[5..3]   ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_b[2]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_b[1]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_c[32]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[32..31] ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[30]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[29]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[28]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[27]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[26]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[25]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[24]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[23]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[22]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[21]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[20]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[19]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[18]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[17]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[16]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[15]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[14]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[13]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[12]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[11]     ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[10]     ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[9]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[8]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[7]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[6]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[5]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[4]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[3]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[2]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-; i_data_d[1]      ; Input ; Info     ; Stuck at VCC                                                                                                              ;
-; i_data_d[0]      ; Input ; Info     ; Stuck at GND                                                                                                              ;
-+------------------+-------+----------+---------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH ;
++----------------+------------------+---------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value            ; Type                                                                                                                            ;
++----------------+------------------+---------------------------------------------------------------------------------------------------------------------------------+
+; src_x_p        ; 0000000000000000 ; Unsigned Binary                                                                                                                 ;
+; src_y_p        ; 0000000000000000 ; Unsigned Binary                                                                                                                 ;
++----------------+------------------+---------------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6 ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                                                   ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; p_data_width   ; 33    ; Signed Integer                                                                                                                                         ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                      ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; mode_p         ; 1     ; Signed Integer                                                                                            ;
+; data_width_p   ; 33    ; Signed Integer                                                                                            ;
+; buffer_depth_p ; 4     ; Signed Integer                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+; data_width_p   ; 33    ; Signed Integer                                                                                                                       ;
+; buffer_depth_p ; 4     ; Signed Integer                                                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                      ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+; mode_p         ; 1     ; Signed Integer                                                                                            ;
+; data_width_p   ; 33    ; Signed Integer                                                                                            ;
+; buffer_depth_p ; 4     ; Signed Integer                                                                                            ;
++----------------+-------+-----------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+; data_width_p   ; 33    ; Signed Integer                                                                                                                       ;
+; buffer_depth_p ; 4     ; Signed Integer                                                                                                                       ;
++----------------+-------+--------------------------------------------------------------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6" ;
++------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
+; Port             ; Type  ; Severity ; Details                                                                                                                  ;
++------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
+; i_data_a[32]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_b         ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_c[32..21] ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_c[5..3]   ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_c[2]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_c[1]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_d[32]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_e[32]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[32..31] ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[30]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[29]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[28]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[27]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[26]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[25]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[24]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[23]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[22]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[21]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[20]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[19]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[18]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[17]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[16]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[15]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[14]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[13]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[12]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[11]     ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[10]     ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[9]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[8]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[7]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[6]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[5]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[4]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[3]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[2]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
+; i_data_f[1]      ; Input ; Info     ; Stuck at VCC                                                                                                             ;
+; i_data_f[0]      ; Input ; Info     ; Stuck at GND                                                                                                             ;
++------------------+-------+----------+--------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -420,24 +546,29 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_ff             ; 153                         ;
-;     CLR               ; 21                          ;
-;     ENA               ; 108                         ;
-;     ENA SLD           ; 24                          ;
-; arriav_lcell_comb     ; 101                         ;
-;     extend            ; 4                           ;
-;         7 data inputs ; 4                           ;
-;     normal            ; 97                          ;
-;         0 data inputs ; 1                           ;
-;         2 data inputs ; 6                           ;
-;         3 data inputs ; 5                           ;
-;         4 data inputs ; 6                           ;
-;         5 data inputs ; 35                          ;
-;         6 data inputs ; 44                          ;
-; boundary_port         ; 206                         ;
+; arriav_ff             ; 303                         ;
+;     CLR               ; 18                          ;
+;     ENA               ; 238                         ;
+;     ENA CLR           ; 15                          ;
+;     ENA SCLR SLD      ; 15                          ;
+;     ENA SLD           ; 16                          ;
+;     plain             ; 1                           ;
+; arriav_lcell_comb     ; 258                         ;
+;     arith             ; 8                           ;
+;         1 data inputs ; 8                           ;
+;     extend            ; 1                           ;
+;         7 data inputs ; 1                           ;
+;     normal            ; 249                         ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 14                          ;
+;         3 data inputs ; 23                          ;
+;         4 data inputs ; 40                          ;
+;         5 data inputs ; 45                          ;
+;         6 data inputs ; 124                         ;
+; boundary_port         ; 328                         ;
 ;                       ;                             ;
 ; Max LUT depth         ; 3.00                        ;
-; Average LUT depth     ; 1.34                        ;
+; Average LUT depth     ; 1.70                        ;
 +-----------------------+-----------------------------+
 
 
@@ -446,7 +577,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:01     ;
+; Top            ; 00:00:00     ;
 +----------------+--------------+
 
 
@@ -456,10 +587,93 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Sun Sep  3 15:32:46 2023
+    Info: Processing started: Fri Oct 13 00:10:51 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off InterfaceTCC -c InterfaceTCC
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 1 design units, including 0 entities, in source file /repos/interfacetcc/hdl/tcc_package.vhd
+    Info (12022): Found design unit 1: tcc_package File: E:/repos/InterfaceTCC/hdl/tcc_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/test/write_request_injector.vhd
+    Info (12022): Found design unit 1: write_request_injector-rtl File: E:/repos/InterfaceTCC/hdl/slave/test/write_request_injector.vhd Line: 19
+    Info (12023): Found entity 1: write_request_injector File: E:/repos/InterfaceTCC/hdl/slave/test/write_request_injector.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/test/tb_slave_write.vhd
+    Info (12022): Found design unit 1: tb_slave_write-rtl File: E:/repos/InterfaceTCC/hdl/slave/test/tb_slave_write.vhd Line: 12
+    Info (12023): Found entity 1: tb_slave_write File: E:/repos/InterfaceTCC/hdl/slave/test/tb_slave_write.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/test/tb_slave_read.vhd
+    Info (12022): Found design unit 1: tb_slave_read-rtl File: E:/repos/InterfaceTCC/hdl/slave/test/tb_slave_read.vhd Line: 12
+    Info (12023): Found entity 1: tb_slave_read File: E:/repos/InterfaceTCC/hdl/slave/test/tb_slave_read.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/test/read_request_injector.vhd
+    Info (12022): Found design unit 1: read_request_injector-rtl File: E:/repos/InterfaceTCC/hdl/slave/test/read_request_injector.vhd Line: 19
+    Info (12023): Found entity 1: read_request_injector File: E:/repos/InterfaceTCC/hdl/slave/test/read_request_injector.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/frontend/frontend_slave.vhd
+    Info (12022): Found design unit 1: frontend_slave-rtl File: E:/repos/InterfaceTCC/hdl/slave/frontend/frontend_slave.vhd Line: 73
+    Info (12023): Found entity 1: frontend_slave File: E:/repos/InterfaceTCC/hdl/slave/frontend/frontend_slave.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/reception/backend_slave_reception.vhd
+    Info (12022): Found design unit 1: backend_slave_reception-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/reception/backend_slave_reception.vhd Line: 34
+    Info (12023): Found entity 1: backend_slave_reception File: E:/repos/InterfaceTCC/hdl/slave/backend/reception/backend_slave_reception.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/reception/backend_slave_depacketizer_control.vhd
+    Info (12022): Found design unit 1: backend_slave_depacketizer_control-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/reception/backend_slave_depacketizer_control.vhd Line: 36
+    Info (12023): Found entity 1: backend_slave_depacketizer_control File: E:/repos/InterfaceTCC/hdl/slave/backend/reception/backend_slave_depacketizer_control.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/injection/backend_slave_packetizer_datapath.vhd
+    Info (12022): Found design unit 1: backend_slave_packetizer_datapath-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_packetizer_datapath.vhd Line: 30
+    Info (12023): Found entity 1: backend_slave_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_packetizer_datapath.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/injection/backend_slave_packetizer_control.vhd
+    Info (12022): Found design unit 1: backend_slave_packetizer_control-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_packetizer_control.vhd Line: 26
+    Info (12023): Found entity 1: backend_slave_packetizer_control File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_packetizer_control.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/injection/backend_slave_injection.vhd
+    Info (12022): Found design unit 1: backend_slave_injection-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_injection.vhd Line: 38
+    Info (12023): Found entity 1: backend_slave_injection File: E:/repos/InterfaceTCC/hdl/slave/backend/injection/backend_slave_injection.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/backend/backend_slave.vhd
+    Info (12022): Found design unit 1: backend_slave-rtl File: E:/repos/InterfaceTCC/hdl/slave/backend/backend_slave.vhd Line: 49
+    Info (12023): Found entity 1: backend_slave File: E:/repos/InterfaceTCC/hdl/slave/backend/backend_slave.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/slave/tcc_top_slave.vhd
+    Info (12022): Found design unit 1: tcc_top_slave-rtl File: E:/repos/InterfaceTCC/hdl/slave/tcc_top_slave.vhd Line: 68
+    Info (12023): Found entity 1: tcc_top_slave File: E:/repos/InterfaceTCC/hdl/slave/tcc_top_slave.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/reception/write_response_injector.vhd
+    Info (12022): Found design unit 1: write_response_injector-arch_write_response_injector File: E:/repos/InterfaceTCC/hdl/master/test/reception/write_response_injector.vhd Line: 19
+    Info (12023): Found entity 1: write_response_injector File: E:/repos/InterfaceTCC/hdl/master/test/reception/write_response_injector.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/reception/tb_master_reception_write.vhd
+    Info (12022): Found design unit 1: tb_master_reception_write-arch_tb_master_reception_write File: E:/repos/InterfaceTCC/hdl/master/test/reception/tb_master_reception_write.vhd Line: 12
+    Info (12023): Found entity 1: tb_master_reception_write File: E:/repos/InterfaceTCC/hdl/master/test/reception/tb_master_reception_write.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/reception/tb_master_reception_read.vhd
+    Info (12022): Found design unit 1: tb_master_reception_read-arch_tb_master_reception_read File: E:/repos/InterfaceTCC/hdl/master/test/reception/tb_master_reception_read.vhd Line: 12
+    Info (12023): Found entity 1: tb_master_reception_read File: E:/repos/InterfaceTCC/hdl/master/test/reception/tb_master_reception_read.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/reception/read_response_injector.vhd
+    Info (12022): Found design unit 1: read_response_injector-arch_read_response_injector File: E:/repos/InterfaceTCC/hdl/master/test/reception/read_response_injector.vhd Line: 19
+    Info (12023): Found entity 1: read_response_injector File: E:/repos/InterfaceTCC/hdl/master/test/reception/read_response_injector.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/injection/tb_master_injection_write.vhd
+    Info (12022): Found design unit 1: tb_master_injection_write-arch_tb_master_injection_write File: E:/repos/InterfaceTCC/hdl/master/test/injection/tb_master_injection_write.vhd Line: 12
+    Info (12023): Found entity 1: tb_master_injection_write File: E:/repos/InterfaceTCC/hdl/master/test/injection/tb_master_injection_write.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/test/injection/tb_master_injection_read.vhd
+    Info (12022): Found design unit 1: tb_master_injection_read-arch_tb_master_injection_read File: E:/repos/InterfaceTCC/hdl/master/test/injection/tb_master_injection_read.vhd Line: 12
+    Info (12023): Found entity 1: tb_master_injection_read File: E:/repos/InterfaceTCC/hdl/master/test/injection/tb_master_injection_read.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/frontend/frontend_master.vhd
+    Info (12022): Found design unit 1: frontend_master-rtl File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 78
+    Info (12023): Found entity 1: frontend_master File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 7
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/reception/backend_master_reception.vhd
+    Info (12022): Found design unit 1: backend_master_reception-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_reception.vhd Line: 31
+    Info (12023): Found entity 1: backend_master_reception File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_reception.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/reception/backend_master_depacketizer_control.vhd
+    Info (12022): Found design unit 1: backend_master_depacketizer_control-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_depacketizer_control.vhd Line: 31
+    Info (12023): Found entity 1: backend_master_depacketizer_control File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_depacketizer_control.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/injection/backend_master_routing_table.vhd
+    Info (12022): Found design unit 1: backend_master_routing_table-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_routing_table.vhd Line: 23
+    Info (12023): Found entity 1: backend_master_routing_table File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_routing_table.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/injection/backend_master_packetizer_datapath.vhd
+    Info (12022): Found design unit 1: backend_master_packetizer_datapath-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_datapath.vhd Line: 34
+    Info (12023): Found entity 1: backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_datapath.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/injection/backend_master_packetizer_control.vhd
+    Info (12022): Found design unit 1: backend_master_packetizer_control-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_control.vhd Line: 29
+    Info (12023): Found entity 1: backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_control.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/injection/backend_master_injection.vhd
+    Info (12022): Found design unit 1: backend_master_injection-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 41
+    Info (12023): Found entity 1: backend_master_injection File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/backend/backend_master.vhd
+    Info (12022): Found design unit 1: backend_master-rtl File: E:/repos/InterfaceTCC/hdl/master/backend/backend_master.vhd Line: 53
+    Info (12023): Found entity 1: backend_master File: E:/repos/InterfaceTCC/hdl/master/backend/backend_master.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/master/tcc_top_master.vhd
+    Info (12022): Found design unit 1: tcc_top_master-rtl File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 68
+    Info (12023): Found entity 1: tcc_top_master File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 9
 Info (12021): Found 3 design units, including 1 entities, in source file /repos/interfacetcc/hdl/dependencies/xina/rtl/xina.vhd
     Info (12022): Found design unit 1: xina_pkg File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd Line: 4
     Info (12022): Found design unit 2: xina-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/xina.vhd Line: 60
@@ -514,163 +728,127 @@ Info (12021): Found 3 design units, including 1 entities, in source file /repos/
 Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/dependencies/xina/rtl/arbitration.vhd
     Info (12022): Found design unit 1: arbitration-rtl File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 17
     Info (12023): Found entity 1: arbitration File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/arbitration.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_send_control.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_send_control-arch_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 24
-    Info (12023): Found entity 1: tcc_backend_master_send_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_packetizer_datapath.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_packetizer_datapath-arch_backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 27
-    Info (12023): Found entity 1: tcc_backend_master_packetizer_datapath File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master_packetizer_control.vhd
-    Info (12022): Found design unit 1: tcc_backend_master_packetizer_control-arch_backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 25
-    Info (12023): Found entity 1: tcc_backend_master_packetizer_control File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/backend/tcc_backend_master.vhd
-    Info (12022): Found design unit 1: tcc_backend_master-arch_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 36
-    Info (12023): Found entity 1: tcc_backend_master File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/basic/mux4.vhd
-    Info (12022): Found design unit 1: mux4-arch_mux4 File: E:/repos/InterfaceTCC/hdl/basic/mux4.vhd Line: 20
-    Info (12023): Found entity 1: mux4 File: E:/repos/InterfaceTCC/hdl/basic/mux4.vhd Line: 4
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/frontend/tcc_frontend_master_send_control.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master_send_control-arch_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 49
-    Info (12023): Found entity 1: tcc_frontend_master_send_control File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/frontend/tcc_frontend_master.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master-arch_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 63
-    Info (12023): Found entity 1: tcc_frontend_master File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/test/tcc_tb.vhd
-    Info (12022): Found design unit 1: tcc_tb-arch_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 11
-    Info (12023): Found entity 1: tcc_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_tb.vhd Line: 8
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/test/tcc_frontend_master_tb.vhd
-    Info (12022): Found design unit 1: tcc_frontend_master_tb-arch_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 10
-    Info (12023): Found entity 1: tcc_frontend_master_tb File: E:/repos/InterfaceTCC/hdl/test/tcc_frontend_master_tb.vhd Line: 7
-Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/tcc_top_master.vhd
-    Info (12022): Found design unit 1: tcc_top_master-arch_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 60
-    Info (12023): Found entity 1: tcc_top_master File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 8
-Info (12021): Found 1 design units, including 0 entities, in source file /repos/interfacetcc/hdl/tcc_package.vhd
-    Info (12022): Found design unit 1: tcc_package File: E:/repos/InterfaceTCC/hdl/tcc_package.vhd Line: 6
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/common/send_control.vhd
+    Info (12022): Found design unit 1: send_control-rtl File: E:/repos/InterfaceTCC/hdl/common/send_control.vhd Line: 24
+    Info (12023): Found entity 1: send_control File: E:/repos/InterfaceTCC/hdl/common/send_control.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/common/receive_control.vhd
+    Info (12022): Found design unit 1: receive_control-rtl File: E:/repos/InterfaceTCC/hdl/common/receive_control.vhd Line: 24
+    Info (12023): Found entity 1: receive_control File: E:/repos/InterfaceTCC/hdl/common/receive_control.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/basic/mux6.vhd
+    Info (12022): Found design unit 1: mux6-rtl File: E:/repos/InterfaceTCC/hdl/basic/mux6.vhd Line: 22
+    Info (12023): Found entity 1: mux6 File: E:/repos/InterfaceTCC/hdl/basic/mux6.vhd Line: 4
+Info (12021): Found 2 design units, including 1 entities, in source file /repos/interfacetcc/hdl/basic/mux5.vhd
+    Info (12022): Found design unit 1: mux5-rtl File: E:/repos/InterfaceTCC/hdl/basic/mux5.vhd Line: 21
+    Info (12023): Found entity 1: mux5 File: E:/repos/InterfaceTCC/hdl/basic/mux5.vhd Line: 4
 Info (12127): Elaborating entity "tcc_top_master" for the top level hierarchy
-Info (12128): Elaborating entity "tcc_frontend_master" for hierarchy "tcc_frontend_master:u_FRONTEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 74
-Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(29): used implicit default value for signal "BVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 29
-Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(31): used explicit default value for signal "BRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 31
-Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(43): used implicit default value for signal "RVALID" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 43
-Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(45): used explicit default value for signal "RDATA" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 45
-Warning (10541): VHDL Signal Declaration warning at tcc_frontend_master.vhd(46): used implicit default value for signal "RLAST" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 46
-Warning (10540): VHDL Signal Declaration warning at tcc_frontend_master.vhd(47): used explicit default value for signal "RRESP" because signal was never assigned a value File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 47
-Info (12128): Elaborating entity "tcc_frontend_master_send_control" for hierarchy "tcc_frontend_master:u_FRONTEND_MASTER|tcc_frontend_master_send_control:u_FRONTEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master.vhd Line: 65
-Warning (10492): VHDL Process Statement warning at tcc_frontend_master_send_control.vhd(72): signal "r_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/frontend/tcc_frontend_master_send_control.vhd Line: 72
-Info (12128): Elaborating entity "tcc_backend_master" for hierarchy "tcc_backend_master:u_BACKEND_MASTER" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 129
-Warning (10541): VHDL Signal Declaration warning at tcc_backend_master.vhd(32): used implicit default value for signal "l_out_ack_i" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 32
-Info (12128): Elaborating entity "tcc_backend_master_packetizer_control" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_control:u_BACKEND_MASTER_PACKETIZER_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 50
-Warning (10492): VHDL Process Statement warning at tcc_backend_master_packetizer_control.vhd(49): signal "r_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_control.vhd Line: 49
-Info (12128): Elaborating entity "tcc_backend_master_packetizer_datapath" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 64
-Info (12128): Elaborating entity "mux4" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_packetizer_datapath:u_BACKEND_MASTER_PACKETIZER_DATAPATH|mux4:u_MUX4" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_packetizer_datapath.vhd Line: 34
-Info (12128): Elaborating entity "buffering" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 80
-Info (12129): Elaborating entity "buffering_fifo" using architecture "A:shift" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift" File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 31
-Info (12128): Elaborating entity "tcc_backend_master_send_control" for hierarchy "tcc_backend_master:u_BACKEND_MASTER|tcc_backend_master_send_control:u_BACKEND_MASTER_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master.vhd Line: 99
-Warning (10492): VHDL Process Statement warning at tcc_backend_master_send_control.vhd(45): signal "r_STATE" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: E:/repos/InterfaceTCC/hdl/backend/tcc_backend_master_send_control.vhd Line: 45
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "BVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 30
-    Warning (13410): Pin "BRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "BRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "BRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 32
-    Warning (13410): Pin "RVALID" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 44
-    Warning (13410): Pin "RDATA[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[3]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[4]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[5]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[6]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[7]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[8]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[9]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[10]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[11]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[12]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[13]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[14]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[15]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[16]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[17]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[18]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[19]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[20]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[21]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[22]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[23]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[24]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[25]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[26]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[27]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[28]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[29]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[30]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RDATA[31]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 46
-    Warning (13410): Pin "RLAST" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 47
-    Warning (13410): Pin "RRESP[0]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "RRESP[1]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "RRESP[2]" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 48
-    Warning (13410): Pin "l_out_ack_i" is stuck at GND File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 56
+Info (12128): Elaborating entity "frontend_master" for hierarchy "frontend_master:u_FRONTEND" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 95
+Info (10041): Inferred latch for "o_LENGTH[0]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[1]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[2]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[3]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[4]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[5]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[6]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_LENGTH[7]" at frontend_master.vhd(105) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 105
+Info (10041): Inferred latch for "o_BURST[0]" at frontend_master.vhd(104) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 104
+Info (10041): Inferred latch for "o_BURST[1]" at frontend_master.vhd(104) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 104
+Info (10041): Inferred latch for "o_ADDR[0]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[1]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[2]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[3]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[4]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[5]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[6]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[7]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[8]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[9]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[10]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[11]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[12]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[13]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[14]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[15]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[16]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[17]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[18]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[19]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[20]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[21]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[22]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[23]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[24]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[25]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[26]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[27]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[28]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[29]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[30]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[31]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[32]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[33]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[34]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[35]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[36]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[37]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[38]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[39]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[40]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[41]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[42]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[43]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[44]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[45]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[46]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[47]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[48]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[49]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[50]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[51]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[52]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[53]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[54]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[55]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[56]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[57]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[58]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[59]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[60]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[61]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[62]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "o_ADDR[63]" at frontend_master.vhd(103) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 103
+Info (10041): Inferred latch for "w_OPC_SEND" at frontend_master.vhd(93) File: E:/repos/InterfaceTCC/hdl/master/frontend/frontend_master.vhd Line: 93
+Info (12128): Elaborating entity "backend_master" for hierarchy "backend_master:u_BACKEND" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 164
+Info (12128): Elaborating entity "backend_master_injection" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION" File: E:/repos/InterfaceTCC/hdl/master/backend/backend_master.vhd Line: 55
+Info (12128): Elaborating entity "backend_master_routing_table" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_routing_table:u_ROUTING_TABLE" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 60
+Info (12128): Elaborating entity "backend_master_packetizer_control" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_control:u_PACKETIZER_CONTROL" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 71
+Info (12128): Elaborating entity "backend_master_packetizer_datapath" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 89
+Info (12128): Elaborating entity "mux6" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|backend_master_packetizer_datapath:u_PACKETIZER_DATAPATH|mux6:u_MUX6" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_packetizer_datapath.vhd Line: 44
+Info (12128): Elaborating entity "buffering" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 112
+Info (12129): Elaborating entity "buffering_fifo" using architecture "A:shift" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|buffering:u_BUFFER_FIFO|buffering_fifo:\fifo:shift" File: E:/repos/InterfaceTCC/hdl/dependencies/xina/rtl/buffering.vhd Line: 31
+Info (12128): Elaborating entity "send_control" for hierarchy "backend_master:u_BACKEND|backend_master_injection:u_INJECTION|send_control:u_SEND_CONTROL" File: E:/repos/InterfaceTCC/hdl/master/backend/injection/backend_master_injection.vhd Line: 131
+Info (12128): Elaborating entity "backend_master_reception" for hierarchy "backend_master:u_BACKEND|backend_master_reception:u_RECEPTION" File: E:/repos/InterfaceTCC/hdl/master/backend/backend_master.vhd Line: 83
+Info (12128): Elaborating entity "backend_master_depacketizer_control" for hierarchy "backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|backend_master_depacketizer_control:u_DEPACKETIZER_CONTROL" File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_reception.vhd Line: 59
+Info (12128): Elaborating entity "receive_control" for hierarchy "backend_master:u_BACKEND|backend_master_reception:u_RECEPTION|receive_control:u_RECEIVE_CONTROL" File: E:/repos/InterfaceTCC/hdl/master/backend/reception/backend_master_reception.vhd Line: 95
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 50 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "AWADDR[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWADDR[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 18
-    Warning (15610): No output dependent on input pin "AWSIZE[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "AWSIZE[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "AWSIZE[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 20
-    Warning (15610): No output dependent on input pin "BREADY" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 31
-    Warning (15610): No output dependent on input pin "ARSIZE[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "ARSIZE[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "ARSIZE[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 40
-    Warning (15610): No output dependent on input pin "RREADY" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 45
-    Warning (15610): No output dependent on input pin "l_out_data_o[0]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[1]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[2]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[3]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[4]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[5]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[6]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[7]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[8]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[9]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[10]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[11]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[12]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[13]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[14]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[15]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[16]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[17]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[18]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[19]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[20]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[21]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[22]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[23]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[24]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[25]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[26]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[27]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[28]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[29]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[30]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[31]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_data_o[32]" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 54
-    Warning (15610): No output dependent on input pin "l_out_val_o" File: E:/repos/InterfaceTCC/hdl/tcc_top_master.vhd Line: 55
-Info (21057): Implemented 417 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 127 input pins
-    Info (21059): Implemented 79 output pins
-    Info (21061): Implemented 211 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 105 warnings
+Warning (21074): Design contains 7 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "AWSIZE[0]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 26
+    Warning (15610): No output dependent on input pin "AWSIZE[1]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 26
+    Warning (15610): No output dependent on input pin "AWSIZE[2]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 26
+    Warning (15610): No output dependent on input pin "ARSIZE[0]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 47
+    Warning (15610): No output dependent on input pin "ARSIZE[1]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 47
+    Warning (15610): No output dependent on input pin "ARSIZE[2]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 47
+    Warning (15610): No output dependent on input pin "l_out_data_o[32]" File: E:/repos/InterfaceTCC/hdl/master/tcc_top_master.vhd Line: 62
+Info (21057): Implemented 824 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 239 input pins
+    Info (21059): Implemented 89 output pins
+    Info (21061): Implemented 496 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
     Info: Peak virtual memory: 4899 megabytes
-    Info: Processing ended: Sun Sep  3 15:32:56 2023
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:16
+    Info: Processing ended: Fri Oct 13 00:10:59 2023
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:17
 
 

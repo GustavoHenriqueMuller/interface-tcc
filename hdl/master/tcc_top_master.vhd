@@ -8,8 +8,8 @@ use work.xina_pkg.all;
 
 entity tcc_top_master is
     generic(
-        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
-        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0)
+        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
+        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0')
     );
 
     port(

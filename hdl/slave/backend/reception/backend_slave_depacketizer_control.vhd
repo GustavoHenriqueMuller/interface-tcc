@@ -60,11 +60,11 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_H_DEST => r_NEXT_STATE <= S_H_SRC when (i_READ_OK_BUFFER = '1') else S_H_DEST;
+            when S_H_DEST => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_SRC; else r_NEXT_STATE <= S_H_DEST; end if;
 
-            when S_H_SRC  => r_NEXT_STATE <= S_H_INTERFACE when (i_READ_OK_BUFFER = '1') else S_H_SRC;
+            when S_H_SRC  => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_INTERFACE; else r_NEXT_STATE <= S_H_SRC; end if;
 
-            when S_H_INTERFACE => r_NEXT_STATE <= S_H_ADDRESS when (i_READ_OK_BUFFER = '1') else S_H_INTERFACE;
+            when S_H_INTERFACE => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_ADDRESS; else r_NEXT_STATE <= S_H_INTERFACE; end if;
 
             when S_H_ADDRESS => if (i_READ_OK_BUFFER = '1') then
                                          if (i_H_INTERFACE(0) = '0') then
@@ -78,7 +78,7 @@ begin
                                          r_NEXT_STATE <= S_H_ADDRESS;
                                      end if;
 
-            when S_WRITE_REQUEST => r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD when (i_READY_RECEIVE_PACKET = '1') else S_WRITE_REQUEST;
+            when S_WRITE_REQUEST => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD; else r_NEXT_STATE <= S_WRITE_REQUEST; end if;
 
             when S_WRITE_REQUEST_PAYLOAD => if (r_PAYLOAD_COUNTER = to_unsigned(1, 8) and i_READY_RECEIVE_DATA = '1' and i_READ_OK_BUFFER = '1') then
                                                 r_NEXT_STATE <= S_TRAILER;
@@ -86,10 +86,10 @@ begin
                                                 r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD;
                                             end if;
 
-            when S_READ_REQUEST => r_NEXT_STATE <= S_TRAILER when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
+--            when S_READ_REQUEST => r_NEXT_STATE <= S_TRAILER when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
 
-            when S_TRAILER => r_NEXT_STATE <= S_WAIT when (i_READ_OK_BUFFER = '1') else S_TRAILER;
-            when S_WAIT    => r_NEXT_STATE <= S_H_DEST when (i_READY_RECEIVE_PACKET = '1') else S_WAIT;
+            when S_TRAILER => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAIT; else r_NEXT_STATE <= S_TRAILER; end if;
+            when S_WAIT    => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_WAIT; end if;
         end case;
     end process;
 

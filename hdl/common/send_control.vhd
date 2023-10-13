@@ -43,13 +43,13 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_IDLE => r_NEXT_STATE <= S_WAITING_ACK_ONE when (i_READ_OK_BUFFER = '1') else S_IDLE;
+            when S_IDLE => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAITING_ACK_ONE; else r_NEXT_STATE <= S_IDLE; end if;
 
-            when S_WAITING_ACK_ONE => r_NEXT_STATE <= S_WAITING_ACK_ZERO when (l_in_ack_o = '1') else S_WAITING_ACK_ONE;
+            when S_WAITING_ACK_ONE => if (l_in_ack_o = '1') then r_NEXT_STATE <= S_WAITING_ACK_ZERO; else r_NEXT_STATE <= S_WAITING_ACK_ONE; end if;
 
-            when S_WAITING_ACK_ZERO => r_NEXT_STATE <= S_READ_BUFFER when (l_in_ack_o = '0') else S_WAITING_ACK_ZERO;
+            when S_WAITING_ACK_ZERO => if (l_in_ack_o = '0') then r_NEXT_STATE <= S_READ_BUFFER; else r_NEXT_STATE <= S_WAITING_ACK_ZERO; end if;
 
-            when S_READ_BUFFER => r_NEXT_STATE <= S_WAITING_ACK_ONE when (i_READ_OK_BUFFER = '1') else S_IDLE;
+            when S_READ_BUFFER => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAITING_ACK_ONE; else r_NEXT_STATE <= S_IDLE; end if;
 
             when others => r_NEXT_STATE <= S_IDLE;
         end case;
