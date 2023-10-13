@@ -96,6 +96,7 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
+    w_OPC_RECEIVE   <= i_H_INTERFACE_RECEIVE(1);
     w_ID_RECEIVE    <= i_H_INTERFACE_RECEIVE(19 downto 15);
     w_LEN_RECEIVE   <= i_H_INTERFACE_RECEIVE(14 downto 7);
     w_BURST_RECEIVE <= i_H_INTERFACE_RECEIVE(6 downto 5);
