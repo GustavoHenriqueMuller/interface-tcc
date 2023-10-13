@@ -25,7 +25,7 @@ architecture rtl of write_request_injector is
     signal id_w: integer range 0 to 6 := 0;
     signal header_dest_w: std_logic_vector(data_width_p downto 0) := "1" & "0000000000000000" & "0000000000000000";
     signal header_src_w : std_logic_vector(data_width_p downto 0) := "0" & "0000000000000001" & "0000000000000000";
-    signal header_interface_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000001000101000";
+    signal header_interface_w: std_logic_vector(data_width_p downto 0) := "0" & "0000000100000001" & "0000000100101000";
     signal address_w  : std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";
     signal payload1_w : std_logic_vector(data_width_p downto 0) := "0" & "1001110111011101" & "1101110111011101";
     signal payload2_w : std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";

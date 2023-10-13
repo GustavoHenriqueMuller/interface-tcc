@@ -53,3 +53,8 @@ sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/f
 
 add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/data_o
+
+add wave -position insertpoint  \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/l_out_data_o
+add wave -position insertpoint  \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/l_out_val_o

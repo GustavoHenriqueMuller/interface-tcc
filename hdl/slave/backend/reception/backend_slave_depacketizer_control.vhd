@@ -67,7 +67,7 @@ begin
             when S_H_INTERFACE => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_ADDRESS; else r_NEXT_STATE <= S_H_INTERFACE; end if;
 
             when S_H_ADDRESS => if (i_READ_OK_BUFFER = '1') then
-                                         if (i_H_INTERFACE(0) = '0') then
+                                         if (i_H_INTERFACE(1) = '0') then
                                              -- Write request.
                                              r_NEXT_STATE <= S_WRITE_REQUEST;
                                          else
@@ -101,7 +101,7 @@ begin
             r_PAYLOAD_COUNTER <= to_unsigned(255, 8);
         elsif (rising_edge(ACLK)) then
             if (r_SET_PAYLOAD_COUNTER = '1') then
-                r_PAYLOAD_COUNTER <= unsigned(i_H_INTERFACE(15 downto 8));
+                r_PAYLOAD_COUNTER <= unsigned(i_H_INTERFACE(14 downto 7));
             elsif (r_SUBTRACT_PAYLOAD_COUNTER = '1') then
                 r_PAYLOAD_COUNTER <= r_PAYLOAD_COUNTER - 1;
             end if;

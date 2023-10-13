@@ -60,7 +60,7 @@ begin
             when S_H_SRC => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_INTERFACE; else r_NEXT_STATE <= S_H_SRC; end if;
 
             when S_H_INTERFACE => if (i_READ_OK_BUFFER = '1') then
-                                      if (i_FLIT(0) = '0') then
+                                      if (i_FLIT(1) = '0') then
                                           -- Write response. Next flit is trailer.
                                           r_NEXT_STATE <= S_WRITE_RESPONSE;
                                       else
@@ -91,7 +91,7 @@ begin
             r_PAYLOAD_COUNTER <= to_unsigned(255, 8);
         elsif (rising_edge(ACLK)) then
             if (r_SET_PAYLOAD_COUNTER = '1') then
-                r_PAYLOAD_COUNTER <= unsigned(i_FLIT(15 downto 8));
+                r_PAYLOAD_COUNTER <= unsigned(i_FLIT(14 downto 7));
             elsif (r_SUBTRACT_PAYLOAD_COUNTER = '1') then
                 r_PAYLOAD_COUNTER <= r_PAYLOAD_COUNTER - 1;
             end if;
