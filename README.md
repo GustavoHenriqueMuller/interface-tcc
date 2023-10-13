@@ -5,6 +5,10 @@ To compile the interface and all dependencies, run (in ModelSim):
 ```cd do_files```
 ```do do_all.do```
 
+To compile only the interface, do:
+```cd do_files```
+```do interface_tcc.do```
+
 To run simulations (all simulations start with ```sim_``` prefix):
 ```do <simulation_name>```
 
