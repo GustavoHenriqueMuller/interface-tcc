@@ -110,7 +110,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Internal signals.
-    r_SET_PAYLOAD_COUNTER      <= '1' when (r_STATE = S_H_INTERFACE) else '0';
+    r_SET_PAYLOAD_COUNTER      <= '1' when (r_STATE = S_H_ADDRESS) else '0';
     r_SUBTRACT_PAYLOAD_COUNTER <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1' and i_READY_RECEIVE_DATA = '1') else '0';
 
     ---------------------------------------------------------------------------------------------

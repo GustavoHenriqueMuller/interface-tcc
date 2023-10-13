@@ -120,9 +120,9 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    w_OPC_RECEIVE    <= i_H_INTERFACE_RECEIVE(0);
-    w_STATUS_RECEIVE <= i_H_INTERFACE_RECEIVE(5 downto 3);
-    w_ID_RECEIVE     <= i_H_INTERFACE_RECEIVE(20 downto 16);
+    w_OPC_RECEIVE    <= i_H_INTERFACE_RECEIVE(1);
+    w_STATUS_RECEIVE <= i_H_INTERFACE_RECEIVE(4 downto 2);
+    w_ID_RECEIVE     <= i_H_INTERFACE_RECEIVE(19 downto 15);
 
     o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and w_OPC_RECEIVE = '0') or
                                        (RREADY = '1' and w_OPC_RECEIVE = '1') else '0';
