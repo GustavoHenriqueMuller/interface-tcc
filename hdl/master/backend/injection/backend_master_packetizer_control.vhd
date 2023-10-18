@@ -95,7 +95,7 @@ begin
                                (r_STATE = S_H_INTERFACE) or
                                (r_STATE = S_H_ADDRESS) or
                                (r_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1') or
-                               (r_STATE  = S_TRAILER) else '0';
+                               (r_STATE = S_TRAILER) else '0';
 
     o_READY_SEND_DATA <= '1' when (r_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') else '0';
 
