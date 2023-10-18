@@ -43,9 +43,9 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_IDLE => if (l_out_val_o = '1') then r_NEXT_STATE <= S_WRITE_BUFFER; else r_NEXT_STATE <= S_IDLE; end if;
+            when S_IDLE => if (l_out_val_o = '1' and i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_WRITE_BUFFER; else r_NEXT_STATE <= S_IDLE; end if;
 
-            when S_WRITE_BUFFER => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAIT_VAL_ZERO; else r_NEXT_STATE <= S_WRITE_BUFFER; end if;
+            when S_WRITE_BUFFER => r_NEXT_STATE <= S_WAIT_VAL_ZERO;
 
             when S_WAIT_VAL_ZERO => if (l_out_val_o = '0') then r_NEXT_STATE <= S_IDLE; else r_NEXT_STATE <= S_WAIT_VAL_ZERO; end if;
 
@@ -59,6 +59,6 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values (NoC).
-    l_out_ack_i <= '1' when (r_STATE /= S_IDLE) else '0';
+    l_out_ack_i <= '1' when (r_STATE = S_WAIT_VAL_ZERO) else '0';
 
 end rtl;
