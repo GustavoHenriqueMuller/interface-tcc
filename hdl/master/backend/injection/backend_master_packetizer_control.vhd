@@ -59,7 +59,7 @@ begin
             when S_H_INTERFACE => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_ADDRESS; else r_NEXT_STATE <= S_H_INTERFACE; end if;
 
             when S_H_ADDRESS => if (i_WRITE_OK_BUFFER = '1') then
-                                         if (i_OPC_SEND = '0') then
+                                     if (i_OPC_SEND = '0') then
                                              r_NEXT_STATE <= S_PAYLOAD; -- Write packet. Next flit is payload.
                                          else
                                              r_NEXT_STATE <= S_TRAILER; -- Read packet. Next flit is trailer.

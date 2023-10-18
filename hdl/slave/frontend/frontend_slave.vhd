@@ -49,9 +49,9 @@ entity frontend_slave is
             RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Backend signals (injection).
-        o_VALID_SEND_DATA  : out std_logic;
-        o_LAST_SEND_DATA   : out std_logic;
-        i_READY_SEND_DATA  : in std_logic;
+        o_VALID_SEND_DATA: out std_logic;
+        o_LAST_SEND_DATA : out std_logic;
+        i_READY_SEND_DATA: in std_logic;
 
         o_DATA_SEND  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_STATUS_SEND: out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
@@ -61,9 +61,9 @@ entity frontend_slave is
         i_VALID_RECEIVE_DATA  : in std_logic;
         i_LAST_RECEIVE_DATA   : in std_logic;
 
-        i_DATA_RECEIVE      : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_DATA_RECEIVE       : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_ADDRESS_RECEIVE   : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_ADDRESS_RECEIVE    : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         o_READY_RECEIVE_PACKET: out std_logic;
         o_READY_RECEIVE_DATA  : out std_logic
