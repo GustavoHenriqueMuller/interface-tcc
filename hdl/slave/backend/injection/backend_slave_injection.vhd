@@ -53,7 +53,7 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_OPC_SEND => i_H_INTERFACE_RECEIVE(0),
+            i_OPC_SEND => i_H_INTERFACE_RECEIVE(1),
             i_VALID_SEND_DATA => i_VALID_SEND_DATA,
             i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
             o_READY_SEND_DATA => o_READY_SEND_DATA,
@@ -73,11 +73,11 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_DATA_SEND          => i_DATA_SEND,
-            i_STATUS_SEND        => i_STATUS_SEND,
+            i_DATA_SEND => i_DATA_SEND,
+            i_STATUS_SEND => i_STATUS_SEND,
             i_H_SRC_RECEIVE => i_H_SRC_RECEIVE,
             i_H_INTERFACE_RECEIVE => i_H_INTERFACE_RECEIVE,
-            i_FLIT_SELECTOR    => w_FLIT_SELECTOR,
+            i_FLIT_SELECTOR => w_FLIT_SELECTOR,
 
             o_FLIT => w_FLIT
         );
