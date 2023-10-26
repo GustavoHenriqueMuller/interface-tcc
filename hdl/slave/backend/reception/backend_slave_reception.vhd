@@ -109,7 +109,7 @@ begin
             data_i => l_out_data_o
         );
 
-    u_RECEIVE_CONTROL: entity work.receive_control
+    u_RECEIVE_CONTROL: entity work.receive_control_tmr
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

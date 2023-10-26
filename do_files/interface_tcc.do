@@ -8,7 +8,9 @@ vcom -2008 ../hdl/basic/mux5.vhd
 vcom -2008 ../hdl/basic/mux6.vhd
 
 vcom -2008 ../hdl/common/send_control.vhd
+vcom -2008 ../hdl/common/send_control_tmr.vhd
 vcom -2008 ../hdl/common/receive_control.vhd
+vcom -2008 ../hdl/common/receive_control_tmr.vhd
 
 #---------------------------------------------------------------------------------------------
 # Master frontend.
