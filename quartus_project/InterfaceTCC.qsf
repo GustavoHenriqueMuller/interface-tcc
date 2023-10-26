@@ -58,6 +58,13 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE ../hdl/slave/backend/reception/backend_slave_depacketizer_control_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/slave/backend/injection/backend_slave_packetizer_control_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/master/backend/reception/backend_master_depacketizer_control_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/master/backend/injection/backend_master_packetizer_control_tmr.vhd
 set_global_assignment -name VHDL_FILE ../hdl/common/send_control_tmr.vhd
 set_global_assignment -name VHDL_FILE ../hdl/common/receive_control_tmr.vhd
 set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/xina_ft.vhd
@@ -120,7 +127,4 @@ set_global_assignment -name VHDL_FILE ../hdl/common/send_control.vhd
 set_global_assignment -name VHDL_FILE ../hdl/common/receive_control.vhd
 set_global_assignment -name VHDL_FILE ../hdl/basic/mux6.vhd
 set_global_assignment -name VHDL_FILE ../hdl/basic/mux5.vhd
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

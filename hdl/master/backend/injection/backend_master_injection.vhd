@@ -128,7 +128,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_SEND_CONTROL: entity work.send_control_tmr
+    u_SEND_CONTROL: entity work.send_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

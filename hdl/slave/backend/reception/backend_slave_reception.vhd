@@ -68,7 +68,7 @@ begin
     o_ADDRESS_RECEIVE  <= w_H_ADDRESS(c_FLIT_WIDTH - 2 downto 0);
     o_DATA_RECEIVE     <= w_FLIT(31 downto 0);
 
-    u_DEPACKETIZER_CONTROL: entity work.backend_slave_depacketizer_control
+    u_DEPACKETIZER_CONTROL: entity work.backend_slave_depacketizer_control_tmr
         port map(
             ACLK => ACLK,
             ARESETn => ARESETn,
