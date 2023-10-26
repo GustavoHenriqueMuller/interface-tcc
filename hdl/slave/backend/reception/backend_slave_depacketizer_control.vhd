@@ -86,7 +86,7 @@ begin
                                                 r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD;
                                             end if;
 
-            when S_READ_REQUEST => r_NEXT_STATE <= S_TRAILER when (i_READY_RECEIVE_PACKET = '1') else S_READ_REQUEST;
+            when S_READ_REQUEST => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_TRAILER; else r_NEXT_STATE <= S_READ_REQUEST; end if;
 
             when S_TRAILER => if (i_READ_OK_BUFFER = '1') then r_NEXT_STATE <= S_WAIT; else r_NEXT_STATE <= S_TRAILER; end if;
             when S_WAIT    => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_WAIT; end if;
