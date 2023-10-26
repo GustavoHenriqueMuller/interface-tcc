@@ -53,9 +53,11 @@ vcom -2008 ../hdl/slave/frontend/frontend_slave.vhd
 # Slave backend and top.
 
 vcom -2008 ../hdl/slave/backend/reception/backend_slave_depacketizer_control.vhd
+vcom -2008 ../hdl/slave/backend/reception/backend_slave_depacketizer_control_tmr.vhd
 vcom -2008 ../hdl/slave/backend/reception/backend_slave_reception.vhd
 
 vcom -2008 ../hdl/slave/backend/injection/backend_slave_packetizer_control.vhd
+vcom -2008 ../hdl/slave/backend/injection/backend_slave_packetizer_control_tmr.vhd
 vcom -2008 ../hdl/slave/backend/injection/backend_slave_packetizer_datapath.vhd
 vcom -2008 ../hdl/slave/backend/injection/backend_slave_injection.vhd
 

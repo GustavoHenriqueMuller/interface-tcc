@@ -56,7 +56,7 @@ begin
     o_DATA_RECEIVE <= w_FLIT(31 downto 0);
     o_H_INTERFACE_RECEIVE <= w_H_INTERFACE;
 
-    u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
+    u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control_tmr
         port map(
             ACLK => ACLK,
             ARESETn => ARESETn,

@@ -57,9 +57,9 @@ begin
             i_VALID_SEND_DATA => i_VALID_SEND_DATA,
             i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
             o_READY_SEND_DATA => o_READY_SEND_DATA,
+            o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
 
             i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
             o_WRITE_BUFFER    => w_WRITE_BUFFER
         );
 

@@ -68,7 +68,7 @@ begin
             o_DEST_Y   => w_DEST_Y
         );
 
-    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
+    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control_tmr
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
