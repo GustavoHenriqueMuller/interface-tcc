@@ -25,14 +25,14 @@ vcom -2008 ../hdl/dependencies/xina/tb/xina_tb.vhd
 # XINA FT.
 
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/hamming_pkg.vhd
+vcom -2008 ../hdl/dependencies/xina/rtl/ft/hamming_dec.vhd
+vcom -2008 ../hdl/dependencies/xina/rtl/ft/hamming_enc.vhd
+vcom -2008 ../hdl/dependencies/xina/rtl/ft/buffering_ham.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/routing_tmr.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/arbitration_tmr.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/flow_in_tmr.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/flow_out_tmr.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/channel_in_ft.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/channel_out_ft.vhd
-vcom -2008 ../hdl/dependencies/xina/rtl/ft/hamming_dec.vhd
-vcom -2008 ../hdl/dependencies/xina/rtl/ft/hamming_enc.vhd
-vcom -2008 ../hdl/dependencies/xina/rtl/ft/buffering_ham.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/router_ft.vhd
 vcom -2008 ../hdl/dependencies/xina/rtl/ft/xina_ft.vhd
