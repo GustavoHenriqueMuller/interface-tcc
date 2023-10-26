@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CGXFC9E7F35C8
-set_global_assignment -name TOP_LEVEL_ENTITY tcc_top_master
+set_global_assignment -name TOP_LEVEL_ENTITY buffering_ham
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.1STD.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:30:24  SEPTEMBER 03, 2023"
 set_global_assignment -name LAST_QUARTUS_VERSION "22.1std.1 Lite Edition"
@@ -58,6 +58,18 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/xina_ft.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/routing_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/router_ft.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/hamming_pkg.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/hamming_enc.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/hamming_dec.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/flow_out_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/flow_in_tmr.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/channel_out_ft.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/channel_in_ft.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/buffering_ham.vhd
+set_global_assignment -name VHDL_FILE ../hdl/dependencies/xina/rtl/ft/arbitration_tmr.vhd
 set_global_assignment -name VHDL_FILE ../hdl/tcc_package.vhd
 set_global_assignment -name VHDL_FILE ../hdl/slave/test/write_request_injector.vhd
 set_global_assignment -name VHDL_FILE ../hdl/slave/test/tb_slave_write.vhd

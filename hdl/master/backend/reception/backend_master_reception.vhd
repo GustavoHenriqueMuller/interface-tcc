@@ -76,8 +76,8 @@ begin
     u_BUFFER_FIFO: entity work.buffering
         generic map(
             data_width_p => c_FLIT_WIDTH,
-            buffer_depth_p => 10,
-            mode_p => 1
+            buffer_depth_p => c_BUFFER_DEPTH,
+            mode_p => c_BUFFER_MODE
         )
         port map(
             clk_i => ACLK,

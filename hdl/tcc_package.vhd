@@ -11,5 +11,7 @@ package tcc_package is
 	constant c_RESP_WIDTH : natural := 3;  -- This constant corresponds to "BRESP_WIDTH" and "RRESP_WIDTH".
 
 	-- Interface attributes.
-	constant c_FLIT_WIDTH: natural := c_DATA_WIDTH + 1;
+	constant c_FLIT_WIDTH  : natural := c_DATA_WIDTH + 1;
+	constant c_BUFFER_DEPTH: positive := 10;
+	constant c_BUFFER_MODE : natural := 1;
 end package;
