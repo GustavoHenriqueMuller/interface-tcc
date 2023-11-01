@@ -19,7 +19,10 @@ entity backend_slave_packetizer_control is
         o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
 
         i_WRITE_OK_BUFFER: in std_logic;
-        o_WRITE_BUFFER   : out std_logic
+        o_WRITE_BUFFER   : out std_logic;
+
+        o_ADD: out std_logic;
+        o_INTEGRITY_RESETn: out std_logic
     );
 end backend_slave_packetizer_control;
 
@@ -75,6 +78,10 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
+    o_READY_SEND_DATA <= '1' when (r_STATE = S_IDLE and i_OPC_SEND = '0') or -- For writes.
+                                  (r_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') -- For reads.
+                                  else '0';
+
     o_FLIT_SELECTOR <= "000" when (r_STATE = S_H_DEST) else
                        "001" when (r_STATE = S_H_SRC) else
                        "010" when (r_STATE = S_H_INTERFACE) else
@@ -88,7 +95,10 @@ begin
                                (r_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1') or
                                (r_STATE = S_TRAILER) else '0';
 
-    o_READY_SEND_DATA <= '1' when (r_STATE = S_IDLE and i_OPC_SEND = '0') or -- For writes.
-                                  (r_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') -- For reads.
-                                  else '0';
+    o_ADD <= '1' when ((r_STATE = S_H_DEST) or
+                       (r_STATE = S_H_SRC) or
+                       (r_STATE = S_H_INTERFACE) or
+                       (r_STATE = S_PAYLOAD and i_VALID_SEND_DATA = '1')) and i_WRITE_OK_BUFFER = '1' else '0';
+
+    o_INTEGRITY_RESETn <= '0' when (r_STATE = S_IDLE) else '1';
 end rtl;

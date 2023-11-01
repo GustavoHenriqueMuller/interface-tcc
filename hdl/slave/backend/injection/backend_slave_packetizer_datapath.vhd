@@ -22,6 +22,7 @@ entity backend_slave_packetizer_datapath is
         i_H_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_FLIT_SELECTOR: in std_logic_vector(2 downto 0);
+        i_CHECKSUM     : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 		o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
     );
@@ -63,5 +64,5 @@ begin
     w_FLIT_H_SRC  <= '0' & SRC_X_p & SRC_Y_p;
     w_FLIT_H_INTERFACE <= '0' & "000000000000" & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & w_OPC & "1";
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
-    w_FLIT_TRAILER  <= '1' & "1010101010101010" & "1010101010101010";
+    w_FLIT_TRAILER  <= '1' & i_CHECKSUM;
 end rtl;

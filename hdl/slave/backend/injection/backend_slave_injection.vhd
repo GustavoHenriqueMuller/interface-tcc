@@ -42,6 +42,11 @@ architecture rtl of backend_slave_injection is
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_SELECTOR: std_logic_vector(2 downto 0);
 
+    -- Checksum.
+    signal w_ADD: std_logic;
+    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_INTEGRITY_RESETn: std_logic;
+
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
     signal w_WRITE_OK_BUFFER: std_logic;
@@ -60,7 +65,10 @@ begin
             o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
 
             i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER    => w_WRITE_BUFFER
+            o_WRITE_BUFFER    => w_WRITE_BUFFER,
+
+            o_ADD => w_ADD,
+            o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
         );
 
     u_PACKETIZER_DATAPATH: entity work.backend_slave_packetizer_datapath
@@ -78,8 +86,20 @@ begin
             i_H_SRC_RECEIVE => i_H_SRC_RECEIVE,
             i_H_INTERFACE_RECEIVE => i_H_INTERFACE_RECEIVE,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
+            i_CHECKSUM  => w_CHECKSUM,
 
             o_FLIT => w_FLIT
+        );
+
+    u_INTEGRITY_CONTROL_SEND: entity work.integrity_control_send
+        port map(
+            ACLK    => ACLK,
+            ARESETn => w_INTEGRITY_RESETn,
+
+            i_ADD   => w_ADD,
+            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+
+            o_CHECKSUM => w_CHECKSUM
         );
 
     u_BUFFER_FIFO: entity work.buffering

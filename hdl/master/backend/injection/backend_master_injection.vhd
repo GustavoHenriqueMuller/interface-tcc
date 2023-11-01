@@ -31,8 +31,6 @@ entity backend_master_injection is
         i_OPC_SEND : in std_logic;
         i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
-        o_CHECKSUM: out std_logic_vector(c_DATA_WIDTH - 1 downto 0); -- @TODO
-
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_in_val_i : out std_logic;
@@ -51,6 +49,11 @@ architecture rtl of backend_master_injection is
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_FLIT_SELECTOR: std_logic_vector(2 downto 0);
+
+    -- Checksum.
+    signal w_ADD: std_logic;
+    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -82,10 +85,13 @@ begin
 
             o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
             o_READY_SEND_DATA    => o_READY_SEND_DATA,
-            o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
+            o_FLIT_SELECTOR      => w_FLIT_SELECTOR,
 
             i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER    => w_WRITE_BUFFER
+            o_WRITE_BUFFER    => w_WRITE_BUFFER,
+
+            o_ADD => w_ADD,
+            o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
         );
 
     u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath
@@ -107,22 +113,23 @@ begin
             i_DEST_X    => w_DEST_X,
             i_DEST_Y    => w_DEST_Y,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
+            i_CHECKSUM  => w_CHECKSUM,
 
             o_FLIT => w_FLIT
         );
 
-    u_INTEGRITY_CONTROL_SEND: entity work.integrity_control_send -- @TODO
+    u_INTEGRITY_CONTROL_SEND: entity work.integrity_control_send
         port map(
             ACLK    => ACLK,
-            ARESETn => ARESETn,
+            ARESETn => w_INTEGRITY_RESETn,
 
-            i_ADD   => w_WRITE_OK_BUFFER,
-            i_VALUE_ADD => i_DATA_SEND,
+            i_ADD   => w_ADD,
+            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
 
-            o_CHECKSUM => o_CHECKSUM
+            o_CHECKSUM => w_CHECKSUM
         );
 
-    u_BUFFER_FIFO: entity work.buffering_ham
+    u_BUFFER_FIFO: entity work.buffering
         generic map(
             data_width_p => c_FLIT_WIDTH,
             buffer_depth_p => c_BUFFER_DEPTH,
@@ -141,7 +148,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_SEND_CONTROL: entity work.send_control_tmr
+    u_SEND_CONTROL: entity work.send_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

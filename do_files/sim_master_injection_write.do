@@ -45,6 +45,11 @@ sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/w_READ_BUFFER 
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/o_CHECKSUM
+add wave -position insertpoint  \
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/i_ADD
+
+add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
 
 #---------------------------------------------------------------------------------------------

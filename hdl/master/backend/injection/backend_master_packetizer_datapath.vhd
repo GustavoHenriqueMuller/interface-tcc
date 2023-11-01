@@ -26,6 +26,7 @@ entity backend_master_packetizer_datapath is
         i_DEST_X   : in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
         i_DEST_Y   : in std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
         i_FLIT_SELECTOR: in std_logic_vector(2 downto 0);
+        i_CHECKSUM : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
 		o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
     );
@@ -61,5 +62,5 @@ begin
     w_FLIT_H_INTERFACE <= '0' & "000000000000" & i_ID & i_LENGTH & i_BURST & "000" & i_OPC_SEND & "0";
     w_FLIT_H_ADDRESS   <= '0' & i_OPC_ADDR;
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
-    w_FLIT_TRAILER  <= '1' & "1010101010101010" & "1010101010101010";
+    w_FLIT_TRAILER  <= '1' & i_CHECKSUM;
 end rtl;
