@@ -82,8 +82,8 @@ begin
             ARESETn => ARESETn,
 
             i_ADD   => w_READ_OK_BUFFER,
-            i_VALUE_ADD => l_out_data_o(31 downto 0),
-            i_VALUE_COMPARE => l_out_data_o(31 downto 0),
+            i_VALUE_ADD => l_out_data_o,
+            i_VALUE_COMPARE => l_out_data_o,
 
             o_CHECKSUM => o_CHECKSUM,
             o_CORRUPT => o_CORRUPT

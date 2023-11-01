@@ -31,6 +31,8 @@ entity backend_master_injection is
         i_OPC_SEND : in std_logic;
         i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
 
+        o_CHECKSUM: out std_logic_vector(c_DATA_WIDTH - 1 downto 0); -- @TODO
+
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_in_val_i : out std_logic;
@@ -68,7 +70,7 @@ begin
             o_DEST_Y   => w_DEST_Y
         );
 
-    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control_tmr
+    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -109,7 +111,18 @@ begin
             o_FLIT => w_FLIT
         );
 
-    u_BUFFER_FIFO: entity work.buffering
+    u_INTEGRITY_CONTROL_SEND: entity work.integrity_control_send -- @TODO
+        port map(
+            ACLK    => ACLK,
+            ARESETn => ARESETn,
+
+            i_ADD   => w_WRITE_OK_BUFFER,
+            i_VALUE_ADD => i_DATA_SEND,
+
+            o_CHECKSUM => o_CHECKSUM
+        );
+
+    u_BUFFER_FIFO: entity work.buffering_ham
         generic map(
             data_width_p => c_FLIT_WIDTH,
             buffer_depth_p => c_BUFFER_DEPTH,
@@ -128,7 +141,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_SEND_CONTROL: entity work.send_control
+    u_SEND_CONTROL: entity work.send_control_tmr
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,

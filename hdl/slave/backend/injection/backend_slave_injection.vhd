@@ -48,7 +48,7 @@ architecture rtl of backend_slave_injection is
     signal w_READ_BUFFER    : std_logic;
     signal w_READ_OK_BUFFER : std_logic;
 begin
-    u_PACKETIZER_CONTROL: entity work.backend_slave_packetizer_control_tmr
+    u_PACKETIZER_CONTROL: entity work.backend_slave_packetizer_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
@@ -101,7 +101,7 @@ begin
             data_i => w_FLIT
         );
 
-    u_SEND_CONTROL: entity work.send_control_tmr
+    u_SEND_CONTROL: entity work.send_control
         port map(
             ACLK    => ACLK,
             ARESETn => ARESETn,
