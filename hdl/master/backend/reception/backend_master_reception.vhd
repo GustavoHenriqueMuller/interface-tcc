@@ -6,6 +6,11 @@ use work.tcc_package.all;
 use work.xina_pkg.all;
 
 entity backend_master_reception is
+    generic(
+        p_BUFFER_DEPTH: positive;
+        p_BUFFER_MODE : natural
+    );
+
     port(
         -- AMBA AXI 5 signals.
         ACLK   : in std_logic;
@@ -18,7 +23,7 @@ entity backend_master_reception is
         o_VALID_RECEIVE_DATA: out std_logic;
         o_LAST_RECEIVE_DATA : out std_logic;
 
-        o_DATA_RECEIVE       : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_DATA_RECEIVE       : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         o_CORRUPT_RECEIVE: out std_logic;
@@ -43,7 +48,7 @@ architecture rtl of backend_master_reception is
     -- Checksum.
     signal w_ADD: std_logic;
     signal w_COMPARE : std_logic;
-    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
     signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
@@ -91,9 +96,9 @@ begin
             ARESETn => w_INTEGRITY_RESETn,
 
             i_ADD       => w_ADD,
-            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+            i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
             i_COMPARE   => w_COMPARE,
-            i_VALUE_COMPARE => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+            i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
             o_CHECKSUM => w_CHECKSUM,
             o_CORRUPT  => o_CORRUPT_RECEIVE
@@ -102,8 +107,8 @@ begin
     u_BUFFER_FIFO: entity work.buffering
         generic map(
             data_width_p => c_FLIT_WIDTH,
-            buffer_depth_p => c_BUFFER_DEPTH,
-            mode_p => c_BUFFER_MODE
+            buffer_depth_p => p_BUFFER_DEPTH,
+            mode_p => p_BUFFER_MODE
         )
         port map(
             clk_i => ACLK,

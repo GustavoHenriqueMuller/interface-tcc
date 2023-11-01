@@ -18,40 +18,40 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
         -- Write request signals.
         signal t_AWVALID: std_logic := '0';
         signal t_AWREADY: std_logic := '0';
-        signal t_AWID   : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        signal t_AWADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
+        signal t_AWID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_AWADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
+        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_AWBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Write data signals.
         signal t_WVALID : std_logic := '0';
         signal t_WREADY : std_logic := '0';
-        signal t_WDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t_WDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_WLAST  : std_logic := '0';
 
         -- Write response signals.
         signal t_BVALID : std_logic := '0';
         signal t_BREADY : std_logic := '0';
-        signal t_BID    : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        signal t_BRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_BID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_BRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Read request signals.
         signal t_ARVALID: std_logic := '0';
         signal t_ARREADY: std_logic := '0';
-        signal t_ARID   : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        signal t_ARADDR : std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
+        signal t_ARID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_ARADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
+        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Read response/data signals.
         signal t_RVALID : std_logic := '0';
         signal t_RREADY : std_logic := '0';
-        signal t_RDATA  : std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
-        signal t_RID    : std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-        signal t_RRESP  : std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+        signal t_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
     -- Signals between backend and XINA router.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
@@ -92,8 +92,8 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
 begin
     u_TOP_MASTER: entity work.tcc_top_master
         generic map(
-            SRC_X_p => (others => '0'),
-            SRC_Y_p => (others => '0')
+            p_SRC_X => (others => '0'),
+            p_SRC_Y => (others => '0')
         )
 
         port map(

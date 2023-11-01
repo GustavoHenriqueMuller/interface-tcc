@@ -14,15 +14,15 @@ entity integrity_control_send is
 
         -- Inputs.
         i_ADD: in std_logic;
-        i_VALUE_ADD: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_VALUE_ADD: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         -- Outputs.
-        o_CHECKSUM: out std_logic_vector(c_DATA_WIDTH - 1 downto 0)
+        o_CHECKSUM: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0)
     );
 end integrity_control_send;
 
 architecture rtl of integrity_control_send is
-    signal w_CHECKSUM: unsigned(c_DATA_WIDTH - 1 downto 0) := to_unsigned(0, c_DATA_WIDTH);
+    signal w_CHECKSUM: unsigned(c_AXI_DATA_WIDTH - 1 downto 0) := to_unsigned(0, c_AXI_DATA_WIDTH);
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ begin
     process (all)
     begin
         if (ARESETn = '0') then
-            w_CHECKSUM <= to_unsigned(0, c_DATA_WIDTH);
+            w_CHECKSUM <= to_unsigned(0, c_AXI_DATA_WIDTH);
         elsif (rising_edge(ACLK)) then
             if (i_ADD = '1') then
                 w_CHECKSUM <= w_CHECKSUM + unsigned(i_VALUE_ADD);

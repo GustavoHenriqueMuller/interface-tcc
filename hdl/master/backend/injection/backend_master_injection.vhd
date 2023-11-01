@@ -7,8 +7,10 @@ use work.xina_pkg.all;
 
 entity backend_master_injection is
     generic(
-        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
-        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0')
+        p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
+        p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
+        p_BUFFER_DEPTH: positive;
+        p_BUFFER_MODE : natural
     );
 
     port(
@@ -24,12 +26,12 @@ entity backend_master_injection is
         o_READY_SEND_PACKET: out std_logic;
 		o_READY_SEND_DATA  : out std_logic;
 
-		i_ADDR     : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+		i_ADDR     : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
 		i_BURST    : in std_logic_vector(1 downto 0);
         i_LENGTH   : in std_logic_vector(7 downto 0);
-        i_DATA_SEND: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_DATA_SEND: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         i_OPC_SEND : in std_logic;
-        i_ID       : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        i_ID       : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -42,9 +44,9 @@ architecture rtl of backend_master_injection is
     signal w_ARESET: std_logic;
 
     -- Routing table.
-    signal w_OPC_ADDR: std_logic_vector((c_ADDR_WIDTH / 2) - 1 downto 0);
-    signal w_DEST_X  : std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
-    signal w_DEST_Y  : std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0);
+    signal w_OPC_ADDR: std_logic_vector((c_AXI_ADDR_WIDTH / 2) - 1 downto 0);
+    signal w_DEST_X  : std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
+    signal w_DEST_Y  : std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
 
     -- Packetizer.
     signal w_FLIT: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -52,7 +54,7 @@ architecture rtl of backend_master_injection is
 
     -- Checksum.
     signal w_ADD: std_logic;
-    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
     signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
@@ -96,8 +98,8 @@ begin
 
     u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath
         generic map(
-            SRC_X_p => SRC_X_p,
-            SRC_Y_p => SRC_Y_p
+            p_SRC_X => p_SRC_X,
+            p_SRC_Y => p_SRC_Y
         )
 
         port map(
@@ -124,7 +126,7 @@ begin
             ARESETn => w_INTEGRITY_RESETn,
 
             i_ADD   => w_ADD,
-            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+            i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
             o_CHECKSUM => w_CHECKSUM
         );
@@ -132,8 +134,8 @@ begin
     u_BUFFER_FIFO: entity work.buffering
         generic map(
             data_width_p => c_FLIT_WIDTH,
-            buffer_depth_p => c_BUFFER_DEPTH,
-            mode_p => c_BUFFER_MODE
+            buffer_depth_p => p_BUFFER_DEPTH,
+            mode_p => p_BUFFER_MODE
         )
         port map(
             clk_i => ACLK,

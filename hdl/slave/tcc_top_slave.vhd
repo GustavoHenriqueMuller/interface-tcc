@@ -8,8 +8,10 @@ use work.xina_pkg.all;
 
 entity tcc_top_slave is
     generic(
-        SRC_X_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
-        SRC_Y_p: std_logic_vector((c_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0')
+        p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
+        p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0) := (others => '0');
+        p_BUFFER_DEPTH: positive := 10;
+        p_BUFFER_MODE : natural  := 1
     );
 
     port(
@@ -19,41 +21,41 @@ entity tcc_top_slave is
 
             -- Write request signals.
             AWVALID: out std_logic := '0';
-            AWREADY: in std_logic  := '1';
-            AWID   : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            AWADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
+            AWREADY: in std_logic  := '0';
+            AWID   : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            AWADDR : out std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
             AWLEN  : out std_logic_vector(7 downto 0) := "00000000";
-            AWSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
+            AWSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             AWBURST: out std_logic_vector(1 downto 0) := "01";
 
             -- Write data signals.
             WVALID : out std_logic := '0';
             WREADY : in std_logic  := '0';
-            WDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+            WDATA  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
             WLAST  : out std_logic := '0';
 
             -- Write response signals.
             BVALID : in std_logic  := '0';
             BREADY : out std_logic := '0';
-            BID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            BRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
+            BID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            BRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
             ARVALID: out std_logic := '0';
-            ARREADY: in std_logic  := '1';
-            ARID   : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            ARADDR : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0) := (others => '0');
+            ARREADY: in std_logic  := '0';
+            ARID   : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            ARADDR : out std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
             ARLEN  : out std_logic_vector(7 downto 0) := "00000000";
-            ARSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_DATA_WIDTH / 8, 3));
+            ARSIZE : out std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             ARBURST: out std_logic_vector(1 downto 0) := "01";
 
             -- Read response/data signals.
             RVALID : in std_logic  := '0';
-            RREADY : out std_logic := '1';
-            RDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0) := (others => '0');
+            RREADY : out std_logic := '0';
+            RDATA  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
             RLAST  : in std_logic  := '0';
-            RID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0) := (others => '0');
+            RID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            RRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -71,8 +73,8 @@ architecture rtl of tcc_top_slave is
     signal w_LAST_SEND_DATA   : std_logic;
     signal w_READY_SEND_DATA  : std_logic;
 
-    signal w_DATA_SEND  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
-    signal w_STATUS_SEND: std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+    signal w_DATA_SEND  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+    signal w_STATUS_SEND: std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
 
     -- Reception.
     signal w_READY_RECEIVE_PACKET: std_logic;
@@ -81,10 +83,10 @@ architecture rtl of tcc_top_slave is
     signal w_VALID_RECEIVE_PACKET: std_logic;
     signal w_VALID_RECEIVE_DATA  : std_logic;
     signal w_LAST_RECEIVE_DATA   : std_logic;
-    signal w_DATA_RECEIVE        : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_DATA_RECEIVE        : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
     signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_ADDRESS_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_ADDRESS_RECEIVE: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
     signal w_CORRUPT_RECEIVE: std_logic;
 
@@ -156,8 +158,10 @@ begin
 
     u_BACKEND: entity work.backend_slave
         generic map(
-            SRC_X_p => SRC_X_p,
-            SRC_Y_p => SRC_Y_p
+            p_SRC_X => p_SRC_X,
+            p_SRC_Y => p_SRC_Y,
+            p_BUFFER_DEPTH => p_BUFFER_DEPTH,
+            p_BUFFER_MODE => p_BUFFER_MODE
         )
 
         port map(

@@ -13,8 +13,8 @@ entity frontend_master is
             -- Write request signals.
             AWVALID: in std_logic;
             AWREADY: out std_logic;
-            AWID   : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
-            AWADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+            AWID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+            AWADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
             AWLEN  : in std_logic_vector(7 downto 0);
             AWSIZE : in std_logic_vector(2 downto 0);
             AWBURST: in std_logic_vector(1 downto 0);
@@ -22,20 +22,20 @@ entity frontend_master is
             -- Write data signals.
             WVALID : in std_logic;
             WREADY : out std_logic;
-            WDATA  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+            WDATA  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
             WLAST  : in std_logic;
 
             -- Write response signals.
             BVALID : out std_logic;
             BREADY : in std_logic;
-            BID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            BRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+            BID    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            BRESP  : out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
 
             -- Read request signals.
             ARVALID: in std_logic;
             ARREADY: out std_logic;
-            ARID   : in std_logic_vector(c_ID_WIDTH - 1 downto 0);
-            ARADDR : in std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+            ARID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+            ARADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
             ARLEN  : in std_logic_vector(7 downto 0);
             ARSIZE : in std_logic_vector(2 downto 0);
             ARBURST: in std_logic_vector(1 downto 0);
@@ -43,10 +43,10 @@ entity frontend_master is
             -- Read response/data signals.
             RVALID : out std_logic;
             RREADY : in std_logic;
-            RDATA  : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+            RDATA  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
             RLAST  : out std_logic;
-            RID    : out std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
-            RRESP  : out std_logic_vector(c_RESP_WIDTH - 1 downto 0);
+            RID    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            RRESP  : out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
 
             -- Extra signals.
             CORRUPT_PACKET: out std_logic;
@@ -59,18 +59,18 @@ entity frontend_master is
         i_READY_SEND_DATA  : in std_logic;
         i_READY_SEND_PACKET: in std_logic;
 
-        o_ADDR     : out std_logic_vector(c_ADDR_WIDTH - 1 downto 0);
+        o_ADDR     : out std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
         o_BURST    : out std_logic_vector(1 downto 0);
         o_LENGTH   : out std_logic_vector(7 downto 0);
-        o_DATA_SEND: out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_DATA_SEND: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         o_OPC_SEND : out std_logic;
-        o_ID       : out std_logic_vector(c_ID_WIDTH - 1 downto 0);
+        o_ID       : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
 
         -- Backend signals (reception).
         i_VALID_RECEIVE_DATA: in std_logic;
         i_LAST_RECEIVE_DATA : in std_logic;
 
-        i_DATA_RECEIVE: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_DATA_RECEIVE: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
         i_CORRUPT_RECEIVE: in std_logic;
@@ -88,7 +88,7 @@ architecture rtl of frontend_master is
     -- Reception.
     signal w_OPC_RECEIVE: std_logic;
     signal w_STATUS_RECEIVE: std_logic_vector(2 downto 0);
-    signal w_ID_RECEIVE: std_logic_vector(c_ID_WIDTH - 1 downto 0);
+    signal w_ID_RECEIVE: std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -108,9 +108,9 @@ begin
     o_ADDR      <= AWADDR  when (w_OPC_SEND_OUT = '0') else ARADDR  when (w_OPC_SEND_OUT = '1');
     o_BURST     <= AWBURST when (w_OPC_SEND_OUT = '0') else ARBURST when (w_OPC_SEND_OUT = '1');
     o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN   when (w_OPC_SEND_OUT = '1');
-    o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
     o_OPC_SEND  <= w_OPC_SEND_OUT;
-    o_ID        <= AWID    when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
+    o_ID        <= AWID    when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';
@@ -135,14 +135,14 @@ begin
     o_READY_RECEIVE_DATA   <= RREADY;
 
     BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else '0';
-    BID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_ID_WIDTH - 1 downto 0 => '0');
-    BRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
+    BID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '0') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
+    BRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
 
     RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else '0';
-    RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_DATA_WIDTH - 1 downto 0 => '0');
+    RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
     RLAST  <= i_LAST_RECEIVE_DATA;
-    RID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_ID_WIDTH - 1 downto 0 => '0');
-    RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_RESP_WIDTH - 1 downto 0 => '0');
+    RID    <= w_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and w_OPC_RECEIVE = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
+    RRESP  <= w_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
 
     CORRUPT_PACKET <= i_CORRUPT_RECEIVE;
 end rtl;
