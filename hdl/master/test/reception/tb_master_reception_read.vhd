@@ -51,6 +51,9 @@ architecture arch_tb_master_reception_read of tb_master_reception_read is
         signal t_RLAST  : std_logic := '0';
         signal t_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
+        -- Extra signals.
+        signal t_CORRUPT_PACKET: std_logic;
+
     -- Signals of slave interface.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
@@ -155,6 +158,8 @@ begin
                 RDATA   => t_RDATA,
                 RLAST   => t_RLAST,
                 RRESP   => t_RRESP,
+
+                CORRUPT_PACKET => t_CORRUPT_PACKET,
 
             -- XINA signals.
             l_in_data_i  => t_l_in_data_i,

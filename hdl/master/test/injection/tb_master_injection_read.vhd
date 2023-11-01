@@ -53,6 +53,9 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
         signal t_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
+        -- Extra signals.
+        signal t_CORRUPT_PACKET: std_logic;
+
     -- Signals between backend and XINA router.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
@@ -91,11 +94,6 @@ architecture arch_tb_master_injection_read of tb_master_injection_read is
 
 begin
     u_TOP_MASTER: entity work.tcc_top_master
-        generic map(
-            p_SRC_X => (others => '0'),
-            p_SRC_Y => (others => '0')
-        )
-
         port map(
             -- AMBA AXI 5 signals.
             ACLK    => t_ACLK,
@@ -138,6 +136,8 @@ begin
                 RLAST   => t_RLAST,
                 RID     => t_RID,
                 RRESP   => t_RRESP,
+
+                CORRUPT_PACKET => t_CORRUPT_PACKET,
 
             -- XINA signals.
             l_in_data_i  => t_l_in_data_i,
@@ -216,8 +216,13 @@ begin
         t_ARLEN <= "00000001";
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
-
         t_ARVALID <= '0';
+
+        t_ARADDR <= "0000000000000000" & "0000000000000000" & "0000000000000000" & "0000000000000000";
+        t_ARID <= "00000";
+        t_ARLEN <= "00000000";
+
+        wait;
     end process;
 
 end arch_tb_master_injection_read;

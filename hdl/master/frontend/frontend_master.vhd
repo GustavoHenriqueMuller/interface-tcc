@@ -100,23 +100,25 @@ begin
                     w_OPC_SEND <= '0';
 
                     o_ADDR      <= AWADDR;
-                    o_BURST     <= AWBURST;
-                    o_LENGTH    <= AWLEN;
-                    o_DATA_SEND <= WDATA;
                     o_ID        <= AWID;
+                    o_LENGTH    <= AWLEN;
+                    o_BURST     <= AWBURST;
+                    o_DATA_SEND <= WDATA;
                 elsif (ARVALID = '1') then
                     -- Registering read signals.
                     w_OPC_SEND <= '1';
 
                     o_ADDR      <= ARADDR;
-                    o_BURST     <= ARBURST;
-                    o_LENGTH    <= ARLEN;
-                    o_DATA_SEND <= (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
                     o_ID        <= ARID;
+                    o_LENGTH    <= ARLEN;
+                    o_BURST     <= ARBURST;
+                    o_DATA_SEND <= (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
                 end if;
             end if;
         end if;
     end process registering;
+
+    o_OPC_SEND <= w_OPC_SEND;
 
     -- Control information.
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1')    else '0';

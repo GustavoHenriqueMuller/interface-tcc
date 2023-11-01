@@ -57,6 +57,9 @@ entity tcc_top_master is
             RID    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
+            -- Extra signals.
+            CORRUPT_PACKET: out std_logic;
+
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_in_val_i  : out std_logic;
@@ -142,6 +145,9 @@ begin
                 RID     => RID,
                 RRESP   => RRESP,
 
+                -- Extra signals.
+                CORRUPT_PACKET => CORRUPT_PACKET,
+
             -- Backend signals.
             i_READY_SEND_PACKET => w_READY_SEND_PACKET,
             i_READY_SEND_DATA   => w_READY_SEND_DATA,
@@ -221,5 +227,4 @@ begin
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
-
 end rtl;

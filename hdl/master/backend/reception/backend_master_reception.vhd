@@ -68,10 +68,10 @@ begin
         end if;
     end process registering;
 
-    o_ID_RECEIVE <= w_H_INTERFACE(19 downto 15);
+    o_ID_RECEIVE     <= w_H_INTERFACE(19 downto 15);
     o_STATUS_RECEIVE <= w_H_INTERFACE(4 downto 2);
-    o_OPC_RECEIVE <= w_H_INTERFACE(1);
-    o_DATA_RECEIVE <= w_FLIT(31 downto 0);
+    o_OPC_RECEIVE    <= w_H_INTERFACE(1);
+    o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
         port map(
