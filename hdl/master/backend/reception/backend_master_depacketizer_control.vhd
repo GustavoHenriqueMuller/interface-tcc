@@ -20,8 +20,8 @@ entity backend_master_depacketizer_control is
 
         -- Buffer.
         i_FLIT          : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_READ_BUFFER   : out std_logic;
         i_READ_OK_BUFFER: in std_logic;
+        o_READ_BUFFER   : out std_logic;
 
         -- Headers.
         o_WRITE_H_INTERFACE_REG: out std_logic;
@@ -110,17 +110,18 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-	o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
-                              (r_STATE = S_H_SRC) or
-                              (r_STATE = S_H_INTERFACE) or
-                              (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READY_RECEIVE_DATA = '1') or
-                              (r_STATE = S_TRAILER)
-                              else '0';
 
     o_VALID_RECEIVE_DATA <= '1' when (r_STATE = S_WRITE_RESPONSE and i_READ_OK_BUFFER = '1') or
                                      (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READ_OK_BUFFER = '1')
                                      else '0';
     o_LAST_RECEIVE_DATA  <= '1' when (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READ_OK_BUFFER = '1' and r_PAYLOAD_COUNTER = to_unsigned(1, 8)) else '0';
+
+    o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
+                              (r_STATE = S_H_SRC) or
+                              (r_STATE = S_H_INTERFACE) or
+                              (r_STATE = S_READ_RESPONSE_PAYLOAD and i_READY_RECEIVE_DATA = '1') or
+                              (r_STATE = S_TRAILER)
+                              else '0';
 
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
 

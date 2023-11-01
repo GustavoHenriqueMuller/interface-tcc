@@ -23,8 +23,10 @@ entity backend_master_reception is
         o_VALID_RECEIVE_DATA: out std_logic;
         o_LAST_RECEIVE_DATA : out std_logic;
 
-        o_DATA_RECEIVE       : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_ID_RECEIVE    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+        o_STATUS_RECEIVE: out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
+        o_OPC_RECEIVE   : out std_logic;
+        o_DATA_RECEIVE  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         o_CORRUPT_RECEIVE: out std_logic;
 
@@ -66,8 +68,10 @@ begin
         end if;
     end process registering;
 
+    o_ID_RECEIVE <= w_H_INTERFACE(19 downto 15);
+    o_STATUS_RECEIVE <= w_H_INTERFACE(4 downto 2);
+    o_OPC_RECEIVE <= w_H_INTERFACE(1);
     o_DATA_RECEIVE <= w_FLIT(31 downto 0);
-    o_H_INTERFACE_RECEIVE <= w_H_INTERFACE;
 
     u_DEPACKETIZER_CONTROL: entity work.backend_master_depacketizer_control
         port map(
@@ -79,13 +83,13 @@ begin
             o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
-            i_FLIT => w_FLIT,
-            o_READ_BUFFER => w_READ_BUFFER,
+            i_FLIT           => w_FLIT,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
+            o_READ_BUFFER    => w_READ_BUFFER,
 
             o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
 
-            o_ADD => w_ADD,
+            o_ADD     => w_ADD,
             o_COMPARE => w_COMPARE,
             o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
         );

@@ -12,7 +12,7 @@ entity backend_master_routing_table is
         ARESETn: in std_logic;
 
         -- Backend signals.
-    	i_ADDR: in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
+    	i_ADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
 
 		o_OPC_ADDR: out std_logic_vector((c_AXI_ADDR_WIDTH / 2) - 1 downto 0);
         o_DEST_X  : out std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);

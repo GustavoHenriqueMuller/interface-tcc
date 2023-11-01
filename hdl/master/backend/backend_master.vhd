@@ -26,11 +26,11 @@ entity backend_master is
 		o_READY_SEND_DATA  : out std_logic;
 
 		i_ADDR     : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
-		i_BURST    : in std_logic_vector(1 downto 0);
+		i_ID       : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
         i_LENGTH   : in std_logic_vector(7 downto 0);
-        i_DATA_SEND: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+        i_BURST    : in std_logic_vector(1 downto 0);
         i_OPC_SEND : in std_logic;
-        i_ID       : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+        i_DATA_SEND: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         -- Signals (reception).
         i_READY_RECEIVE_PACKET: in std_logic;
@@ -39,8 +39,10 @@ entity backend_master is
         o_VALID_RECEIVE_DATA: out std_logic;
         o_LAST_RECEIVE_DATA : out std_logic;
 
-        o_DATA_RECEIVE: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_ID_RECEIVE    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+        o_STATUS_RECEIVE: out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
+        o_OPC_RECEIVE   : out std_logic;
+        o_DATA_RECEIVE  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         o_CORRUPT_RECEIVE: out std_logic;
 
@@ -75,11 +77,11 @@ begin
             o_READY_SEND_DATA   => o_READY_SEND_DATA,
 
             i_ADDR      => i_ADDR,
-            i_BURST     => i_BURST,
-            i_LENGTH    => i_LENGTH,
-            i_DATA_SEND => i_DATA_SEND,
-            i_OPC_SEND  => i_OPC_SEND,
             i_ID        => i_ID,
+            i_LENGTH    => i_LENGTH,
+            i_BURST     => i_BURST,
+            i_OPC_SEND  => i_OPC_SEND,
+            i_DATA_SEND => i_DATA_SEND,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
@@ -101,8 +103,11 @@ begin
 
             o_VALID_RECEIVE_DATA  => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA   => o_LAST_RECEIVE_DATA,
-            o_DATA_RECEIVE        => o_DATA_RECEIVE,
-            o_H_INTERFACE_RECEIVE => o_H_INTERFACE_RECEIVE,
+
+            o_ID_RECEIVE     => o_ID_RECEIVE,
+            o_STATUS_RECEIVE => o_STATUS_RECEIVE,
+            o_OPC_RECEIVE    => o_OPC_RECEIVE,
+            o_DATA_RECEIVE   => o_DATA_RECEIVE,
 
             o_CORRUPT_RECEIVE => o_CORRUPT_RECEIVE,
 

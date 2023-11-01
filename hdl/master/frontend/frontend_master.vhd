@@ -85,34 +85,43 @@ end frontend_master;
 architecture rtl of frontend_master is
     -- Injection.
     signal w_OPC_SEND: std_logic;
-    signal w_OPC_SEND_OUT: std_logic;
 
 begin
     ---------------------------------------------------------------------------------------------
     -- Injection.
 
-    -- Registering.
-    w_OPC_SEND <= '0' when (AWVALID = '1') else '1' when (ARVALID = '1');
-
+    -- Registering transaction information.
     registering: process(all)
     begin
         if (rising_edge(ACLK)) then
-            if (i_READY_SEND_PACKET) then w_OPC_SEND_OUT <= w_OPC_SEND; end if;
+            if (i_READY_SEND_PACKET) then
+                if (AWVALID = '1') then
+                    -- Registering write signals.
+                    w_OPC_SEND <= '0';
+
+                    o_ADDR      <= AWADDR;
+                    o_BURST     <= AWBURST;
+                    o_LENGTH    <= AWLEN;
+                    o_DATA_SEND <= WDATA;
+                    o_ID        <= AWID;
+                elsif (ARVALID = '1') then
+                    -- Registering read signals.
+                    w_OPC_SEND <= '1';
+
+                    o_ADDR      <= ARADDR;
+                    o_BURST     <= ARBURST;
+                    o_LENGTH    <= ARLEN;
+                    o_DATA_SEND <= (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
+                    o_ID        <= ARID;
+                end if;
+            end if;
         end if;
     end process registering;
 
-    -- Transaction information.
-    o_ADDR      <= AWADDR  when (w_OPC_SEND_OUT = '0') else ARADDR  when (w_OPC_SEND_OUT = '1');
-    o_BURST     <= AWBURST when (w_OPC_SEND_OUT = '0') else ARBURST when (w_OPC_SEND_OUT = '1');
-    o_LENGTH    <= AWLEN   when (w_OPC_SEND_OUT = '0') else ARLEN   when (w_OPC_SEND_OUT = '1');
-    o_DATA_SEND <= WDATA   when (w_OPC_SEND_OUT = '0') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
-    o_OPC_SEND  <= w_OPC_SEND_OUT;
-    o_ID        <= AWID    when (w_OPC_SEND_OUT = '0') else ARID when (w_OPC_SEND_OUT = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
-
     -- Control information.
-    o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1') else '0';
-    o_VALID_SEND_DATA   <= '1' when (w_OPC_SEND_OUT = '0' and WVALID = '1') or (w_OPC_SEND_OUT = '1') else '0';
-    o_LAST_SEND_DATA    <= '1' when (w_OPC_SEND_OUT = '0' and WLAST = '1') or (w_OPC_SEND_OUT = '1') else '0';
+    o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1')    else '0';
+    o_VALID_SEND_DATA   <= '1' when (w_OPC_SEND = '0' and WVALID = '1') else '0';
+    o_LAST_SEND_DATA    <= '1' when (w_OPC_SEND = '0' and WLAST = '1')  else '0';
 
     -- Ready information to front-end.
     AWREADY <= i_READY_SEND_PACKET;
@@ -122,20 +131,22 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Reception.
 
-    o_READY_RECEIVE_PACKET <= '1' when (BREADY = '1' and i_OPC_RECEIVE = '0') or
-                                       (RREADY = '1' and i_OPC_RECEIVE = '1') else '0';
+    o_READY_RECEIVE_PACKET <= '1' when (i_OPC_RECEIVE = '0' and BREADY = '1') or
+                                       (i_OPC_RECEIVE = '1' and RREADY = '1') else '0';
 
     o_READY_RECEIVE_DATA   <= RREADY;
 
-    BVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '0') else '0';
-    BID    <= i_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '0') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
-    BRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
+    -- Write reception.
+    BVALID <= '1' when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_DATA = '1') else '0';
+    BID    <= i_ID_RECEIVE when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
+    BRESP  <= i_STATUS_RECEIVE when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
 
-    RVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '1') else '0';
+    -- Read reception.
+    RVALID <= '1' when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else '0';
     RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
     RLAST  <= i_LAST_RECEIVE_DATA;
-    RID    <= i_ID_RECEIVE when (i_VALID_RECEIVE_DATA = '1' and i_OPC_RECEIVE = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
-    RRESP  <= i_STATUS_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
+    RID    <= i_ID_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
+    RRESP  <= i_STATUS_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');
 
     CORRUPT_PACKET <= i_CORRUPT_RECEIVE;
 end rtl;

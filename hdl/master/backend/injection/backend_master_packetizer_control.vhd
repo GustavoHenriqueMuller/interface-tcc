@@ -88,10 +88,9 @@ begin
     ---------------------------------------------------------------------------------------------
     -- Output values.
 
+    o_READY_SEND_PACKET <= '1' when (r_STATE = S_IDLE and i_WRITE_OK_BUFFER = '1') else '0';
 
     o_READY_SEND_DATA <= '1' when (r_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') else '0';
-
-    o_READY_SEND_PACKET <= '1' when (r_STATE = S_IDLE and i_WRITE_OK_BUFFER = '1') else '0';
 
     o_FLIT_SELECTOR <= "000" when (r_STATE = S_H_DEST) else
                        "001" when (r_STATE = S_H_SRC) else
