@@ -15,6 +15,8 @@ entity integrity_control_receive is
         -- Inputs.
         i_ADD: in std_logic;
         i_VALUE_ADD: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+
+        i_COMPARE: in std_logic;
         i_VALUE_COMPARE: in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
         -- Outputs.
@@ -25,7 +27,6 @@ end integrity_control_receive;
 
 architecture rtl of integrity_control_receive is
     signal w_CHECKSUM: unsigned(c_DATA_WIDTH - 1 downto 0) := to_unsigned(0, c_DATA_WIDTH);
-    signal w_CORRUPT: boolean;
 
 begin
     ---------------------------------------------------------------------------------------------
@@ -41,9 +42,6 @@ begin
         end if;
     end process;
 
-    w_CORRUPT <= w_CHECKSUM /= unsigned(i_VALUE_COMPARE);
-
     o_CHECKSUM <= std_logic_vector(w_CHECKSUM);
-    o_CORRUPT  <= '1' when w_CORRUPT = true else '0';
-
+    o_CORRUPT  <= '1' when (w_CHECKSUM /= unsigned(i_VALUE_COMPARE) and i_COMPARE = '1') else '0';
 end rtl;

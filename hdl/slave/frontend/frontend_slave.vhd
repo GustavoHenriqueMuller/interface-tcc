@@ -48,6 +48,9 @@ entity frontend_slave is
             RID    : in std_logic_vector(c_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
+            -- Extra signals.
+            CORRUPT_PACKET: out std_logic;
+
         -- Backend signals (injection).
         o_VALID_SEND_DATA: out std_logic;
         o_LAST_SEND_DATA : out std_logic;
@@ -64,6 +67,8 @@ entity frontend_slave is
         i_DATA_RECEIVE       : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         i_ADDRESS_RECEIVE    : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+
+        i_CORRUPT_RECEIVE    : in std_logic;
 
         o_READY_RECEIVE_PACKET: out std_logic;
         o_READY_RECEIVE_DATA  : out std_logic
@@ -122,4 +127,6 @@ begin
     ARLEN   <= w_LEN_RECEIVE when (i_VALID_RECEIVE_PACKET = '1' and w_OPC_RECEIVE = '1') else (7 downto 0 => '0');
     ARBURST <= w_BURST_RECEIVE when (i_VALID_RECEIVE_PACKET = '1' and w_OPC_RECEIVE = '1') else (1 downto 0 => '0');
     ARSIZE  <= "010";
+
+    CORRUPT_PACKET <= i_CORRUPT_RECEIVE;
 end rtl;

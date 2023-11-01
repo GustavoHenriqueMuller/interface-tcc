@@ -21,8 +21,7 @@ entity backend_master_reception is
         o_DATA_RECEIVE       : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
-        o_CHECKSUM: out std_logic_vector(c_DATA_WIDTH - 1 downto 0); -- @TODO
-        o_CORRUPT: out std_logic;
+        o_CORRUPT_RECEIVE: out std_logic;
 
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -40,6 +39,12 @@ architecture rtl of backend_master_reception is
     -- Registers.
     signal w_WRITE_H_INTERFACE_REG: std_logic;
     signal w_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
+    -- Checksum.
+    signal w_ADD: std_logic;
+    signal w_COMPARE : std_logic;
+    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -73,20 +78,25 @@ begin
             o_READ_BUFFER => w_READ_BUFFER,
             i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
-            o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG
+            o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
+
+            o_ADD => w_ADD,
+            o_COMPARE => w_COMPARE,
+            o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
         );
 
-    u_INTEGRITY_CONTROL_RECEIVE: entity work.integrity_control_receive -- @TODO
+    u_INTEGRITY_CONTROL_RECEIVE: entity work.integrity_control_receive
         port map(
             ACLK    => ACLK,
-            ARESETn => ARESETn,
+            ARESETn => w_INTEGRITY_RESETn,
 
-            i_ADD   => w_READ_OK_BUFFER,
-            i_VALUE_ADD => l_out_data_o(31 downto 0),
-            i_VALUE_COMPARE => l_out_data_o(31 downto 0),
+            i_ADD       => w_ADD,
+            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+            i_COMPARE   => w_COMPARE,
+            i_VALUE_COMPARE => w_FLIT(c_DATA_WIDTH - 1 downto 0),
 
-            o_CHECKSUM => o_CHECKSUM,
-            o_CORRUPT => o_CORRUPT
+            o_CHECKSUM => w_CHECKSUM,
+            o_CORRUPT  => o_CORRUPT_RECEIVE
         );
 
     u_BUFFER_FIFO: entity work.buffering

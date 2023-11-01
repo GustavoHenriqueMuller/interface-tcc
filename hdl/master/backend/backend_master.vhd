@@ -40,6 +40,8 @@ entity backend_master is
         o_DATA_RECEIVE: out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
+        o_CORRUPT_RECEIVE: out std_logic;
+
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_in_val_i  : out std_logic;
@@ -88,10 +90,12 @@ begin
             i_READY_RECEIVE_PACKET => i_READY_RECEIVE_PACKET,
             i_READY_RECEIVE_DATA   => i_READY_RECEIVE_DATA,
 
-            o_VALID_RECEIVE_DATA => o_VALID_RECEIVE_DATA,
-            o_LAST_RECEIVE_DATA  => o_LAST_RECEIVE_DATA,
-            o_DATA_RECEIVE       => o_DATA_RECEIVE,
+            o_VALID_RECEIVE_DATA  => o_VALID_RECEIVE_DATA,
+            o_LAST_RECEIVE_DATA   => o_LAST_RECEIVE_DATA,
+            o_DATA_RECEIVE        => o_DATA_RECEIVE,
             o_H_INTERFACE_RECEIVE => o_H_INTERFACE_RECEIVE,
+
+            o_CORRUPT_RECEIVE => o_CORRUPT_RECEIVE,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,

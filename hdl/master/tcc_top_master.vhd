@@ -88,8 +88,10 @@ architecture rtl of tcc_top_master is
     signal w_VALID_RECEIVE_DATA: std_logic;
     signal w_LAST_RECEIVE_DATA : std_logic;
 
-    signal w_DATA_RECEIVE  : std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_DATA_RECEIVE: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
     signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
+    signal w_CORRUPT_RECEIVE: std_logic;
 
 begin
     u_FRONTEND: entity work.frontend_master
@@ -158,7 +160,8 @@ begin
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE
+            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
+            i_CORRUPT_RECEIVE      => w_CORRUPT_RECEIVE
         );
 
     u_BACKEND: entity work.backend_master
@@ -193,7 +196,9 @@ begin
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
+            o_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
+
+            o_CORRUPT_RECEIVE => w_CORRUPT_RECEIVE,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

@@ -18,9 +18,11 @@ entity backend_slave_packetizer_control is
         o_READY_SEND_DATA: out std_logic;
         o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
 
+        -- Buffer.
         i_WRITE_OK_BUFFER: in std_logic;
         o_WRITE_BUFFER   : out std_logic;
 
+        -- Integrity control.
         o_ADD: out std_logic;
         o_INTEGRITY_RESETn: out std_logic
     );

@@ -24,6 +24,8 @@ entity backend_slave_reception is
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_ADDRESS_RECEIVE: out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
 
+        o_CORRUPT_RECEIVE: out std_logic;
+
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_out_val_o : in std_logic;
@@ -45,6 +47,12 @@ architecture rtl of backend_slave_reception is
     signal w_H_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_H_ADDRESS : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+
+    -- Checksum.
+    signal w_ADD: std_logic;
+    signal w_COMPARE : std_logic;
+    signal w_CHECKSUM: std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+    signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
     signal w_WRITE_BUFFER   : std_logic;
@@ -89,6 +97,21 @@ begin
             o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
             o_WRITE_H_ADDRESS_REG   => w_WRITE_H_ADDRESS_REG
         );
+
+    u_INTEGRITY_CONTROL_RECEIVE: entity work.integrity_control_receive
+        port map(
+            ACLK    => ACLK,
+            ARESETn => w_INTEGRITY_RESETn,
+
+            i_ADD       => w_ADD,
+            i_VALUE_ADD => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+            i_COMPARE   => w_COMPARE,
+            i_VALUE_COMPARE => w_FLIT(c_DATA_WIDTH - 1 downto 0),
+
+            o_CHECKSUM => w_CHECKSUM,
+            o_CORRUPT  => o_CORRUPT_RECEIVE
+        );
+
 
     u_BUFFER_FIFO: entity work.buffering
         generic map(

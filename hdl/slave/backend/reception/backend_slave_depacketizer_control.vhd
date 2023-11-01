@@ -29,7 +29,12 @@ entity backend_slave_depacketizer_control is
 
         o_WRITE_H_SRC_REG: out std_logic;
         o_WRITE_H_INTERFACE_REG: out std_logic;
-        o_WRITE_H_ADDRESS_REG  : out std_logic
+        o_WRITE_H_ADDRESS_REG  : out std_logic;
+
+        -- Integrity control.
+        o_ADD    : out std_logic;
+        o_COMPARE: out std_logic;
+        o_INTEGRITY_RESETn: out std_logic
     );
 end backend_slave_depacketizer_control;
 
@@ -135,4 +140,14 @@ begin
     o_WRITE_H_SRC_REG       <= '1' when (r_STATE = S_H_SRC) else '0';
     o_WRITE_H_INTERFACE_REG <= '1' when (r_STATE = S_H_INTERFACE) else '0';
     o_WRITE_H_ADDRESS_REG   <= '1' when (r_STATE = S_H_ADDRESS)  else '0';
+
+    o_ADD <= '1' when ((r_STATE = S_H_DEST) or
+                       (r_STATE = S_H_SRC) or
+                       (r_STATE = S_H_INTERFACE) or
+                       (r_STATE = S_H_ADDRESS) or
+                       (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READY_RECEIVE_DATA = '1')) and i_READ_OK_BUFFER = '1' else '0';
+
+    o_COMPARE <= '1' when (r_STATE = S_TRAILER and i_READ_OK_BUFFER = '1') else '0';
+
+    o_INTEGRITY_RESETn <= '0' when (r_STATE = S_H_DEST and r_NEXT_STATE = S_H_DEST) else '1';
 end rtl;

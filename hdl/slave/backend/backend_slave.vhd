@@ -21,7 +21,7 @@ entity backend_slave is
         i_LAST_SEND_DATA   : in std_logic;
 		o_READY_SEND_DATA  : out std_logic;
 
-        i_DATA_SEND : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        i_DATA_SEND  : in std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         i_STATUS_SEND: in std_logic_vector(c_RESP_WIDTH - 1 downto 0);
 
         -- Signals (reception).
@@ -32,9 +32,10 @@ entity backend_slave is
         o_VALID_RECEIVE_DATA  : out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
-        o_DATA_RECEIVE      : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_DATA_RECEIVE       : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_ADDRESS_RECEIVE   : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_ADDRESS_RECEIVE    : out std_logic_vector(c_DATA_WIDTH - 1 downto 0);
+        o_CORRUPT_RECEIVE    : out std_logic;
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -88,9 +89,10 @@ begin
             o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
             o_DATA_RECEIVE         => o_DATA_RECEIVE,
-            o_H_SRC_RECEIVE   => w_H_SRC_RECEIVE,
-            o_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
+            o_H_SRC_RECEIVE        => w_H_SRC_RECEIVE,
+            o_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
             o_ADDRESS_RECEIVE      => o_ADDRESS_RECEIVE,
+            o_CORRUPT_RECEIVE      => o_CORRUPT_RECEIVE,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,
