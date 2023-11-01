@@ -90,8 +90,10 @@ architecture rtl of tcc_top_master is
     signal w_VALID_RECEIVE_DATA: std_logic;
     signal w_LAST_RECEIVE_DATA : std_logic;
 
-    signal w_DATA_RECEIVE: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-    signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_ID_RECEIVE    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+    signal w_STATUS_RECEIVE: std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
+    signal w_OPC_RECEIVE   : std_logic;
+    signal w_DATA_RECEIVE  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
     signal w_CORRUPT_RECEIVE: std_logic;
 
@@ -141,12 +143,12 @@ begin
                 RRESP   => RRESP,
 
             -- Backend signals.
+            i_READY_SEND_PACKET => w_READY_SEND_PACKET,
+            i_READY_SEND_DATA   => w_READY_SEND_DATA,
+
             o_START_SEND_PACKET => w_START_SEND_PACKET,
             o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             o_LAST_SEND_DATA    => w_LAST_SEND_DATA,
-
-            i_READY_SEND_PACKET => w_READY_SEND_PACKET,
-            i_READY_SEND_DATA   => w_READY_SEND_DATA,
 
             o_ADDR      => w_ADDR,
             o_BURST     => w_BURST,
@@ -156,14 +158,18 @@ begin
             o_ID        => w_ID,
 
             -- Backend signals (reception).
-            o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
-            o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA,
-
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
-            i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
-            i_CORRUPT_RECEIVE      => w_CORRUPT_RECEIVE
+
+            i_ID_RECEIVE     => w_ID_RECEIVE,
+            i_STATUS_RECEIVE => w_STATUS_RECEIVE,
+            i_OPC_RECEIVE    => w_OPC_RECEIVE,
+            i_DATA_RECEIVE   => w_DATA_RECEIVE,
+
+            i_CORRUPT_RECEIVE      => w_CORRUPT_RECEIVE,
+
+            o_READY_RECEIVE_PACKET => w_READY_RECEIVE_PACKET,
+            o_READY_RECEIVE_DATA   => w_READY_RECEIVE_DATA
         );
 
     u_BACKEND: entity work.backend_master
@@ -199,8 +205,11 @@ begin
 
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
-            o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
+
+            o_ID_RECEIVE     => w_ID_RECEIVE,
+            o_STATUS_RECEIVE => w_STATUS_RECEIVE,
+            o_OPC_RECEIVE    => w_OPC_RECEIVE,
+            o_DATA_RECEIVE   => w_DATA_RECEIVE,
 
             o_CORRUPT_RECEIVE => w_CORRUPT_RECEIVE,
 
@@ -212,4 +221,5 @@ begin
             l_out_val_o  => l_out_val_o,
             l_out_ack_i  => l_out_ack_i
         );
+
 end rtl;
