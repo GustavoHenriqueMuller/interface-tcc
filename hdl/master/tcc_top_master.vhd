@@ -16,44 +16,44 @@ entity tcc_top_master is
 
     port(
         -- AMBA AXI 5 signals.
-        ACLK: in std_logic    := '0';
+        ACLK: in std_logic;
         ARESETn: in std_logic := '1';
 
             -- Write request signals.
-            AWVALID: in std_logic  := '0';
-            AWREADY: out std_logic := '0';
-            AWID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
-            AWADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
-            AWLEN  : in std_logic_vector(7 downto 0) := "00000000";
+            AWVALID: in std_logic;
+            AWREADY: out std_logic;
+            AWID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+            AWADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
+            AWLEN  : in std_logic_vector(7 downto 0) := (others => '0');
             AWSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             AWBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Write data signals.
-            WVALID : in std_logic  := '0';
-            WREADY : out std_logic := '0';
-            WDATA  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
-            WLAST  : in std_logic  := '0';
+            WVALID : in std_logic;
+            WREADY : out std_logic;
+            WDATA  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+            WLAST  : in std_logic;
 
             -- Write response signals.
-            BVALID : out std_logic := '0';
-            BREADY : in std_logic  := '0';
+            BVALID : out std_logic;
+            BREADY : in std_logic;
             BID    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             BRESP  : out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
-            ARVALID: in std_logic  := '0';
-            ARREADY: out std_logic := '0';
+            ARVALID: in std_logic;
+            ARREADY: out std_logic;
             ARID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             ARADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
-            ARLEN  : in std_logic_vector(7 downto 0) := "00000000";
+            ARLEN  : in std_logic_vector(7 downto 0) := (others => '0');
             ARSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             ARBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Read response/data signals.
-            RVALID : out std_logic := '0';
-            RREADY : in std_logic  := '0';
-            RDATA  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
-            RLAST  : out std_logic := '0';
+            RVALID : out std_logic;
+            RREADY : in std_logic;
+            RDATA  : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+            RLAST  : out std_logic;
             RID    : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : out std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
