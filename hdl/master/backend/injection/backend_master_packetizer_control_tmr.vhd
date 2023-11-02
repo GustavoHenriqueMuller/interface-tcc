@@ -21,8 +21,13 @@ entity backend_master_packetizer_control_tmr is
         o_READY_SEND_DATA  : out std_logic;
         o_FLIT_SELECTOR    : out std_logic_vector(2 downto 0);
 
+        -- Buffer.
         i_WRITE_OK_BUFFER: in std_logic;
-        o_WRITE_BUFFER   : out std_logic
+        o_WRITE_BUFFER   : out std_logic;
+
+        -- Integrity control.
+        o_ADD: out std_logic;
+        o_INTEGRITY_RESETn: out std_logic
     );
 end backend_master_packetizer_control_tmr;
 
@@ -32,8 +37,10 @@ architecture rtl of backend_master_packetizer_control_tmr is
 
     signal w_READY_SEND_PACKET: t_BIT_VECTOR;
     signal w_READY_SEND_DATA: t_BIT_VECTOR;
-    signal w_WRITE_BUFFER: t_BIT_VECTOR;
     signal w_FLIT_SELECTOR: t_BIT_VECTOR_FLIT_SELECTOR;
+    signal w_WRITE_BUFFER: t_BIT_VECTOR;
+    signal w_ADD: t_BIT_VECTOR;
+    signal w_INTEGRITY_RESETn: t_BIT_VECTOR;
 
 begin
     TMR:
@@ -68,6 +75,14 @@ begin
     o_WRITE_BUFFER      <= (w_WRITE_BUFFER(0) and w_WRITE_BUFFER(1)) or
                            (w_WRITE_BUFFER(0) and w_WRITE_BUFFER(2)) or
                            (w_WRITE_BUFFER(1) and w_WRITE_BUFFER(2));
+
+    o_ADD               <= (w_ADD(0) and w_ADD(1)) or
+                           (w_ADD(0) and w_ADD(2)) or
+                           (w_ADD(1) and w_ADD(2));
+
+    o_INTEGRITY_RESETn  <= (w_INTEGRITY_RESETn(0) and w_INTEGRITY_RESETn(1)) or
+                           (w_INTEGRITY_RESETn(0) and w_INTEGRITY_RESETn(2)) or
+                           (w_INTEGRITY_RESETn(1) and w_INTEGRITY_RESETn(2));
 
     TMR_FLIT_SELECTOR:
     for i in 2 downto 0 generate

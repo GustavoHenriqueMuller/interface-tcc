@@ -24,7 +24,12 @@ entity backend_master_depacketizer_control_tmr is
         i_READ_OK_BUFFER: in std_logic;
 
         -- Headers.
-        o_WRITE_H_INTERFACE_REG: out std_logic
+        o_WRITE_H_INTERFACE_REG: out std_logic;
+
+        -- Integrity control.
+        o_ADD    : out std_logic;
+        o_COMPARE: out std_logic;
+        o_INTEGRITY_RESETn: out std_logic
     );
 end backend_master_depacketizer_control_tmr;
 
@@ -35,6 +40,10 @@ architecture rtl of backend_master_depacketizer_control_tmr is
     signal w_LAST_RECEIVE_DATA: t_BIT_VECTOR;
     signal w_READ_BUFFER: t_BIT_VECTOR;
     signal w_WRITE_H_INTERFACE_REG: t_BIT_VECTOR;
+
+    signal w_ADD: t_BIT_VECTOR;
+    signal w_COMPARE: t_BIT_VECTOR;
+    signal w_INTEGRITY_RESETn: t_BIT_VECTOR;
 
 begin
     TMR:
@@ -72,4 +81,16 @@ begin
     o_WRITE_H_INTERFACE_REG <= (w_WRITE_H_INTERFACE_REG(0) and w_WRITE_H_INTERFACE_REG(1)) or
                                (w_WRITE_H_INTERFACE_REG(0) and w_WRITE_H_INTERFACE_REG(2)) or
                                (w_WRITE_H_INTERFACE_REG(1) and w_WRITE_H_INTERFACE_REG(2));
+
+    o_ADD              <= (w_ADD(0) and w_ADD(1)) or
+                          (w_ADD(0) and w_ADD(2)) or
+                          (w_ADD(1) and w_ADD(2));
+
+    o_COMPARE          <= (w_COMPARE(0) and w_COMPARE(1)) or
+                          (w_COMPARE(0) and w_COMPARE(2)) or
+                          (w_COMPARE(1) and w_COMPARE(2));
+
+    o_INTEGRITY_RESETn <= (w_INTEGRITY_RESETn(0) and w_INTEGRITY_RESETn(1)) or
+                          (w_INTEGRITY_RESETn(0) and w_INTEGRITY_RESETn(2)) or
+                          (w_INTEGRITY_RESETn(1) and w_INTEGRITY_RESETn(2));
 end rtl;

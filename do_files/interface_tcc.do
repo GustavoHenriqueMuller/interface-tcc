@@ -22,6 +22,7 @@ vcom -2008 ../hdl/master/frontend/frontend_master.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_routing_table.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_control.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_control_tmr.vhd
+
 vcom -2008 ../hdl/master/backend/injection/backend_master_packetizer_datapath.vhd
 vcom -2008 ../hdl/master/backend/injection/backend_master_injection.vhd
 
@@ -74,4 +75,3 @@ vcom -2008 ../hdl/slave/test/read_request_injector.vhd
 vcom -2008 ../hdl/slave/test/tb_slave_read.vhd
 vcom -2008 ../hdl/slave/test/write_request_injector.vhd
 vcom -2008 ../hdl/slave/test/tb_slave_write.vhd
-

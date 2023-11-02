@@ -9,8 +9,11 @@ entity backend_master_injection is
     generic(
         p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
+
         p_BUFFER_DEPTH: positive;
-        p_BUFFER_MODE : natural
+        p_BUFFER_MODE : natural;
+        p_USE_TMR     : boolean;
+        p_USE_HAMMING : boolean
     );
 
     port(
@@ -76,26 +79,50 @@ begin
             o_DEST_Y   => w_DEST_Y
         );
 
-    u_PACKETIZER_CONTROL: entity work.backend_master_packetizer_control
-        port map(
-            ACLK    => ACLK,
-            ARESETn => ARESETn,
+    u_PACKETIZER_CONTROL:
+    if (p_USE_TMR = true) generate
+        u_PACKETIZER_CONTROL_TMR: entity work.backend_master_packetizer_control_tmr
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
 
-            i_OPC_SEND => i_OPC_SEND,
-            i_START_SEND_PACKET  => i_START_SEND_PACKET,
-            i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
-            i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
+                i_OPC_SEND => i_OPC_SEND,
+                i_START_SEND_PACKET  => i_START_SEND_PACKET,
+                i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
+                i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
 
-            o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
-            o_READY_SEND_DATA    => o_READY_SEND_DATA,
-            o_FLIT_SELECTOR      => w_FLIT_SELECTOR,
+                o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
+                o_READY_SEND_DATA    => o_READY_SEND_DATA,
+                o_FLIT_SELECTOR      => w_FLIT_SELECTOR,
 
-            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER    => w_WRITE_BUFFER,
+                i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+                o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
-            o_ADD => w_ADD,
-            o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
-        );
+                o_ADD => w_ADD,
+                o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
+            );
+    else generate
+        u_PACKETIZER_CONTROL_NORMAL: entity work.backend_master_packetizer_control
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
+
+                i_OPC_SEND => i_OPC_SEND,
+                i_START_SEND_PACKET  => i_START_SEND_PACKET,
+                i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
+                i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
+
+                o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
+                o_READY_SEND_DATA    => o_READY_SEND_DATA,
+                o_FLIT_SELECTOR      => w_FLIT_SELECTOR,
+
+                i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+                o_WRITE_BUFFER    => w_WRITE_BUFFER,
+
+                o_ADD => w_ADD,
+                o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
+            );
+    end generate;
 
     u_PACKETIZER_DATAPATH: entity work.backend_master_packetizer_datapath
         generic map(
@@ -133,36 +160,73 @@ begin
             o_CHECKSUM => w_CHECKSUM
         );
 
-    u_BUFFER_FIFO: entity work.buffering
-        generic map(
-            data_width_p => c_FLIT_WIDTH,
-            buffer_depth_p => p_BUFFER_DEPTH,
-            mode_p => p_BUFFER_MODE
-        )
-        port map(
-            clk_i => ACLK,
-            rst_i => w_ARESET,
+    u_BUFFER_FIFO:
+    if (p_USE_HAMMING = true) generate
+        u_BUFFER_FIFO_HAM: entity work.buffering_ham
+            generic map(
+                data_width_p => c_FLIT_WIDTH,
+                buffer_depth_p => p_BUFFER_DEPTH,
+                mode_p => p_BUFFER_MODE
+            )
+            port map(
+                clk_i => ACLK,
+                rst_i => w_ARESET,
 
-            rok_o  => w_READ_OK_BUFFER,
-            rd_i   => w_READ_BUFFER,
-            data_o => l_in_data_i,
+                rok_o  => w_READ_OK_BUFFER,
+                rd_i   => w_READ_BUFFER,
+                data_o => l_in_data_i,
 
-            wok_o  => w_WRITE_OK_BUFFER,
-            wr_i   => w_WRITE_BUFFER,
-            data_i => w_FLIT
-        );
+                wok_o  => w_WRITE_OK_BUFFER,
+                wr_i   => w_WRITE_BUFFER,
+                data_i => w_FLIT
+            );
+    else generate
+        u_BUFFER_FIFO_NORMAL: entity work.buffering
+            generic map(
+                data_width_p => c_FLIT_WIDTH,
+                buffer_depth_p => p_BUFFER_DEPTH,
+                mode_p => p_BUFFER_MODE
+            )
+            port map(
+                clk_i => ACLK,
+                rst_i => w_ARESET,
 
-    u_SEND_CONTROL: entity work.send_control
-        port map(
-            ACLK    => ACLK,
-            ARESETn => ARESETn,
+                rok_o  => w_READ_OK_BUFFER,
+                rd_i   => w_READ_BUFFER,
+                data_o => l_in_data_i,
 
-            i_READ_OK_BUFFER => w_READ_OK_BUFFER,
-            o_READ_BUFFER    => w_READ_BUFFER,
+                wok_o  => w_WRITE_OK_BUFFER,
+                wr_i   => w_WRITE_BUFFER,
+                data_i => w_FLIT
+            );
+    end generate;
 
-            l_in_val_i  => l_in_val_i,
-            l_in_ack_o  => l_in_ack_o
-        );
+    u_SEND_CONTROL:
+    if (p_USE_TMR = true) generate
+        u_SEND_CONTROL_TMR: entity work.send_control_tmr
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
+
+                i_READ_OK_BUFFER => w_READ_OK_BUFFER,
+                o_READ_BUFFER    => w_READ_BUFFER,
+
+                l_in_val_i  => l_in_val_i,
+                l_in_ack_o  => l_in_ack_o
+            );
+    else generate
+        u_SEND_CONTROL_NORMAL: entity work.send_control
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
+
+                i_READ_OK_BUFFER => w_READ_OK_BUFFER,
+                o_READ_BUFFER    => w_READ_BUFFER,
+
+                l_in_val_i  => l_in_val_i,
+                l_in_ack_o  => l_in_ack_o
+            );
+    end generate;
 
     w_ARESET <= not ARESETn;
 end rtl;
