@@ -24,6 +24,9 @@ sim:/tb_slave_write/t_BREADY \
 sim:/tb_slave_write/t_BRESP
 
 add wave -position insertpoint  \
+sim:/tb_slave_write/t_CORRUPT_PACKET
+
+add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_STATE
 
 add wave -position insertpoint  \

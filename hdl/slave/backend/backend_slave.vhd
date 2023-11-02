@@ -19,9 +19,9 @@ entity backend_slave is
         ARESETn: in std_logic;
 
         -- Signals (injection).
-        i_VALID_SEND_DATA  : in std_logic;
-        i_LAST_SEND_DATA   : in std_logic;
-		o_READY_SEND_DATA  : out std_logic;
+        i_VALID_SEND_DATA: in std_logic;
+        i_LAST_SEND_DATA : in std_logic;
+		o_READY_SEND_DATA: out std_logic;
 
         i_DATA_SEND  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         i_STATUS_SEND: in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
@@ -34,10 +34,14 @@ entity backend_slave is
         o_VALID_RECEIVE_DATA  : out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
-        o_DATA_RECEIVE       : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_ADDRESS_RECEIVE    : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_CORRUPT_RECEIVE    : out std_logic;
+        o_ID_RECEIVE     : out std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+        o_LEN_RECEIVE    : out std_logic_vector(7 downto 0);
+        o_BURST_RECEIVE  : out std_logic_vector(1 downto 0);
+        o_OPC_RECEIVE    : out std_logic;
+        o_ADDRESS_RECEIVE: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+        o_DATA_RECEIVE   : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+
+        o_CORRUPT_RECEIVE: out std_logic;
 
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -101,6 +105,7 @@ begin
             o_H_SRC_RECEIVE        => w_H_SRC_RECEIVE,
             o_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
             o_ADDRESS_RECEIVE      => o_ADDRESS_RECEIVE,
+
             o_CORRUPT_RECEIVE      => o_CORRUPT_RECEIVE,
 
             l_out_data_o => l_out_data_o,
@@ -108,5 +113,8 @@ begin
             l_out_ack_i  => l_out_ack_i
         );
 
-    o_H_INTERFACE_RECEIVE <= w_H_INTERFACE_RECEIVE;
+    o_ID_RECEIVE    <= w_H_INTERFACE_RECEIVE(19 downto 15);
+    o_LEN_RECEIVE   <= w_H_INTERFACE_RECEIVE(14 downto 7);
+    o_BURST_RECEIVE <= w_H_INTERFACE_RECEIVE(6 downto 5);
+    o_OPC_RECEIVE   <= w_H_INTERFACE_RECEIVE(1);
 end rtl;

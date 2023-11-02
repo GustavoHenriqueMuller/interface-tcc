@@ -14,6 +14,9 @@ sim:/tb_master_injection_write/t_AWVALID \
 sim:/tb_master_injection_write/t_AWREADY
 
 add wave -position insertpoint  \
+sim:/tb_master_injection_write/t_CORRUPT_PACKET
+
+add wave -position insertpoint  \
 sim:/tb_master_injection_write/t_RESET \
 sim:/tb_master_injection_write/t_RESETn
 

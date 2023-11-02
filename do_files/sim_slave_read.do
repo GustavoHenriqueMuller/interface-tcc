@@ -22,6 +22,9 @@ sim:/tb_slave_read/t_RLAST \
 sim:/tb_slave_read/t_RRESP
 
 add wave -position insertpoint  \
+sim:/tb_slave_read/t_CORRUPT_PACKET
+
+add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_STATE
 
 add wave -position insertpoint  \

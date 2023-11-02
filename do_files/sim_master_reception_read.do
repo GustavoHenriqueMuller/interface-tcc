@@ -15,7 +15,7 @@ sim:/tb_master_reception_read/t_RLAST \
 sim:/tb_master_reception_read/t_RRESP
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/CORRUPT_PACKET
+sim:/tb_master_reception_read/t_CORRUPT_PACKET
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/i_VALID_RECEIVE_DATA \

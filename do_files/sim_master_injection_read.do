@@ -14,14 +14,14 @@ sim:/tb_master_injection_read/t_ARVALID \
 sim:/tb_master_injection_read/t_ARREADY
 
 add wave -position insertpoint  \
+sim:/tb_master_injection_read/t_CORRUPT_PACKET
+
+add wave -position insertpoint  \
 sim:/tb_master_injection_read/t_RESET \
 sim:/tb_master_injection_read/t_RESETn
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/r_STATE
-
-add wave -position insertpoint  \
-sim:/tb_master_injection_read/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_SEND_CONTROL/r_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_read/u_TOP_MASTER/w_DATA_SEND \

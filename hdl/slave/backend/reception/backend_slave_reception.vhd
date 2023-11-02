@@ -24,10 +24,10 @@ entity backend_slave_reception is
         o_VALID_RECEIVE_DATA  : out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
-        o_DATA_RECEIVE : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_H_SRC_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        o_DATA_RECEIVE       : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+        o_H_SRC_RECEIVE      : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_H_INTERFACE_RECEIVE: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        o_ADDRESS_RECEIVE: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+        o_ADDRESS_RECEIVE    : out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         o_CORRUPT_RECEIVE: out std_logic;
 
@@ -100,7 +100,11 @@ begin
 
             o_WRITE_H_SRC_REG => w_WRITE_H_SRC_REG,
             o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
-            o_WRITE_H_ADDRESS_REG   => w_WRITE_H_ADDRESS_REG
+            o_WRITE_H_ADDRESS_REG   => w_WRITE_H_ADDRESS_REG,
+
+            o_ADD     => w_ADD,
+            o_COMPARE => w_COMPARE,
+            o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
         );
 
     u_INTEGRITY_CONTROL_RECEIVE: entity work.integrity_control_receive
@@ -116,7 +120,6 @@ begin
             o_CHECKSUM => w_CHECKSUM,
             o_CORRUPT  => o_CORRUPT_RECEIVE
         );
-
 
     u_BUFFER_FIFO: entity work.buffering
         generic map(

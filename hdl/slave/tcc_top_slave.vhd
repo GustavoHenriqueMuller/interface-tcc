@@ -57,6 +57,9 @@ entity tcc_top_slave is
             RID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             RRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
+            -- Extra signals.
+            CORRUPT_PACKET: out std_logic;
+
         -- XINA signals.
         l_in_data_i : out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_in_val_i  : out std_logic;
@@ -83,10 +86,13 @@ architecture rtl of tcc_top_slave is
     signal w_VALID_RECEIVE_PACKET: std_logic;
     signal w_VALID_RECEIVE_DATA  : std_logic;
     signal w_LAST_RECEIVE_DATA   : std_logic;
-    signal w_DATA_RECEIVE        : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
-    signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_ID_RECEIVE     : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+    signal w_LEN_RECEIVE    : std_logic_vector(7 downto 0);
+    signal w_BURST_RECEIVE  : std_logic_vector(1 downto 0);
+    signal w_OPC_RECEIVE    : std_logic;
     signal w_ADDRESS_RECEIVE: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+    signal w_DATA_RECEIVE   : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
     signal w_CORRUPT_RECEIVE: std_logic;
 
@@ -133,6 +139,9 @@ begin
                 RLAST   => RLAST,
                 RRESP   => RRESP,
 
+                -- Extra signals.
+                CORRUPT_PACKET => CORRUPT_PACKET,
+
             -- Backend signals (injection).
             o_VALID_SEND_DATA   => w_VALID_SEND_DATA,
             o_LAST_SEND_DATA    => w_LAST_SEND_DATA,
@@ -149,11 +158,14 @@ begin
             i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
 
-            i_DATA_RECEIVE         => w_DATA_RECEIVE,
-            i_H_INTERFACE_RECEIVE  => w_H_INTERFACE_RECEIVE,
-            i_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
+            i_ID_RECEIVE      => w_ID_RECEIVE,
+            i_LEN_RECEIVE     => w_LEN_RECEIVE,
+            i_BURST_RECEIVE   => w_BURST_RECEIVE,
+            i_OPC_RECEIVE     => w_OPC_RECEIVE,
+            i_ADDRESS_RECEIVE => w_ADDRESS_RECEIVE,
+            i_DATA_RECEIVE    => w_DATA_RECEIVE,
 
-            i_CORRUPT_RECEIVE      => w_CORRUPT_RECEIVE
+            i_CORRUPT_RECEIVE => w_CORRUPT_RECEIVE
         );
 
     u_BACKEND: entity work.backend_slave
@@ -184,9 +196,15 @@ begin
             o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET,
             o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
             o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
-            o_DATA_RECEIVE         => w_DATA_RECEIVE,
-            o_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
-            o_ADDRESS_RECEIVE      => w_ADDRESS_RECEIVE,
+
+            o_ID_RECEIVE      => w_ID_RECEIVE,
+            o_LEN_RECEIVE     => w_LEN_RECEIVE,
+            o_BURST_RECEIVE   => w_BURST_RECEIVE,
+            o_OPC_RECEIVE     => w_OPC_RECEIVE,
+            o_ADDRESS_RECEIVE => w_ADDRESS_RECEIVE,
+            o_DATA_RECEIVE    => w_DATA_RECEIVE,
+
+            o_CORRUPT_RECEIVE => w_CORRUPT_RECEIVE,
 
             -- XINA signals.
             l_in_data_i  => l_in_data_i,

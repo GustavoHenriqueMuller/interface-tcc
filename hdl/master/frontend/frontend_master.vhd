@@ -94,7 +94,7 @@ begin
     registering: process(all)
     begin
         if (rising_edge(ACLK)) then
-            if (i_READY_SEND_PACKET) then
+            if (i_READY_SEND_PACKET = '1') then
                 if (AWVALID = '1') then
                     -- Registering write signals.
                     w_OPC_SEND <= '0';
