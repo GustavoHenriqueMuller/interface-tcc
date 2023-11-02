@@ -9,8 +9,11 @@ entity backend_slave is
     generic(
         p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
+
         p_BUFFER_DEPTH: positive;
-        p_BUFFER_MODE : natural
+        p_BUFFER_MODE : natural;
+        p_USE_TMR     : boolean;
+        p_USE_HAMMING : boolean
     );
 
     port(
@@ -63,7 +66,9 @@ begin
             p_SRC_X => p_SRC_X,
             p_SRC_Y => p_SRC_Y,
             p_BUFFER_DEPTH => p_BUFFER_DEPTH,
-            p_BUFFER_MODE => p_BUFFER_MODE
+            p_BUFFER_MODE  => p_BUFFER_MODE,
+            p_USE_TMR      => p_USE_TMR,
+            p_USE_HAMMING  => p_USE_HAMMING
         )
 
         port map(
@@ -88,7 +93,9 @@ begin
     u_RECEPTION: entity work.backend_slave_reception
         generic map(
             p_BUFFER_DEPTH => p_BUFFER_DEPTH,
-            p_BUFFER_MODE => p_BUFFER_MODE
+            p_BUFFER_MODE => p_BUFFER_MODE,
+            p_USE_TMR      => p_USE_TMR,
+            p_USE_HAMMING  => p_USE_HAMMING
         )
 
         port map(
