@@ -59,7 +59,7 @@ architecture rtl of backend_slave_injection is
     signal w_READ_OK_BUFFER : std_logic;
 begin
     u_PACKETIZER_CONTROL:
-    if (p_USE_TMR = true) generate
+    if (p_USE_TMR) generate
         u_PACKETIZER_CONTROL_TMR: entity work.backend_slave_packetizer_control_tmr
             port map(
                 ACLK    => ACLK,
@@ -129,7 +129,7 @@ begin
         );
 
     u_BUFFER_FIFO:
-    if (p_USE_HAMMING = true) generate
+    if (p_USE_HAMMING) generate
         u_BUFFER_FIFO_HAM: entity work.buffering_ham
             generic map(
                 data_width_p => c_FLIT_WIDTH,
@@ -170,7 +170,7 @@ begin
     end generate;
 
     u_SEND_CONTROL:
-    if (p_USE_TMR = true) generate
+    if (p_USE_TMR) generate
         u_SEND_CONTROL_TMR: entity work.send_control_tmr
             port map(
                 ACLK    => ACLK,

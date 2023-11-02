@@ -76,7 +76,7 @@ begin
     o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL:
-    if (p_USE_TMR = true) generate
+    if (p_USE_TMR) generate
         u_DEPACKETIZER_CONTROL_TMR: entity work.backend_master_depacketizer_control_tmr
             port map(
                 ACLK => ACLK,
@@ -135,7 +135,7 @@ begin
         );
 
     u_BUFFER_FIFO:
-    if (p_USE_HAMMING = true) generate
+    if (p_USE_HAMMING) generate
         u_BUFFER_FIFO_HAM: entity work.buffering_ham
             generic map(
                 data_width_p => c_FLIT_WIDTH,
@@ -176,7 +176,7 @@ begin
     end generate;
 
     u_RECEIVE_CONTROL:
-    if (p_USE_TMR = true) generate
+    if (p_USE_TMR) generate
         u_RECEIVE_CONTROL_TMR: entity work.receive_control_tmr
         port map(
             ACLK    => ACLK,
