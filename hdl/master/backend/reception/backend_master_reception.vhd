@@ -120,19 +120,36 @@ begin
             );
     end generate;
 
-    u_INTEGRITY_CONTROL_RECEIVE: entity work.integrity_control_receive
-        port map(
-            ACLK    => ACLK,
-            ARESETn => w_INTEGRITY_RESETn,
+    u_INTEGRITY_CONTROL_RECEIVE:
+    if (p_USE_TMR) generate
+        u_INTEGRITY_CONTROL_RECEIVE_TMR: entity work.integrity_control_receive_tmr
+            port map(
+                ACLK    => ACLK,
+                ARESETn => w_INTEGRITY_RESETn,
 
-            i_ADD       => w_ADD,
-            i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
-            i_COMPARE   => w_COMPARE,
-            i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_ADD       => w_ADD,
+                i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_COMPARE   => w_COMPARE,
+                i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
-            o_CHECKSUM => w_CHECKSUM,
-            o_CORRUPT  => o_CORRUPT_RECEIVE
-        );
+                o_CHECKSUM => w_CHECKSUM,
+                o_CORRUPT  => o_CORRUPT_RECEIVE
+            );
+    else generate
+        u_INTEGRITY_CONTROL_RECEIVE_NORMAL: entity work.integrity_control_receive
+            port map(
+                ACLK    => ACLK,
+                ARESETn => w_INTEGRITY_RESETn,
+
+                i_ADD       => w_ADD,
+                i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_COMPARE   => w_COMPARE,
+                i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+
+                o_CHECKSUM => w_CHECKSUM,
+                o_CORRUPT  => o_CORRUPT_RECEIVE
+            );
+    end generate;
 
     u_BUFFER_FIFO:
     if (p_USE_HAMMING) generate
@@ -178,28 +195,28 @@ begin
     u_RECEIVE_CONTROL:
     if (p_USE_TMR) generate
         u_RECEIVE_CONTROL_TMR: entity work.receive_control_tmr
-        port map(
-            ACLK    => ACLK,
-            ARESETn => ARESETn,
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
 
-            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER    => w_WRITE_BUFFER,
+                i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+                o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
-            l_out_val_o => l_out_val_o,
-            l_out_ack_i => l_out_ack_i
-        );
+                l_out_val_o => l_out_val_o,
+                l_out_ack_i => l_out_ack_i
+            );
     else generate
         u_RECEIVE_CONTROL_NORMAL: entity work.receive_control
-        port map(
-            ACLK    => ACLK,
-            ARESETn => ARESETn,
+            port map(
+                ACLK    => ACLK,
+                ARESETn => ARESETn,
 
-            i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
-            o_WRITE_BUFFER    => w_WRITE_BUFFER,
+                i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
+                o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
-            l_out_val_o => l_out_val_o,
-            l_out_ack_i => l_out_ack_i
-        );
+                l_out_val_o => l_out_val_o,
+                l_out_ack_i => l_out_ack_i
+            );
     end generate;
 
     w_ARESET <= not ARESETn;
