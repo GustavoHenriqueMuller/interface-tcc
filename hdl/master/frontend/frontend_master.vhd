@@ -103,7 +103,6 @@ begin
                     o_ID        <= AWID;
                     o_LENGTH    <= AWLEN;
                     o_BURST     <= AWBURST;
-                    o_DATA_SEND <= WDATA;
                 elsif (ARVALID = '1') then
                     -- Registering read signals.
                     w_OPC_SEND <= '1';
@@ -112,7 +111,6 @@ begin
                     o_ID        <= ARID;
                     o_LENGTH    <= ARLEN;
                     o_BURST     <= ARBURST;
-                    o_DATA_SEND <= (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
                 end if;
             end if;
         end if;
@@ -124,6 +122,7 @@ begin
     o_START_SEND_PACKET <= '1' when (AWVALID = '1' or ARVALID = '1')    else '0';
     o_VALID_SEND_DATA   <= '1' when (w_OPC_SEND = '0' and WVALID = '1') else '0';
     o_LAST_SEND_DATA    <= '1' when (w_OPC_SEND = '0' and WLAST = '1')  else '0';
+    o_DATA_SEND         <= WDATA when (w_OPC_SEND = '0' and WVALID = '1') else (others => '0');
 
     -- Ready information to front-end.
     AWREADY <= i_READY_SEND_PACKET;
