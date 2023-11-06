@@ -33,6 +33,7 @@ architecture rtl of tb_slave_write is
         -- Write response signals.
         signal t_BVALID : std_logic := '0';
         signal t_BREADY : std_logic := '0';
+        signal t_BID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_BRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Read request signals.
@@ -49,6 +50,7 @@ architecture rtl of tb_slave_write is
         signal t_RREADY : std_logic := '0';
         signal t_RDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
         signal t_RLAST  : std_logic := '0';
+        signal t_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Extra signals.
@@ -135,6 +137,7 @@ begin
                 -- Write response signals.
                 BVALID  => t_BVALID,
                 BREADY  => t_BREADY,
+                BID     => t_BID,
                 BRESP   => t_BRESP,
 
                 -- Read request signals.
@@ -151,6 +154,7 @@ begin
                 RREADY  => t_RREADY,
                 RDATA   => t_RDATA,
                 RLAST   => t_RLAST,
+                RID     => t_RID,
                 RRESP   => t_RRESP,
 
                 -- Extra signals.
