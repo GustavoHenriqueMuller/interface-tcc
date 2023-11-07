@@ -25,15 +25,15 @@ sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_PACKET \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_DATA
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_PAYLOAD_COUNTER \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SET_PAYLOAD_COUNTER \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SUBTRACT_PAYLOAD_COUNTER
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_PAYLOAD_COUNTER \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_SET_PAYLOAD_COUNTER \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_SUBTRACT_PAYLOAD_COUNTER
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/i_FLIT
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/i_FLIT
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_BUFFER \
@@ -42,15 +42,15 @@ sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_BUFFER \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/i_ADD \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/i_VALUE_ADD \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/o_CHECKSUM \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/i_COMPARE \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/i_VALUE_COMPARE \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/o_CORRUPT
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/i_ADD \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/i_VALUE_ADD \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/o_CHECKSUM \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/i_COMPARE \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/i_VALUE_COMPARE \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/o_CORRUPT
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 #---------------------------------------------------------------------------------------------
 # Network signals.

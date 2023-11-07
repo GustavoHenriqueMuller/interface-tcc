@@ -27,15 +27,15 @@ add wave -position insertpoint  \
 sim:/tb_slave_write/t_CORRUPT_PACKET
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/u_PACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_PAYLOAD_COUNTER \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SET_PAYLOAD_COUNTER \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SUBTRACT_PAYLOAD_COUNTER
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_PAYLOAD_COUNTER \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_SET_PAYLOAD_COUNTER \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_SUBTRACT_PAYLOAD_COUNTER
 
 add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_SRC \
@@ -52,18 +52,18 @@ add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_FLIT
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/ARESETn \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/i_ADD \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/o_CHECKSUM
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/u_INTEGRITY_CONTROL_SEND_NORMAL/ARESETn \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/u_INTEGRITY_CONTROL_SEND_NORMAL/i_ADD \
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/u_INTEGRITY_CONTROL_SEND_NORMAL/o_CHECKSUM
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/data_o
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/data_o
 
 add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/l_out_data_o

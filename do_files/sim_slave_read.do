@@ -25,10 +25,10 @@ add wave -position insertpoint  \
 sim:/tb_slave_read/t_CORRUPT_PACKET
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/u_PACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/w_H_SRC \
@@ -42,10 +42,10 @@ sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_BUFFER \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 #---------------------------------------------------------------------------------------------
 # Network signals.

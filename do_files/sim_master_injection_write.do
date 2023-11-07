@@ -27,7 +27,7 @@ sim:/tb_master_injection_write/t_WREADY \
 sim:/tb_master_injection_write/t_WVALID
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL_NORMAL/r_STATE
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_PACKETIZER_CONTROL/u_PACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_injection_write/u_TOP_MASTER/w_DATA_SEND \
@@ -45,7 +45,7 @@ sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/w_READ_BUFFER 
 sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/fifo/shift/fifo_r
+sim:/tb_master_injection_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
 
 #---------------------------------------------------------------------------------------------
 # Router signals.
