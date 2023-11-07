@@ -42,10 +42,10 @@ sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_BUFFER \
 sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 add wave -position insertpoint  \
-sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_slave_read/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 #---------------------------------------------------------------------------------------------
 # Network signals.

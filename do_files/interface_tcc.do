@@ -15,6 +15,8 @@ vcom -2008 ../hdl/common/integrity_control_send.vhd
 vcom -2008 ../hdl/common/integrity_control_send_tmr.vhd
 vcom -2008 ../hdl/common/integrity_control_receive.vhd
 vcom -2008 ../hdl/common/integrity_control_receive_tmr.vhd
+vcom -2008 ../hdl/common/buffer_fifo.vhd
+vcom -2008 ../hdl/common/buffer_fifo_ham.vhd
 
 #---------------------------------------------------------------------------------------------
 # Master frontend.

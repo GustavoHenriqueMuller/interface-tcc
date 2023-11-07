@@ -57,10 +57,10 @@ sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/u
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_INTEGRITY_CONTROL_SEND/u_INTEGRITY_CONTROL_SEND_NORMAL/o_CHECKSUM
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 add wave -position insertpoint  \
-sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 add wave -position insertpoint  \
 sim:/tb_slave_write/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/l_out_data_o

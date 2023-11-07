@@ -31,7 +31,7 @@ add wave -position insertpoint  \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_BUFFER \

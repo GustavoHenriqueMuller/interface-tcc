@@ -50,7 +50,7 @@ sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CON
 sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_INTEGRITY_CONTROL_RECEIVE/u_INTEGRITY_CONTROL_RECEIVE_NORMAL/o_CORRUPT
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/fifo/shift/fifo_r
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_INJECTION/u_BUFFER_FIFO/u_BUFFER_FIFO_NORMAL/w_FIFO
 
 #---------------------------------------------------------------------------------------------
 # Network signals.

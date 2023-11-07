@@ -11,7 +11,6 @@ entity backend_slave_injection is
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
 
         p_BUFFER_DEPTH: positive;
-        p_BUFFER_MODE : natural;
         p_USE_TMR     : boolean;
         p_USE_HAMMING : boolean
     );
@@ -152,42 +151,40 @@ begin
 
     u_BUFFER_FIFO:
     if (p_USE_HAMMING) generate
-        u_BUFFER_FIFO_HAM: entity work.buffering_ham
+        u_BUFFER_FIFO_HAM: entity work.buffer_fifo_ham
             generic map(
-                data_width_p => c_FLIT_WIDTH,
-                buffer_depth_p => p_BUFFER_DEPTH,
-                mode_p => p_BUFFER_MODE
+                p_DATA_WIDTH   => c_FLIT_WIDTH,
+                p_BUFFER_DEPTH => p_BUFFER_DEPTH
             )
             port map(
-                clk_i => ACLK,
-                rst_i => w_ARESET,
+                ACLK   => ACLK,
+                ARESET => w_ARESET,
 
-                rok_o  => w_READ_OK_BUFFER,
-                rd_i   => w_READ_BUFFER,
-                data_o => l_in_data_i,
+                o_READ_OK  => w_READ_OK_BUFFER,
+                i_READ     => w_READ_BUFFER,
+                o_DATA     => l_in_data_i,
 
-                wok_o  => w_WRITE_OK_BUFFER,
-                wr_i   => w_WRITE_BUFFER,
-                data_i => w_FLIT
+                o_WRITE_OK => w_WRITE_OK_BUFFER,
+                i_WRITE    => w_WRITE_BUFFER,
+                i_DATA     => w_FLIT
             );
     else generate
-        u_BUFFER_FIFO_NORMAL: entity work.buffering
+        u_BUFFER_FIFO_NORMAL: entity work.buffer_fifo
             generic map(
-                data_width_p => c_FLIT_WIDTH,
-                buffer_depth_p => p_BUFFER_DEPTH,
-                mode_p => p_BUFFER_MODE
+                p_DATA_WIDTH   => c_FLIT_WIDTH,
+                p_BUFFER_DEPTH => p_BUFFER_DEPTH
             )
             port map(
-                clk_i => ACLK,
-                rst_i => w_ARESET,
+                ACLK   => ACLK,
+                ARESET => w_ARESET,
 
-                rok_o  => w_READ_OK_BUFFER,
-                rd_i   => w_READ_BUFFER,
-                data_o => l_in_data_i,
+                o_READ_OK  => w_READ_OK_BUFFER,
+                i_READ     => w_READ_BUFFER,
+                o_DATA     => l_in_data_i,
 
-                wok_o  => w_WRITE_OK_BUFFER,
-                wr_i   => w_WRITE_BUFFER,
-                data_i => w_FLIT
+                o_WRITE_OK => w_WRITE_OK_BUFFER,
+                i_WRITE    => w_WRITE_BUFFER,
+                i_DATA     => w_FLIT
             );
     end generate;
 
