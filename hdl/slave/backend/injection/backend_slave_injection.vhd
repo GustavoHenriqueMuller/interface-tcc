@@ -30,8 +30,10 @@ entity backend_slave_injection is
         i_STATUS_SEND: in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
 
         -- Signals from reception.
-        i_H_SRC_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-        i_H_INTERFACE_RECEIVE: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_SRC_RECEIVE        : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_H_INTERFACE_RECEIVE  : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+        i_HAS_REQUEST_PACKET   : in std_logic;
+        o_HAS_FINISHED_RESPONSE: out std_logic;
 
         -- XINA signals.
         l_in_data_i: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
@@ -71,6 +73,9 @@ begin
                 o_READY_SEND_DATA => o_READY_SEND_DATA,
                 o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
 
+                i_HAS_REQUEST_PACKET    => i_HAS_REQUEST_PACKET,
+                o_HAS_FINISHED_RESPONSE => o_HAS_FINISHED_RESPONSE,
+
                 i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
                 o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
@@ -88,6 +93,9 @@ begin
                 i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
                 o_READY_SEND_DATA => o_READY_SEND_DATA,
                 o_FLIT_SELECTOR   => w_FLIT_SELECTOR,
+
+                i_HAS_REQUEST_PACKET    => i_HAS_REQUEST_PACKET,
+                o_HAS_FINISHED_RESPONSE => o_HAS_FINISHED_RESPONSE,
 
                 i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
                 o_WRITE_BUFFER    => w_WRITE_BUFFER,

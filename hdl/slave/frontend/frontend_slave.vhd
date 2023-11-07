@@ -125,8 +125,7 @@ begin
     AWBURST <= i_BURST_RECEIVE when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_PACKET = '1') else (1 downto 0 => '0');
     AWSIZE  <= "010";
 
-    WVALID <= '1' when (i_VALID_RECEIVE_DATA = '1') else '0'; -- @TODO: Mudar aqui
-    --WVALID <= '1' when (i_VALID_RECEIVE_DATA = '1' or (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_PACKET = '1')) else '0'; -- @TODO: Mudar aqui
+    WVALID <= '1' when (i_VALID_RECEIVE_DATA = '1') else '0';
     WDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
     WLAST  <= i_LAST_RECEIVE_DATA;
 

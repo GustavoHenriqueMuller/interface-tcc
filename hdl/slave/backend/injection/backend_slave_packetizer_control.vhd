@@ -12,11 +12,15 @@ entity backend_slave_packetizer_control is
         ARESETn: in std_logic;
 
         -- Backend signals.
-        i_OPC_SEND       : in std_logic;
-        i_VALID_SEND_DATA: in std_logic;
-        i_LAST_SEND_DATA : in std_logic;
-        o_READY_SEND_DATA: out std_logic;
-        o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
+        i_OPC_SEND        : in std_logic;
+        i_VALID_SEND_DATA : in std_logic;
+        i_LAST_SEND_DATA  : in std_logic;
+        o_READY_SEND_DATA : out std_logic;
+        o_FLIT_SELECTOR   : out std_logic_vector(2 downto 0);
+
+        -- Signals from reception.
+        i_HAS_REQUEST_PACKET   : in std_logic;
+        o_HAS_FINISHED_RESPONSE: out std_logic;
 
         -- Buffer.
         i_WRITE_OK_BUFFER: in std_logic;
@@ -50,7 +54,7 @@ begin
     process (all)
     begin
         case r_STATE is
-            when S_IDLE => if (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_IDLE; end if;
+            when S_IDLE => if (i_HAS_REQUEST_PACKET = '1' and i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_DEST; else r_NEXT_STATE <= S_IDLE; end if;
 
             when S_H_DEST => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_H_SRC; else r_NEXT_STATE <= S_H_DEST; end if;
 
@@ -67,9 +71,9 @@ begin
                                   end if;
 
             when S_PAYLOAD => if (i_VALID_SEND_DATA = '1' and i_WRITE_OK_BUFFER = '1' and i_LAST_SEND_DATA = '1') then
-                                 r_NEXT_STATE <= S_TRAILER;
+                                  r_NEXT_STATE <= S_TRAILER;
                               else
-                                 r_NEXT_STATE <= S_PAYLOAD;
+                                  r_NEXT_STATE <= S_PAYLOAD;
                               end if;
 
             when S_TRAILER => if (i_WRITE_OK_BUFFER = '1') then r_NEXT_STATE <= S_IDLE; else r_NEXT_STATE <= S_TRAILER; end if;
@@ -80,7 +84,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-    o_READY_SEND_DATA <= '1' when (r_STATE = S_IDLE and i_OPC_SEND = '0') or -- For writes.
+    o_READY_SEND_DATA <= '1' when (r_STATE = S_IDLE and i_OPC_SEND = '0' and i_HAS_REQUEST_PACKET = '1') or -- For writes.
                                   (r_STATE = S_PAYLOAD and i_WRITE_OK_BUFFER = '1') -- For reads.
                                   else '0';
 
@@ -90,6 +94,8 @@ begin
                        "011" when (r_STATE = S_PAYLOAD) else
                        "100" when (r_STATE = S_TRAILER) else
                        "111";
+
+    o_HAS_FINISHED_RESPONSE <= '1' when (r_STATE = S_TRAILER and i_WRITE_OK_BUFFER = '1') else '0';
 
     o_WRITE_BUFFER <= '1' when (r_STATE = S_H_DEST) or
                                (r_STATE = S_H_SRC) or

@@ -13,7 +13,7 @@ entity integrity_control_send is
         ARESETn: in std_logic;
 
         -- Inputs.
-        i_ADD: in std_logic;
+        i_ADD      : in std_logic;
         i_VALUE_ADD: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         -- Outputs.

@@ -18,6 +18,10 @@ entity backend_slave_packetizer_control_tmr is
         o_READY_SEND_DATA: out std_logic;
         o_FLIT_SELECTOR  : out std_logic_vector(2 downto 0);
 
+        -- Signals from reception.
+        i_HAS_REQUEST_PACKET   : in std_logic;
+        o_HAS_FINISHED_RESPONSE: out std_logic;
+
         -- Buffer.
         i_WRITE_OK_BUFFER: in std_logic;
         o_WRITE_BUFFER   : out std_logic;
@@ -35,6 +39,7 @@ architecture rtl of backend_slave_packetizer_control_tmr is
     signal w_READY_SEND_DATA: t_BIT_VECTOR;
     signal w_WRITE_BUFFER: t_BIT_VECTOR;
     signal w_FLIT_SELECTOR: t_BIT_VECTOR_FLIT_SELECTOR;
+    signal w_HAS_FINISHED_RESPONSE: t_BIT_VECTOR;
 
     signal w_ADD: t_BIT_VECTOR;
     signal w_INTEGRITY_RESETn: t_BIT_VECTOR;
@@ -52,6 +57,9 @@ begin
                 i_LAST_SEND_DATA  => i_LAST_SEND_DATA,
                 o_READY_SEND_DATA => w_READY_SEND_DATA(i),
                 o_FLIT_SELECTOR   => w_FLIT_SELECTOR(i),
+
+                i_HAS_REQUEST_PACKET    => i_HAS_REQUEST_PACKET,
+                o_HAS_FINISHED_RESPONSE => w_HAS_FINISHED_RESPONSE(i),
 
                 i_WRITE_OK_BUFFER => i_WRITE_OK_BUFFER,
                 o_WRITE_BUFFER    => w_WRITE_BUFFER(i)
@@ -80,4 +88,8 @@ begin
                               (w_FLIT_SELECTOR(0)(i) and w_FLIT_SELECTOR(2)(i)) or
                               (w_FLIT_SELECTOR(1)(i) and w_FLIT_SELECTOR(2)(i));
     end generate;
+
+    o_HAS_FINISHED_RESPONSE <= (w_HAS_FINISHED_RESPONSE(0) and w_HAS_FINISHED_RESPONSE(1)) or
+                               (w_HAS_FINISHED_RESPONSE(0) and w_HAS_FINISHED_RESPONSE(2)) or
+                               (w_HAS_FINISHED_RESPONSE(1) and w_HAS_FINISHED_RESPONSE(2));
 end rtl;

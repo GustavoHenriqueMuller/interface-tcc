@@ -13,15 +13,15 @@ entity integrity_control_receive is
         ARESETn: in std_logic;
 
         -- Inputs.
-        i_ADD: in std_logic;
+        i_ADD      : in std_logic;
         i_VALUE_ADD: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
-        i_COMPARE: in std_logic;
+        i_COMPARE      : in std_logic;
         i_VALUE_COMPARE: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         -- Outputs.
         o_CHECKSUM: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
-        o_CORRUPT: out std_logic
+        o_CORRUPT : out std_logic
     );
 end integrity_control_receive;
 

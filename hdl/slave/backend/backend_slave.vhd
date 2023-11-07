@@ -60,6 +60,9 @@ architecture rtl of backend_slave is
     signal w_H_SRC_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_H_INTERFACE_RECEIVE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
+    signal w_HAS_REQUEST_PACKET: std_logic;
+    signal w_HAS_FINISHED_RESPONSE: std_logic;
+
 begin
     u_INJECTION: entity work.backend_slave_injection
         generic map(
@@ -82,8 +85,10 @@ begin
             i_DATA_SEND   => i_DATA_SEND,
             i_STATUS_SEND => i_STATUS_SEND,
 
-            i_H_SRC_RECEIVE => w_H_SRC_RECEIVE,
-            i_H_INTERFACE_RECEIVE => w_H_INTERFACE_RECEIVE,
+            i_H_SRC_RECEIVE         => w_H_SRC_RECEIVE,
+            i_H_INTERFACE_RECEIVE   => w_H_INTERFACE_RECEIVE,
+            i_HAS_REQUEST_PACKET    => w_HAS_REQUEST_PACKET,
+            o_HAS_FINISHED_RESPONSE => w_HAS_FINISHED_RESPONSE,
 
             l_in_data_i => l_in_data_i,
             l_in_val_i  => l_in_val_i,
@@ -114,6 +119,9 @@ begin
             o_ADDRESS_RECEIVE      => o_ADDRESS_RECEIVE,
 
             o_CORRUPT_RECEIVE      => o_CORRUPT_RECEIVE,
+
+            i_HAS_FINISHED_RESPONSE => w_HAS_FINISHED_RESPONSE,
+            o_HAS_REQUEST_PACKET    => w_HAS_REQUEST_PACKET,
 
             l_out_data_o => l_out_data_o,
             l_out_val_o  => l_out_val_o,

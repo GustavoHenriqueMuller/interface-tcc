@@ -33,6 +33,10 @@ entity backend_slave_reception is
 
         o_CORRUPT_RECEIVE: out std_logic;
 
+        -- Signals from injection.
+        i_HAS_FINISHED_RESPONSE: in std_logic;
+        o_HAS_REQUEST_PACKET   : out std_logic;
+
         -- XINA signals.
         l_out_data_o: in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         l_out_val_o : in std_logic;
@@ -96,13 +100,16 @@ begin
                 o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
                 o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
 
+                i_HAS_FINISHED_RESPONSE => i_HAS_FINISHED_RESPONSE,
+                o_HAS_REQUEST_PACKET    => o_HAS_REQUEST_PACKET,
+
                 i_FLIT => w_FLIT,
                 o_READ_BUFFER => w_READ_BUFFER,
                 i_READ_OK_BUFFER => w_READ_OK_BUFFER,
 
                 i_H_INTERFACE => w_H_INTERFACE,
 
-                o_WRITE_H_SRC_REG => w_WRITE_H_SRC_REG,
+                o_WRITE_H_SRC_REG       => w_WRITE_H_SRC_REG,
                 o_WRITE_H_INTERFACE_REG => w_WRITE_H_INTERFACE_REG,
                 o_WRITE_H_ADDRESS_REG   => w_WRITE_H_ADDRESS_REG,
 
@@ -121,6 +128,9 @@ begin
                 o_VALID_RECEIVE_PACKET => o_VALID_RECEIVE_PACKET,
                 o_VALID_RECEIVE_DATA   => o_VALID_RECEIVE_DATA,
                 o_LAST_RECEIVE_DATA    => o_LAST_RECEIVE_DATA,
+
+                i_HAS_FINISHED_RESPONSE => i_HAS_FINISHED_RESPONSE,
+                o_HAS_REQUEST_PACKET    => o_HAS_REQUEST_PACKET,
 
                 i_FLIT => w_FLIT,
                 o_READ_BUFFER => w_READ_BUFFER,

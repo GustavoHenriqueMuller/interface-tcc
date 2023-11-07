@@ -19,6 +19,10 @@ entity backend_slave_depacketizer_control_tmr is
         o_VALID_RECEIVE_DATA  : out std_logic;
         o_LAST_RECEIVE_DATA   : out std_logic;
 
+        -- Signals from injection.
+        i_HAS_FINISHED_RESPONSE: in std_logic;
+        o_HAS_REQUEST_PACKET   : out std_logic;
+
         -- Buffer.
         i_FLIT          : in std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
         o_READ_BUFFER   : out std_logic;
@@ -44,6 +48,7 @@ architecture rtl of backend_slave_depacketizer_control_tmr is
     signal w_VALID_RECEIVE_PACKET: t_BIT_VECTOR;
     signal w_VALID_RECEIVE_DATA: t_BIT_VECTOR;
     signal w_LAST_RECEIVE_DATA: t_BIT_VECTOR;
+    signal w_HAS_REQUEST_PACKET: t_BIT_VECTOR;
     signal w_READ_BUFFER: t_BIT_VECTOR;
     signal w_WRITE_H_SRC_REG: t_BIT_VECTOR;
     signal w_WRITE_H_INTERFACE_REG: t_BIT_VECTOR;
@@ -66,6 +71,9 @@ begin
                 o_VALID_RECEIVE_PACKET => w_VALID_RECEIVE_PACKET(i),
                 o_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA(i),
                 o_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA(i),
+
+                i_HAS_FINISHED_RESPONSE => i_HAS_FINISHED_RESPONSE,
+                o_HAS_REQUEST_PACKET    => w_HAS_REQUEST_PACKET(i),
 
                 i_FLIT => i_FLIT,
                 o_READ_BUFFER => w_READ_BUFFER(i),
@@ -90,6 +98,10 @@ begin
     o_LAST_RECEIVE_DATA <= (w_LAST_RECEIVE_DATA(0) and w_LAST_RECEIVE_DATA(1)) or
                            (w_LAST_RECEIVE_DATA(0) and w_LAST_RECEIVE_DATA(2)) or
                            (w_LAST_RECEIVE_DATA(1) and w_LAST_RECEIVE_DATA(2));
+
+    o_HAS_REQUEST_PACKET <= (w_HAS_REQUEST_PACKET(0) and w_HAS_REQUEST_PACKET(1)) or
+                            (w_HAS_REQUEST_PACKET(0) and w_HAS_REQUEST_PACKET(2)) or
+                            (w_HAS_REQUEST_PACKET(1) and w_HAS_REQUEST_PACKET(2));
 
     o_READ_BUFFER <= (w_READ_BUFFER(0) and w_READ_BUFFER(1)) or
                      (w_READ_BUFFER(0) and w_READ_BUFFER(2)) or
