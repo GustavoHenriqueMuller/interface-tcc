@@ -89,7 +89,7 @@ begin
 
             when S_WRITE_REQUEST => if (i_READY_RECEIVE_PACKET = '1') then r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD; else r_NEXT_STATE <= S_WRITE_REQUEST; end if;
 
-            when S_WRITE_REQUEST_PAYLOAD => if (r_PAYLOAD_COUNTER = to_unsigned(1, 8) and i_READY_RECEIVE_DATA = '1' and i_READ_OK_BUFFER = '1') then
+            when S_WRITE_REQUEST_PAYLOAD => if (r_PAYLOAD_COUNTER = to_unsigned(0, 8) and i_READY_RECEIVE_DATA = '1' and i_READ_OK_BUFFER = '1') then
                                                 r_NEXT_STATE <= S_TRAILER;
                                             else
                                                 r_NEXT_STATE <= S_WRITE_REQUEST_PAYLOAD;
@@ -140,7 +140,7 @@ begin
     o_VALID_RECEIVE_DATA <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1') or
                                      (r_STATE = S_READ_REQUEST)
                                      else '0';
-    o_LAST_RECEIVE_DATA  <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1' and r_PAYLOAD_COUNTER = to_unsigned(1, 8)) else '0';
+    o_LAST_RECEIVE_DATA  <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1' and r_PAYLOAD_COUNTER = to_unsigned(0, 8)) else '0';
 
     o_HAS_REQUEST_PACKET <= '1' when (r_STATE = S_WAIT_RESPONSE) else '0';
 

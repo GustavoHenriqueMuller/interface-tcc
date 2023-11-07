@@ -93,7 +93,6 @@ architecture rtl of tb_integration is
         signal t2_RVALID : std_logic := '0';
         signal t2_RREADY : std_logic := '0';
         signal t2_RDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
-        signal t2_RLAST  : std_logic := '0';
         signal t2_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t2_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
@@ -245,7 +244,7 @@ begin
                 RVALID  => t2_RVALID,
                 RREADY  => t2_RREADY,
                 RDATA   => t2_RDATA,
-                RLAST   => t2_RLAST,
+                RLAST   => '1',
                 RRESP   => t2_RRESP,
 
                 -- Extra signals.
@@ -350,7 +349,7 @@ begin
         t_AWVALID <= '1';
         t_AWADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_AWID <= "00001";
-        t_AWLEN <= "00000001";
+        t_AWLEN <= "00000000";
 
         wait until rising_edge(t_ACLK) and t_AWREADY = '1';
         t_AWVALID <= '0';
@@ -376,10 +375,26 @@ begin
         t_ARVALID <= '1';
         t_ARADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_ARID <= "00001";
-        t_ARLEN <= "00000001";
+        t_ARLEN <= "00000000";
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
         t_ARVALID <= '0';
+
+        -- RESULT: 00001000010100110000000000001010 / 0853000A
+
+        ---------------------------------------------------------------------------------------------
+        -- Receive first transaction response.
+        t_BREADY <= '1';
+
+        wait until rising_edge(t_ACLK) and t_BVALID = '1';
+        t_BREADY <= '0';
+
+        ---------------------------------------------------------------------------------------------
+        -- Receive second transaction response.
+        t_RREADY <= '1';
+
+        wait until rising_edge(t_ACLK) and t_RVALID = '1' and t_RLAST = '1';
+        t_RREADY <= '0';
 
         wait;
     end process;

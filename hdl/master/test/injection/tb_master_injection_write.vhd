@@ -213,7 +213,7 @@ begin
         t_AWVALID <= '1';
         t_AWADDR <= "1011101110111011" & "1011101110111011" & "1011101110111011" & "1011101110111011";
         t_AWID <= "00001";
-        t_AWLEN <= "00000010";
+        t_AWLEN <= "00000001";
 
         wait until rising_edge(t_ACLK) and t_AWREADY = '1';
         t_AWVALID <= '0';

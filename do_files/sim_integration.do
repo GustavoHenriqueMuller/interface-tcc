@@ -30,22 +30,9 @@ sim:/tb_integration/t2_ARBURST \
 sim:/tb_integration/t2_RVALID \
 sim:/tb_integration/t2_RREADY \
 sim:/tb_integration/t2_RDATA \
-sim:/tb_integration/t2_RLAST \
 sim:/tb_integration/t2_RID \
 sim:/tb_integration/t2_RRESP \
 sim:/tb_integration/t2_CORRUPT_PACKET
 
 add wave -position insertpoint  \
-sim:/tb_integration/u_TOP_SLAVE/ARVALID \
-sim:/tb_integration/u_TOP_SLAVE/ARREADY \
-sim:/tb_integration/u_TOP_SLAVE/ARID \
-sim:/tb_integration/u_TOP_SLAVE/ARADDR \
-sim:/tb_integration/u_TOP_SLAVE/ARLEN \
-sim:/tb_integration/u_TOP_SLAVE/ARSIZE \
-sim:/tb_integration/u_TOP_SLAVE/ARBURST \
-sim:/tb_integration/u_TOP_SLAVE/RVALID \
-sim:/tb_integration/u_TOP_SLAVE/RREADY \
-sim:/tb_integration/u_TOP_SLAVE/RDATA \
-sim:/tb_integration/u_TOP_SLAVE/RLAST \
-sim:/tb_integration/u_TOP_SLAVE/RID \
-sim:/tb_integration/u_TOP_SLAVE/RRESP
+sim:/tb_integration/u_TOP_SLAVE/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
