@@ -25,15 +25,15 @@ sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_PACKET \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_FRONTEND/o_READY_RECEIVE_DATA
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_STATE
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_PAYLOAD_COUNTER \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_SET_PAYLOAD_COUNTER \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_SUBTRACT_PAYLOAD_COUNTER
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_PAYLOAD_COUNTER \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SET_PAYLOAD_COUNTER \
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_SUBTRACT_PAYLOAD_COUNTER
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/i_FLIT
+sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/i_FLIT
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_read/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_WRITE_BUFFER \

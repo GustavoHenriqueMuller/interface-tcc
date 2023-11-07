@@ -28,7 +28,7 @@ sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_BUFFER 
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/w_READ_OK_BUFFER
 
 add wave -position insertpoint  \
-sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL/r_STATE
+sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_DEPACKETIZER_CONTROL_NORMAL/r_STATE
 
 add wave -position insertpoint  \
 sim:/tb_master_reception_write/u_TOP_MASTER/u_BACKEND/u_RECEPTION/u_BUFFER_FIFO/fifo/shift/fifo_r
