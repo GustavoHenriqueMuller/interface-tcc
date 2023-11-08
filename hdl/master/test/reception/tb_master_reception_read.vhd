@@ -21,7 +21,6 @@ architecture arch_tb_master_reception_read of tb_master_reception_read is
         signal t_AWID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_AWBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Write data signals.
@@ -42,7 +41,6 @@ architecture arch_tb_master_reception_read of tb_master_reception_read is
         signal t_ARID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Read response/data signals.
@@ -131,7 +129,6 @@ begin
                 AWID    => t_AWID,
                 AWADDR  => t_AWADDR,
                 AWLEN   => t_AWLEN,
-                AWSIZE  => t_AWSIZE,
                 AWBURST => t_AWBURST,
 
                 -- Write data signals.
@@ -152,7 +149,6 @@ begin
                 ARID    => t_ARID,
                 ARADDR  => t_ARADDR,
                 ARLEN   => t_ARLEN,
-                ARSIZE  => t_ARSIZE,
                 ARBURST => t_ARBURST,
 
                 -- Read response/data signals.

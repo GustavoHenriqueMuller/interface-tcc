@@ -58,12 +58,11 @@ architecture rtl of backend_slave_reception is
 
     signal w_H_SRC: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
     signal w_H_INTERFACE: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
-    signal w_H_ADDRESS : std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
+    signal w_H_ADDRESS: std_logic_vector(c_FLIT_WIDTH - 1 downto 0);
 
     -- Checksum.
     signal w_ADD: std_logic;
-    signal w_COMPARE : std_logic;
-    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+    signal w_COMPARE: std_logic;
     signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
@@ -156,12 +155,11 @@ begin
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD       => w_ADD,
-                i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
-                i_COMPARE   => w_COMPARE,
+                i_ADD           => w_ADD,
+                i_VALUE_ADD     => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_COMPARE       => w_COMPARE,
                 i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
-                o_CHECKSUM => w_CHECKSUM,
                 o_CORRUPT  => o_CORRUPT_RECEIVE
             );
     else generate
@@ -170,12 +168,11 @@ begin
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD       => w_ADD,
-                i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
-                i_COMPARE   => w_COMPARE,
+                i_ADD           => w_ADD,
+                i_VALUE_ADD     => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_COMPARE       => w_COMPARE,
                 i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
-                o_CHECKSUM => w_CHECKSUM,
                 o_CORRUPT  => o_CORRUPT_RECEIVE
             );
     end generate;

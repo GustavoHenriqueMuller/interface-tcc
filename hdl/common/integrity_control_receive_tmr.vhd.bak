@@ -28,6 +28,7 @@ architecture rtl of integrity_control_receive_tmr is
     type t_BIT_VECTOR is array (2 downto 0) of std_logic;
     type t_BIT_VECTOR_CHECKSUM is array (2 downto 0) of std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
+    signal w_CHECKSUM: t_BIT_VECTOR_CHECKSUM;
     signal w_CORRUPT: t_BIT_VECTOR;
 
 begin
@@ -43,6 +44,7 @@ begin
                 i_COMPARE   => i_COMPARE,
                 i_VALUE_COMPARE => i_VALUE_COMPARE,
 
+                o_CHECKSUM => w_CHECKSUM(i),
                 o_CORRUPT  => w_CORRUPT(i)
             );
     end generate;

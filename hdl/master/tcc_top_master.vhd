@@ -29,7 +29,6 @@ entity tcc_top_master is
             AWID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
             AWADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
             AWLEN  : in std_logic_vector(7 downto 0) := (others => '0');
-            AWSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             AWBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Write data signals.
@@ -50,7 +49,6 @@ entity tcc_top_master is
             ARID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
             ARADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
             ARLEN  : in std_logic_vector(7 downto 0) := (others => '0');
-            ARSIZE : in std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
             ARBURST: in std_logic_vector(1 downto 0) := "01";
 
             -- Read response/data signals.
@@ -117,7 +115,6 @@ begin
                 AWID    => AWID,
                 AWADDR  => AWADDR,
                 AWLEN   => AWLEN,
-                AWSIZE  => AWSIZE,
                 AWBURST => AWBURST,
 
                 -- Write data signals.
@@ -138,7 +135,6 @@ begin
                 ARID    => ARID,
                 ARADDR  => ARADDR,
                 ARLEN   => ARLEN,
-                ARSIZE  => ARSIZE,
                 ARBURST => ARBURST,
 
                 -- Read response/data signals.

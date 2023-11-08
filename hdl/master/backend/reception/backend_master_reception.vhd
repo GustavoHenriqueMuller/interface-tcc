@@ -52,8 +52,7 @@ architecture rtl of backend_master_reception is
 
     -- Checksum.
     signal w_ADD: std_logic;
-    signal w_COMPARE : std_logic;
-    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+    signal w_COMPARE: std_logic;
     signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
@@ -133,7 +132,6 @@ begin
                 i_COMPARE   => w_COMPARE,
                 i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
-                o_CHECKSUM => w_CHECKSUM,
                 o_CORRUPT  => o_CORRUPT_RECEIVE
             );
     else generate
@@ -147,7 +145,6 @@ begin
                 i_COMPARE   => w_COMPARE,
                 i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
-                o_CHECKSUM => w_CHECKSUM,
                 o_CORRUPT  => o_CORRUPT_RECEIVE
             );
     end generate;

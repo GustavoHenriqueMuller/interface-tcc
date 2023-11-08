@@ -20,7 +20,6 @@ entity integrity_control_receive is
         i_VALUE_COMPARE: in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
         -- Outputs.
-        o_CHECKSUM: out std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
         o_CORRUPT : out std_logic
     );
 end integrity_control_receive;
@@ -42,6 +41,5 @@ begin
         end if;
     end process;
 
-    o_CHECKSUM <= std_logic_vector(w_CHECKSUM);
     o_CORRUPT  <= '1' when (w_CHECKSUM /= unsigned(i_VALUE_COMPARE) and i_COMPARE = '1') else '0';
 end rtl;

@@ -123,7 +123,6 @@ begin
     AWADDR  <= i_ADDRESS_RECEIVE & (0 to 31 => '0') when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_PACKET = '1') else (c_AXI_ADDR_WIDTH - 1 downto 0 => '0');
     AWLEN   <= i_LEN_RECEIVE when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_PACKET = '1') else (7 downto 0 => '0');
     AWBURST <= i_BURST_RECEIVE when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_PACKET = '1') else (1 downto 0 => '0');
-    AWSIZE  <= "010";
 
     WVALID <= '1' when (i_OPC_RECEIVE = '0' and i_VALID_RECEIVE_DATA = '1') else '0';
     WDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
@@ -134,7 +133,6 @@ begin
     ARADDR  <= i_ADDRESS_RECEIVE & (0 to 31 => '0') when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_PACKET = '1') else (c_AXI_ADDR_WIDTH - 1 downto 0 => '0');
     ARLEN   <= i_LEN_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_PACKET = '1') else (7 downto 0 => '0');
     ARBURST <= i_BURST_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_PACKET = '1') else (1 downto 0 => '0');
-    ARSIZE  <= "010";
 
     CORRUPT_PACKET <= i_CORRUPT_RECEIVE;
 end rtl;

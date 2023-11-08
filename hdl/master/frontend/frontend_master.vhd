@@ -16,7 +16,6 @@ entity frontend_master is
             AWID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
             AWADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
             AWLEN  : in std_logic_vector(7 downto 0);
-            AWSIZE : in std_logic_vector(2 downto 0);
             AWBURST: in std_logic_vector(1 downto 0);
 
             -- Write data signals.
@@ -37,7 +36,6 @@ entity frontend_master is
             ARID   : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
             ARADDR : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
             ARLEN  : in std_logic_vector(7 downto 0);
-            ARSIZE : in std_logic_vector(2 downto 0);
             ARBURST: in std_logic_vector(1 downto 0);
 
             -- Read response/data signals.
