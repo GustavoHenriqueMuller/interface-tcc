@@ -15,7 +15,8 @@ entity tcc_top_master is
         p_USE_TMR_PACKETIZER: boolean  := c_USE_TMR_PACKETIZER;
         p_USE_TMR_FLOW      : boolean  := c_USE_TMR_FLOW;
         p_USE_TMR_INTEGRITY : boolean  := c_USE_TMR_INTEGRITY;
-        p_USE_HAMMING       : boolean  := c_USE_HAMMING
+        p_USE_HAMMING       : boolean  := c_USE_HAMMING;
+        p_USE_INTEGRITY     : boolean  := c_USE_INTEGRITY
     );
 
     port(
@@ -186,7 +187,8 @@ begin
             p_USE_TMR_PACKETIZER => p_USE_TMR_PACKETIZER,
             p_USE_TMR_FLOW       => p_USE_TMR_FLOW,
             p_USE_TMR_INTEGRITY  => p_USE_TMR_INTEGRITY,
-            p_USE_HAMMING        => p_USE_HAMMING
+            p_USE_HAMMING        => p_USE_HAMMING,
+            p_USE_INTEGRITY      => p_USE_INTEGRITY
         )
 
         port map(

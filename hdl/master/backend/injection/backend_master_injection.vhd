@@ -14,7 +14,8 @@ entity backend_master_injection is
         p_USE_TMR_PACKETIZER: boolean;
         p_USE_TMR_FLOW      : boolean;
         p_USE_TMR_INTEGRITY : boolean;
-        p_USE_HAMMING       : boolean
+        p_USE_HAMMING       : boolean;
+        p_USE_INTEGRITY     : boolean
     );
 
     port(
@@ -151,7 +152,7 @@ begin
         );
 
     u_INTEGRITY_CONTROL_SEND:
-    if (p_USE_TMR_INTEGRITY) generate
+    if (p_USE_TMR_INTEGRITY and p_USE_INTEGRITY) generate
         u_INTEGRITY_CONTROL_SEND_TMR: entity work.integrity_control_send_tmr
             port map(
                 ACLK    => ACLK,
@@ -162,8 +163,19 @@ begin
 
                 o_CHECKSUM => w_CHECKSUM
             );
-    else generate
+    elsif (p_USE_INTEGRITY) generate
         u_INTEGRITY_CONTROL_SEND_NORMAL: entity work.integrity_control_send
+            port map(
+                ACLK    => ACLK,
+                ARESETn => w_INTEGRITY_RESETn,
+
+                i_ADD       => w_ADD,
+                i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+
+                o_CHECKSUM => w_CHECKSUM
+            );
+    else generate
+        u_INTEGRITY_CONTROL_SEND_EMPTY: entity work.integrity_control_send_empty
             port map(
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,

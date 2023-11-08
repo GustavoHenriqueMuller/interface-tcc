@@ -11,7 +11,8 @@ entity backend_slave_reception is
         p_USE_TMR_PACKETIZER: boolean;
         p_USE_TMR_FLOW      : boolean;
         p_USE_TMR_INTEGRITY : boolean;
-        p_USE_HAMMING       : boolean
+        p_USE_HAMMING       : boolean;
+        p_USE_INTEGRITY     : boolean
     );
 
     port(
@@ -149,7 +150,7 @@ begin
     end generate;
 
     u_INTEGRITY_CONTROL_RECEIVE:
-    if (p_USE_TMR_INTEGRITY) generate
+    if (p_USE_TMR_INTEGRITY and p_USE_INTEGRITY) generate
         u_INTEGRITY_CONTROL_RECEIVE_TMR: entity work.integrity_control_receive_tmr
             port map(
                 ACLK    => ACLK,
@@ -162,8 +163,21 @@ begin
 
                 o_CORRUPT  => o_CORRUPT_RECEIVE
             );
-    else generate
+    elsif (p_USE_INTEGRITY) generate
         u_INTEGRITY_CONTROL_RECEIVE_NORMAL: entity work.integrity_control_receive
+            port map(
+                ACLK    => ACLK,
+                ARESETn => w_INTEGRITY_RESETn,
+
+                i_ADD           => w_ADD,
+                i_VALUE_ADD     => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+                i_COMPARE       => w_COMPARE,
+                i_VALUE_COMPARE => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
+
+                o_CORRUPT  => o_CORRUPT_RECEIVE
+            );
+    else generate
+        u_INTEGRITY_CONTROL_RECEIVE_EMPTY: entity work.integrity_control_receive_empty
             port map(
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,

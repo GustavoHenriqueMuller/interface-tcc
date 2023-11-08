@@ -14,7 +14,8 @@ entity backend_master is
         p_USE_TMR_PACKETIZER: boolean;
         p_USE_TMR_FLOW      : boolean;
         p_USE_TMR_INTEGRITY : boolean;
-        p_USE_HAMMING       : boolean
+        p_USE_HAMMING       : boolean;
+        p_USE_INTEGRITY     : boolean
     );
 
     port(
@@ -71,7 +72,8 @@ begin
             p_USE_TMR_PACKETIZER => p_USE_TMR_PACKETIZER,
             p_USE_TMR_FLOW       => p_USE_TMR_FLOW,
             p_USE_TMR_INTEGRITY  => p_USE_TMR_INTEGRITY,
-            p_USE_HAMMING        => p_USE_HAMMING
+            p_USE_HAMMING        => p_USE_HAMMING,
+            p_USE_INTEGRITY      => p_USE_INTEGRITY
         )
 
         port map(
@@ -102,7 +104,8 @@ begin
             p_USE_TMR_PACKETIZER => p_USE_TMR_PACKETIZER,
             p_USE_TMR_FLOW       => p_USE_TMR_FLOW,
             p_USE_TMR_INTEGRITY  => p_USE_TMR_INTEGRITY,
-            p_USE_HAMMING        => p_USE_HAMMING
+            p_USE_HAMMING        => p_USE_HAMMING,
+            p_USE_INTEGRITY      => p_USE_INTEGRITY
         )
 
         port map(
