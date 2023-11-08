@@ -1,6 +1,7 @@
 do_files/work
 *.dbg
 *.wlf
+*.vstf
 
 quartus_project/db
 quartus_project/incremental_db
