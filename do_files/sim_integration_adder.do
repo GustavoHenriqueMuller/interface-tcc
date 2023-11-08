@@ -10,7 +10,6 @@ sim:/tb_integration_adder/t2_AWREADY \
 sim:/tb_integration_adder/t2_AWID \
 sim:/tb_integration_adder/t2_AWADDR \
 sim:/tb_integration_adder/t2_AWLEN \
-sim:/tb_integration_adder/t2_AWSIZE \
 sim:/tb_integration_adder/t2_AWBURST \
 sim:/tb_integration_adder/t2_WVALID \
 sim:/tb_integration_adder/t2_WREADY \

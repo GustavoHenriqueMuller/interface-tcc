@@ -8,7 +8,6 @@ sim:/tb_master_injection_write/t_ACLK \
 sim:/tb_master_injection_write/t_AWADDR \
 sim:/tb_master_injection_write/t_AWID \
 sim:/tb_master_injection_write/t_AWLEN \
-sim:/tb_master_injection_write/t_AWSIZE \
 sim:/tb_master_injection_write/t_AWBURST \
 sim:/tb_master_injection_write/t_AWVALID \
 sim:/tb_master_injection_write/t_AWREADY
