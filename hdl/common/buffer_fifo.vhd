@@ -32,7 +32,7 @@ architecture rtl of buffer_fifo is
 
 begin
     process (all)
-        variable var_READ_PTR: unsigned(integer(ceil(log2(real(p_BUFFER_DEPTH)))) downto 0);
+        variable var_READ_PTR: unsigned(integer(ceil(log2(real(p_BUFFER_DEPTH)))) downto 0) := (others => '0');
     begin
         if (ARESET = '1') then
             w_READ_PTR <= (others => '0');

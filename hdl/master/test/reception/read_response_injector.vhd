@@ -35,7 +35,7 @@ architecture arch_read_response_injector of read_response_injector is
     signal header_interface_w : std_logic_vector(data_width_p downto 0) := "0" & "000000000000" & id_w & len_w & burst_w & status_w & opc_w & type_w;
     signal payload1_w: std_logic_vector(data_width_p downto 0) := "0" & "1010101010101010" & "1010101010101010";
     signal payload2_w: std_logic_vector(data_width_p downto 0) := "0" & "1101110111011101" & "1101110111011101";
-    signal trailer_w : std_logic_vector(data_width_p downto 0) := "1" & "1000100010001010" & "0000100110110010";
+    signal trailer_w : std_logic_vector(data_width_p downto 0) := "1" & "1000100010001010" & "0000100100110010";
     signal data_out_w: std_logic_vector(data_width_p downto 0);
 
 begin
