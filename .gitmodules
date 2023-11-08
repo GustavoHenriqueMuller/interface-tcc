@@ -1,3 +1,6 @@
 [submodule "hdl/dependencies/xina"]
 	path = hdl/dependencies/xina
 	url = https://github.com/xarc/xina
+[submodule "hdl/dependencies/harv-soc"]
+	path = hdl/dependencies/harv-soc
+	url = https://github.com/xarc/harv-soc

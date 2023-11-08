@@ -6,10 +6,10 @@ use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tb_integration is
-end tb_integration;
+entity tb_integration_adder is
+end tb_integration_adder;
 
-architecture rtl of tb_integration is
+architecture rtl of tb_integration_adder is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';

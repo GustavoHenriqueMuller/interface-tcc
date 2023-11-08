@@ -94,6 +94,10 @@ architecture arch_tb_master_injection_write of tb_master_injection_write is
 
 begin
     u_TOP_MASTER: entity work.tcc_top_master
+        generic map(
+            p_BUFFER_DEPTH => 4
+        )
+
         port map(
             -- AMBA AXI 5 signals.
             ACLK    => t_ACLK,
