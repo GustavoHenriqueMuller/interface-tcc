@@ -13,9 +13,9 @@ package tcc_package is
 	-- Interface attributes.
 	constant c_FLIT_WIDTH        : natural  := c_AXI_DATA_WIDTH + 1;
 	constant c_BUFFER_DEPTH      : positive := 10;
+	constant c_USE_HAMMING       : boolean  := false;
+	constant c_USE_INTEGRITY     : boolean  := true;
 	constant c_USE_TMR_PACKETIZER: boolean  := false;
 	constant c_USE_TMR_FLOW      : boolean  := false;
 	constant c_USE_TMR_INTEGRITY : boolean  := false;
-	constant c_USE_HAMMING       : boolean  := false;
-	constant c_USE_INTEGRITY     : boolean  := true;
 end package;
