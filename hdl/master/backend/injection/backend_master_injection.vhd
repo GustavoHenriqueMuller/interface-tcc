@@ -10,9 +10,11 @@ entity backend_master_injection is
         p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
 
-        p_BUFFER_DEPTH: positive;
-        p_USE_TMR     : boolean;
-        p_USE_HAMMING : boolean
+        p_BUFFER_DEPTH      : positive;
+        p_USE_TMR_PACKETIZER: boolean;
+        p_USE_TMR_FLOW      : boolean;
+        p_USE_TMR_INTEGRITY : boolean;
+        p_USE_HAMMING       : boolean
     );
 
     port(
@@ -79,25 +81,25 @@ begin
         );
 
     u_PACKETIZER_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_PACKETIZER) generate
         u_PACKETIZER_CONTROL_TMR: entity work.backend_master_packetizer_control_tmr
             port map(
                 ACLK    => ACLK,
                 ARESETn => ARESETn,
 
-                i_OPC_SEND => i_OPC_SEND,
-                i_START_SEND_PACKET  => i_START_SEND_PACKET,
-                i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
-                i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
+                i_OPC_SEND          => i_OPC_SEND,
+                i_START_SEND_PACKET => i_START_SEND_PACKET,
+                i_VALID_SEND_DATA   => i_VALID_SEND_DATA,
+                i_LAST_SEND_DATA    => i_LAST_SEND_DATA,
 
-                o_READY_SEND_PACKET  => o_READY_SEND_PACKET,
-                o_READY_SEND_DATA    => o_READY_SEND_DATA,
-                o_FLIT_SELECTOR      => w_FLIT_SELECTOR,
+                o_READY_SEND_PACKET => o_READY_SEND_PACKET,
+                o_READY_SEND_DATA   => o_READY_SEND_DATA,
+                o_FLIT_SELECTOR     => w_FLIT_SELECTOR,
 
                 i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
                 o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
-                o_ADD => w_ADD,
+                o_ADD              => w_ADD,
                 o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
             );
     else generate
@@ -106,7 +108,7 @@ begin
                 ACLK    => ACLK,
                 ARESETn => ARESETn,
 
-                i_OPC_SEND => i_OPC_SEND,
+                i_OPC_SEND           => i_OPC_SEND,
                 i_START_SEND_PACKET  => i_START_SEND_PACKET,
                 i_VALID_SEND_DATA    => i_VALID_SEND_DATA,
                 i_LAST_SEND_DATA     => i_LAST_SEND_DATA,
@@ -118,7 +120,7 @@ begin
                 i_WRITE_OK_BUFFER => w_WRITE_OK_BUFFER,
                 o_WRITE_BUFFER    => w_WRITE_BUFFER,
 
-                o_ADD => w_ADD,
+                o_ADD              => w_ADD,
                 o_INTEGRITY_RESETn => w_INTEGRITY_RESETn
             );
     end generate;
@@ -140,22 +142,22 @@ begin
             i_OPC_SEND  => i_OPC_SEND,
             i_DATA_SEND => i_DATA_SEND,
 
-            i_DEST_X    => w_DEST_X,
-            i_DEST_Y    => w_DEST_Y,
+            i_DEST_X        => w_DEST_X,
+            i_DEST_Y        => w_DEST_Y,
             i_FLIT_SELECTOR => w_FLIT_SELECTOR,
-            i_CHECKSUM  => w_CHECKSUM,
+            i_CHECKSUM      => w_CHECKSUM,
 
             o_FLIT => w_FLIT
         );
 
     u_INTEGRITY_CONTROL_SEND:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_INTEGRITY) generate
         u_INTEGRITY_CONTROL_SEND_TMR: entity work.integrity_control_send_tmr
             port map(
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD   => w_ADD,
+                i_ADD       => w_ADD,
                 i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
                 o_CHECKSUM => w_CHECKSUM
@@ -166,7 +168,7 @@ begin
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD   => w_ADD,
+                i_ADD       => w_ADD,
                 i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
                 o_CHECKSUM => w_CHECKSUM
@@ -213,7 +215,7 @@ begin
     end generate;
 
     u_SEND_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_FLOW) generate
         u_SEND_CONTROL_TMR: entity work.send_control_tmr
             port map(
                 ACLK    => ACLK,

@@ -83,4 +83,4 @@ vcom -2008 ../hdl/slave/test/tb_slave_write.vhd
 #---------------------------------------------------------------------------------------------
 # Testbenches.
 
-vcom -2008 ../hdl/test/tb_integration.vhd
+vcom -2008 ../hdl/test/tb_integration_adder.vhd

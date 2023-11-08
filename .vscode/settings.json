@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.lfm": "xml",
+        "harvsoc.h": "c"
+    }
+}

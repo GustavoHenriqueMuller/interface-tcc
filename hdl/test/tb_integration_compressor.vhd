@@ -6,10 +6,10 @@ use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tb_integration_harv is
-end tb_integration_harv;
+entity tb_integration_adder is
+end tb_integration_adder;
 
-architecture rtl of tb_integration_harv is
+architecture rtl of tb_integration_adder is
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -200,8 +200,6 @@ begin
             l_out_ack_i  => t_l_out_ack_i
         );
 
-    u_HARV_PROCESSOR: entity work.adder_full_v1_0
-
     u_TOP_SLAVE: entity work.tcc_top_slave
         generic map(
             p_SRC_X => "0000000000000001",
@@ -260,6 +258,48 @@ begin
             l_out_data_o => t2_l_out_data_o,
             l_out_val_o  => t2_l_out_val_o,
             l_out_ack_i  => t2_l_out_ack_i
+        );
+
+    u_ADDER: entity work.adder_full_v1_0
+        generic map(
+            C_S00_AXI_ID_WIDTH => c_AXI_ID_WIDTH,
+            C_S00_AXI_DATA_WIDTH => c_AXI_DATA_WIDTH,
+            C_S00_AXI_ADDR_WIDTH => c_AXI_ADDR_WIDTH
+        )
+
+        port map(
+            s00_axi_awid    => t2_AWID,
+            s00_axi_awlen   => t2_AWLEN,
+            s00_axi_awsize  => t2_AWSIZE,
+            s00_axi_awburst => t2_AWBURST,
+
+            s00_axi_arid    => t2_ARID,
+            s00_axi_arlen   => t2_ARLEN,
+            s00_axi_arsize  => t2_ARSIZE,
+            s00_axi_arburst => t2_ARBURST,
+
+            s00_axi_aclk => t_ACLK,
+            s00_axi_aresetn	=> t2_RESETn,
+            s00_axi_awaddr	=> t2_AWADDR,
+            s00_axi_awprot	=> "000",
+            s00_axi_awvalid	=> t2_AWVALID,
+            s00_axi_awready	=> t2_AWREADY,
+            s00_axi_wdata	=> t2_WDATA,
+            s00_axi_wstrb	=> "1111",
+            s00_axi_wvalid	=> t2_WVALID,
+            s00_axi_wready	=> t2_WREADY,
+            s00_axi_wlast	=> t2_WLAST,
+            s00_axi_bresp	=> t2_BRESP(1 downto 0),
+            s00_axi_bvalid	=> t2_BVALID,
+            s00_axi_bready	=> t2_BREADY,
+            s00_axi_araddr	=> t2_ARADDR,
+            s00_axi_arprot	=> "000",
+            s00_axi_arvalid	=> t2_ARVALID,
+            s00_axi_arready	=> t2_ARREADY,
+            s00_axi_rdata	=> t2_RDATA,
+            s00_axi_rresp	=> t2_RRESP(1 downto 0),
+            s00_axi_rvalid	=> t2_RVALID,
+            s00_axi_rready	=> t2_RREADY
         );
 
     u_XINA_NETWORK: entity work.xina

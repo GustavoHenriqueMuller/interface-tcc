@@ -10,6 +10,9 @@ entity tb_integration_adder is
 end tb_integration_adder;
 
 architecture rtl of tb_integration_adder is
+    ------------------------------------------------------------------------------------------------------
+    -- MASTER SIGNALS.
+
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -57,7 +60,9 @@ architecture rtl of tb_integration_adder is
         -- Extra signals.
         signal t_CORRUPT_PACKET: std_logic;
 
-    ------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------
+    -- SLAVE SIGNALS.
+
     -- AMBA-AXI 5 signals.
         -- Write request signals.
         signal t2_AWVALID: std_logic := '0';
@@ -99,7 +104,9 @@ architecture rtl of tb_integration_adder is
         -- Extra signals.
         signal t2_CORRUPT_PACKET: std_logic;
 
-    ------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------
+    -- NETWORK SIGNALS.
+
     -- Signals of master interface.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;

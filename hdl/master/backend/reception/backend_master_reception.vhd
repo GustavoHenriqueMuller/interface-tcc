@@ -7,9 +7,11 @@ use work.xina_pkg.all;
 
 entity backend_master_reception is
     generic(
-        p_BUFFER_DEPTH: positive;
-        p_USE_TMR     : boolean;
-        p_USE_HAMMING : boolean
+        p_BUFFER_DEPTH      : positive;
+        p_USE_TMR_PACKETIZER: boolean;
+        p_USE_TMR_FLOW      : boolean;
+        p_USE_TMR_INTEGRITY : boolean;
+        p_USE_HAMMING       : boolean
     );
 
     port(
@@ -75,7 +77,7 @@ begin
     o_DATA_RECEIVE   <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_PACKETIZER) generate
         u_DEPACKETIZER_CONTROL_TMR: entity work.backend_master_depacketizer_control_tmr
             port map(
                 ACLK => ACLK,
@@ -120,7 +122,7 @@ begin
     end generate;
 
     u_INTEGRITY_CONTROL_RECEIVE:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_INTEGRITY) generate
         u_INTEGRITY_CONTROL_RECEIVE_TMR: entity work.integrity_control_receive_tmr
             port map(
                 ACLK    => ACLK,
@@ -190,7 +192,7 @@ begin
     end generate;
 
     u_RECEIVE_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_FLOW) generate
         u_RECEIVE_CONTROL_TMR: entity work.receive_control_tmr
             port map(
                 ACLK    => ACLK,

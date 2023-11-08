@@ -10,9 +10,11 @@ entity backend_slave_injection is
         p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
 
-        p_BUFFER_DEPTH: positive;
-        p_USE_TMR     : boolean;
-        p_USE_HAMMING : boolean
+        p_BUFFER_DEPTH      : positive;
+        p_USE_TMR_PACKETIZER: boolean;
+        p_USE_TMR_FLOW      : boolean;
+        p_USE_TMR_INTEGRITY : boolean;
+        p_USE_HAMMING       : boolean
     );
 
     port(
@@ -60,7 +62,7 @@ architecture rtl of backend_slave_injection is
     signal w_READ_OK_BUFFER : std_logic;
 begin
     u_PACKETIZER_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_PACKETIZER) generate
         u_PACKETIZER_CONTROL_TMR: entity work.backend_slave_packetizer_control_tmr
             port map(
                 ACLK    => ACLK,
@@ -114,24 +116,24 @@ begin
             ACLK    => ACLK,
             ARESETn => ARESETn,
 
-            i_DATA_SEND => i_DATA_SEND,
-            i_STATUS_SEND => i_STATUS_SEND,
-            i_H_SRC_RECEIVE => i_H_SRC_RECEIVE,
+            i_DATA_SEND           => i_DATA_SEND,
+            i_STATUS_SEND         => i_STATUS_SEND,
+            i_H_SRC_RECEIVE       => i_H_SRC_RECEIVE,
             i_H_INTERFACE_RECEIVE => i_H_INTERFACE_RECEIVE,
-            i_FLIT_SELECTOR => w_FLIT_SELECTOR,
-            i_CHECKSUM  => w_CHECKSUM,
+            i_FLIT_SELECTOR       => w_FLIT_SELECTOR,
+            i_CHECKSUM            => w_CHECKSUM,
 
             o_FLIT => w_FLIT
         );
 
     u_INTEGRITY_CONTROL_SEND:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_INTEGRITY) generate
         u_INTEGRITY_CONTROL_SEND_TMR: entity work.integrity_control_send_tmr
             port map(
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD   => w_ADD,
+                i_ADD       => w_ADD,
                 i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
                 o_CHECKSUM => w_CHECKSUM
@@ -142,7 +144,7 @@ begin
                 ACLK    => ACLK,
                 ARESETn => w_INTEGRITY_RESETn,
 
-                i_ADD   => w_ADD,
+                i_ADD       => w_ADD,
                 i_VALUE_ADD => w_FLIT(c_AXI_DATA_WIDTH - 1 downto 0),
 
                 o_CHECKSUM => w_CHECKSUM
@@ -189,7 +191,7 @@ begin
     end generate;
 
     u_SEND_CONTROL:
-    if (p_USE_TMR) generate
+    if (p_USE_TMR_FLOW) generate
         u_SEND_CONTROL_TMR: entity work.send_control_tmr
             port map(
                 ACLK    => ACLK,

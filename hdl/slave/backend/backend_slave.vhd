@@ -10,9 +10,11 @@ entity backend_slave is
         p_SRC_X: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
         p_SRC_Y: std_logic_vector((c_AXI_ADDR_WIDTH / 4) - 1 downto 0);
 
-        p_BUFFER_DEPTH: positive;
-        p_USE_TMR     : boolean;
-        p_USE_HAMMING : boolean
+        p_BUFFER_DEPTH      : positive;
+        p_USE_TMR_PACKETIZER: boolean;
+        p_USE_TMR_FLOW      : boolean;
+        p_USE_TMR_INTEGRITY : boolean;
+        p_USE_HAMMING       : boolean
     );
 
     port(
@@ -67,9 +69,12 @@ begin
         generic map(
             p_SRC_X => p_SRC_X,
             p_SRC_Y => p_SRC_Y,
-            p_BUFFER_DEPTH => p_BUFFER_DEPTH,
-            p_USE_TMR      => p_USE_TMR,
-            p_USE_HAMMING  => p_USE_HAMMING
+
+            p_BUFFER_DEPTH       => p_BUFFER_DEPTH,
+            p_USE_TMR_PACKETIZER => p_USE_TMR_PACKETIZER,
+            p_USE_TMR_FLOW       => p_USE_TMR_FLOW,
+            p_USE_TMR_INTEGRITY  => p_USE_TMR_INTEGRITY,
+            p_USE_HAMMING        => p_USE_HAMMING
         )
 
         port map(
@@ -95,9 +100,11 @@ begin
 
     u_RECEPTION: entity work.backend_slave_reception
         generic map(
-            p_BUFFER_DEPTH => p_BUFFER_DEPTH,
-            p_USE_TMR      => p_USE_TMR,
-            p_USE_HAMMING  => p_USE_HAMMING
+            p_BUFFER_DEPTH       => p_BUFFER_DEPTH,
+            p_USE_TMR_PACKETIZER => p_USE_TMR_PACKETIZER,
+            p_USE_TMR_FLOW       => p_USE_TMR_FLOW,
+            p_USE_TMR_INTEGRITY  => p_USE_TMR_INTEGRITY,
+            p_USE_HAMMING        => p_USE_HAMMING
         )
 
         port map(
