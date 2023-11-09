@@ -41,8 +41,8 @@ entity tcc_top_slave is
             -- Write response signals.
             BVALID : in std_logic;
             BREADY : out std_logic;
-            BID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
-            BRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
+            BID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            BRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Read request signals.
             ARVALID: out std_logic;
@@ -58,8 +58,8 @@ entity tcc_top_slave is
             RREADY : out std_logic;
             RDATA  : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
             RLAST  : in std_logic;
-            RID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
-            RRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0);
+            RID    : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
+            RRESP  : in std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
             -- Extra signals.
             CORRUPT_PACKET: out std_logic;
