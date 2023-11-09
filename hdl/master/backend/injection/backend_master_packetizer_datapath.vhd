@@ -60,7 +60,7 @@ begin
 
     w_FLIT_H_DEST      <= '1' & i_DEST_X & i_DEST_Y;
     w_FLIT_H_SRC       <= '0' & p_SRC_X  & p_SRC_Y;
-    w_FLIT_H_INTERFACE <= '0' & "000000000000" & i_ID & i_LENGTH & i_BURST & "000" & i_OPC_SEND & "0";
+    w_FLIT_H_INTERFACE <= '0' & (others => '0') & i_ID & i_LENGTH & i_BURST & "000" & i_OPC_SEND & "0";
     w_FLIT_H_ADDRESS   <= '0' & i_OPC_ADDR;
 
     w_FLIT_PAYLOAD <= '0' & i_DATA_SEND;

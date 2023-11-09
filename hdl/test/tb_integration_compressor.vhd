@@ -10,6 +10,9 @@ entity tb_integration_adder is
 end tb_integration_adder;
 
 architecture rtl of tb_integration_adder is
+    ------------------------------------------------------------------------------------------------------
+    -- MASTER SIGNALS.
+
     -- AMBA-AXI 5 signals.
     signal t_ACLK  : std_logic := '0';
     signal t_RESETn: std_logic := '1';
@@ -22,7 +25,6 @@ architecture rtl of tb_integration_adder is
         signal t_AWID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_AWLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_AWSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_AWBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Write data signals.
@@ -43,7 +45,6 @@ architecture rtl of tb_integration_adder is
         signal t_ARID   : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARADDR : std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
         signal t_ARLEN  : std_logic_vector(7 downto 0) := "00000000";
-        signal t_ARSIZE : std_logic_vector(2 downto 0) := std_logic_vector(to_unsigned(c_AXI_DATA_WIDTH / 8, 3));
         signal t_ARBURST: std_logic_vector(1 downto 0) := "01";
 
         -- Read response/data signals.
@@ -57,7 +58,9 @@ architecture rtl of tb_integration_adder is
         -- Extra signals.
         signal t_CORRUPT_PACKET: std_logic;
 
-    ------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------
+    -- SLAVE SIGNALS.
+
     -- AMBA-AXI 5 signals.
         -- Write request signals.
         signal t2_AWVALID: std_logic := '0';
@@ -93,13 +96,16 @@ architecture rtl of tb_integration_adder is
         signal t2_RVALID : std_logic := '0';
         signal t2_RREADY : std_logic := '0';
         signal t2_RDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t2_RLAST  : std_logic := '0';
         signal t2_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t2_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
         -- Extra signals.
         signal t2_CORRUPT_PACKET: std_logic;
 
-    ------------------------------------------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------------------------
+    -- NETWORK SIGNALS.
+
     -- Signals of master interface.
     signal t_l_in_data_i : std_logic_vector(data_width_c downto 0);
     signal t_l_in_val_i  : std_logic;
@@ -157,7 +163,6 @@ begin
                 AWID    => t_AWID,
                 AWADDR  => t_AWADDR,
                 AWLEN   => t_AWLEN,
-                AWSIZE  => t_AWSIZE,
                 AWBURST => t_AWBURST,
 
                 -- Write data signals.
@@ -178,7 +183,6 @@ begin
                 ARID    => t_ARID,
                 ARADDR  => t_ARADDR,
                 ARLEN   => t_ARLEN,
-                ARSIZE  => t_ARSIZE,
                 ARBURST => t_ARBURST,
 
                 -- Read response/data signals.
@@ -244,7 +248,7 @@ begin
                 RVALID  => t2_RVALID,
                 RREADY  => t2_RREADY,
                 RDATA   => t2_RDATA,
-                RLAST   => '1',
+                RLAST   => t2_RLAST,
                 RRESP   => t2_RRESP,
 
                 -- Extra signals.
@@ -260,7 +264,7 @@ begin
             l_out_ack_i  => t2_l_out_ack_i
         );
 
-    u_COMPRESSOR: entity work.adder_full_v1_0
+    u_COMPRESSOR: entity work.ccsds_axifull_v1_0
         generic map(
             C_S00_AXI_ID_WIDTH => c_AXI_ID_WIDTH,
             C_S00_AXI_DATA_WIDTH => c_AXI_DATA_WIDTH,
@@ -268,36 +272,47 @@ begin
         )
 
         port map(
+            s00_axi_aclk    => t_ACLK,
+            s00_axi_aresetn	=> t2_RESETn,
+
+            -- Write request channel.
             s00_axi_awid    => t2_AWID,
+            s00_axi_awaddr	=> t2_AWADDR,
             s00_axi_awlen   => t2_AWLEN,
             s00_axi_awsize  => t2_AWSIZE,
             s00_axi_awburst => t2_AWBURST,
-
-            s00_axi_arid    => t2_ARID,
-            s00_axi_arlen   => t2_ARLEN,
-            s00_axi_arsize  => t2_ARSIZE,
-            s00_axi_arburst => t2_ARBURST,
-
-            s00_axi_aclk => t_ACLK,
-            s00_axi_aresetn	=> t2_RESETn,
-            s00_axi_awaddr	=> t2_AWADDR,
             s00_axi_awprot	=> "000",
             s00_axi_awvalid	=> t2_AWVALID,
             s00_axi_awready	=> t2_AWREADY,
+
+            -- Write data channel.
             s00_axi_wdata	=> t2_WDATA,
             s00_axi_wstrb	=> "1111",
+            s00_axi_wlast	=> t2_WLAST,
             s00_axi_wvalid	=> t2_WVALID,
             s00_axi_wready	=> t2_WREADY,
-            s00_axi_wlast	=> t2_WLAST,
+
+            -- Write response channel.
+            s00_axi_bid 	=> t2_BID,
             s00_axi_bresp	=> t2_BRESP(1 downto 0),
             s00_axi_bvalid	=> t2_BVALID,
             s00_axi_bready	=> t2_BREADY,
+
+            -- Read request channel.
+            s00_axi_arid    => t2_ARID,
             s00_axi_araddr	=> t2_ARADDR,
+            s00_axi_arlen   => t2_ARLEN,
+            s00_axi_arsize  => t2_ARSIZE,
+            s00_axi_arburst => t2_ARBURST,
             s00_axi_arprot	=> "000",
             s00_axi_arvalid	=> t2_ARVALID,
             s00_axi_arready	=> t2_ARREADY,
+
+            -- Read data channel.
+            s00_axi_rid  	=> t2_RID,
             s00_axi_rdata	=> t2_RDATA,
             s00_axi_rresp	=> t2_RRESP(1 downto 0),
+            s00_axi_rlast	=> t2_RLAST,
             s00_axi_rvalid	=> t2_RVALID,
             s00_axi_rready	=> t2_RREADY
         );
@@ -345,22 +360,23 @@ begin
         t2_RESETn <= '1';
 
         ---------------------------------------------------------------------------------------------
-        -- First transaction.
+        -- First transaction (write).
         t_AWVALID <= '1';
         t_AWADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_AWID <= "00001";
         t_AWLEN <= "00000000";
 
         wait until rising_edge(t_ACLK) and t_AWREADY = '1';
-        t_AWVALID <= '0';
 
+        -- Reset.
+        t_AWVALID <= '0';
         t_AWADDR <= (others => '0');
         t_AWID <= (others => '0');
         t_AWLEN <= (others => '0');
 
-        -- Flit.
+        -- Flit 1.
         t_WVALID <= '1';
-        t_WDATA <= "00001000010100110000000000000000";
+        t_WDATA <= "00000000000000000000000000101000";
         t_WLAST <= '1';
 
         wait until rising_edge(t_ACLK) and t_WREADY = '1';
@@ -371,29 +387,33 @@ begin
         t_WLAST <= '0';
 
         ---------------------------------------------------------------------------------------------
-        -- Second transaction.
+        -- Receive first transaction response.
+        t_BREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_BVALID = '1';
+        t_BREADY <= '0';
+
+        ---------------------------------------------------------------------------------------------
+        -- Second transaction (read).
         t_ARVALID <= '1';
         t_ARADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
-        t_ARID <= "00001";
+        t_ARID <= "00010";
         t_ARLEN <= "00000000";
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
+
+        -- Reset.
         t_ARVALID <= '0';
-
-        -- RESULT: 00001000010100110000000000001010 / 0853000A
-
-        ---------------------------------------------------------------------------------------------
-        -- Receive first transaction response.
-        t_BREADY <= '1';
-
-        wait until rising_edge(t_ACLK) and t_BVALID = '1';
-        t_BREADY <= '0';
+        t_ARADDR <= (others => '0');
+        t_ARID <= (others => '0');
+        t_ARLEN <= (others => '0');
 
         ---------------------------------------------------------------------------------------------
         -- Receive second transaction response.
         t_RREADY <= '1';
 
         wait until rising_edge(t_ACLK) and t_RVALID = '1' and t_RLAST = '1';
+
+        -- Reset.
         t_RREADY <= '0';
 
         wait;

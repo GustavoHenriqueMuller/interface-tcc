@@ -4,7 +4,7 @@ library work;
 use IEEE.std_logic_1164.all;
 
 package tcc_package is
-	-- AMBA AXI attributes.
+	-- AMBA-AXI attributes.
 	constant c_AXI_DATA_WIDTH: natural := 32;
 	constant c_AXI_ADDR_WIDTH: natural := c_AXI_DATA_WIDTH * 2; -- First half: Operation address. Second half: IP address (XXYY).
 	constant c_AXI_ID_WIDTH  : natural := 5;  -- This constant corresponds to "ID_W_WIDTH" and "ID_R_WIDTH".

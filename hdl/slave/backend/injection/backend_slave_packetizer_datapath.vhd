@@ -62,7 +62,7 @@ begin
 
     w_FLIT_H_DEST <= '1' & i_H_SRC_RECEIVE(31 downto 0);
     w_FLIT_H_SRC  <= '0' & p_SRC_X & p_SRC_Y;
-    w_FLIT_H_INTERFACE <= '0' & "000000000000" & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & w_OPC & "1";
+    w_FLIT_H_INTERFACE <= '0' & (others => '0') & w_ID & w_LENGTH & w_BURST & i_STATUS_SEND & w_OPC & "1";
     w_FLIT_PAYLOAD  <= '0' & i_DATA_SEND;
     w_FLIT_TRAILER  <= '1' & i_CHECKSUM;
 end rtl;

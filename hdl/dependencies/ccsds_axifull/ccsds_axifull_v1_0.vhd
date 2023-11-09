@@ -59,7 +59,7 @@ entity ccsds_axifull_v1_0 is
 		s00_axi_arlen	: in std_logic_vector(7 downto 0);
 		s00_axi_arsize	: in std_logic_vector(2 downto 0);
 		s00_axi_arburst	: in std_logic_vector(1 downto 0);
-		s00_axi_arlock	: in std_logic;
+		s00_axi_arlock	: in std_logic := '0';
 		s00_axi_arcache	: in std_logic_vector(3 downto 0) := (others => '0');
 		s00_axi_arprot	: in std_logic_vector(2 downto 0) := (others => '0');
 		s00_axi_arqos	: in std_logic_vector(3 downto 0) := (others => '0');
