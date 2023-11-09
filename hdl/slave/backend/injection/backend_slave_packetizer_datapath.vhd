@@ -55,10 +55,10 @@ begin
             o_DATA     => o_FLIT
         );
 
-    w_ID     <= i_H_INTERFACE_RECEIVE(20 downto 16);
-    w_LENGTH <= i_H_INTERFACE_RECEIVE(15 downto 8);
-    w_BURST  <= i_H_INTERFACE_RECEIVE(7 downto 6);
-    w_OPC    <= i_H_INTERFACE_RECEIVE(0);
+    w_ID     <= i_H_INTERFACE_RECEIVE(19 downto 15);
+    w_LENGTH <= i_H_INTERFACE_RECEIVE(14 downto 7);
+    w_BURST  <= i_H_INTERFACE_RECEIVE(6 downto 5);
+    w_OPC    <= i_H_INTERFACE_RECEIVE(1);
 
     w_FLIT_H_DEST <= '1' & i_H_SRC_RECEIVE(31 downto 0);
     w_FLIT_H_SRC  <= '0' & p_SRC_X & p_SRC_Y;

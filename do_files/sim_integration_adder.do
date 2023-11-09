@@ -57,6 +57,7 @@ sim:/tb_integration_adder/t2_ARBURST \
 sim:/tb_integration_adder/t2_RVALID \
 sim:/tb_integration_adder/t2_RREADY \
 sim:/tb_integration_adder/t2_RDATA \
+sim:/tb_integration_adder/t2_RLAST \
 sim:/tb_integration_adder/t2_RID \
 sim:/tb_integration_adder/t2_RRESP \
 sim:/tb_integration_adder/t2_CORRUPT_PACKET
