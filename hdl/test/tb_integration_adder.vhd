@@ -396,13 +396,20 @@ begin
         t_ARLEN <= "00000001"; -- Read 2 flits starting from address 0.
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
+
+        -- Reset.
         t_ARVALID <= '0';
+        t_ARADDR <= (others => '0');
+        t_ARID <= (others => '0');
+        t_ARLEN <= (others => '0');
 
         ---------------------------------------------------------------------------------------------
         -- Receive second transaction response.
         t_RREADY <= '1';
 
         wait until rising_edge(t_ACLK) and t_RVALID = '1' and t_RLAST = '1';
+
+        -- Reset.
         t_RREADY <= '0';
 
         wait;
