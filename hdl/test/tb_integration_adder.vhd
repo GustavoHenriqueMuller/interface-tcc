@@ -96,6 +96,7 @@ architecture rtl of tb_integration_adder is
         signal t2_RVALID : std_logic := '0';
         signal t2_RREADY : std_logic := '0';
         signal t2_RDATA  : std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
+        signal t2_RLAST  : std_logic := '0';
         signal t2_RID    : std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0) := (others => '0');
         signal t2_RRESP  : std_logic_vector(c_AXI_RESP_WIDTH - 1 downto 0) := (others => '0');
 
@@ -247,7 +248,7 @@ begin
                 RVALID  => t2_RVALID,
                 RREADY  => t2_RREADY,
                 RDATA   => t2_RDATA,
-                RLAST   => '1',
+                RLAST   => t2_RLAST,
                 RRESP   => t2_RRESP,
 
                 -- Extra signals.
@@ -300,6 +301,7 @@ begin
             s00_axi_arvalid	=> t2_ARVALID,
             s00_axi_arready	=> t2_ARREADY,
             s00_axi_rdata	=> t2_RDATA,
+            s00_axi_rlast	=> t2_RLAST,
             s00_axi_rresp	=> t2_RRESP(1 downto 0),
             s00_axi_rvalid	=> t2_RVALID,
             s00_axi_rready	=> t2_RREADY
@@ -352,7 +354,7 @@ begin
         t_AWVALID <= '1';
         t_AWADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_AWID <= "00001";
-        t_AWLEN <= "00000000";
+        t_AWLEN <= "00000001";
 
         wait until rising_edge(t_ACLK) and t_AWREADY = '1';
 
@@ -380,7 +382,8 @@ begin
         t_WVALID <= '0';
         t_WLAST <= '0';
 
-        -- Response.
+        ---------------------------------------------------------------------------------------------
+        -- Receive first transaction response.
         t_BREADY <= '1';
         wait until rising_edge(t_ACLK) and t_BVALID = '1';
         t_BREADY <= '0';
@@ -394,13 +397,6 @@ begin
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
         t_ARVALID <= '0';
-
-        ---------------------------------------------------------------------------------------------
-        -- Receive first transaction response.
-        t_BREADY <= '1';
-
-        wait until rising_edge(t_ACLK) and t_BVALID = '1';
-        t_BREADY <= '0';
 
         ---------------------------------------------------------------------------------------------
         -- Receive second transaction response.

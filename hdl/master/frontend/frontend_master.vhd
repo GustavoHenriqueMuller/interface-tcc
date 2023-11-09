@@ -142,7 +142,7 @@ begin
 
     -- Read reception.
     RVALID <= '1' when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else '0';
-    RDATA  <= i_DATA_RECEIVE when (i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
+    RDATA  <= i_DATA_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_DATA_WIDTH - 1 downto 0 => '0');
     RLAST  <= i_LAST_RECEIVE_DATA;
     RID    <= i_ID_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_ID_WIDTH - 1 downto 0 => '0');
     RRESP  <= i_STATUS_RECEIVE when (i_OPC_RECEIVE = '1' and i_VALID_RECEIVE_DATA = '1') else (c_AXI_RESP_WIDTH - 1 downto 0 => '0');

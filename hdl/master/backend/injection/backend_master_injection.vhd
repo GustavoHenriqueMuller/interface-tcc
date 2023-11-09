@@ -59,7 +59,7 @@ architecture rtl of backend_master_injection is
 
     -- Checksum.
     signal w_ADD: std_logic;
-    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
+    signal w_CHECKSUM: std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0) := (others => '0');
     signal w_INTEGRITY_RESETn: std_logic;
 
     -- FIFO.
