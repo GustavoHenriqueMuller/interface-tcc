@@ -376,7 +376,7 @@ begin
 
         -- Flit 1.
         t_WVALID <= '1';
-        t_WDATA <= "00000000000000000000000000101000";
+        t_WDATA <= "00000000000000000000000000000001";
         t_WLAST <= '1';
 
         wait until rising_edge(t_ACLK) and t_WREADY = '1';
