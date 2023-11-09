@@ -21,12 +21,12 @@ architecture rtl of read_request_injector is
     signal current_state : std_logic := '0';
     signal next_state    : std_logic;
 
-    signal id_w: std_logic_vector(4 downto 0) := "00001";
-    signal len_w: std_logic_vector(7 downto 0) := "00000000";
-    signal burst_w: std_logic_vector(1 downto 0) := "01";
-    signal status_w: std_logic_vector(2 downto 0) := "000";
-    signal opc_w: std_logic := '1';
-    signal type_w: std_logic := '0';
+    constant id_w: std_logic_vector(4 downto 0) := "00001";
+    constant len_w: std_logic_vector(7 downto 0) := "00000000";
+    constant burst_w: std_logic_vector(1 downto 0) := "01";
+    constant status_w: std_logic_vector(2 downto 0) := "000";
+    constant opc_w: std_logic := '1';
+    constant type_w: std_logic := '0';
 
     signal enb_counter_w: std_logic;
     signal state_w: integer range 0 to 4 := 0;

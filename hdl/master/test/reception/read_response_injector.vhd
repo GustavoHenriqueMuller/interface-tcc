@@ -21,12 +21,12 @@ architecture arch_read_response_injector of read_response_injector is
     signal current_state : std_logic := '0';
     signal next_state    : std_logic;
 
-    signal id_w: std_logic_vector(4 downto 0) := "00001";
-    signal len_w: std_logic_vector(7 downto 0) := "00000001";
-    signal burst_w: std_logic_vector(1 downto 0) := "01";
-    signal status_w: std_logic_vector(2 downto 0) := "010";
-    signal opc_w: std_logic := '1';
-    signal type_w: std_logic := '1';
+    constant id_w: std_logic_vector(4 downto 0) := "00001";
+    constant len_w: std_logic_vector(7 downto 0) := "00000001";
+    constant burst_w: std_logic_vector(1 downto 0) := "01";
+    constant status_w: std_logic_vector(2 downto 0) := "010";
+    constant opc_w: std_logic := '1';
+    constant type_w: std_logic := '1';
 
     signal enb_counter_w: std_logic;
     signal state_w: integer range 0 to 6 := 0;
