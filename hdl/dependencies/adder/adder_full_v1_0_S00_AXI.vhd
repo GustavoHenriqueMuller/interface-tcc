@@ -44,7 +44,7 @@ entity adder_full_v1_0_S00_AXI is
 		S_AXI_AWLEN	: in std_logic_vector(7 downto 0);
 		-- Burst size. This signal indicates the size of each transfer in the burst
 		S_AXI_AWSIZE	: in std_logic_vector(2 downto 0);
-		-- Burst type. The burst type and the size information, 
+		-- Burst type. The burst type and the size information,
     -- determine how the address for each transfer within the burst is calculated.
 		S_AXI_AWBURST	: in std_logic_vector(1 downto 0);
 		-- Lock type. Provides additional information about the
@@ -114,7 +114,7 @@ entity adder_full_v1_0_S00_AXI is
 		S_AXI_ARLEN	: in std_logic_vector(7 downto 0);
 		-- Burst size. This signal indicates the size of each transfer in the burst
 		S_AXI_ARSIZE	: in std_logic_vector(2 downto 0);
-		-- Burst type. The burst type and the size information, 
+		-- Burst type. The burst type and the size information,
     -- determine how the address for each transfer within the burst is calculated.
 		S_AXI_ARBURST	: in std_logic_vector(1 downto 0);
 		-- Lock type. Provides additional information about the
@@ -182,7 +182,7 @@ architecture arch_imp of adder_full_v1_0_S00_AXI is
 	signal axi_ruser	: std_logic_vector(C_S_AXI_RUSER_WIDTH-1 downto 0);
 	signal axi_rvalid	: std_logic;
 	-- aw_wrap_en determines wrap boundary and enables wrapping
-	signal  aw_wrap_en : std_logic; 
+	signal  aw_wrap_en : std_logic;
 	-- ar_wrap_en determines wrap boundary and enables wrapping
 	signal  ar_wrap_en : std_logic;
 	-- aw_wrap_size is the size of the write transfer, the
@@ -207,12 +207,12 @@ architecture arch_imp of adder_full_v1_0_S00_AXI is
 	signal axi_awlen      : std_logic_vector(8-1 downto 0);
 	--local parameter for addressing 32 bit / 64 bit C_S_AXI_DATA_WIDTH
 	--ADDR_LSB is used for addressing 32/64 bit registers/memories
-	--ADDR_LSB = 2 for 32 bits (n downto 2) 
+	--ADDR_LSB = 2 for 32 bits (n downto 2)
 	--ADDR_LSB = 3 for 42 bits (n downto 3)
 
 	constant ADDR_LSB  : integer := (C_S_AXI_DATA_WIDTH/32)+ 1;
 	constant OPT_MEM_ADDR_BITS : integer := 3;
-	constant USER_NUM_MEM: integer := 1;
+	constant USER_NUM_MEM: integer := 2;
 	constant low : std_logic_vector (C_S_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
 	------------------------------------------------
 	---- Signals for user logic memory space example
@@ -232,7 +232,7 @@ architecture arch_imp of adder_full_v1_0_S00_AXI is
     port ( i_A   : in std_logic_vector(31 downto 0);
            o_ADD : out std_logic_vector(31 downto 0));
     end component;
-    
+
 begin
 	-- I/O Connections assignments
 
@@ -249,8 +249,8 @@ begin
 	S_AXI_RVALID	<= axi_rvalid;
 	S_AXI_BID <= S_AXI_AWID;
 	S_AXI_RID <= S_AXI_ARID;
-	aw_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_awlen))); 
-	ar_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_arlen))); 
+	aw_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_awlen)));
+	ar_wrap_size <= ((C_S_AXI_DATA_WIDTH)/8 * to_integer(unsigned(axi_arlen)));
 	aw_wrap_en <= '1' when (((axi_awaddr AND std_logic_vector(to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH))) XOR std_logic_vector(to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH))) = low) else '0';
 	ar_wrap_en <= '1' when (((axi_araddr AND std_logic_vector(to_unsigned(ar_wrap_size,C_S_AXI_ADDR_WIDTH))) XOR std_logic_vector(to_unsigned(ar_wrap_size,C_S_AXI_ADDR_WIDTH))) = low) else '0';
 
@@ -262,7 +262,7 @@ begin
 
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_awready <= '0';
 	      axi_awv_awr_flag <= '0';
@@ -272,36 +272,36 @@ begin
 	        -- associated control signals
 	        axi_awv_awr_flag  <= '1'; -- used for generation of bresp() and bvalid
 	        axi_awready <= '1';
-	      elsif (S_AXI_WLAST = '1' and axi_wready = '1') then 
+	      elsif (S_AXI_WLAST = '1' and axi_wready = '1') then
 	      -- preparing to accept next address after current write burst tx completion
 	        axi_awv_awr_flag  <= '0';
 	      else
 	        axi_awready <= '0';
 	      end if;
 	    end if;
-	  end if;         
-	end process; 
+	  end if;
+	end process;
 	-- Implement axi_awaddr latching
 
-	-- This process is used to latch the address when both 
-	-- S_AXI_AWVALID and S_AXI_WVALID are valid. 
+	-- This process is used to latch the address when both
+	-- S_AXI_AWVALID and S_AXI_WVALID are valid.
 
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_awaddr <= (others => '0');
-	      axi_awburst <= (others => '0'); 
-	      axi_awlen <= (others => '0'); 
+	      axi_awburst <= (others => '0');
+	      axi_awlen <= (others => '0');
 	      axi_awlen_cntr <= (others => '0');
 	    else
 	      if (axi_awready = '0' and S_AXI_AWVALID = '1' and axi_awv_awr_flag = '0') then
-	      -- address latching 
+	      -- address latching
 	        axi_awaddr <= S_AXI_AWADDR(C_S_AXI_ADDR_WIDTH - 1 downto 0);  ---- start address of transfer
 	        axi_awlen_cntr <= (others => '0');
 	        axi_awburst <= S_AXI_AWBURST;
 	        axi_awlen <= S_AXI_AWLEN;
-	      elsif((axi_awlen_cntr <= axi_awlen) and axi_wready = '1' and S_AXI_WVALID = '1') then     
+	      elsif((axi_awlen_cntr <= axi_awlen) and axi_wready = '1' and S_AXI_WVALID = '1') then
 	        axi_awlen_cntr <= std_logic_vector (unsigned(axi_awlen_cntr) + 1);
 
 	        case (axi_awburst) is
@@ -313,17 +313,17 @@ begin
 	            axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--awaddr aligned to 4 byte boundary
 	            axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
 	          when "10" => --Wrapping burst
-	            -- The write address wraps when the address reaches wrap boundary 
+	            -- The write address wraps when the address reaches wrap boundary
 	            if (aw_wrap_en = '1') then
-	              axi_awaddr <= std_logic_vector (unsigned(axi_awaddr) - (to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH)));                
-	            else 
+	              axi_awaddr <= std_logic_vector (unsigned(axi_awaddr) - (to_unsigned(aw_wrap_size,C_S_AXI_ADDR_WIDTH)));
+	            else
 	              axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--awaddr aligned to 4 byte boundary
 	              axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
 	            end if;
 	          when others => --reserved (incremental burst for example)
 	            axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_awaddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--for awsize = 4 bytes (010)
 	            axi_awaddr(ADDR_LSB-1 downto 0)  <= (others => '0');
-	        end case;        
+	        end case;
 	      end if;
 	    end if;
 	  end if;
@@ -331,35 +331,35 @@ begin
 	-- Implement axi_wready generation
 
 	-- axi_wready is asserted for one S_AXI_ACLK clock cycle when both
-	-- S_AXI_AWVALID and S_AXI_WVALID are asserted. axi_wready is 
-	-- de-asserted when reset is low. 
+	-- S_AXI_AWVALID and S_AXI_WVALID are asserted. axi_wready is
+	-- de-asserted when reset is low.
 
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_wready <= '0';
 	    else
 	      if (axi_wready = '0' and S_AXI_WVALID = '1' and axi_awv_awr_flag = '1') then
 	        axi_wready <= '1';
 	        -- elsif (axi_awv_awr_flag = '0') then
-	      elsif (S_AXI_WLAST = '1' and axi_wready = '1') then 
+	      elsif (S_AXI_WLAST = '1' and axi_wready = '1') then
 
 	        axi_wready <= '0';
 	      end if;
 	    end if;
-	  end if;         
-	end process; 
+	  end if;
+	end process;
 	-- Implement write response logic generation
 
-	-- The write response and response valid signals are asserted by the slave 
-	-- when axi_wready, S_AXI_WVALID, axi_wready and S_AXI_WVALID are asserted.  
-	-- This marks the acceptance of address and indicates the status of 
+	-- The write response and response valid signals are asserted by the slave
+	-- when axi_wready, S_AXI_WVALID, axi_wready and S_AXI_WVALID are asserted.
+	-- This marks the acceptance of address and indicates the status of
 	-- write transaction.
 
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_bvalid  <= '0';
 	      axi_bresp  <= "00"; --need to work more on the responses
@@ -367,25 +367,25 @@ begin
 	    else
 	      if (axi_awv_awr_flag = '1' and axi_wready = '1' and S_AXI_WVALID = '1' and axi_bvalid = '0' and S_AXI_WLAST = '1' ) then
 	        axi_bvalid <= '1';
-	        axi_bresp  <= "00"; 
-	      elsif (S_AXI_BREADY = '1' and axi_bvalid = '1') then  
+	        axi_bresp  <= "00";
+	      elsif (S_AXI_BREADY = '1' and axi_bvalid = '1') then
 	      --check if bready is asserted while bvalid is high)
-	        axi_bvalid <= '0';                      
+	        axi_bvalid <= '0';
 	      end if;
 	    end if;
-	  end if;         
+	  end if;
 	end process;
 	-- Implement axi_arready generation
 
 	-- axi_arready is asserted for one S_AXI_ACLK clock cycle when
-	-- S_AXI_ARVALID is asserted. axi_awready is 
-	-- de-asserted when reset (active low) is asserted. 
-	-- The read address is also latched when S_AXI_ARVALID is 
+	-- S_AXI_ARVALID is asserted. axi_awready is
+	-- de-asserted when reset (active low) is asserted.
+	-- The read address is also latched when S_AXI_ARVALID is
 	-- asserted. axi_araddr is reset to zero on reset assertion.
 
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_arready <= '0';
 	      axi_arv_arr_flag <= '0';
@@ -393,41 +393,41 @@ begin
 	      if (axi_arready = '0' and S_AXI_ARVALID = '1' and axi_awv_awr_flag = '0' and axi_arv_arr_flag = '0') then
 	        axi_arready <= '1';
 	        axi_arv_arr_flag <= '1';
-	      elsif (axi_rvalid = '1' and S_AXI_RREADY = '1' and (axi_arlen_cntr = axi_arlen)) then 
+	      elsif (axi_rvalid = '1' and S_AXI_RREADY = '1' and (axi_arlen_cntr = axi_arlen)) then
 	      -- preparing to accept next address after current read completion
 	        axi_arv_arr_flag <= '0';
 	      else
 	        axi_arready <= '0';
 	      end if;
 	    end if;
-	  end if;         
-	end process; 
+	  end if;
+	end process;
 	-- Implement axi_araddr latching
 
-	--This process is used to latch the address when both 
-	--S_AXI_ARVALID and S_AXI_RVALID are valid. 
+	--This process is used to latch the address when both
+	--S_AXI_ARVALID and S_AXI_RVALID are valid.
 	process (S_AXI_ACLK)
 	begin
-	  if rising_edge(S_AXI_ACLK) then 
+	  if rising_edge(S_AXI_ACLK) then
 	    if S_AXI_ARESETN = '0' then
 	      axi_araddr <= (others => '0');
 	      axi_arburst <= (others => '0');
-	      axi_arlen <= (others => '0'); 
+	      axi_arlen <= (others => '0');
 	      axi_arlen_cntr <= (others => '0');
 	      axi_rlast <= '0';
 	      axi_ruser <= (others => '0');
 	    else
 	      if (axi_arready = '0' and S_AXI_ARVALID = '1' and axi_arv_arr_flag = '0') then
-	        -- address latching 
+	        -- address latching
 	        axi_araddr <= S_AXI_ARADDR(C_S_AXI_ADDR_WIDTH - 1 downto 0); ---- start address of transfer
 	        axi_arlen_cntr <= (others => '0');
 	        axi_rlast <= '0';
 	        axi_arburst <= S_AXI_ARBURST;
 	        axi_arlen <= S_AXI_ARLEN;
-	      elsif((axi_arlen_cntr <= axi_arlen) and axi_rvalid = '1' and S_AXI_RREADY = '1') then     
+	      elsif((axi_arlen_cntr <= axi_arlen) and axi_rvalid = '1' and S_AXI_RREADY = '1') then
 	        axi_arlen_cntr <= std_logic_vector (unsigned(axi_arlen_cntr) + 1);
-	        axi_rlast <= '0';      
-	     
+	        axi_rlast <= '0';
+
 	        case (axi_arburst) is
 	          when "00" =>  -- fixed burst
 	            -- The read address for all the beats in the transaction are fixed
@@ -437,34 +437,34 @@ begin
 	            axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1); --araddr aligned to 4 byte boundary
 	            axi_araddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
 	          when "10" =>  --Wrapping burst
-	            -- The read address wraps when the address reaches wrap boundary 
-	            if (ar_wrap_en = '1') then   
+	            -- The read address wraps when the address reaches wrap boundary
+	            if (ar_wrap_en = '1') then
 	              axi_araddr <= std_logic_vector (unsigned(axi_araddr) - (to_unsigned(ar_wrap_size,C_S_AXI_ADDR_WIDTH)));
-	            else 
+	            else
 	              axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1); --araddr aligned to 4 byte boundary
 	              axi_araddr(ADDR_LSB-1 downto 0)  <= (others => '0');  ----for awsize = 4 bytes (010)
 	            end if;
 	          when others => --reserved (incremental burst for example)
 	            axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB) <= std_logic_vector (unsigned(axi_araddr(C_S_AXI_ADDR_WIDTH - 1 downto ADDR_LSB)) + 1);--for arsize = 4 bytes (010)
 			  axi_araddr(ADDR_LSB-1 downto 0)  <= (others => '0');
-	        end case;         
-	      elsif((axi_arlen_cntr = axi_arlen) and axi_rlast = '0' and axi_arv_arr_flag = '1') then  
+	        end case;
+	      elsif((axi_arlen_cntr = axi_arlen) and axi_rlast = '0' and axi_arv_arr_flag = '1') then
 	        axi_rlast <= '1';
-	      elsif (S_AXI_RREADY = '1') then  
+	      elsif (S_AXI_RREADY = '1') then
 	        axi_rlast <= '0';
 	      end if;
 	    end if;
 	  end if;
-	end  process;  
+	end  process;
 	-- Implement axi_arvalid generation
 
-	-- axi_rvalid is asserted for one S_AXI_ACLK clock cycle when both 
-	-- S_AXI_ARVALID and axi_arready are asserted. The slave registers 
-	-- data are available on the axi_rdata bus at this instance. The 
-	-- assertion of axi_rvalid marks the validity of read data on the 
-	-- bus and axi_rresp indicates the status of read transaction.axi_rvalid 
-	-- is deasserted on reset (active low). axi_rresp and axi_rdata are 
-	-- cleared to zero on reset (active low).  
+	-- axi_rvalid is asserted for one S_AXI_ACLK clock cycle when both
+	-- S_AXI_ARVALID and axi_arready are asserted. The slave registers
+	-- data are available on the axi_rdata bus at this instance. The
+	-- assertion of axi_rvalid marks the validity of read data on the
+	-- bus and axi_rresp indicates the status of read transaction.axi_rvalid
+	-- is deasserted on reset (active low). axi_rresp and axi_rdata are
+	-- cleared to zero on reset (active low).
 
 	process (S_AXI_ACLK)
 	begin
@@ -478,7 +478,7 @@ begin
 	        axi_rresp  <= "00"; -- 'OKAY' response
 	      elsif (axi_rvalid = '1' and S_AXI_RREADY = '1') then
 	        axi_rvalid <= '0';
-	      end  if;      
+	      end  if;
 	    end if;
 	  end if;
 	end  process;
@@ -488,12 +488,12 @@ begin
 
 	gen_mem_sel: if (USER_NUM_MEM >= 1) generate
 	begin
-	  mem_select  <= "1";
+	  mem_select  <= "11";
 	  mem_address <= axi_araddr(ADDR_LSB+OPT_MEM_ADDR_BITS downto ADDR_LSB) when axi_arv_arr_flag = '1' else
 	                 axi_awaddr(ADDR_LSB+OPT_MEM_ADDR_BITS downto ADDR_LSB) when axi_awv_awr_flag = '1' else
 	                 (others => '0');
 	end generate gen_mem_sel;
-	 
+
 	-- implement Block RAM(s)
 	BRAM_GEN : for i in 0 to USER_NUM_MEM-1 generate
 	  signal mem_rden : std_logic;
@@ -501,7 +501,7 @@ begin
 	begin
 	  mem_wren <= axi_wready and S_AXI_WVALID ;
 	  mem_rden <= axi_arv_arr_flag ;
-	
+
 	 BYTE_BRAM_GEN : for mem_byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) generate
 	   signal byte_ram : BYTE_RAM_TYPE;
 	   signal data_in  : std_logic_vector(8-1 downto 0);
@@ -517,17 +517,17 @@ begin
 	         byte_ram(to_integer(unsigned(mem_address))) <= data_in;
 	       end if;
 	     end if;
-	  
+
 	   end process BYTE_RAM_PROC;
 	   process( S_AXI_ACLK ) is
 	     begin
 	       if ( rising_edge (S_AXI_ACLK) ) then
-	         if ( mem_rden = '1') then 
+	         if ( mem_rden = '1') then
 	           mem_data_out(i)((mem_byte_index*8+7) downto mem_byte_index*8) <= data_out;
 	         end if;
 	       end if;
 	   end process;
-	 
+
 	 end generate BYTE_BRAM_GEN;
 
 	end generate BRAM_GEN;
@@ -536,13 +536,13 @@ begin
 	process(w_adder_out, axi_rvalid ) is
 	begin
 	  if (axi_rvalid = '1') then
-	    -- When there is a valid read address (S_AXI_ARVALID) with 
-	    -- acceptance of read address by the slave (axi_arready), 
-	    -- output the read dada 
+	    -- When there is a valid read address (S_AXI_ARVALID) with
+	    -- acceptance of read address by the slave (axi_arready),
+	    -- output the read dada
 	    axi_rdata <= w_adder_out;  -- memory range 0 read data
 	  else
 	    axi_rdata <= (others => '0');
-	  end if;  
+	  end if;
 	end process;
 
 	-- Add user logic here

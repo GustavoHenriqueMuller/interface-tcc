@@ -348,22 +348,29 @@ begin
         t2_RESETn <= '1';
 
         ---------------------------------------------------------------------------------------------
-        -- First transaction.
+        -- First transaction (write).
         t_AWVALID <= '1';
         t_AWADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_AWID <= "00001";
         t_AWLEN <= "00000000";
 
         wait until rising_edge(t_ACLK) and t_AWREADY = '1';
-        t_AWVALID <= '0';
 
+        -- Reset.
+        t_AWVALID <= '0';
         t_AWADDR <= (others => '0');
         t_AWID <= (others => '0');
         t_AWLEN <= (others => '0');
 
-        -- Flit.
+        -- Flit 1.
         t_WVALID <= '1';
-        t_WDATA <= "00001000010100110000000000000000";
+        t_WDATA <= "00000000000000000000000000101000"; -- 40
+
+        wait until rising_edge(t_ACLK) and t_WREADY = '1';
+
+        -- Flit 2.
+        t_WVALID <= '1';
+        t_WDATA <= "00000000000000000000000001010000"; -- 80
         t_WLAST <= '1';
 
         wait until rising_edge(t_ACLK) and t_WREADY = '1';
@@ -373,17 +380,20 @@ begin
         t_WVALID <= '0';
         t_WLAST <= '0';
 
+        -- Response.
+        t_BREADY <= '1';
+        wait until rising_edge(t_ACLK) and t_BVALID = '1';
+        t_BREADY <= '0';
+
         ---------------------------------------------------------------------------------------------
-        -- Second transaction.
+        -- Second transaction (read).
         t_ARVALID <= '1';
         t_ARADDR <= "0000000000000000" & "0000000000000000" & "0000000000000001" & "0000000000000000";
         t_ARID <= "00001";
-        t_ARLEN <= "00000000";
+        t_ARLEN <= "00000001"; -- Read 2 flits starting from address 0.
 
         wait until rising_edge(t_ACLK) and t_ARREADY = '1';
         t_ARVALID <= '0';
-
-        -- RESULT: 00001000010100110000000000001010 / 0853000A
 
         ---------------------------------------------------------------------------------------------
         -- Receive first transaction response.

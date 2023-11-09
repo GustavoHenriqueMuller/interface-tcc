@@ -14,6 +14,6 @@ architecture rtl of adder is
 
 begin
 
-  o_ADD <= std_logic_vector(unsigned(i_A) + 10);
+  o_ADD <= std_logic_vector(unsigned(i_A) + 15);
 
 end architecture;
