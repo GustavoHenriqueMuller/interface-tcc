@@ -260,7 +260,7 @@ begin
             l_out_ack_i  => t2_l_out_ack_i
         );
 
-    u_ADDER: entity work.adder_full_v1_0
+    u_COMPRESSOR: entity work.adder_full_v1_0
         generic map(
             C_S00_AXI_ID_WIDTH => c_AXI_ID_WIDTH,
             C_S00_AXI_DATA_WIDTH => c_AXI_DATA_WIDTH,

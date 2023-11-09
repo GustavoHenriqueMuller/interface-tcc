@@ -3,9 +3,9 @@ vlib work
 #---------------------------------------------------------------------------------------------
 # Compressor.
 
+vcom -2008 ../hdl/dependencies/ccsds_axifull/ccsds123_B2_package.vhd
 vcom -2008 ../hdl/dependencies/ccsds_axifull/ccsds_axifull_v1_0.vhd
 vcom -2008 ../hdl/dependencies/ccsds_axifull/ccsds_axifull_v1_0_S00_AXI.vhd
-vcom -2008 ../hdl/dependencies/ccsds_axifull/ccsds123_B2_package.vhd
 vcom -2008 ../hdl/dependencies/ccsds_axifull/central_local_diff.vhd
 vcom -2008 ../hdl/dependencies/ccsds_axifull/double_res.vhd
 vcom -2008 ../hdl/dependencies/ccsds_axifull/high_resolution.vhd

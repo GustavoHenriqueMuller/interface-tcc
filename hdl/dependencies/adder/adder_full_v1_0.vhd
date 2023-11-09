@@ -11,7 +11,7 @@ entity adder_full_v1_0 is
 
 
 		-- Parameters of Axi Slave Bus Interface S00_AXI
-		C_S00_AXI_ID_WIDTH	: integer	:= 1;
+		C_S00_AXI_ID_WIDTH	: integer	:= 5;
 		C_S00_AXI_DATA_WIDTH	: integer	:= 32;
 		C_S00_AXI_ADDR_WIDTH	: integer	:= 6;
 		C_S00_AXI_AWUSER_WIDTH	: integer	:= 0;
@@ -41,10 +41,12 @@ entity adder_full_v1_0 is
 		s00_axi_awqos	: in std_logic_vector(3 downto 0) := (others => '0');
 		s00_axi_awregion	: in std_logic_vector(3 downto 0) := (others => '0');
 		s00_axi_awuser	: in std_logic_vector(C_S00_AXI_AWUSER_WIDTH-1 downto 0) := (others => '0');
+
 		s00_axi_awvalid	: in std_logic;
 		s00_axi_awready	: out std_logic;
 		s00_axi_wdata	: in std_logic_vector(C_S00_AXI_DATA_WIDTH-1 downto 0);
 		s00_axi_wstrb	: in std_logic_vector((C_S00_AXI_DATA_WIDTH/8)-1 downto 0) := (others => '0');
+
 		s00_axi_wlast	: in std_logic;
 		s00_axi_wuser	: in std_logic_vector(C_S00_AXI_WUSER_WIDTH-1 downto 0) := (others => '0');
 		s00_axi_wvalid	: in std_logic;
@@ -54,6 +56,7 @@ entity adder_full_v1_0 is
 		s00_axi_buser	: out std_logic_vector(C_S00_AXI_BUSER_WIDTH-1 downto 0) := (others => '0');
 		s00_axi_bvalid	: out std_logic;
 		s00_axi_bready	: in std_logic;
+
 		s00_axi_arid	: in std_logic_vector(C_S00_AXI_ID_WIDTH-1 downto 0);
 		s00_axi_araddr	: in std_logic_vector(C_S00_AXI_ADDR_WIDTH-1 downto 0);
 		s00_axi_arlen	: in std_logic_vector(7 downto 0);
