@@ -6,10 +6,10 @@ use IEEE.numeric_std.all;
 use work.tcc_package.all;
 use work.xina_pkg.all;
 
-entity tb_integration_adder is
-end tb_integration_adder;
+entity tb_integration_compressor is
+end tb_integration_compressor;
 
-architecture rtl of tb_integration_adder is
+architecture rtl of tb_integration_compressor is
     ------------------------------------------------------------------------------------------------------
     -- MASTER SIGNALS.
 

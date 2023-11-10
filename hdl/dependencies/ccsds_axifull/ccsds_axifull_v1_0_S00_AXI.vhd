@@ -215,7 +215,7 @@ architecture arch_imp of ccsds_axifull_v1_0_S00_AXI is
 	constant ADDR_LSB  : integer := (C_S_AXI_DATA_WIDTH/32)+ 1;
 	constant OPT_MEM_ADDR_BITS : integer := 3;
 	constant USER_NUM_MEM: integer := 1;
-	constant low : std_logic_vector (C_S_AXI_ADDR_WIDTH - 1 downto 0) := "000000";
+	constant low : std_logic_vector (C_S_AXI_ADDR_WIDTH - 1 downto 0) := (others => '0');
 	------------------------------------------------
 	---- Signals for user logic memory space example
 	--------------------------------------------------
@@ -530,9 +530,27 @@ begin
 	   process( S_AXI_ACLK ) is
 	     begin
 	       if ( rising_edge (S_AXI_ACLK) ) then
-	         if ( mem_rden = '1') then
-	           mem_data_out(i)((mem_byte_index*8+7) downto mem_byte_index*8) <= data_out;
-	         end if;
+	        -- Tive que tirar o IF abaixo para a integração funcionar, visto que o sinal "mem_rden" só é ativado
+			-- na transação de leitura. Ou seja, o que acontece é que é somente na transação de leitura que
+			-- a escrita realmente acontece na memória. E é só quando a escrita realmente acontece na memória que
+			-- ativa o sinal de start no compressor (visto que ele pega esse sinal da memória). Mas o compressor não
+			-- termina a tempo e o dado retornado é tudo zero ao invés do resultado da compressão.
+
+			-- O certo seria o compressor ter uma saída que diz quando ele tem um resultado válido ou não e então
+			-- conecectar esse sinal no RVALID. Porém, esse núcleo está sempre gerando RVALID = 1 depois da transação
+			-- de leitura iniciar. Isso é como se o núcleo dissesse que sempre tem um resultado válido no RDATA, sendo que
+			-- isso não é verdade, visto que o compressor demora um certo tempo para gerar o resultado.
+			-- Com essa saída do compressor, a transação de leitura não iria completar até o compressor terminar, logo, ela
+			-- teria o valor correto.
+
+			-- Outra solução possível é fazer com que a memória escreva o valor imediatamente, ao invés de esperar ela
+			-- ser lida para então escrever o valor. Desse modo, a transação de escrita  imediatamente escrever
+			-- o valor na memória e consequentemente iniciaria o compressor. Até a transação de leitura chegar, a compressão
+			-- já terminou. Essa foi a solução que eu fiz aqui.
+
+			--if ( mem_rden = '1') then
+	        mem_data_out(i)((mem_byte_index*8+7) downto mem_byte_index*8) <= data_out;
+	         --end if;
 	       end if;
 	   end process;
 
@@ -556,7 +574,7 @@ begin
 	-- Add user logic here
    compressor_inst : p_top
    port map ( i_clk          => S_AXI_ACLK,
-              i_rst         => '0',
+              i_rst          => '0',
               i_start        => mem_data_out(0)(0),
               i_t            => "01000110",
               i_z            => "010",
