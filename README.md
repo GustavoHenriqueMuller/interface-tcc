@@ -1,7 +1,7 @@
 # interface-tcc
 To open in Quartus, simply open the file ```quartus_files/InterfaceTCC.qpf``` as a project.
 
-To compile the interface and all dependencies, run (in ModelSim):
+To compile the interface and all dependencies, run (in Questa):
 ```cd do_files```
 ```do do_all.do```
 
