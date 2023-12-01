@@ -125,7 +125,7 @@ begin
 
     ---------------------------------------------------------------------------------------------
     -- Output values.
-	o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
+    o_READ_BUFFER <= '1' when (r_STATE = S_H_DEST) or
                               (r_STATE = S_H_SRC) or
                               (r_STATE = S_H_INTERFACE) or
                               (r_STATE = S_H_ADDRESS) or

@@ -24,7 +24,7 @@ entity backend_slave_packetizer_datapath is
         i_FLIT_SELECTOR: in std_logic_vector(2 downto 0);
         i_CHECKSUM     : in std_logic_vector(c_AXI_DATA_WIDTH - 1 downto 0);
 
-		o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
+        o_FLIT: out std_logic_vector(c_FLIT_WIDTH - 1 downto 0)
     );
 end backend_slave_packetizer_datapath;
 

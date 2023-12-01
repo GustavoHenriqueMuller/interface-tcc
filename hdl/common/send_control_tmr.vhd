@@ -13,7 +13,7 @@ entity send_control_tmr is
 
         -- Buffer signals.
         i_READ_OK_BUFFER: in std_logic;
-		o_READ_BUFFER   : out std_logic;
+        o_READ_BUFFER   : out std_logic;
 
         -- XINA signals.
         l_in_val_i: out std_logic;

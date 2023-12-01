@@ -13,7 +13,7 @@ entity receive_control is
 
         -- Buffer signals.
         i_WRITE_OK_BUFFER: in std_logic;
-		o_WRITE_BUFFER   : out std_logic;
+        o_WRITE_BUFFER   : out std_logic;
 
         -- XINA signals.
         l_out_val_o: in std_logic;

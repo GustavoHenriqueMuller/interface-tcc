@@ -273,48 +273,48 @@ begin
 
         port map(
             s00_axi_aclk    => t_ACLK,
-            s00_axi_aresetn	=> t2_RESETn,
+            s00_axi_aresetn    => t2_RESETn,
 
             -- Write request channel.
             s00_axi_awid    => t2_AWID,
-            s00_axi_awaddr	=> t2_AWADDR,
+            s00_axi_awaddr    => t2_AWADDR,
             s00_axi_awlen   => t2_AWLEN,
             s00_axi_awsize  => t2_AWSIZE,
             s00_axi_awburst => t2_AWBURST,
-            s00_axi_awprot	=> "000",
-            s00_axi_awvalid	=> t2_AWVALID,
-            s00_axi_awready	=> t2_AWREADY,
+            s00_axi_awprot    => "000",
+            s00_axi_awvalid    => t2_AWVALID,
+            s00_axi_awready    => t2_AWREADY,
 
             -- Write data channel.
-            s00_axi_wdata	=> t2_WDATA,
-            s00_axi_wstrb	=> "1111",
-            s00_axi_wlast	=> t2_WLAST,
-            s00_axi_wvalid	=> t2_WVALID,
-            s00_axi_wready	=> t2_WREADY,
+            s00_axi_wdata    => t2_WDATA,
+            s00_axi_wstrb    => "1111",
+            s00_axi_wlast    => t2_WLAST,
+            s00_axi_wvalid    => t2_WVALID,
+            s00_axi_wready    => t2_WREADY,
 
             -- Write response channel.
-            s00_axi_bid 	=> t2_BID,
-            s00_axi_bresp	=> t2_BRESP(1 downto 0),
-            s00_axi_bvalid	=> t2_BVALID,
-            s00_axi_bready	=> t2_BREADY,
+            s00_axi_bid     => t2_BID,
+            s00_axi_bresp    => t2_BRESP(1 downto 0),
+            s00_axi_bvalid    => t2_BVALID,
+            s00_axi_bready    => t2_BREADY,
 
             -- Read request channel.
             s00_axi_arid    => t2_ARID,
-            s00_axi_araddr	=> t2_ARADDR,
+            s00_axi_araddr    => t2_ARADDR,
             s00_axi_arlen   => t2_ARLEN,
             s00_axi_arsize  => t2_ARSIZE,
             s00_axi_arburst => t2_ARBURST,
-            s00_axi_arprot	=> "000",
-            s00_axi_arvalid	=> t2_ARVALID,
-            s00_axi_arready	=> t2_ARREADY,
+            s00_axi_arprot    => "000",
+            s00_axi_arvalid    => t2_ARVALID,
+            s00_axi_arready    => t2_ARREADY,
 
             -- Read data channel.
-            s00_axi_rid  	=> t2_RID,
-            s00_axi_rdata	=> t2_RDATA,
-            s00_axi_rresp	=> t2_RRESP(1 downto 0),
-            s00_axi_rlast	=> t2_RLAST,
-            s00_axi_rvalid	=> t2_RVALID,
-            s00_axi_rready	=> t2_RREADY
+            s00_axi_rid      => t2_RID,
+            s00_axi_rdata    => t2_RDATA,
+            s00_axi_rresp    => t2_RRESP(1 downto 0),
+            s00_axi_rlast    => t2_RLAST,
+            s00_axi_rvalid    => t2_RVALID,
+            s00_axi_rready    => t2_RREADY
         );
 
     u_XINA_NETWORK: entity work.xina
