@@ -165,8 +165,8 @@ begin
             o_ID        => w_ID,
 
             -- Backend signals (reception).
-            i_VALID_RECEIVE_DATA   => w_VALID_RECEIVE_DATA,
-            i_LAST_RECEIVE_DATA    => w_LAST_RECEIVE_DATA,
+            i_VALID_RECEIVE_DATA => w_VALID_RECEIVE_DATA,
+            i_LAST_RECEIVE_DATA  => w_LAST_RECEIVE_DATA,
 
             i_ID_RECEIVE     => w_ID_RECEIVE,
             i_STATUS_RECEIVE => w_STATUS_RECEIVE,
