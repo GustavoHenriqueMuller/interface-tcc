@@ -28,10 +28,10 @@ entity backend_master is
         i_VALID_SEND_DATA  : in std_logic;
         i_LAST_SEND_DATA   : in std_logic;
         o_READY_SEND_PACKET: out std_logic;
-		o_READY_SEND_DATA  : out std_logic;
+        o_READY_SEND_DATA  : out std_logic;
 
-		i_ADDR     : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
-		i_ID       : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
+        i_ADDR     : in std_logic_vector(c_AXI_ADDR_WIDTH - 1 downto 0);
+        i_ID       : in std_logic_vector(c_AXI_ID_WIDTH - 1 downto 0);
         i_LENGTH   : in std_logic_vector(7 downto 0);
         i_BURST    : in std_logic_vector(1 downto 0);
         i_OPC_SEND : in std_logic;
