@@ -137,9 +137,8 @@ begin
                                        (r_STATE = S_READ_REQUEST)
                                        else '0';
 
-    o_VALID_RECEIVE_DATA <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1') or
-                                     (r_STATE = S_READ_REQUEST)
-                                     else '0';
+    o_VALID_RECEIVE_DATA <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1') else '0';
+
     o_LAST_RECEIVE_DATA  <= '1' when (r_STATE = S_WRITE_REQUEST_PAYLOAD and i_READ_OK_BUFFER = '1' and r_PAYLOAD_COUNTER = to_unsigned(0, 8)) else '0';
 
     o_HAS_REQUEST_PACKET <= '1' when (r_STATE = S_WAIT_RESPONSE) else '0';

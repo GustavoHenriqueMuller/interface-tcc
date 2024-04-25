@@ -85,8 +85,8 @@ begin
 
     o_H_SRC_RECEIVE       <= w_H_SRC;
     o_H_INTERFACE_RECEIVE <= w_H_INTERFACE;
-    o_ADDRESS_RECEIVE  <= w_H_ADDRESS(c_FLIT_WIDTH - 2 downto 0);
-    o_DATA_RECEIVE     <= w_FLIT(31 downto 0);
+    o_ADDRESS_RECEIVE     <= w_H_ADDRESS(c_FLIT_WIDTH - 2 downto 0);
+    o_DATA_RECEIVE        <= w_FLIT(31 downto 0);
 
     u_DEPACKETIZER_CONTROL:
     if (p_USE_TMR_PACKETIZER) generate
